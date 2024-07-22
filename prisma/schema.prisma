@@ -8,8 +8,15 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model DB_Location { 
+model DB_Location {
   label String @id
   lat   Float
-  long  Float 
+  long  Float
+}
+
+model Event_DB {
+  title       String   @id
+  description String
+  start       DateTime
+  end         DateTime
 }
