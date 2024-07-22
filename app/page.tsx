@@ -1,14 +1,9 @@
 import InstagramEmbed from "@/components/InstagramEmbed";
 import { AnimatedText, Header } from "@/components/TextComponents";
-import WidthWrapper from "@/components/WidthWrapper";
-import db from "@/db/db";
+import WidthWrapper from "@/components/WidthWrapper"; 
 import Image from "next/image";
 
-export default async function Home() {
-
-  const test = await db.event_DB.findMany();
-  console.log(test);
-  
+export default async function Home() { 
 
   
   return (
