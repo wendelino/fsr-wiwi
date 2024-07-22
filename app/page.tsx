@@ -1,9 +1,16 @@
 import InstagramEmbed from "@/components/InstagramEmbed";
 import { AnimatedText, Header } from "@/components/TextComponents";
 import WidthWrapper from "@/components/WidthWrapper";
+import db from "@/db/db";
 import Image from "next/image";
 
-export default function Home() {
+export default async function Home() {
+
+  const test = await db.event_DB.findMany();
+  console.log(test);
+  
+
+  
   return (
     <>
       <div className="relative w-full h-[400px]">
