@@ -25,7 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { Header } from "./TextComponents";
+import { AnimatedEvents, Header } from "./TextComponents";
 import { sendMail } from "@/app/_actions/sendMail";
 import { useState } from "react";
 import { CheckCircleIcon } from "lucide-react";
@@ -82,7 +82,12 @@ export function RegisterForm() {
       </div>
     );
   }
-
+  const events = [
+    {label: "Veranstaltung"},
+    {label: "Speedmeeting"},
+    {label: "Stadtrallye"},
+    {label: "Ersti-Party"}
+  ] 
   return (
     <Form {...form}>
       <form
@@ -98,7 +103,7 @@ export function RegisterForm() {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder="- Auswählen -" />
+                    <SelectValue placeholder={<AnimatedEvents events={events} />} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
