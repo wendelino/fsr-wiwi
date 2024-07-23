@@ -16,7 +16,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { toast } from "@/components/ui/use-toast";
 import { Input } from "./ui/input";
 import {
   Select,
@@ -28,7 +27,9 @@ import {
 import { AnimatedEvents, Header } from "./TextComponents";
 import { sendMail } from "@/app/_actions/sendMail";
 import { useState } from "react";
-import { CheckCircleIcon } from "lucide-react";
+import { CheckCircleIcon, XCircleIcon } from "lucide-react";
+import { Event_DB } from "@prisma/client";
+import { useFormStatus } from "react-dom";
 
 const FormSchema = z.object({
   event: z.string({ message: "Dieses Feld ist erforderlich." }),
@@ -42,8 +43,16 @@ const FormSchema = z.object({
   }),
 });
 
-export function RegisterForm() {
+export function RegisterForm({
+  event,
+  events,
+}: {
+  event?: Event_DB;
+  events: Event_DB[];
+}) {
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -52,6 +61,7 @@ export function RegisterForm() {
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
+    setLoading(true);
     const html = ` <h2 style="color: #333333;">Hey ${data.name},</h2><h4 style="color: #333333;">Danke für deine Anmeldung!</h4>
         <p style="color: #555555;">
           Hiermit hast du dich erfogrleich für die Veranstaltung <strong>${data.event}</strong> angemeldet!
@@ -68,26 +78,33 @@ export function RegisterForm() {
       html,
       "Anmeldungsbestätigung " + data.event
     );
-    if (res.success) setFormSubmitted(true);
+    if (res.success){ setFormSubmitted(true);}
+    else setError(true)
   }
 
   if (formSubmitted) {
     return (
       <div className="flex flex-col items-center w-full gap-4 max-w-md border p-8 rounded-lg shadow-lg">
         <div className="text-green-800 w-full h-32 flex justify-center my-8">
-          <CheckCircleIcon className="h-full w-full animate-bounce"/>
-        </div> 
+          <CheckCircleIcon className="h-full w-full animate-bounce" />
+        </div>
         <span className="text-2xl font-bold">Erfolgreich angemeldet!</span>
-         Schau in deinem Postfach nach {";)"}
+        Schau in deinem Postfach nach {";)"}
       </div>
     );
   }
-  const events = [
-    {label: "Veranstaltung"},
-    {label: "Speedmeeting"},
-    {label: "Stadtrallye"},
-    {label: "Ersti-Party"}
-  ] 
+  if (error) {
+    return (
+      <div className="flex flex-col items-center w-full gap-4 max-w-md border p-8 rounded-lg shadow-lg">
+        <div className="text-red-800 w-full h-32 flex justify-center my-8">
+          <XCircleIcon className="h-full w-full animate-bounce" />
+        </div>
+        <span className="text-2xl font-bold">Leider ist ein Fehler passiert {":/"}</span>
+         Bitte kontaktiere uns per E-Mail!
+      </div>
+    );
+  }
+
   return (
     <Form {...form}>
       <form
@@ -103,13 +120,17 @@ export function RegisterForm() {
               <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
-                    <SelectValue placeholder={<AnimatedEvents events={events} />} />
+                    <SelectValue
+                      placeholder={<AnimatedEvents events={events} />}
+                    />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
-                  <SelectItem value="Speedmeeting">Speedmeeting</SelectItem>
-                  <SelectItem value="Stadtrallye">Stadtrallye</SelectItem>
-                  <SelectItem value="Ersti-Party">Ersti-Party</SelectItem>
+                  {events.map((e) => (
+                    <SelectItem key={e.title} value={e.title}>
+                      {e.title}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
               <FormMessage />
@@ -124,7 +145,7 @@ export function RegisterForm() {
             <FormItem>
               <FormLabel>Vorname *</FormLabel>
               <FormControl>
-                <Input placeholder="Max" {...field} />
+                <Input placeholder="Max" {...field} autoComplete="given-name" />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -137,7 +158,11 @@ export function RegisterForm() {
             <FormItem>
               <FormLabel>Nachname *</FormLabel>
               <FormControl>
-                <Input placeholder="Mustermann" {...field} />
+                <Input
+                  placeholder="Mustermann"
+                  {...field}
+                  autoComplete="family-name"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -171,7 +196,7 @@ export function RegisterForm() {
                 <FormLabel>Datenschutzerklärung *</FormLabel>
                 <FormDescription>
                   Ich habe die{" "}
-                  <Link className="underline" href="/examples/forms">
+                  <Link className="underline" href="/datenschutz">
                     Datenschutzerklärung
                   </Link>{" "}
                   gelesen und akzeptiere diese
@@ -181,7 +206,9 @@ export function RegisterForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Anmelden</Button>
+        <Button type="submit" disabled={loading}>
+          {loading ? "Laden..." : "Anmelden"}
+        </Button>
         <FormDescription>
           Felder mit einem <strong>*</strong> sind Pflichtfelder.
         </FormDescription>

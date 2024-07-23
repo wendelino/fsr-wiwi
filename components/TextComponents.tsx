@@ -1,5 +1,6 @@
 "use client"
 import { cn } from "@/lib/utils";
+import { Event_DB } from "@prisma/client";
 import { useState, useEffect } from 'react';
 
 export function Header({
@@ -21,6 +22,25 @@ export function Header({
   );
 }
 
+export function SubHeader({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <div 
+      className={cn(
+        "font-bold text-xl py-4 lg:text-2xl",
+         className
+      )}
+    >
+      {children}
+    </div>
+  );
+}
+
 export function AnimatedText({text}: {text: string}) {
   const [displayedText, setDisplayedText] = useState(text[0]);
 
@@ -28,7 +48,7 @@ export function AnimatedText({text}: {text: string}) {
     let currentIndex = 0;
     const interval = setInterval(() => {
       if (currentIndex < text.length) {
-        setDisplayedText(text.substring(0, currentIndex + 1));
+        setDisplayedText(text.substring(0, currentIndex + 1) + "|");
         currentIndex += 1;
       } else {
         clearInterval(interval);
@@ -42,9 +62,9 @@ export function AnimatedText({text}: {text: string}) {
 }
 
 
-export function AnimatedEvents({events}: {events: any[]}) {
+export function AnimatedEvents({events}: {events: Event_DB[]}) {
 
-  const [currentEvent, setCurrentEvent] = useState(events[0].label); // Initiale Veranstaltung
+  const [currentEvent, setCurrentEvent] = useState(events[0].title); // Initiale Veranstaltung
 
   useEffect(() => {
     // Index für die aktuelle Veranstaltung
@@ -52,7 +72,7 @@ export function AnimatedEvents({events}: {events: any[]}) {
 
     const intervalId = setInterval(() => {
       eventIndex = (eventIndex + 1) % events.length; // Nächsten Index, Loop zurück zum Anfang
-      setCurrentEvent(events[eventIndex].label);
+      setCurrentEvent(events[eventIndex].title);
     }, 2500); // Alle 3 Sekunden
 
     // Aufräumarbeiten, um den Interval-Handler zu stoppen, wenn die Komponente unmontiert wird

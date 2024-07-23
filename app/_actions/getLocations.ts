@@ -1,10 +1,10 @@
 "use server";
-import db from "@/db/db"; 
-import { DB_Location } from "@prisma/client";
+import db from "@/db/db";  
+import { Location_DB } from "@prisma/client";
 
 
-export const sendMail = async (to: string, html: string, subject: string) => {
-  const locations: DB_Location[] = await db.dB_Location.findMany();
+export const getLOCS = async (to: string, html: string, subject: string) => {
+  const locations: Location_DB[] = await db.location_DB.findMany();
 
   return locations;
 };

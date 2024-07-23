@@ -8,10 +8,11 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model DB_Location {
-  label String @id
-  lat   Float
-  long  Float
+model Location_DB {
+  label    String     @id
+  lat      Float
+  long     Float
+  Event_DB Event_DB[]
 }
 
 model Event_DB {
@@ -19,4 +20,20 @@ model Event_DB {
   description String
   start       DateTime
   end         DateTime
+
+  location_label String
+  location_DB    Location_DB @relation(fields: [location_label], references: [label])
+  User_DB        User_DB[]
+}
+
+model User_DB {
+  id      String @id @default(cuid())
+  name    String
+  surname String
+  email   String
+
+  events Event_DB[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
