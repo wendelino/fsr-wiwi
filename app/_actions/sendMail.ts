@@ -13,9 +13,7 @@ const smtpConfig = {
 };
 
 export const sendMail = async (to: string, html: string, subject: string) => {
-  console.log("sending email...");
-  console.log("process.env.SMTP_USER");
-  console.log(process.env.SMTP_USER);
+  console.log("sending email..."); 
 
   const transporter = nodemailer.createTransport(smtpConfig);
   const mailOptions = {
