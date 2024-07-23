@@ -1,5 +1,4 @@
-import { Header } from "@/components/TextComponents";
-import WidthWrapper from "@/components/WidthWrapper";  
+import { Header } from "@/components/TextComponents"; 
 import dynamic from "next/dynamic";
 
 export default async function Page() {
@@ -11,20 +10,17 @@ export default async function Page() {
     ),
     ssr: false,
   });
- 
 
   return (
     <div>
-      <WidthWrapper> 
-        <Header>
-          <span>
-            Alle <span className="fsr-gradient">wichtigen Orte</span> für dich
-          </span>
-        </Header>
-        <div className="w-full h-[50vh] rounded-lg shadow-xl z-0">
-          <Map />
-        </div>
-      </WidthWrapper>
+      <Header>
+        <span>
+          Alle <span className="fsr-gradient">wichtigen Orte</span> für dich
+        </span>
+      </Header>
+      <div className="w-full h-[50vh] rounded-lg shadow-xl z-0">
+        <Map />
+      </div>
     </div>
   );
 }

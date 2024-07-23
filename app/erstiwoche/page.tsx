@@ -1,8 +1,7 @@
 import Countdown from "@/components/CountDown";
 import DayCard, { DayProps } from "@/components/Day";
 import EventCard, { EventProps } from "@/components/Event";
-import { Header } from "@/components/TextComponents";
-import WidthWrapper from "@/components/WidthWrapper";
+import { Header } from "@/components/TextComponents"; 
 
 export default function Page() {
   const events: EventProps[] = [
@@ -101,7 +100,7 @@ export default function Page() {
   const days: DayProps[] = groupEventsByDay(events);
 
   return (
-    <WidthWrapper>
+    <div>
       <Countdown />
 
       <Header>
@@ -113,7 +112,7 @@ export default function Page() {
           <DayCard key={index} day={e} />
         ))}
       </div>
-    </WidthWrapper>
+    </div>
   );
 }
 

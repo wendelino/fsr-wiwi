@@ -13,6 +13,7 @@ function NavLayout() {
       <NavDropdown title={"Erstiwoche"}>
         <NavLink href="/erstiwoche">Programm</NavLink>
         <NavLink href="/erstiwoche/lageplan">Lageplan</NavLink>
+        <NavLink href="/erstiwoche/anmeldung">Anmeldung</NavLink>
         <NavLink href="/erstiwoche/kontakt">Kontakt</NavLink>
       </NavDropdown>
       <NavDropdown title={"Über uns"}>

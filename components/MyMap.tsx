@@ -10,7 +10,7 @@ export default function MyMap() {
   const [locations, setLocations] = useState<DB_Location[]>([]);
 
   useEffect(() => {
-    const fetchLocations = async () => {
+    const fetchLocations = async () => { 
       const response = await fetch("/api/locations"); // Passen Sie den API-Endpunkt entsprechend an
       const data: DB_Location[] = await response.json(); 
       setLocations(data);
