@@ -78,7 +78,7 @@ export function RegisterForm() {
           <CheckCircleIcon className="h-full w-full animate-bounce"/>
         </div> 
         <span className="text-2xl font-bold">Erfolgreich angemeldet!</span>
-         Schau in deinem Postfach nach
+         Schau in deinem Postfach nach {";)"}
       </div>
     );
   }
