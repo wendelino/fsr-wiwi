@@ -40,3 +40,26 @@ export function AnimatedText({text}: {text: string}) {
 
   return <span>{displayedText}</span>;
 }
+
+
+export function AnimatedEvents({events}: {events: any[]}) {
+
+  const [currentEvent, setCurrentEvent] = useState(events[0].label); // Initiale Veranstaltung
+
+  useEffect(() => {
+    // Index für die aktuelle Veranstaltung
+    let eventIndex = 0;
+
+    const intervalId = setInterval(() => {
+      eventIndex = (eventIndex + 1) % events.length; // Nächsten Index, Loop zurück zum Anfang
+      setCurrentEvent(events[eventIndex].label);
+    }, 2500); // Alle 3 Sekunden
+
+    // Aufräumarbeiten, um den Interval-Handler zu stoppen, wenn die Komponente unmontiert wird
+    return () => clearInterval(intervalId);
+  }, [events]);
+
+    return (
+      <AnimatedText text={currentEvent}/>
+    );
+}

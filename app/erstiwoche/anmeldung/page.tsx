@@ -1,12 +1,13 @@
 
 "use client"
 import { RegisterForm } from "@/components/RegisterForm";
-import { AnimatedText, Header } from "@/components/TextComponents";
+import { AnimatedEvents, AnimatedText, Header } from "@/components/TextComponents";
 import { useEffect, useState } from "react";
 
 export default function page() {
 
   const events = [
+    {label: "Veranstaltung"},
     {label: "Speedmeeting"},
     {label: "Stadtrallye"},
     {label: "Ersti-Party"}
@@ -29,7 +30,7 @@ export default function page() {
 
   return (
     <div className="flex flex-col items-center">
-      <Header>Bei <span className="fsr-gradient"><AnimatedText text={currentEvent}/>  </span> anmelden</Header>
+      <Header>Bei <span className="fsr-gradient"> <AnimatedEvents events={events} />  </span> anmelden</Header>
       <RegisterForm />
     </div>
   );
