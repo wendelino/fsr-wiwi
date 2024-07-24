@@ -1,6 +1,7 @@
 import { Header, SubHeader } from "@/components/TextComponents";
 import { Button } from "@/components/ui/button";
 import { PaperclipIcon } from "lucide-react";
+import Navigate from "./Navigate";
 
 export default function page() {
   return (
@@ -24,134 +25,7 @@ export default function page() {
           <PaperclipIcon className="pr-2" /> Als PDF herunterladen
         </Button>
       </a>
-      <nav className="my-8">
-        <SubHeader>Inhaltsverzeichnis</SubHeader>
-        <ul className="list-inside space-y-4">
-          <li>
-            <a href="#preambel" className=" hover:underline">
-              <strong>I.</strong> PRÄAMBEL
-            </a>
-          </li>
-          <li>
-            <a href="#fachschaft" className=" hover:underline">
-              <strong>II.</strong> DIE FACHSCHAFT
-            </a>
-            <ul className=" list-inside ml-4 space-y-1">
-              <li>
-                <a href="#begriff" className=" hover:underline">
-                  <strong>§ 1 </strong>BEGRIFFSBESTIMMUNG UND RECHTSSTELLUNG
-                </a>
-              </li>
-              <li>
-                <a href="#organ" className=" hover:underline">
-                  <strong>§ 2 </strong>ORGAN DER FACHSCHAFT
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="#fachschaftsrat" className=" hover:underline">
-              <strong>III.</strong> DER FACHSCHAFTSRAT
-            </a>
-            <ul className=" list-inside ml-4 space-y-1">
-              <li>
-                <a href="#rechte" className=" hover:underline">
-                  <strong>§ 3 </strong>RECHTE UND AUFGABEN DES FACHSCHAFTSRATES
-                </a>
-              </li>
-              <li>
-                <a href="#konstituierung" className=" hover:underline">
-                  <strong>§ 4 </strong>KONSTITUIERUNG
-                </a>
-              </li>
-              <li>
-                <a href="#wahlen" className=" hover:underline">
-                  <strong>§ 5 </strong>WAHLEN
-                </a>
-              </li>
-              <li>
-                <a href="#mitgliedschaft" className=" hover:underline">
-                  <strong>§ 6 </strong>MITGLIEDSCHAFT IM FACHSCHAFTSRAT
-                </a>
-              </li>
-              <li>
-                <a href="#rechte-mitglieder" className=" hover:underline">
-                  <strong>§ 7 </strong>RECHTE UND PFLICHTEN DER MITGLIEDER DES
-                  FACHSCHAFTSRATES
-                </a>
-              </li>
-              <li>
-                <a href="#vorstand" className=" hover:underline">
-                  <strong>§ 8 </strong>VORSTAND DES FACHSCHAFTSRATES
-                </a>
-              </li>
-              <li>
-                <a href="#referate" className=" hover:underline">
-                  <strong>§ 9 </strong>REFERATE UND SPRECHER*INNEN FÜR BESONDERE
-                  AUFGABEN
-                </a>
-              </li>
-              <li>
-                <a href="#arbeitsgruppen" className=" hover:underline">
-                  <strong>§ 10</strong> ARBEITSGRUPPEN
-                </a>
-              </li>
-              <li>
-                <a href="#einberufung" className=" hover:underline">
-                  <strong>§ 11</strong> EINBERUFUNG UND BESCHLUSSFÄHIGKEIT
-                </a>
-              </li>
-              <li>
-                <a href="#fernbleiben" className=" hover:underline">
-                  <strong>§ 12</strong> FERNBLEIBEN
-                </a>
-              </li>
-              <li>
-                <a href="#abstimmung" className=" hover:underline">
-                  <strong>§ 13</strong> ABSTIMMUNG UND BESCHLUSSFASSUNG
-                </a>
-              </li>
-              <li>
-                <a href="#offentlichkeit" className=" hover:underline">
-                  <strong>§ 14</strong> ÖFFENTLICHKEIT UND REDERECHT
-                </a>
-              </li>
-              <li>
-                <a href="#sitzungsleitung" className=" hover:underline">
-                  <strong>§ 15</strong> SITZUNGSLEITUNG UND SITZUNGSABLAUF
-                </a>
-              </li>
-              <li>
-                <a href="#tagesordnung" className=" hover:underline">
-                  <strong>§ 16</strong> TAGESORDNUNG
-                </a>
-              </li>
-              <li>
-                <a href="#antrage" className=" hover:underline">
-                  <strong>§ 17</strong> ANTRÄGE ZUR GESCHÄFTSORDNUNG
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="#schlussbestimmungen" className=" hover:underline">
-              <strong>IV.</strong> SCHLUSSBESTIMMUNGEN
-            </a>
-            <ul className=" list-inside ml-4 space-y-1">
-              <li>
-                <a href="#inkrafttreten" className=" hover:underline">
-                  <strong>§ 18</strong> INKRAFTTRETEN, ÄNDERUNG
-                </a>
-              </li>
-              <li>
-                <a href="#uberordnete" className=" hover:underline">
-                  <strong>§ 19</strong> ÜBERGEORDNETE VORSCHRIFTEN
-                </a>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
+      <Navigate/>
       <section id="preambel" className="mb-8">
         <h2 className="text-2xl font-bold mb-4">I. PRÄAMBEL</h2>
         <p>
