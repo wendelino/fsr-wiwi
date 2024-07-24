@@ -30,13 +30,10 @@ export default async function Home() {
       </header>
 
       <div className="flex flex-col gap-16 py-4">
-        <div className="h-32 bg-red-50 rounded-lg flex items-center justify-center">
-          [Content]
-        </div>
-
-        <div className="h-64 bg-slate-50 rounded-lg flex items-center justify-center">
-          [Content]
-        </div>
+        <iframe
+          src="https://www.ich-will-wissen.de"
+          className="h-[750px] w-full rounded-xl "
+        />
 
         <div className="h-48 flex gap-2">
           <div className="  flex-1 bg-yellow-50 rounded-lg flex items-center justify-center">

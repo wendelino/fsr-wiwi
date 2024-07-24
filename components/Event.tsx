@@ -135,9 +135,17 @@ export default function EventCard({ event }: { event: EventProps }) {
 }
 
 export function LocationCard({ location }: { location: Location_DB }) {
-  const handleGoogle = () =>  window.open(`https://maps.google.com/?q=${location.lat},${location.long}`, "_blank");
-  const handleApple = () => window.open(`https://maps.apple.com/?q=${location.lat},${location.long}`, "_blank");
- 
+  const handleGoogle = () =>
+    window.open(
+      `https://maps.google.com/?q=${location.lat},${location.long}`,
+      "_blank"
+    );
+  const handleApple = () =>
+    window.open(
+      `https://maps.apple.com/?q=${location.lat},${location.long}`,
+      "_blank"
+    );
+
   return (
     <div className="flex flex-col gap-4">
       <span className="flex items-center font-semibold pr-2 ">
@@ -147,35 +155,34 @@ export function LocationCard({ location }: { location: Location_DB }) {
         <Button
           variant={"outline"}
           type="button"
-          className="flex-1 space-x-1 group"
+          className="flex-1 group "
           onClick={() => handleGoogle()}
         >
           <img
-            className="h-full pr-2"
+            className="h-full pr-2 group-hover:animate-bounce"
             onError={(e: any) => {
               e.target.style.display = "none";
             }}
             alt="Google Logo"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Google_Maps_icon_%282020%29.svg/418px-Google_Maps_icon_%282020%29.svg.png"
           />
-          Google Maps <MoveRightIcon className="w-10 transform transition-transform duration-300 ease-in-out group-hover:-rotate-45" />
-        
+          Google 
         </Button>
         <Button
           variant={"outline"}
           type="button"
-          className="flex-1 space-x-1 group"
+          className="flex-1 group  "
           onClick={() => handleApple()}
         >
           <img
-            className="h-full pr-2"
+            className="h-full pr-2 group-hover:animate-bounce  "
             onError={(e: any) => {
               e.target.style.display = "none";
             }}
             alt="Apple Logo"
             src="https://www.apple.com/v/maps/d/images/overview/intro_icon__dfyvjc1ohbcm_large.png"
           />
-          Apple Maps <MoveRightIcon className="w-10 transform transition-transform duration-300 ease-in-out group-hover:-rotate-45" />
+          Apple
         </Button>
       </div>
     </div>

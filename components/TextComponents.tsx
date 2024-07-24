@@ -32,7 +32,7 @@ export function SubHeader({
   return (
     <div 
       className={cn(
-        "font-bold text-xl py-4 lg:text-2xl",
+        "font-bold text-lg py-4 lg:text-2xl",
          className
       )}
     >

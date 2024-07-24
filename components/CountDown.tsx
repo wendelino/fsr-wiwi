@@ -42,7 +42,7 @@ export default function Countdown() {
   }, []);
 
   return (
-    <div className="font-semibold text-3xl flex flex-col gap-6 p-4 bg-secondary rounded-xl items-center my-8 shadow-lg">
+    <div className="font-bold text-2xl flex flex-col gap-6 p-4 bg-secondary rounded-xl items-center my-8 shadow-lg">
         Start der Erstiwoche
       <div className="font-semibold text-3xl flex gap-3 ">
         <TimeDisplay label="Tage" value={timeLeft.days} />

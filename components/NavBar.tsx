@@ -4,21 +4,23 @@ import { ChevronDown, Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import WidthWrapper from "./WidthWrapper";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
+import ThemeToggle from "./ThemeToggle";
 
 function NavLayout() {
   return (
     <>
+      <NavDropdown title={"Über uns"}>
+        <NavLink href="/go">Geschäftsordnung</NavLink>
+        <NavLink href="/about">Mitglieder:innen</NavLink>
+      </NavDropdown>
       <NavDropdown title={"Erstiwoche"}>
         <NavLink href="/erstiwoche">Programm</NavLink>
         <NavLink href="/erstiwoche/lageplan">Lageplan</NavLink>
         <NavLink href="/erstiwoche/anmeldung">Anmeldung</NavLink>
+        <NavLink href="/erstiwoche/ressorts">Ressorts</NavLink>
         <NavLink href="/erstiwoche/kontakt">Kontakt</NavLink>
-      </NavDropdown>
-      <NavDropdown title={"Über uns"}> 
-        <NavLink href="/go">Geschäftsordnung</NavLink>
-        <NavLink href="/about">Mitglieder:innen</NavLink>
       </NavDropdown>
       <NavDropdown title={"Veranstaltungen"}>
         <NavLink href="/erstiwoche">Erstiwoche</NavLink>
@@ -27,12 +29,20 @@ function NavLayout() {
       </NavDropdown>
 
       <NavLink href="/kontakt">Kontakt</NavLink>
+      <ThemeToggle />
     </>
   );
 }
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
+
   return (
     <>
       <div className="w-screen h-[72px] py-3 border-b fixed bg-background  z-50">
@@ -61,13 +71,12 @@ export default function NavBar() {
                 ></div>
               </div>
             )}
-            <aside
-              onClick={() => setIsOpen(false)}
+            <aside 
               className={`transform top-0 right-0 w-64 bg-background fixed h-full overflow-auto ease-in-out transition-all duration-300 z-30 ${
                 isOpen ? "translate-x-0" : "translate-x-full"
               }`}
             >
-              <div className="w-full h-full flex flex-col p-4">
+              <div className="w-full h-full flex flex-col gap-2 p-4">
                 <NavLayout />
               </div>
             </aside>
@@ -105,14 +114,24 @@ interface NavDropdownProps {
 
 function NavDropdown({ children, title }: NavDropdownProps) {
   return (
-    <div className="relative group p-2 py-4">
-      <div className="flex items-center gap-0.5 ">
-        {title}
-        <ChevronDown className="group-hover:rotate-180 transition" />
+    <>
+      <div className="hidden md:flex relative group p-2 py-4">
+        <div className="flex items-center gap-0.5 ">
+          {title}
+          <ChevronDown className="group-hover:rotate-180 transition" />
+        </div>
+        <div className="absolute z-10 hidden group-hover:flex flex-col gap-1 left-0 mt-10 w-48 bg-background rounded-md shadow-lg p-2">
+          {children}
+        </div>
       </div>
-      <div className="absolute z-10 hidden group-hover:flex flex-col gap-1 left-0 mt-4 w-48 bg-background rounded-md shadow-lg p-2">
-        {children}
+
+      <div className=" md:hidden border-b  p-2">
+        <div className="flex font-semibold items-center gap-0.5 ">
+          {title}
+          <ChevronDown />
+        </div>
+        <div className="flex flex-col  m-2  ">{children}</div>
       </div>
-    </div>
+    </>
   );
 }

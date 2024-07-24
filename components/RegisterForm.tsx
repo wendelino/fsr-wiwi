@@ -24,7 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { AnimatedEvents, Header } from "./TextComponents";
+import { AnimatedEvents, Header, SubHeader } from "./TextComponents";
 import { sendMail } from "@/app/_actions/sendMail";
 import { useState } from "react";
 import { CheckCircleIcon, XCircleIcon } from "lucide-react";
@@ -242,14 +242,14 @@ export function SelectEvent({ events }: { events: EventWithLocation[] }) {
         />
 
         {selectedEvent && (
-          <div className="flex flex-col gap-8">
-            <div className="flex flex-col gap-2 p-2 border-l-4 ">
+          <div className="flex flex-col gap-8 ">
+            <div> 
               <span className="font-semibold">
                 {format(selectedEvent.start, "EEEE, dd.MM.yyyy ", {
                   locale: de,
                 })}
               </span>
-              <div>
+              <p>
                 Von{" "}
                 <span className="font-semibold">
                   {format(selectedEvent.start, "HH:mm")}
@@ -258,10 +258,15 @@ export function SelectEvent({ events }: { events: EventWithLocation[] }) {
                 <span className="font-semibold">
                   {format(selectedEvent.end, "HH:mm")}
                 </span>
-              </div>
+              </p>
             </div>
-            <LocationCard location={selectedEvent.location_DB} />
-            {selectedEvent.description}
+
+            <div> 
+              <LocationCard location={selectedEvent.location_DB} />
+            </div>
+            <div> 
+              {selectedEvent.description}
+            </div>
           </div>
         )}
 
