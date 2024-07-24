@@ -5,6 +5,7 @@ import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import { useEffect, useState } from "react";
 import { Location_DB } from "@prisma/client";
+import { LocationCard } from "./Event";
 
 export default function MyMap() {
   const [locations, setLocations] = useState<Location_DB[]>([]);
@@ -35,15 +36,7 @@ export default function MyMap() {
         locations.map((loc) => (
           <Marker position={[loc.lat, loc.long]} key={loc.label}>
             <Popup>
-              <span className="font-bold p-1">{loc.label}</span>
-              <br /><br />
-              <a href={`https://maps.google.com/?q=${loc.lat},${loc.long}`}>
-                Auf Google anzeigen
-              </a>
-              <br />
-              <a href={`http://maps.apple.com/?q=${loc.lat},${loc.long}`}>
-                Auf Apple anzeigen
-              </a>
+              <LocationCard location={loc} />
             </Popup>
           </Marker>
         ))}

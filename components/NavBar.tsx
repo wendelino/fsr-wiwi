@@ -16,9 +16,8 @@ function NavLayout() {
         <NavLink href="/erstiwoche/anmeldung">Anmeldung</NavLink>
         <NavLink href="/erstiwoche/kontakt">Kontakt</NavLink>
       </NavDropdown>
-      <NavDropdown title={"Über uns"}>
-        <NavLink href="/about">Struktur</NavLink>
-        <NavLink href="/about">Aufgaben</NavLink>
+      <NavDropdown title={"Über uns"}> 
+        <NavLink href="/go">Geschäftsordnung</NavLink>
         <NavLink href="/about">Mitglieder:innen</NavLink>
       </NavDropdown>
       <NavDropdown title={"Veranstaltungen"}>

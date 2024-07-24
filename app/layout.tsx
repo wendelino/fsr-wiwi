@@ -5,6 +5,7 @@ import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 import WidthWrapper from "@/components/WidthWrapper";
+import ScrollTop from "@/components/ScrollTop";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -26,6 +27,7 @@ export default function RootLayout({
           <WidthWrapper>{children}</WidthWrapper>
         </main>
         <Footer />
+        <ScrollTop/>
       </body>
     </html>
   );
