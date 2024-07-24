@@ -276,88 +276,46 @@ export function SelectEvent({ events }: { events: EventWithLocation[] }) {
   );
 }
 
-export function RegisterNewsletter() {
+export function AdminLogin() {
   const FormSchema = z.object({
-    email: z
-      .string({ message: "Dieses Feld ist erforderlich." })
-      .email({ message: "Ungültige E-Mail-Adresse" }),
-    dsgvo: z.boolean().refine((value) => value === true, {
-      message: "Bitte akzeptiere unsere Datenschutzerklärung.",
-    }),
+    password: z
+      .string({ message: "Dieses Feld ist erforderlich." }) 
   });
-
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+ 
+  const [loading, setLoading] = useState(false); 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-    defaultValues: {
-      dsgvo: false,
-    },
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     setLoading(true);
 
-    const res = { success: true };
-    if (res.success) {
-      setFormSubmitted(true);
-    } else setError(true);
+    const res = { success: true }; 
   }
-
-  if (formSubmitted) return <SuccessForm />;
-  if (error) return <ErrorForm />;
-
+ 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 flex flex-col w-full  border p-8 rounded-lg shadow-lg"
+        className="space-y-6 flex flex-col max-w-md mx-auto border p-8 rounded-lg shadow-lg"
       >
         <FormField
           control={form.control}
-          name="email"
+          name="password"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>E-Mail *</FormLabel>
+              <FormLabel>Passwort *</FormLabel>
               <FormControl>
-                <Input placeholder="name@mail.de" {...field} />
+                <Input placeholder="1234" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
-        />
-        <FormField
-          control={form.control}
-          name="dsgvo"
-          render={({ field }) => (
-            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-              <FormControl>
-                <Checkbox
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-              </FormControl>
-              <div className="space-y-1 leading-none">
-                <FormLabel>Datenschutzerklärung *</FormLabel>
-                <FormDescription>
-                  Ich habe die{" "}
-                  <Link className="underline" href="/datenschutz">
-                    Datenschutzerklärung
-                  </Link>{" "}
-                  gelesen und akzeptiere diese
-                </FormDescription>
-                <FormMessage />
-              </div>
-            </FormItem>
-          )}
-        />
+        /> 
+
         <Button type="submit" disabled={loading}>
           {loading ? "Laden..." : "Anmelden"}
-        </Button>
-        <FormDescription>
-          Felder mit einem <strong>*</strong> sind Pflichtfelder.
-        </FormDescription>
+        </Button> 
       </form>
     </Form>
   );

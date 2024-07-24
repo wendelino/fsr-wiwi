@@ -28,24 +28,59 @@ export default async function Home() {
           </div>
         </div>
       </header>
+      <Header>
+        Nützliche <span className="fsr-gradient">Links</span>
+      </Header>
+
+      <div className="flex gap-8 justify-around mb-8 flex-wrap">
+
+      <a
+          href="https://studip.uni-halle.de/  "
+          className="bg-secondary  flex justify-center items-center flex-col gap-2 p-4  rounded-xl shadow-lg transition-transform duration-300 hover:scale-110"
+        >
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/9/90/Uni_Halle_Logo.png"
+            className="rounded-xl w-32 h-32 object-cover aspect-square"
+          />
+          <p className="text-lg font-semibold text-center">StudIP</p>
+        </a>
+        <a
+          href="https://loewenportal.uni-halle.de "
+          className="bg-secondary  flex justify-center items-center flex-col gap-2 p-4  rounded-xl shadow-lg transition-transform duration-300 hover:scale-110 "
+        >
+          <img
+            src="https://loewenportal.uni-halle.de/portal/pub/img//fotos/loewe.jpg"
+            className="rounded-xl w-32 h-32 object-cover aspect-square"
+          />
+          <p className="text-lg font-semibold text-center">Löwenportal</p>
+        </a>
+        <a
+          href="https://www.stura.uni-halle.de "
+          className="bg-secondary  flex justify-center items-center flex-col gap-2 p-4  rounded-xl shadow-lg transition-transform duration-300 hover:scale-110"
+        >
+          <img
+            src="https://www.stura.uni-halle.de/wp-content/uploads/2020/09/0001-scaled-e1603108866970.jpg"
+            className="rounded-xl w-32 h-32 object-cover aspect-square"
+          />
+          <p className="text-lg font-semibold text-center">StuRa</p>
+        </a>
+        <a
+          href="https://studmail.uni-halle.de/de/login "
+          className="bg-secondary  flex justify-center items-center flex-col gap-2 p-4  rounded-xl shadow-lg transition-transform duration-300 hover:scale-110"
+        >
+          <img
+            src="https://www.tenfold-security.com/wp-content/uploads/groupwise-logo-e1587790118740-1.png"
+            className="rounded-xl w-32 h-32 object-cover aspect-square"
+          />
+          <p className="text-lg font-semibold text-center">StudMail</p>
+        </a> 
+      </div>
 
       <div className="flex flex-col gap-16 py-4">
         <iframe
           src="https://www.ich-will-wissen.de"
           className="h-[750px] w-full rounded-xl "
         />
-
-        <div className="h-48 flex gap-2">
-          <div className="  flex-1 bg-yellow-50 rounded-lg flex items-center justify-center">
-            [Content]
-          </div>
-          <div className="  flex-1 bg-blue-50 rounded-lg flex items-center justify-center">
-            [Content]
-          </div>
-        </div>
-        <div className="h-32 bg-green-50 rounded-lg flex items-center justify-center">
-          [Content]
-        </div>
 
         <Header>
           Folg uns auf <span className="text-gradient">Instagram</span>
