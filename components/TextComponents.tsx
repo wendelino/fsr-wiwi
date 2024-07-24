@@ -52,6 +52,7 @@ export function AnimatedText({text}: {text: string}) {
         currentIndex += 1;
       } else {
         clearInterval(interval);
+        setDisplayedText(text)
       }
     }, 150); // Intervall in Millisekunden
 

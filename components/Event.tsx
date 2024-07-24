@@ -15,6 +15,7 @@ import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { MapPin } from "lucide-react";
 import { createEvent } from "ics";
+import { Location_DB } from "@prisma/client";
 
 interface Location {
   name: string;
@@ -29,10 +30,6 @@ export interface EventProps {
   tag?: string[];
 }
 export default function EventCard({ event }: { event: EventProps }) {
-  const handleMapsRedirect = () => {
-    if (event.location) window.open(event.location.maps_link, "_blank");
-  };
-
   const handleSafeCalendar = () => {
     const icsEvent: any = {
       start: [
@@ -103,9 +100,6 @@ export default function EventCard({ event }: { event: EventProps }) {
               <span className="flex items-center font-semibold pr-2 rounded-lg">
                 <MapPin height={16} /> {event.location?.name}
               </span>
-              <Button variant={"outline"} onClick={() => handleMapsRedirect()}>
-                Auf Maps anzeigen {"–>"}
-              </Button>
             </div>
             <DrawerTitle>{event.name}</DrawerTitle>
             <span className="font-extralight py-2">
@@ -135,5 +129,22 @@ export default function EventCard({ event }: { event: EventProps }) {
         </div>
       </DrawerContent>
     </Drawer>
+  );
+}
+
+export function LocationCard({ location }: { location: Location_DB }) {
+  const handleMapsRedirect = () => {
+    //if (location) window.open(event.location.maps_link, "_blank");
+  };
+
+  return (
+    <div className="flex gap-2 py-2">
+      <span className="flex items-center font-semibold pr-2 rounded-lg">
+        <MapPin height={16} /> {location.label}
+      </span>
+      <Button variant={"outline"} onClick={() => handleMapsRedirect()}>
+        Auf Maps anzeigen {"–>"}
+      </Button>
+    </div>
   );
 }
