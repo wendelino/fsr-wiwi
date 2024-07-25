@@ -10,7 +10,7 @@ export default function CreativeLayout({blocks}: {blocks: any}) {
           <div
             key={block.id}
             className="p-6 bg-white rounded-lg shadow-md fade-in"
-            style={{ "--delay": `${index * 0.2}s` }}
+            style={{ '--delay': `${index * 0.2}s` } as React.CSSProperties}
           >
             <h2 className="text-xl font-semibold mb-4">{block.title}</h2>
             <p>{block.description}</p>
