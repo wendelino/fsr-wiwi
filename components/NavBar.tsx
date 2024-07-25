@@ -13,6 +13,7 @@ function NavLayout() {
     <>
       <NavDropdown title={"Über uns"}>
         <NavLink href="/go">Geschäftsordnung</NavLink>
+        <NavLink href="/awareness">Awareness</NavLink>
         <NavLink href="/about">Mitglieder:innen</NavLink>
       </NavDropdown>
       <NavDropdown title={"Erstiwoche"}>
