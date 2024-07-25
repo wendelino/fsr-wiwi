@@ -1,4 +1,3 @@
-import CreativeLayout from "@/components/CreativeLayout";
 import { Header, SubHeader } from "@/components/TextComponents";
 
 export default function page() {
@@ -73,8 +72,21 @@ export default function page() {
 
   return (
     <>
-    <Header>Unsere <span className="fsr-gradient">Ressorts</span></Header>
-      <CreativeLayout blocks={blocks} />{" "}
+      <Header>
+        Unsere <span className="fsr-gradient">Ressorts</span>
+      </Header>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 ">
+        {blocks.map((block: any, index: number) => (
+          <div
+            key={block.id}
+            className="p-6 bg-secondary rounded-lg shadow-md fade-in"
+            style={{ "--delay": `${index * 0.2}s` } as React.CSSProperties}
+          >
+            <h2 className="text-xl font-semibold mb-4">{block.title}</h2>
+            <p>{block.description}</p>
+          </div>
+        ))}
+      </div>
     </>
   );
 }
