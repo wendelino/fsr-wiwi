@@ -3,22 +3,9 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
-import { useEffect, useState } from "react";
-import { Location_DB } from "@prisma/client";
-import { LocationCard } from "./Event";
+import { LocationCard, LocationProps } from "./Event";
 
-export default function MyMap() {
-  const [locations, setLocations] = useState<Location_DB[]>([]);
-
-  // useEffect(() => {
-  //   const fetchLocations = async () => {
-  //     const response = await fetch("/api/locations"); // Passen Sie den API-Endpunkt entsprechend an
-  //     const data: Location_DB[] = await response.json();
-  //     setLocations(data);
-  //   };
-
-  //   fetchLocations();
-  // }, []);
+export default function MyMap({locations}: {locations: LocationProps[]}) { 
 
   return (
     <MapContainer

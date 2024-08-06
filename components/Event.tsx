@@ -15,20 +15,27 @@ import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { MapPin, MoveRightIcon } from "lucide-react";
 import { createEvent } from "ics";
-import { Location_DB } from "@prisma/client"; 
- 
+import { Location_DB } from "@prisma/client";
 
-export interface EventProps {
+export type EventProps = {
   id: string;
   title: string;
   start: Date;
   end: Date;
   description: string;
-  registrable: boolean;
   is_public: boolean;
-  location_id: string;
-}
-export default function EventCard({ event }: { event: EventProps }) {
+  registrable: boolean;
+};
+export type LocationProps = {
+  id: string;
+  label: string;
+  lat: number;
+  long: number;
+};
+
+export type EventWithLocation = EventProps & { location: LocationProps | null };
+
+export default function EventCard({ event }: { event: EventWithLocation }) {
   const handleSafeCalendar = () => {
     const icsEvent: any = {
       start: [
@@ -74,7 +81,7 @@ export default function EventCard({ event }: { event: EventProps }) {
       <DrawerTrigger asChild>
         <div className="flex flex-col items-start bg-red-50 p-2 rounded-lg gap-2 relative text-sm">
           <span className="bg-red-200 flex items-center pr-2 py-1 rounded-lg">
-            <MapPin height={16} /> {event.location_id}
+            <MapPin height={16} /> {event.location?.label}
           </span>
           <div className="flex flex-col">
             <span className="font-semibold">{event.title}</span>
@@ -82,7 +89,7 @@ export default function EventCard({ event }: { event: EventProps }) {
               <strong>{format(event.start, "HH:mm")} </strong>
               bis <strong>{format(event.end, "HH:mm")}</strong>
             </span>
-          </div> 
+          </div>
         </div>
       </DrawerTrigger>
       <DrawerContent>
@@ -90,7 +97,7 @@ export default function EventCard({ event }: { event: EventProps }) {
           <DrawerHeader>
             <div className="flex gap-2 pb-6">
               <span className="flex items-center font-semibold pr-2 rounded-lg">
-                <MapPin height={16} /> {event.location_id}
+                <MapPin height={16} /> {event.location?.label}
               </span>
             </div>
             <DrawerTitle>{event.title}</DrawerTitle>
@@ -101,7 +108,7 @@ export default function EventCard({ event }: { event: EventProps }) {
 
             <DrawerDescription>{event.description}</DrawerDescription>
           </DrawerHeader>
- 
+
           <DrawerFooter>
             <Button>Anmelden</Button>
             <Button onClick={handleSafeCalendar}>Im Kalender sichern</Button>

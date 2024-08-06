@@ -24,7 +24,6 @@ export default function Footer() {
           <div className="flex flex-col gap-2 items-center lg:items-start"> 
             <Link href="/datenschutz">Datenschutz</Link>
             <Link href="/impressum">Impressum</Link>
-            <Link href="/admin" className="opacity-50">Admin-Login</Link>
           </div>
         </div>
         <p className="opacity-50 pt-8">

@@ -1,12 +1,12 @@
+"use client";
 import Countdown from "@/components/CountDown";
 import DayCard, { DayProps } from "@/components/Day";
-import EventCard, { EventProps } from "@/components/Event";
-import { Header } from "@/components/TextComponents";
-import { getEvents } from "../_actions/event";
+import { EventProps, EventWithLocation } from "@/components/Event";
+import { Header } from "@/components/TextComponents"; 
+import { useData } from "@/components/DataContext";
 
-export default async function Page() {
-  
-  const events: EventProps[] = await getEvents();
+export default function Page() {
+  const { events } = useData();
   const days: DayProps[] = groupEventsByDay(events);
 
   return (
@@ -17,7 +17,7 @@ export default async function Page() {
         Unser <span className="fsr-gradient">Programm</span> für euch
       </Header>
 
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
         {days.map((e, index) => (
           <DayCard key={index} day={e} />
         ))}
@@ -26,12 +26,12 @@ export default async function Page() {
   );
 }
 
-function groupEventsByDay(events: EventProps[] | undefined): DayProps[] {
+function groupEventsByDay(events: EventWithLocation[] | undefined): DayProps[] {
   if (!events) {
     return [];
   }
 
-  const groupedEvents: Record<string, EventProps[]> = events.reduce(
+  const groupedEvents: Record<string, EventWithLocation[]> = events.reduce(
     (acc, event) => {
       const dateKey = event.start.toISOString().split("T")[0]; // YYYY-MM-DD
       if (!acc[dateKey]) {
@@ -40,7 +40,7 @@ function groupEventsByDay(events: EventProps[] | undefined): DayProps[] {
       acc[dateKey].push(event);
       return acc;
     },
-    {} as Record<string, EventProps[]>
+    {} as Record<string, EventWithLocation[]>
   );
 
   const days = Object.keys(groupedEvents).map((date) => ({

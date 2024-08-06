@@ -1,10 +1,10 @@
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
-import EventCard, { EventProps } from "./Event";
+import EventCard, {  EventWithLocation } from "./Event";
 
 export interface DayProps {
   date: string;
-  events: EventProps[];
+  events: EventWithLocation[];
 }
 
 export default function DayCard({ day }: { day: DayProps }) {

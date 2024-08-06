@@ -1,10 +1,18 @@
-// "use server";
-// import db from "@/db/db";  
-// import { Location_DB } from "@prisma/client";
+ "use server";
 
+import { LocationProps } from "@/components/Event";
 
-// export const getLOCS = async (to: string, html: string, subject: string) => {
-//   const locations: Location_DB[] = await db.location_DB.findMany();
-
-//   return locations;
-// };
+export async function getLocations() {
+    const orgLink = "fsr-wiwi";
+    const response = await fetch(
+      `https://eventec.vercel.app/api/locations?org_link=${orgLink}`
+    );
+    const data = await response.json();
+  
+    const locations: LocationProps[] = data.map((e: any) => ({
+      ...e,
+      start: new Date(e.start),
+      end: new Date(e.end),
+    }));
+    return locations;
+  }
