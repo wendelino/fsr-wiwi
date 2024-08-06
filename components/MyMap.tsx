@@ -10,15 +10,15 @@ import { LocationCard } from "./Event";
 export default function MyMap() {
   const [locations, setLocations] = useState<Location_DB[]>([]);
 
-  useEffect(() => {
-    const fetchLocations = async () => {
-      const response = await fetch("/api/locations"); // Passen Sie den API-Endpunkt entsprechend an
-      const data: Location_DB[] = await response.json();
-      setLocations(data);
-    };
+  // useEffect(() => {
+  //   const fetchLocations = async () => {
+  //     const response = await fetch("/api/locations"); // Passen Sie den API-Endpunkt entsprechend an
+  //     const data: Location_DB[] = await response.json();
+  //     setLocations(data);
+  //   };
 
-    fetchLocations();
-  }, []);
+  //   fetchLocations();
+  // }, []);
 
   return (
     <MapContainer

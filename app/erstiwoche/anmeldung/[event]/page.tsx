@@ -1,8 +1,7 @@
 import { getEvents } from "@/app/_actions/event";
 import { EventProps } from "@/components/Event";
 import { Register4Event } from "@/components/RegisterForm";
-import { Header, SubHeader } from "@/components/TextComponents";
-import db from "@/db/db";
+import { Header, SubHeader } from "@/components/TextComponents"; 
 import { redirect } from "next/navigation";
 
 export default async function page({ params }: { params: { event: string } }) {
