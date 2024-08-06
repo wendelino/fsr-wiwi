@@ -2,6 +2,7 @@
 import { cn } from "@/lib/utils";
 import { Event_DB } from "@prisma/client";
 import { useState, useEffect } from 'react';
+import { EventProps } from "./Event";
 
 export function Header({
   children,
@@ -63,7 +64,7 @@ export function AnimatedText({text}: {text: string}) {
 }
 
 
-export function AnimatedEvents({events}: {events: Event_DB[]}) {
+export function AnimatedEvents({events}: {events: EventProps[]}) {
 
   const [currentEvent, setCurrentEvent] = useState(events[0].title); // Initiale Veranstaltung
 

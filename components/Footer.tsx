@@ -30,8 +30,8 @@ export default function Footer() {
         <p className="opacity-50 pt-8">
           © Fachschaftsrat Wirtschafswissenschaften 2024 | All Rights Reserved |{" "}
           Powered by{" "}
-          <Link className="text-semibold underline" href="https://nextjs.org">
-            NEXT.js
+          <Link className="text-semibold underline" href="https://neventer.vercel.app">
+            Neventer
           </Link>
         </p>
       </WidthWrapper>

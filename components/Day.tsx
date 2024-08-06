@@ -8,6 +8,9 @@ export interface DayProps {
 }
 
 export default function DayCard({ day }: { day: DayProps }) {
+  const sortedEvents = [...day.events].sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime());
+
+
   return (
     <div className="  flex flex-col gap-4">
       <div className=" font-semibold flex flex-col">
@@ -17,7 +20,7 @@ export default function DayCard({ day }: { day: DayProps }) {
         </span>
       </div>
 
-      {day.events.map((e, index) => (
+      {sortedEvents.map((e, index) => (
         <EventCard event={e} key={index} />
       ))}
     </div>

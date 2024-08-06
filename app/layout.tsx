@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="de">
       <body className={cn(inter.className, "flex flex-col min-h-screen")}>
         <NavBar />
-        <main className="flex-1">
+        <main className="flex-1 min-h-[53vh]">
           <WidthWrapper>{children}</WidthWrapper>
         </main>
         <Footer />

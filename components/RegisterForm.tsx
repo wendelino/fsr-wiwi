@@ -32,7 +32,7 @@ import { Event_DB, Location_DB } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
-import { LocationCard } from "./Event";
+import { EventProps, LocationCard } from "./Event";
 
 interface FormState {
   loading: boolean;
@@ -180,9 +180,9 @@ interface EventWithLocation extends Event_DB {
   location_DB: Location_DB;
 }
 
-export function SelectEvent({ events }: { events: EventWithLocation[] }) {
+export function SelectEvent({ events }: { events: EventProps[] }) {
   const router = useRouter();
-  const [selectedEvent, setSelectedEvent] = useState<EventWithLocation | null>(
+  const [selectedEvent, setSelectedEvent] = useState<EventProps | null>(
     null
   );
   const EventFormSchema = z.object({
@@ -262,7 +262,7 @@ export function SelectEvent({ events }: { events: EventWithLocation[] }) {
             </div>
 
             <div> 
-              <LocationCard location={selectedEvent.location_DB} />
+              {/* <LocationCard location={selectedEvent.location_DB} /> */}
             </div>
             <div> 
               {selectedEvent.description}

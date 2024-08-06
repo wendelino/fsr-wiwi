@@ -15,21 +15,18 @@ import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { MapPin, MoveRightIcon } from "lucide-react";
 import { createEvent } from "ics";
-import { Location_DB } from "@prisma/client";
-import Link from "next/link";
-import { useState } from "react";
+import { Location_DB } from "@prisma/client"; 
+ 
 
-interface Location {
-  name: string;
-  maps_link: string;
-}
 export interface EventProps {
-  name: string;
-  description?: string;
-  location?: Location;
+  id: string;
+  title: string;
   start: Date;
   end: Date;
-  tag?: string[];
+  description: string;
+  registrable: boolean;
+  is_public: boolean;
+  location_id: string;
 }
 export default function EventCard({ event }: { event: EventProps }) {
   const handleSafeCalendar = () => {
@@ -48,7 +45,7 @@ export default function EventCard({ event }: { event: EventProps }) {
         event.end.getHours(),
         event.end.getMinutes(),
       ],
-      title: event.name,
+      title: event.title,
       description: event.description,
       status: "CONFIRMED",
       busyStatus: "BUSY",
@@ -77,22 +74,15 @@ export default function EventCard({ event }: { event: EventProps }) {
       <DrawerTrigger asChild>
         <div className="flex flex-col items-start bg-red-50 p-2 rounded-lg gap-2 relative text-sm">
           <span className="bg-red-200 flex items-center pr-2 py-1 rounded-lg">
-            <MapPin height={16} /> {event.location?.name}
+            <MapPin height={16} /> {event.location_id}
           </span>
           <div className="flex flex-col">
-            <span className="font-semibold">{event.name}</span>
+            <span className="font-semibold">{event.title}</span>
             <span className="font-extralight">
               <strong>{format(event.start, "HH:mm")} </strong>
               bis <strong>{format(event.end, "HH:mm")}</strong>
             </span>
-          </div>
-          {event.tag && (
-            <div className="flex flex-wrap justify-end gap-1 w-full">
-              {event.tag.map((e, index) => (
-                <Badge key={index}>{e}</Badge>
-              ))}
-            </div>
-          )}
+          </div> 
         </div>
       </DrawerTrigger>
       <DrawerContent>
@@ -100,10 +90,10 @@ export default function EventCard({ event }: { event: EventProps }) {
           <DrawerHeader>
             <div className="flex gap-2 pb-6">
               <span className="flex items-center font-semibold pr-2 rounded-lg">
-                <MapPin height={16} /> {event.location?.name}
+                <MapPin height={16} /> {event.location_id}
               </span>
             </div>
-            <DrawerTitle>{event.name}</DrawerTitle>
+            <DrawerTitle>{event.title}</DrawerTitle>
             <span className="font-extralight py-2">
               <strong>{format(event.start, "HH:mm")} </strong>
               bis <strong>{format(event.end, "HH:mm")}</strong>
@@ -111,16 +101,7 @@ export default function EventCard({ event }: { event: EventProps }) {
 
             <DrawerDescription>{event.description}</DrawerDescription>
           </DrawerHeader>
-
-          <div className="p-4">
-            {event.tag && (
-              <div className="flex flex-wrap justify-end gap-1 w-full">
-                {event.tag.map((e, index) => (
-                  <Badge key={index}>{e}</Badge>
-                ))}
-              </div>
-            )}
-          </div>
+ 
           <DrawerFooter>
             <Button>Anmelden</Button>
             <Button onClick={handleSafeCalendar}>Im Kalender sichern</Button>
@@ -166,7 +147,7 @@ export function LocationCard({ location }: { location: Location_DB }) {
             alt="Google Logo"
             src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/aa/Google_Maps_icon_%282020%29.svg/418px-Google_Maps_icon_%282020%29.svg.png"
           />
-          Google 
+          Google
         </Button>
         <Button
           variant={"outline"}

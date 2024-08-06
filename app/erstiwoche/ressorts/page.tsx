@@ -59,9 +59,8 @@ export default function page() {
     {
       id: 10,
       title: "Stadtrallye",
-      description:
-        "Organisiert eine Stadtrallye, um den neuen Studierenden die Stadt und ihre Umgebung auf spielerische Weise näherzubringen.",
-    },
+      description: "Habt ihr Lust neue Kontakte zu knüpfen und gleichzeitig euer Wissen und Geschick zu testen? Dann ist die Stadtralley genau das Richtige für euch! Gemeinsam gestalten wir eine Reihe an kleinen Wettbewerben, die ihr in Teams gemeinsam meistert und nebenbei viele Ort in Halle und Fakten zu diesen kennenlernt. "
+     },
     {
       id: 11,
       title: "Teamer*innen-/Helfer*innen-Koordination",
