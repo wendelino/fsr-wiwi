@@ -24,9 +24,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { AnimatedEvents, Header, SubHeader } from "./TextComponents"; 
+import { AnimatedEvents, Header, SubHeader } from "./TextComponents";
 import { useState } from "react";
-import { CheckCircleIcon, XCircleIcon } from "lucide-react"; 
+import { CheckCircleIcon, XCircleIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
@@ -78,7 +78,7 @@ export function Register4Event({ event }: { event: EventProps }) {
           Liebe Grüße
           <br />
           Dein FSR Wiwi <3
-        </p>`; 
+        </p>`;
 
     const guest = {
       firstName: data.name,
@@ -88,14 +88,9 @@ export function Register4Event({ event }: { event: EventProps }) {
 
     const res = await addGuestToEvent({ eventId: event.id, guest });
     if (res) {
-         setFormState((prev) => ({ ...prev, submitted: true }));
-         await sendMail(
-          data.email,
-          html,
-          "Anmeldungsbestätigung " + event.title
-        );
-
-    } else setFormState((prev) => ({ ...prev, error: true })); 
+      setFormState((prev) => ({ ...prev, submitted: true }));
+      await sendMail(data.email, html, "Anmeldungsbestätigung " + event.title);
+    } else setFormState((prev) => ({ ...prev, error: true }));
   }
 
   if (formState.submitted) return <SuccessForm />;
@@ -186,14 +181,7 @@ export function Register4Event({ event }: { event: EventProps }) {
   );
 }
 
-
-export function SelectEvent({
-  events,
-  loading,
-}: {
-  events: EventProps[];
-  loading: boolean;
-}) {
+export function SelectEvent({ events }: { events: EventProps[] }) {
   const router = useRouter();
   const [selectedEvent, setSelectedEvent] = useState<EventProps | null>(null);
   const EventFormSchema = z.object({
@@ -219,10 +207,7 @@ export function SelectEvent({
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6 flex flex-col w-full max-w-md border p-8 rounded-lg shadow-lg"
       >
-        {loading ? (
-          <Skeleton className="h-20 w-full flex items-center justify-center">Laden...</Skeleton>
-        ) : (
-          <FormField
+        <FormField
             control={form.control}
             name="event"
             render={({ field }) => (
@@ -254,7 +239,6 @@ export function SelectEvent({
               </FormItem>
             )}
           />
-        )}
 
         {selectedEvent && (
           <div className="flex flex-col gap-8 ">
