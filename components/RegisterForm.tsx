@@ -24,15 +24,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { AnimatedEvents, Header, SubHeader } from "./TextComponents";
-import { sendMail } from "@/app/_actions/sendMail";
+import { AnimatedEvents, Header, SubHeader } from "./TextComponents"; 
 import { useState } from "react";
-import { CheckCircleIcon, XCircleIcon } from "lucide-react";
-import { Event_DB, Location_DB } from "@prisma/client";
+import { CheckCircleIcon, XCircleIcon } from "lucide-react"; 
 import { useRouter } from "next/navigation";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
 import { EventProps, LocationCard } from "./Event";
+import { addGuestToEvent } from "@/app/_actions/sign-up";
+import { Skeleton } from "./ui/skeleton";
+import { sendMail } from "@/app/_actions/sendMail";
 
 interface FormState {
   loading: boolean;
@@ -45,7 +46,7 @@ const initialFormState: FormState = {
   error: false,
 };
 
-export function Register4Event({ event }: { event: string }) {
+export function Register4Event({ event }: { event: EventProps }) {
   const FormSchema = z.object({
     name: z.string({ message: "Dieses Feld ist erforderlich." }),
     surname: z.string({ message: "Dieses Feld ist erforderlich." }),
@@ -69,7 +70,7 @@ export function Register4Event({ event }: { event: string }) {
     setFormState((prev) => ({ ...prev, loading: true }));
     const html = ` <h2 style="color: #333333;">Hey ${data.name},</h2><h4 style="color: #333333;">Danke für deine Anmeldung!</h4>
         <p style="color: #555555;">
-          Hiermit hast du dich erfogrleich für die Veranstaltung <strong>${event}</strong> angemeldet!
+          Hiermit hast du dich erfogrleich für die Veranstaltung <strong>${event.title}</strong> angemeldet!
           <br /><br />
           Solltest du Fragen haben kannst du uns jederzeit unter dieser E-Mail oder unseren anderen Kontaktmöglichkeiten erreichen :)
         </p>
@@ -77,15 +78,24 @@ export function Register4Event({ event }: { event: string }) {
           Liebe Grüße
           <br />
           Dein FSR Wiwi <3
-        </p>`;
-    const res = await sendMail(
-      data.email,
-      html,
-      "Anmeldungsbestätigung " + event
-    );
-    if (res.success) {
-      setFormState((prev) => ({ ...prev, submitted: true }));
-    } else setFormState((prev) => ({ ...prev, error: true }));
+        </p>`; 
+
+    const guest = {
+      firstName: data.name,
+      lastName: data.surname,
+      email: data.email,
+    };
+
+    const res = await addGuestToEvent({ eventId: event.id, guest });
+    if (res) {
+         setFormState((prev) => ({ ...prev, submitted: true }));
+         await sendMail(
+          data.email,
+          html,
+          "Anmeldungsbestätigung " + event.title
+        );
+
+    } else setFormState((prev) => ({ ...prev, error: true })); 
   }
 
   if (formState.submitted) return <SuccessForm />;
@@ -176,15 +186,16 @@ export function Register4Event({ event }: { event: string }) {
   );
 }
 
-interface EventWithLocation extends Event_DB {
-  location_DB: Location_DB;
-}
 
-export function SelectEvent({ events }: { events: EventProps[] }) {
+export function SelectEvent({
+  events,
+  loading,
+}: {
+  events: EventProps[];
+  loading: boolean;
+}) {
   const router = useRouter();
-  const [selectedEvent, setSelectedEvent] = useState<EventProps | null>(
-    null
-  );
+  const [selectedEvent, setSelectedEvent] = useState<EventProps | null>(null);
   const EventFormSchema = z.object({
     event: z.string({ message: "Dieses Feld ist erforderlich." }),
   });
@@ -208,42 +219,46 @@ export function SelectEvent({ events }: { events: EventProps[] }) {
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6 flex flex-col w-full max-w-md border p-8 rounded-lg shadow-lg"
       >
-        <FormField
-          control={form.control}
-          name="event"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Veranstaltung auswählen</FormLabel>
-              <Select
-                onValueChange={(value) => {
-                  field.onChange(value);
-                  handleEventChange(value);
-                }}
-                defaultValue={field.value}
-              >
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue
-                      placeholder={<AnimatedEvents events={events} />}
-                    />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {events.map((e) => (
-                    <SelectItem key={e.title} value={e.title}>
-                      {e.title}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {loading ? (
+          <Skeleton className="h-20 w-full flex items-center justify-center">Laden...</Skeleton>
+        ) : (
+          <FormField
+            control={form.control}
+            name="event"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Veranstaltung auswählen</FormLabel>
+                <Select
+                  onValueChange={(value) => {
+                    field.onChange(value);
+                    handleEventChange(value);
+                  }}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue
+                        placeholder={<AnimatedEvents events={events} />}
+                      />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {events.map((e) => (
+                      <SelectItem key={e.title} value={e.title}>
+                        {e.title}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
 
         {selectedEvent && (
           <div className="flex flex-col gap-8 ">
-            <div> 
+            <div>
               <span className="font-semibold">
                 {format(selectedEvent.start, "EEEE, dd.MM.yyyy ", {
                   locale: de,
@@ -261,12 +276,10 @@ export function SelectEvent({ events }: { events: EventProps[] }) {
               </p>
             </div>
 
-            <div> 
+            <div>
               {/* <LocationCard location={selectedEvent.location_DB} /> */}
             </div>
-            <div> 
-              {selectedEvent.description}
-            </div>
+            <div>{selectedEvent.description}</div>
           </div>
         )}
 
@@ -278,11 +291,10 @@ export function SelectEvent({ events }: { events: EventProps[] }) {
 
 export function AdminLogin() {
   const FormSchema = z.object({
-    password: z
-      .string({ message: "Dieses Feld ist erforderlich." }) 
+    password: z.string({ message: "Dieses Feld ist erforderlich." }),
   });
- 
-  const [loading, setLoading] = useState(false); 
+
+  const [loading, setLoading] = useState(false);
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   });
@@ -290,9 +302,9 @@ export function AdminLogin() {
   async function onSubmit(data: z.infer<typeof FormSchema>) {
     setLoading(true);
 
-    const res = { success: true }; 
+    const res = { success: true };
   }
- 
+
   return (
     <Form {...form}>
       <form
@@ -311,11 +323,11 @@ export function AdminLogin() {
               <FormMessage />
             </FormItem>
           )}
-        /> 
+        />
 
         <Button type="submit" disabled={loading}>
           {loading ? "Laden..." : "Anmelden"}
-        </Button> 
+        </Button>
       </form>
     </Form>
   );

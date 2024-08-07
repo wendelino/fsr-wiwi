@@ -8,7 +8,9 @@ export default async function page({ params }: { params: { event: string } }) {
   const event_title = decodeURIComponent(params.event); 
   const events: EventProps[] = await getEvents(); 
 
-  if (events.filter((e) => e.title == event_title).length == 0) {
+  const event = events.filter((e) => e.title == event_title);
+
+  if (event.length != 1) {
     redirect("/erstiwoche/anmeldung");
   }
 
@@ -17,7 +19,7 @@ export default async function page({ params }: { params: { event: string } }) {
       <Header className=" fsr-gradient">{event_title}</Header>
       <SubHeader className="-mt-12 lg:-mt-20">Anmeldeformular</SubHeader>
 
-      <Register4Event event={event_title} />
+      <Register4Event event={event[0]} />
     </div>
   );
 }

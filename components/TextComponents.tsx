@@ -65,8 +65,9 @@ export function AnimatedText({text}: {text: string}) {
 
 
 export function AnimatedEvents({events}: {events: EventProps[]}) {
+ 
 
-  const [currentEvent, setCurrentEvent] = useState(events[0].title); // Initiale Veranstaltung
+  const [currentEvent, setCurrentEvent] = useState(events[0]?.title || ""); // Initiale Veranstaltung
 
   useEffect(() => {
     // Index für die aktuelle Veranstaltung
