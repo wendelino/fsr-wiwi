@@ -1,11 +1,11 @@
-"use client"
-import { useData } from "@/components/DataContext";
+ 
+import { getLocations } from "@/app/_actions/getLocations";
 import { Header } from "@/components/TextComponents"; 
 import dynamic from "next/dynamic";
 
-export default function Page() {
+export default async function Page() {
 
-  const {locations} = useData();
+  const locations = await getLocations();
 
   const Map = dynamic(() => import("../../../components/MyMap"), {
     loading: () => (

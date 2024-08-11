@@ -362,7 +362,7 @@ export function RegisterNewsletter() {
             <FormItem>
               <FormLabel>E-Mail *</FormLabel>
               <FormControl>
-                <Input placeholder="name@mail.de" {...field} />
+                <Input placeholder="Coming soon..." {...field} disabled />
               </FormControl>
               <FormMessage />
             </FormItem>

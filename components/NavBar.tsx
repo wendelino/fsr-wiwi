@@ -14,7 +14,7 @@ function NavLayout() {
       <NavDropdown title={"Über uns"}>
         <NavLink href="/go">Geschäftsordnung</NavLink>
         <NavLink href="/awareness">Awareness</NavLink>
-        <NavLink href="/about">Mitglieder:innen</NavLink>
+        {/* <NavLink href="/about">Mitglieder:innen</NavLink> */}
       </NavDropdown>
       <NavDropdown title={"Erstiwoche"}>
         <NavLink href="/erstiwoche">Programm</NavLink>
@@ -22,11 +22,11 @@ function NavLayout() {
         <NavLink href="/erstiwoche/anmeldung">Anmeldung</NavLink>
         <NavLink href="/erstiwoche/ressorts">Ressorts</NavLink> 
       </NavDropdown>
-      <NavDropdown title={"Veranstaltungen"}>
+      {/* <NavDropdown title={"Veranstaltungen"}>
         <NavLink href="/erstiwoche">Erstiwoche</NavLink>
         <NavLink href="/events">Eisparty</NavLink>
         <NavLink href="/events">LNDW</NavLink>
-      </NavDropdown>
+      </NavDropdown> */}
 
       <NavLink href="/kontakt">Kontakt</NavLink>
       <ThemeToggle />

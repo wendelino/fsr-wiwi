@@ -16,6 +16,7 @@ import { Badge } from "./ui/badge";
 import { MapPin, MoveRightIcon } from "lucide-react";
 import { createEvent } from "ics";
 import { Location_DB } from "@prisma/client";
+import Link from "next/link";
 
 export type EventProps = {
   id: string;
@@ -79,10 +80,13 @@ export default function EventCard({ event }: { event: EventWithLocation }) {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <div className="flex flex-col items-start bg-red-50 p-2 rounded-lg gap-2 relative text-sm">
-          <span className="bg-red-200 flex items-center pr-2 py-1 rounded-lg">
-            <MapPin height={16} /> {event.location?.label}
-          </span>
+        <div className="flex flex-col items-start fsr-background-1 p-2 text-white rounded-lg gap-1.5 relative text-sm shadow-lg">
+          {event.location && (
+            <span className="bg-secondary text-foreground  flex items-center pr-2 py-1 rounded-lg">
+              <MapPin height={16} /> {event.location?.label}
+            </span>
+          )}
+
           <div className="flex flex-col">
             <span className="font-semibold">{event.title}</span>
             <span className="font-extralight">
@@ -90,15 +94,22 @@ export default function EventCard({ event }: { event: EventWithLocation }) {
               bis <strong>{format(event.end, "HH:mm")}</strong>
             </span>
           </div>
+          {event.registrable && (
+            <div className="flex justify-end w-full ">
+              <Badge>Anmeldepflichtig!</Badge>
+            </div>
+          )}
         </div>
       </DrawerTrigger>
       <DrawerContent>
         <div className="mx-auto w-full max-w-sm">
           <DrawerHeader>
             <div className="flex gap-2 pb-6">
-              <span className="flex items-center font-semibold pr-2 rounded-lg">
-                <MapPin height={16} /> {event.location?.label}
-              </span>
+              {event.location && (
+                <span className="bg-secondary text-foreground  flex items-center pr-2 py-1 rounded-lg">
+                  <MapPin height={16} /> {event.location?.label}
+                </span>
+              )}
             </div>
             <DrawerTitle>{event.title}</DrawerTitle>
             <span className="font-extralight py-2">
@@ -110,7 +121,11 @@ export default function EventCard({ event }: { event: EventWithLocation }) {
           </DrawerHeader>
 
           <DrawerFooter>
-            <Button>Anmelden</Button>
+            {event.registrable && (
+              <Button asChild>
+                <Link href={"erstiwoche/anmeldung/" + event.title}>Jetzt anmelden</Link>
+              </Button>
+            )}
             <Button onClick={handleSafeCalendar}>Im Kalender sichern</Button>
             <DrawerClose asChild>
               <Button variant="outline">Zurück</Button>
@@ -139,7 +154,7 @@ export function LocationCard({ location }: { location: Location_DB }) {
       <span className="flex items-center font-semibold pr-2 ">
         <MapPin height={18} /> {location.label}
       </span>
-      <div className="flex gap-2 w-full flex-wrap">
+      <div className="flex gap-2 w-full flex-wrap min-w-32">
         <Button
           variant={"outline"}
           type="button"

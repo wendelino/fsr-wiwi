@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 import WidthWrapper from "@/components/WidthWrapper";
 import ScrollTop from "@/components/ScrollTop";
+import { Star } from "lucide-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,7 +28,7 @@ export default function RootLayout({
           <WidthWrapper>{children}</WidthWrapper>
         </main>
         <Footer />
-        <ScrollTop/>
+        <ScrollTop />
       </body>
     </html>
   );
