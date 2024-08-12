@@ -3,9 +3,15 @@
 import { LocationProps } from "@/components/Event";
 
 export async function getLocations() {
-    const orgLink = "fsr-wiwi";
+    const orgLink = "fsr-wiwi"; 
     const response = await fetch(
-      `https://eventec.vercel.app/api/locations?org_link=${orgLink}`
+      `https://eventec.vercel.app/api/locations?org_link=${orgLink}`,
+      {
+        method: "GET",
+        headers: {
+          "Cache-Control": "no-cache", // Stellt sicher, dass der Cache umgangen wird
+        },
+      }
     );
     const data = await response.json();
   
