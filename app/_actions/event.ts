@@ -7,11 +7,13 @@ export async function getEvents() {
   
   const orgLink = "fsr-wiwi";
   const response = await fetch(
-    `https://eventec.vercel.app/api/events?org_link=${orgLink}`,
+    `https://eventec.vercel.app/api/events?org_link=${orgLink}&nocache=${Date.now()}`,
     {
       method: "GET",
       headers: {
-        "Cache-Control": "no-cache", // Stellt sicher, dass der Cache umgangen wird
+        "Cache-Control": "no-cache, no-store, must-revalidate",
+        "Pragma": "no-cache",
+        "Expires": "0",
       },
     }
   );
