@@ -20,7 +20,7 @@ function NavLayout() {
         <NavLink href="/erstiwoche">Programm</NavLink>
         <NavLink href="/erstiwoche/lageplan">Lageplan</NavLink>
         <NavLink href="/erstiwoche/anmeldung">Anmeldung</NavLink>
-        <NavLink href="/erstiwoche/ressorts">Ressorts</NavLink> 
+        {/* <NavLink href="/erstiwoche/ressorts">Ressorts</NavLink>  */}
       </NavDropdown>
       {/* <NavDropdown title={"Veranstaltungen"}>
         <NavLink href="/erstiwoche">Erstiwoche</NavLink>
