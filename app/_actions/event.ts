@@ -11,6 +11,11 @@ export async function getEvents() {
   );
   const data = await response.json();
 
+  console.log(data
+    
+  );
+  
+
   const events: EventWithLocation[] = data.map((e: any) => ({
     ...e,
     start: new Date(e.start),
