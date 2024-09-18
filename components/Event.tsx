@@ -77,6 +77,9 @@ export default function EventCard({ event }: { event: EventWithLocation }) {
     });
   };
 
+  const special = ["Workshop Slot I","Workshop Slot II","Einführungsveranstaltung","Stadtrallye", "Kneipentour Master"].includes(event.title);
+
+
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -87,6 +90,10 @@ export default function EventCard({ event }: { event: EventWithLocation }) {
             </span>
           )}
 
+          {special &&  <div className="bg-foreground text-background font-bold rounded-full px-2 py-1 absolute right-[-12px] top-[-4px] animate-bounce">EMPFOHLEN!</div>
+          }
+
+        
           <div className="flex flex-col">
             <span className="font-semibold">{event.title}</span>
             <span className="font-extralight">

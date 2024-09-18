@@ -17,6 +17,7 @@ function NavLayout() {
         {/* <NavLink href="/about">Mitglieder:innen</NavLink> */}
       </NavDropdown>
       <NavDropdown title={"Erstiwoche"}>
+        <NavLink href="/files/guide.pdf">Ersti Guide</NavLink>
         <NavLink href="/erstiwoche">Programm</NavLink>
         <NavLink href="/erstiwoche/lageplan">Lageplan</NavLink>
         <NavLink href="/erstiwoche/anmeldung">Anmeldung</NavLink>
