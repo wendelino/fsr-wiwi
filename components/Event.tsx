@@ -26,6 +26,8 @@ export type EventProps = {
   description: string;
   is_public: boolean;
   registrable: boolean;
+  max_guests: number | null;
+  rest_seats: number | null;
 };
 export type LocationProps = {
   id: string;
@@ -86,8 +88,7 @@ export default function EventCard({ event }: { event: EventWithLocation }) {
     "Kneipentour Master",
     "Kneipentour Internationals",
     "Kneipentour Master Raucher*innen",
-    "Kneipentour Master NICHT-Raucher*innen"
-
+    "Kneipentour Master NICHT-Raucher*innen",
   ].includes(event.title);
 
   return (
@@ -113,11 +114,12 @@ export default function EventCard({ event }: { event: EventWithLocation }) {
               bis <strong>{format(event.end, "HH:mm")}</strong>
             </span>
           </div>
-          {event.registrable && (
-            <div className="flex justify-end w-full ">
-              <Badge>Anmeldepflichtig!</Badge>
-            </div>
-          )}
+          <div className="flex justify-end w-full gap-2">
+            {event.registrable && <Badge>Anmeldepflichtig!</Badge>}
+            {event.rest_seats && (
+              <Badge variant={"secondary"} >{event.rest_seats} Plätze übrig!</Badge>
+            )}
+          </div>
         </div>
       </DrawerTrigger>
       <DrawerContent>
