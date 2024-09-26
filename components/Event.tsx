@@ -107,6 +107,11 @@ export default function EventCard({ event }: { event: EventWithLocation }) {
             </div>
           )}
 
+          {event.rest_seats == 0 && (
+            <div className="absolute inset-0 bg-background/80 flex justify-center items-center text-2xl font-bold text-foreground ">
+              Ausgebucht!
+            </div>
+          )}
           <div className="flex flex-col">
             <span className="font-semibold">{event.title}</span>
             <span className="font-extralight">
@@ -116,9 +121,11 @@ export default function EventCard({ event }: { event: EventWithLocation }) {
           </div>
           <div className="flex justify-end w-full gap-2 flex-wrap">
             {event.registrable && <Badge>Anmeldepflichtig!</Badge>}
-            {event.rest_seats && (
-              <Badge variant={"secondary"} >{event.rest_seats} Plätze übrig!</Badge>
-            )}
+            {event.rest_seats ? (
+              <Badge variant={"secondary"}>
+                {event.rest_seats} Plätze übrig!
+              </Badge>
+            ) : null}
           </div>
         </div>
       </DrawerTrigger>
