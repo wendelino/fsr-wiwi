@@ -114,7 +114,7 @@ export default function EventCard({ event }: { event: EventWithLocation }) {
               bis <strong>{format(event.end, "HH:mm")}</strong>
             </span>
           </div>
-          <div className="flex justify-end w-full gap-2">
+          <div className="flex justify-end w-full gap-2 flex-wrap">
             {event.registrable && <Badge>Anmeldepflichtig!</Badge>}
             {event.rest_seats && (
               <Badge variant={"secondary"} >{event.rest_seats} Plätze übrig!</Badge>
