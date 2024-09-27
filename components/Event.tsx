@@ -102,7 +102,7 @@ export default function EventCard({ event }: { event: EventWithLocation }) {
           )}
 
           {special && (
-            <div className="bg-foreground z-10 text-background font-bold rounded-full px-2 py-1 absolute right-[-12px] top-[-4px] animate-bounce">
+            <div className="bg-foreground z-1 text-background font-bold rounded-full px-2 py-1 absolute right-[-12px] top-[-4px] animate-bounce">
               EMPFOHLEN!
             </div>
           )}
