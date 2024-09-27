@@ -102,13 +102,13 @@ export default function EventCard({ event }: { event: EventWithLocation }) {
           )}
 
           {special && (
-            <div className="bg-foreground z-1 text-background font-bold rounded-full px-2 py-1 absolute right-[-12px] top-[-4px] animate-bounce">
+            <div className="bg-foreground z-2 text-background font-bold rounded-full px-2 py-1 absolute right-[-12px] top-[-4px] animate-bounce">
               EMPFOHLEN!
             </div>
           )}
 
           {event.rest_seats == 0 && (
-            <div className="absolute rounded-lg -z-1 inset-0 bg-background/80 flex justify-center items-center text-2xl font-bold text-foreground ">
+            <div className="absolute rounded-lg z-[-1] inset-0 bg-background/80 flex justify-center items-center text-2xl font-bold text-foreground ">
               Ausgebucht!
             </div>
           )}
