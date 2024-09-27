@@ -31,7 +31,7 @@ export default function ScrollTop() {
     isVisible && (
       <Button
         onClick={scrollToTop}
-        className="fixed bottom-4 right-4 rounded-full shadow-lg w-12 h-12 p-0 "
+        className="fixed bottom-4 z-[4] right-4 rounded-full shadow-lg w-12 h-12 p-0 "
         aria-label="Nach oben scrollen"
       >
         <MoveUpIcon/>
