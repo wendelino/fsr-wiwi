@@ -80,8 +80,7 @@ export default function EventCard({ event }: { event: EventWithLocation }) {
   };
 
   const special = [
-    "Streik, Gewerkschaften, TVStud!",
-    "Powerpoint-Karaoke",
+    "Streik, Gewerkschaften, TVStud!", 
     "Impro Theater Workshop",
     "Einführungsveranstaltung",
     "Stadtrallye",
