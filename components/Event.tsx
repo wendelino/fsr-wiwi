@@ -85,6 +85,7 @@ export default function EventCard({ event }: { event: EventWithLocation }) {
     "Einführungsveranstaltung",
     "Stadtrallye",
     "Kneipentour Master",
+    "Speedmeeting",
     "Kneipentour Internationals",
     "Kneipentour Master Raucher*innen",
     "Kneipentour Master NICHT-Raucher*innen",
