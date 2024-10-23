@@ -1,5 +1,6 @@
 import InstagramEmbed from "@/components/InstagramEmbed";
 import { AnimatedText, Header } from "@/components/TextComponents";
+import { Card } from "@/components/ui/card";
 import WidthWrapper from "@/components/WidthWrapper";
 import Image from "next/image";
 
@@ -28,13 +29,75 @@ export default async function Home() {
           </div>
         </div>
       </header>
+
+      <section className="pt-16">
+        <Header>
+          Was bedeutet <span className="fsr-gradient">Fachschaft</span>?
+        </Header>
+        <div className="  text-lg text-foreground/80 ">
+          <p className="  mb-6">
+            Mit der Immatrikulation an der Martin-Luther-Universität bist du
+            nicht nur Student*in dieser Universität geworden, sondern
+            automatisch auch Mitglied der Studierendenschaft
+            Wirtschaftswissenschaften. Dies ist die Gesamtheit der Studierenden
+            des Fachbereiches Wirtschaftswissenschaften.
+          </p>
+          <p className="  mb-6">
+            Der Fachschaftsrat ist die gewählte Vertretung von Studierenden aus
+            der Studierendenschaft Wirtschaftswissenschaften, die sich um die
+            Probleme und Belange der Studierenden kümmert. Die Gesamtheit der
+            Studierenden der Universität (die "Studierendenschaft") vertritt
+            zudem der Studierendenrat (StuRa).
+          </p>
+        </div>
+      </section>
+
+      <img
+        src="https://fachschaft.wiwi.uni-halle.de/im/1603206114_616_00_800.jpg"
+        className="w-full"
+      />
+
+      <Card className="mb-16  px-6 sm:px-10  py-10 bg-secondary  shadow-lg rounded-lg">
+        <h2 className="text-3xl font-bold">
+          Anträge zur <span className="fsr-gradient">Projektförderung</span>
+        </h2>
+
+        <p className="mt-4 text-lg">
+          Wenn du ein Projekt hast, das Unterstützung benötigt, kannst du beim
+          Fachschaftsrat WiWi eine Projektförderung beantragen. Hier findest du
+          das{" "}
+          <a
+            href="https://wcms.itz.uni-halle.de/download.php?down=56894&elem=2139305"
+            className="underline "
+          >
+            Merkblatt zur Antragsstellung
+          </a>
+          .
+        </p>
+      </Card>
+
+      <section className="  py-16">
+        <div className="grid lg:grid-cols-2 gap-2 lg:gap-16 items-center w-full ">
+          <Header>
+            Interesse? Dann sei bei der nächsten{" "}
+            <span className="fsr-gradient">Sitzung</span> dabei!
+          </Header> 
+          <div  >
+            <p className="text-lg text-foreground/80   ">
+              Unsere Sitzungen sind öffentlich und finden in der WiWi Fakultät,
+              Große Steinstraße 73 (Raum 201) statt. Studierende des Bereiches WiWi sind herzlich eingeladen, unseren Sitzungen
+              beizuwohnen. Jeden zweiten Diesntag um 19 Uhr.
+            </p>
+          </div>
+        </div>
+      </section>
+
       <Header>
         Nützliche <span className="fsr-gradient">Links</span>
       </Header>
 
-      <div className="flex gap-8 justify-around mb-8 flex-wrap">
-
-      <a
+      <div className="flex gap-8 justify-around mb-16 flex-wrap">
+        <a
           href="https://studip.uni-halle.de/  "
           className="bg-secondary  flex justify-center items-center flex-col gap-2 p-4  rounded-xl shadow-lg transition-transform duration-300 hover:scale-110"
         >
@@ -73,20 +136,20 @@ export default async function Home() {
             className="rounded-xl w-32 h-32 object-cover aspect-square"
           />
           <p className="text-lg font-semibold text-center">StudMail</p>
-        </a> 
+        </a>
       </div>
 
-      <div className="flex flex-col gap-16 py-4">
-        <iframe
+      <section>
+        {/* <iframe
           src="https://www.ich-will-wissen.de"
           className="h-[750px] w-full rounded-xl "
-        />
+        /> */}
 
         <Header>
           Folg uns auf <span className="text-gradient">Instagram</span>
         </Header>
         <InstagramEmbed />
-      </div>
+      </section>
     </>
   );
 }
