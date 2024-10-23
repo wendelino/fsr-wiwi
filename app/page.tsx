@@ -46,7 +46,7 @@ export default async function Home() {
             Der Fachschaftsrat ist die gewählte Vertretung von Studierenden aus
             der Studierendenschaft Wirtschaftswissenschaften, die sich um die
             Probleme und Belange der Studierenden kümmert. Die Gesamtheit der
-            Studierenden der Universität (die "Studierendenschaft") vertritt
+            Studierenden der Universität (die Studierendenschaft) vertritt
             zudem der Studierendenrat (StuRa).
           </p>
         </div>
