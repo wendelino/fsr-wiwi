@@ -14,10 +14,13 @@ import {
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { MapPin, MoveRightIcon } from "lucide-react";
-import { createEvent } from "ics";
-import { Location_DB } from "@prisma/client";
+import { createEvent } from "ics"; 
 import Link from "next/link";
-
+type Location_DB = {
+  label: string;
+  lat: number;
+  long: number;
+}
 export type EventProps = {
   id: string;
   title: string;

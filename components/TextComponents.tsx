@@ -1,6 +1,5 @@
 "use client"
-import { cn } from "@/lib/utils";
-import { Event_DB } from "@prisma/client";
+import { cn } from "@/lib/utils"; 
 import { useState, useEffect } from 'react';
 import { EventProps } from "./Event";
 
