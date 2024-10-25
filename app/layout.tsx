@@ -22,6 +22,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
+      <head>
+        <script
+          defer
+          data-domain="fsr-wiwi-halle.de" 
+          src="https://plausible.lnio.de/js/script.js"
+        ></script>
+      </head>
       <body className={cn(inter.className, "flex flex-col min-h-screen")}>
         <NavBar />
         <main className="flex-1 min-h-[53vh]">
