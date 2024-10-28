@@ -8,10 +8,38 @@ import WidthWrapper from "@/components/WidthWrapper";
 import ScrollTop from "@/components/ScrollTop";
 
 const inter = Inter({ subsets: ["latin"] });
-
+ 
 export const metadata: Metadata = {
-  title: "FSR Wiwi",
-  description: "Fachschaftsrat Wiwi",
+  title: "Fachschaftsrat Wiwi Halle",
+  description: "Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
+  keywords: [
+    "Fachschaftsrat",
+    "Wirtschaftswissenschaften",
+    "FSR Wiwi Halle",
+    "FSR" 
+  ],
+  openGraph: {
+    url: "https://fsr-wiwi-halle.de",
+    type: "website",
+    title: "Fachschaftsrat Wiwi Halle",
+    description: "Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
+     images: [
+      {
+        url:  "https://fsr-wiwi-halle.de/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Logo"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Fachschaftsrat Wiwi Halle",
+    description: "Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg", 
+  },
+  alternates: {
+    canonical: "https://fsr-wiwi-halle.de"
+  }
 };
 
 export default function RootLayout({
