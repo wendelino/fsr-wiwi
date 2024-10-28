@@ -21,13 +21,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="de">
-      <head>
-        <script
+      
+      <script
           defer
           src="https://analytics.lnio.de/script.js"
           data-website-id="d72a7bb9-59d3-40b7-934a-a48d8dceca3f"
         />
-      </head>
       <body className={cn(inter.className, "flex flex-col min-h-screen")}>
         <NavBar />
         <main className="flex-1 min-h-[53vh]">
