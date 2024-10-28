@@ -1,5 +1,5 @@
 module.exports = {
-    siteUrl: process.env.SITE_URL || 'http://localhost:3000', // Your website's URL
+    siteUrl: "https://fsr-wiwi-halle.de",  
     generateRobotsTxt: true, 
     sitemapSize: 7000, 
   }
