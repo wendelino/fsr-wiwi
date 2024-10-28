@@ -6,7 +6,6 @@ import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 import WidthWrapper from "@/components/WidthWrapper";
 import ScrollTop from "@/components/ScrollTop";
-import { Star } from "lucide-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,9 +24,9 @@ export default function RootLayout({
       <head>
         <script
           defer
-          data-domain="fsr-wiwi-halle.de" 
-          src="https://plausible.lnio.de/js/script.js"
-        ></script>
+          src="https://analytics.lnio.de/script.js"
+          data-website-id="d72a7bb9-59d3-40b7-934a-a48d8dceca3f"
+        />
       </head>
       <body className={cn(inter.className, "flex flex-col min-h-screen")}>
         <NavBar />
