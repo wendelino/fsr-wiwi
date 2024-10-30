@@ -1,5 +1,4 @@
-"use server";
-
+ 
 interface Props { 
   eventId: string;
   guest: {

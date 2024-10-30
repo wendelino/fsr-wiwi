@@ -1,5 +1,4 @@
- "use server";
-
+ 
 import { LocationProps } from "@/components/Event";
 
 export async function getLocations() {
