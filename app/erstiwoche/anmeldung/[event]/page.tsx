@@ -28,7 +28,7 @@ export async function generateStaticParams() {
   const events  = await getEvents(); 
  
   return events.map((item) => ({
-    event: decodeURIComponent(item.title)
+    event: encodeURIComponent(item.title)
   }))
 }
  
