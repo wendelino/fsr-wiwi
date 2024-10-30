@@ -1,5 +1,4 @@
-"use server";
-
+ 
 import {  EventWithLocation } from "@/components/Event";
 
 export async function getEvents() {

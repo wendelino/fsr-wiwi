@@ -33,7 +33,7 @@ import { de } from "date-fns/locale";
 import { EventProps, LocationCard } from "./Event";
 import { addGuestToEvent } from "@/app/_actions/sign-up";
 import { Skeleton } from "./ui/skeleton";
-import { sendMail } from "@/app/_actions/sendMail";
+// import { sendMail } from "@/app/_actions/sendMail";
 
 interface FormState {
   loading: boolean;
@@ -89,7 +89,7 @@ export function Register4Event({ event }: { event: EventProps }) {
     const res = await addGuestToEvent({ eventId: event.id, guest });
     if (res) {
       setFormState((prev) => ({ ...prev, submitted: true }));
-      await sendMail(data.email, html, "Anmeldungsbestätigung " + event.title);
+      // await sendMail(data.email, html, "Anmeldungsbestätigung " + event.title);
     } else setFormState((prev) => ({ ...prev, error: true }));
   }
 

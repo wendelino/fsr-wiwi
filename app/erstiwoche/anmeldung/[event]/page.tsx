@@ -23,3 +23,12 @@ export default async function page({ params }: { params: { event: string } }) {
     </div>
   );
 }
+
+export async function generateStaticParams() {
+  const events  = await getEvents(); 
+ 
+  return events.map((item) => ({
+    event: decodeURIComponent(item.title)
+  }))
+}
+ 

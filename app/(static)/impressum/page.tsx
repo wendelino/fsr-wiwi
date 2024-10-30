@@ -14,16 +14,7 @@ export default function page() {
 
       <SubHeader>Vertreten durch</SubHeader>
       <p>
-        Den Vorsitzenden des Fachschaftsrates Wirtschaftswissenschaften <br />
-        E-Mail: fachschaftsrat@wiwi.uni-halle.de <br />
-        Website:{" "}
-        <a
-          href="https://fsr-wiwi.vercel.app/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          https://fsr-wiwi.vercel.app/
-        </a>
+        Den Vorsitzenden des Fachschaftsrates Wirtschaftswissenschaften <br /> 
       </p>
 
       <SubHeader>Kontakt</SubHeader>
