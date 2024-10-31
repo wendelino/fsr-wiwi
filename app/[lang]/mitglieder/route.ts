@@ -1,7 +1,7 @@
 "use server";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function page(request: NextRequest) { 
+export async function GET(request: NextRequest) { 
   console.log("------GET-----"); 
   console.log("request.url: " +request.url);
   console.log("request.nextUrl.href: " + request.nextUrl.href); 
