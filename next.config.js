@@ -3,7 +3,7 @@ module.exports = {
       return [
         {
           source: '/:locale/mitglieder',
-          destination: '/:locale/mitglieder/2024',  
+          destination: '/:locale/mitglieder/2023',  
           permanent: false,
         },
       ]
