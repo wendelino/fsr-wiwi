@@ -1,10 +1,11 @@
 "use server";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest) { 
-  console.log("------GET-----");
+export async function page(request: NextRequest) { 
+  console.log("------GET-----"); 
   console.log("request.url: " +request.url);
   console.log("request.nextUrl.href: " + request.nextUrl.href); 
+  console.log("request.nextUrl.origin: " + request.nextUrl.origin); 
   console.log("request.nextUrl.pathname: " + request.nextUrl.pathname); 
   console.log("------GET-----");
   
