@@ -85,8 +85,7 @@ export default function NavBar() {
                 isOpen ? "translate-x-0" : "translate-x-full"
               }`}
             >
-              <div className="w-full h-full justify-center flex flex-col gap-2 p-2 pt-16">
-              <NavLink href="./">Startseite</NavLink>
+              <div className="w-full h-full justify-center flex flex-col gap-2 p-2 pt-12">
                 <NavLayout />
               </div>
             </aside>

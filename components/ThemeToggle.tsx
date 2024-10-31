@@ -29,7 +29,7 @@ export function ThemeToggle() {
           Hell <SunIcon/>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("dark")} className="flex justify-between">
-          Dark <MoonStarIcon/>
+          Dunkel <MoonStarIcon/>
         </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setTheme("system")} className="flex justify-between">
           System <Laptop/>
