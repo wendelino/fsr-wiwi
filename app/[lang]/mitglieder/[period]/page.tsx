@@ -13,6 +13,7 @@ interface NavigationBarProps {
 
 // Statische URL-Generierung für jede Legislaturperiode
 export async function generateStaticParams() {
+  const t = legislaturData.map(({ period }) => ({ period: period }))
   return legislaturData.map(({ period }) => ({ period: period }))
 }
 
@@ -26,6 +27,16 @@ export async function generateMetadata({ params }: { params: { lang: string, per
   return {
     title: `${t.title} ${legislatur?.period || gt['not-found']}`,
     description: `${t.elected_members} ${legislatur?.period || ''}`,
+    keywords: [
+      "Legislatur",
+      "FSR",
+      legislatur!.period, 
+      "Halle",
+      "Halle-Wittenberg",
+      "Martin Luther Universität",
+      "Universität",
+      "MLU",
+    ]
   }
 }
 

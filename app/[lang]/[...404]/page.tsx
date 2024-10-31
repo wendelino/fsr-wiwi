@@ -1,6 +1,12 @@
 import { Button } from "@/components/ui/button"; 
 import Link from "next/link";
 
+
+export async function generateStaticParams() {
+  return [{404: ["not-found"]}]
+}
+
+
 export default function page() {
   return (
     <div className="flex flex-col items-center mt-32 ">

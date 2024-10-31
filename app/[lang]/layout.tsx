@@ -11,6 +11,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
+  icons: "https://fsr-wiwi-halle.de/favicon.ico",
   title: "Fachschaftsrat Wiwi Halle",
   description:
     "Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",

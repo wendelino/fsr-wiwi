@@ -1,5 +1,4 @@
-"use server"
-import en from "./en.json";
+ import en from "./en.json";
 import de from "./de.json";
 import { cookies } from "next/headers";
 
@@ -13,7 +12,7 @@ export interface TranslationProps {
 
 
 export async function setLocale(lang: string) {
-   cookies().set("lang", lang) 
+  // cookies().set("lang", lang) 
 }
 
 export async function getTranslation(lang: string) {
