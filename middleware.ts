@@ -35,7 +35,7 @@ export function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next|.*\\.png|.*\\.jpg|.*\\.jpeg|files|api|_next/static|_next/image|favicon.ico).*)",
+    "/((?!_next|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.xml|files|api|_next/static|_next/image|favicon.ico).*)",
 
     // Optional: only run on root (/) URL
     // '/'
