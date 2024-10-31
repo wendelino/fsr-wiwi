@@ -17,6 +17,14 @@ function getLocale(request: NextRequest) {
 }
 
 export function middleware(request: NextRequest) {
+  console.log(" "); 
+  console.log("------MIDDLEWARE-----"); 
+  console.log("request.url: " +request.url);
+  console.log("request.nextUrl.href: " + request.nextUrl.href); 
+  console.log("request.nextUrl.origin: " + request.nextUrl.origin); 
+  console.log("request.nextUrl.pathname: " + request.nextUrl.pathname); 
+  console.log("------MIDDLEWARE-----");
+  console.log(" "); 
 
   const { pathname } = request.nextUrl;
   const pathnameHasLocale = locales.some(
