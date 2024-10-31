@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: { params: { lang: string, per
 // Navigationskomponente
 const NavigationBar: FC<NavigationBarProps> = ({ currentPeriod }) => {
   return (
-    <nav className="space-x-4">
+    <nav className="flex gap-4">
       {legislaturData.map(({ period }) => (
         <Link key={period} href={period}>
           <Button variant={currentPeriod === period ? 'default' : 'outline'} className='px-6 h-9'>
