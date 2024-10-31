@@ -1,0 +1,175 @@
+{
+  "global": {
+    "not-found": "Not found",
+    "current": "current"
+  },
+  "home": {
+    "welcome": "Welcome",
+    "councilName": "Student Council of Economics at MLU Halle",
+    "whatIsCouncilHeader": "What does Student Council mean?",
+    "whatIsCouncilContent": [
+      "By enrolling at Martin Luther University, you have not only become a student of this university but also automatically a member of the student body of Economics. This is the entirety of students within the Department of Economics.",
+      "The Student Council is the elected representative body of students from the student body of Economics, addressing student issues and concerns. Additionally, the Student Council (StuRa) represents the entire university student body."
+    ],
+    "projectSupportHeader": "Applications for Project Funding",
+    "projectSupportContent": "If you have a project that needs support, you can apply for project funding with the Student Council of Economics. Here you can find the",
+    "projectSupportLinkText": "guideline for application submission",
+    "joinMeetingHeader": "Interested? Join the next meeting!",
+    "joinMeetingContent": "Our meetings are public and take place at the Economics Faculty, Große Steinstraße 73 (Room 201). Students from the Economics department are warmly invited to attend our meetings. Every other Tuesday at 7 PM.",
+    "usefulLinksHeader": "Useful Links",
+    "studip": "StudIP",
+    "loewenportal": "Löwenportal",
+    "stura": "StuRa",
+    "studmail": "StudMail",
+    "followUsOnInstagram": "Follow us on Instagram",
+    "meaningOfFachschaft": {
+      "header": "What does Student Council mean?",
+      "paragraph1": "With enrollment at Martin Luther University, you not only became a student of this university but also automatically a member of the student body of Economics. This is the totality of students in the Faculty of Economics.",
+      "paragraph2": "The Student Council is the elected representation of students from the student body of Economics, addressing the problems and concerns of the students. The entirety of the university's students (the student body) is also represented by the Student Council (StuRa)."
+    },
+    "projectFunding": {
+      "header": "Project Funding Applications",
+      "paragraph": "If you have a project that needs support, you can apply for project funding from the Student Council of WiWi. Here you will find the information sheet for the application process."
+    },
+    "meeting": {
+      "header": "Interested? Then join the next meeting!",
+      "paragraph": "Our meetings are public and take place in the WiWi Faculty, Große Steinstraße 73 (Room 201). Students from the WiWi department are warmly invited to attend our meetings. Every second Tuesday at 7 PM."
+    },
+    "usefulLinks": {
+      "header": "Useful Links"
+    },
+    "followUs": {
+      "header": "Follow us on Instagram"
+    }
+  },
+  "awareness": {
+    "title": "Awareness",
+    "subheader": "Comprehensive awareness concept for the student council of the business department of the Faculty of Law and Business Administration (hereinafter referred to as 'FSR')",
+    "version": "Version from 07.17.2024",
+    "whatIsAwareness": "What is Awareness?",
+    "whatIsAwarenessText": "‘To be aware’ means ‘to be conscious of something’. This is the starting point for awareness work. It aims to raise awareness of various forms of discrimination and violence (physical or psychological) and to prevent them.",
+    "goal": "The goal is to create a so-called ‘safer space’ where all participants can feel comfortable, safe, and seen. It is both an individual and collective learning process that is part of our FSR's internal activities and all events. This concept is aimed at all our members and participants of our events, as well as the work within our FSR.",
+    "definition": "Clarification of Terms",
+    "selfUnderstanding": "Self-Understanding",
+    "codeOfConduct": "Code of Conduct",
+    "affectedPerson": "What can I do as an affected person?",
+    "supportingAffected": "How can I support affected persons?",
+    "selfAwareness": "Self-Awareness"
+  },
+  "go": {
+    "header": "Rules of Procedure",
+    "subHeader1": "of the student council and the student council of the economics department of the law and economics faculty of Martin Luther University Halle-Wittenberg",
+    "subHeader2": "Version from July 3, 2024",
+    "download": "Download as PDF",
+    "sections": {
+      "preambel": {
+        "title": "I. PREAMBLE",
+        "content": "The student council of economics consists of the members of the student body of the economics department of the law and economics faculty of Martin Luther University Halle-Wittenberg, § 5 No. 3 of the student body constitution. The student council of economics, hereinafter referred to as 'FSR WiWi', adopts the following rules of procedure as an organ of the student body in accordance with § 29 of the student body constitution."
+      },
+      "fachschaft": {
+        "title": "II. THE STUDENT COUNCIL",
+        "sections": {
+          "begriff": {
+            "title": "§ 1 DEFINITION AND LEGAL STATUS",
+            "content": "(1) All members of the constituted student body whose degree programs are assigned to the student council form the student council of economics.\n(2) The student body is a legally competent public corporation and as such a member of Martin Luther University Halle-Wittenberg. The student council of economics is therefore a legally competent sub-corporation of MLU Halle-Wittenberg.\n(3) The student council of economics organizes its affairs independently within the framework of the legal regulations, in particular the HSG LSA, the basic constitution of MLU Halle-Wittenberg, the constitution of the student body of MLU Halle-Wittenberg, the financial regulations of the student body of MLU Halle-Wittenberg, as well as this rules of procedure."
+          },
+          "organ": {
+            "title": "§ 2 ORGAN OF THE STUDENT COUNCIL",
+            "content": "(1) The organ of the student council of economics is the FSR WiWi.\n(2) In addition, the following special bodies exist:\n1. the respective representatives of the student council in the faculty council and\n2. the respective representatives of the student council in the student council."
+          }
+        }
+      },
+      "fachschaftsrat": {
+        "title": "III. THE STUDENT COUNCIL",
+        "sections": {
+          "rechte": {
+            "title": "§ 3 RIGHTS AND DUTIES OF THE STUDENT COUNCIL",
+            "content": "(1) The FSR WiWi represents the interests of the student council. It is the decision-making body of the student council and manages its affairs within the framework of legal provisions, particularly the HSG LSA, the basic constitution of MLU Halle-Wittenberg, the constitution of the student body of MLU Halle-Wittenberg, the financial regulations of the student body of MLU Halle-Wittenberg, as well as this rules of procedure independently."
+          },
+          "konstituierung": {
+            "title": "§ 4 CONSTITUTION",
+            "content": "(1) The election committee and the election management of the student council convene the constitutive meeting of the FSR WiWi and conduct it. § 14 of the constitution of the student body applies.\n(2) In the constitutive meeting, the FSR WiWi elects from its midst:\n1. a chairperson,\n2. two finance speakers."
+          },
+          "wahlen": {
+            "title": "§ 5 ELECTIONS",
+            "content": "(1) All elections are conducted by the respective meeting chair.\n(2) The election will be conducted by a show of hands unless a member requests a secret ballot. In the event of a secret ballot, votes will be cast using concealed ballots. Counting must be carried out by at least two persons who are not candidates for the election. The elected candidate is the one who receives a simple majority of the votes of the elected members.\n(3) An absentee ballot is possible, provided that the candidacy is declared in writing and the absence is excused according to §12 of this rules of procedure.\n(4) Elected members must be asked to accept their election. If the elected members do not accept the election, the election may be immediately repeated according to the provisions of the preceding paragraphs."
+          },
+          "mitgliedschaft": {
+            "title": "§ 6 MEMBERSHIP IN THE STUDENT COUNCIL",
+            "content": "(1) Statutory members of the FSR WiWi are the directly elected members or the members who have been substituted due to the termination of mandates.\n(2) If no representative is elected for a mandate or if no substitutes are available upon termination of a mandate, this mandate will not be newly allocated until the next election.\n(3) The FSR WiWi allows participation through free membership. Free members may take on all positions except for financial and board positions. The FSR WiWi encourages the assumption of responsibility in departments and working groups by free members.\n(4) Qualification for admission to free membership is given if three duly convened meetings have been attended, or if a person is proposed by an elected member. After qualification and interest of the candidate in free membership, admission will be voted on by the elected members. The election follows §5 of this rules of procedure.\n(5) Elected members of the FSR WiWi can submit a request for the revocation of the free membership of individuals. A simple majority of the elected members is required for the removal.\n(6) The term of office of the members begins on the day of the constitutive meeting in accordance with §14 para. 2 of the constitution of the student body.\n(7) The term of office ends:\n1. by written declaration of resignation,\n2. by exmatriculation,\n3. by change of student council,\n4. by withdrawal from the student body or at the latest\n5. on the day of the constitutive meeting after a new election of the student council.\n(8) Furthermore, a member loses their mandate if they are absent from three consecutive duly convened meetings without excuse. A loss of mandate must be communicated in writing to the affected person. Within four weeks of notification, the affected person can raise a justified objection. If the objection is upheld, the loss of mandate is to be reversed.\n(9) A leave of absence is possible. For the period of absence, the next substitute receives the mandate."
+          },
+          "rechteMitglieder": {
+            "title": "§ 7 RIGHTS AND DUTIES OF THE MEMBERS OF THE STUDENT COUNCIL",
+            "content": "(1) The members of the student council are obliged to actively participate in the work of the student council.\n(2) They are subject to confidentiality in personal, confidential, and non-public matters.\n(3) Further rights and duties of the members of the student council result directly from § 27 of the constitution of the student body."
+          },
+          "vorstand": {
+            "title": "§ 8 BOARD OF THE STUDENT COUNCIL",
+            "content": "(1) The chairperson represents the student council externally and coordinates its work. The student council elects its chairperson from its midst.\n(2) The chairperson has the right to convene and lead the meetings. In addition, they may delegate tasks to other members.\n(3) The board of the student council consists of the chairperson and the two finance speakers."
+          },
+          "arbeitsgruppen": {
+            "title": "§ 9 WORKING GROUPS AND DEPARTMENTS",
+            "content": "(1) The student council can form working groups and departments to promote its tasks and objectives.\n(2) The chairperson is authorized to lead and coordinate the areas supervised by the working groups and departments.\n(3) The departments have the right to participate, especially with regard to the proper and independent fulfillment of their tasks."
+          },
+          "committees": {
+            "title": "§ 10 COMMITTEES",
+            "content": "(1) The student council can form committees to support its work.\n(2) The committees are appointed by the student council and are subordinate to it."
+          },
+          "invitation": {
+            "title": "§ 11 INVITATION TO MEETINGS",
+            "content": "(1) All members shall be invited to meetings of the student council within a reasonable period. The period is at least two working days.\n(2) The invitation shall be made in writing and shall contain the date, agenda, and place of the meeting."
+          },
+          "quorum": {
+            "title": "§ 12 QUORUM",
+            "content": "(1) The student council is quorate if more than half of the members are present. In case of lack of a quorum, the meeting must be repeated.\n(2) Resolutions are made by a simple majority. In case of a tie, the vote of the chairperson decides."
+          },
+          "minutes": {
+            "title": "§ 13 MINUTES",
+            "content": "(1) Minutes must be kept of the meetings.\n(2) The minutes shall be created promptly and made available to all members of the student council."
+          }
+        }
+      },
+      "schlussbestimmungen": {
+        "title": "IV. FINAL PROVISIONS",
+        "content": "(1) These rules of procedure shall enter into force upon adoption by the student council. They replace the rules of procedure from July 3, 2022.\n(2) Amendments to these rules of procedure can only be adopted by a two-thirds majority of the elected members of the student council."
+      }
+    }
+  },
+  "mitglieder": {
+    "title": "FSR Legislature",
+    "elected_members": "Elected members from",
+    "table": {
+      "name": "Name",
+      "position": "Position",
+      "tasks": "Tasks"
+    }
+  },
+  "about": {
+    "title": "About Us - Student Council WiWi",
+    "subtitle": "Your student representation at Martin Luther University Halle-Wittenberg",
+    "aboutSection": {
+      "title": "What is the Student Council?",
+      "text1": "With enrollment at Martin Luther University, you are automatically a member of the student body in Economics. The Student Council is the elected representation of students and addresses your concerns.",
+      "text2": "The Student Council (StuRa) represents all students, while the Economics Student Council specifically supports the Faculty of Economics."
+    },
+    "contactSection": {
+      "title": "Contact"
+    },
+    "cards": {
+      "studip": {
+        "title": "Stud.IP",
+        "content": "Econ Students Council",
+        "button": "Visit"
+      },
+      "facebook": {
+        "title": "Facebook",
+        "content": "FSR WiWi Halle",
+        "button": "Follow"
+      },
+      "instagram": {
+        "title": "Instagram",
+        "content": "@fsr.wiwi.halle",
+        "button": "Follow"
+      }
+    }
+  }
+}

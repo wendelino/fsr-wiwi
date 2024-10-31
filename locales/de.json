@@ -1,0 +1,177 @@
+{
+  "global": {
+    "not-found": "Nicht gefunden",
+    "current": "Aktuell"
+  },
+  "home": {
+    "welcome": "Willkommen", 
+    "councilName": "Fachschaftsrat Wirtschaftswissenschaften der MLU Halle",
+    "whatIsCouncilHeader": "Was bedeutet Fachschaft?",
+    "whatIsCouncilContent": [
+      "Mit der Immatrikulation an der Martin-Luther-Universität bist du nicht nur Student*in dieser Universität geworden, sondern automatisch auch Mitglied der Studierendenschaft Wirtschaftswissenschaften. Dies ist die Gesamtheit der Studierenden des Fachbereiches Wirtschaftswissenschaften.",
+      "Der Fachschaftsrat ist die gewählte Vertretung von Studierenden aus der Studierendenschaft Wirtschaftswissenschaften, die sich um die Probleme und Belange der Studierenden kümmert. Die Gesamtheit der Studierenden der Universität (die Studierendenschaft) vertritt zudem der Studierendenrat (StuRa)."
+    ],
+    "projectSupportHeader": "Anträge zur Projektförderung",
+    "projectSupportContent": "Wenn du ein Projekt hast, das Unterstützung benötigt, kannst du beim Fachschaftsrat WiWi eine Projektförderung beantragen. Hier findest du das",
+    "projectSupportLinkText": "Merkblatt zur Antragsstellung",
+    "joinMeetingHeader": "Interesse? Dann sei bei der nächsten Sitzung dabei!",
+    "joinMeetingContent": "Unsere Sitzungen sind öffentlich und finden in der WiWi Fakultät, Große Steinstraße 73 (Raum 201) statt. Studierende des Bereiches WiWi sind herzlich eingeladen, unseren Sitzungen beizuwohnen. Jeden zweiten Dienstag um 19 Uhr.",
+    "usefulLinksHeader": "Nützliche Links",
+    "studip": "StudIP",
+    "loewenportal": "Löwenportal",
+    "stura": "StuRa",
+    "studmail": "StudMail",
+    "followUsOnInstagram": "Folg uns auf Instagram",
+    "meaningOfFachschaft": {
+    "header": "Was bedeutet Fachschaft?",
+    "paragraph1": "Mit der Immatrikulation an der Martin-Luther-Universität bist du nicht nur Student*in dieser Universität geworden, sondern automatisch auch Mitglied der Studierendenschaft Wirtschaftswissenschaften. Dies ist die Gesamtheit der Studierenden des Fachbereiches Wirtschaftswissenschaften.",
+    "paragraph2": "Der Fachschaftsrat ist die gewählte Vertretung von Studierenden aus der Studierendenschaft Wirtschaftswissenschaften, die sich um die Probleme und Belange der Studierenden kümmert. Die Gesamtheit der Studierenden der Universität (die Studierendenschaft) vertritt zudem der Studierendenrat (StuRa)."
+  },
+  "projectFunding": {
+    "header": "Anträge zur Projektförderung",
+    "paragraph": "Wenn du ein Projekt hast, das Unterstützung benötigt, kannst du beim Fachschaftsrat WiWi eine Projektförderung beantragen. Hier findest du das Merkblatt zur Antragsstellung."
+  },
+  "meeting": {
+    "header": "Interesse? Dann sei bei der nächsten Sitzung dabei!",
+    "paragraph": "Unsere Sitzungen sind öffentlich und finden in der WiWi Fakultät, Große Steinstraße 73 (Raum 201) statt. Studierende des Bereiches WiWi sind herzlich eingeladen, unseren Sitzungen beizuwohnen. Jeden zweiten Diesntag um 19 Uhr."
+  },
+  "usefulLinks": {
+    "header": "Nützliche Links"
+  },
+  "followUs": {
+    "header": "Folge uns auf Instagram"
+  }
+  },
+  "awareness": {
+    "title": "Awareness",
+    "subheader": "Allumfassendes Awareness-Konzept für den Fachschaftsrat des wirtschaftswissenschaftlichen Bereichs der Juristischen und Wirtschaftswissenschaftlichen Fakultät (im Nachfolgenden „FSR“ genannt)",
+    "version": "Fassung vom 17.07.2024",
+    "whatIsAwareness": "Was ist Awareness?",
+    "whatIsAwarenessText": "„To be aware“ bedeutet „sich etwas bewusst sein“. Dies bildet den Ausgangspunkt für die Awareness-Arbeit. Sie möchte für diverse Diskriminierungsformen und Gewalt (physisch oder psychisch) sensibilisieren und diesen dadurch vorbeugen.",
+    "goal": "Ziel ist es, einen s.g. „Safer Space“ zu schaffen, wo sich alle Beteiligten wohl, sicher und gesehen fühlen können. Es ist ein sowohl individueller als auch kollektiver Lernprozess, der intern und bei allen Veranstaltungen unseres FSRs dazu gehört. Dieses Konzept richtet sich an alle unsere Mitglieder und Teilnehmer*innen unserer Veranstaltungen sowie die Arbeit innerhalb unseres FSRs.",
+    "definition": "Begriffsklärung",
+    "selfUnderstanding": "Selbstverständnis",
+    "codeOfConduct": "Code of Conduct",
+    "affectedPerson": "Was kann ich als betroffene Person tun?",
+    "supportingAffected": "Wie kann ich betroffene Personen unterstützen?",
+    "selfAwareness": "Self-Awareness"
+  },
+"go": {
+  "header": "Geschäftsordnung",
+  "subHeader1": "der Fachschaft und des Fachschaftsrates des wirtschaftswissenschaftlichen Bereichs der juristischen und wirtschaftswissenschaftlichen Fakultät der Martin-Luther-Universität Halle-Wittenberg",
+  "subHeader2": "Fassung vom 03.07.2024",
+  "download": "Als PDF herunterladen",
+  "sections": {
+    "preambel": {
+      "title": "I. PRÄAMBEL",
+      "content": "Die Fachschaft Wirtschaftswissenschaften besteht aus den Mitgliedern der Studierendenschaft des Wirtschaftswissenschaftlichen Bereiches der Juristischen und Wirtschaftswissenschaftlichen Fakultät der Martin-Luther-Universität Halle-Wittenberg, § 5 Nr. 3 Satzung der Studierendenschaft. Der Fachschaftsrat Wirtschaftswissenschaften, folgend „FSR WiWi“ genannt, gibt sich als Organ der Studierendenschaft gemäß § 29 Satzung der Studierendenschaft folgende Geschäftsordnung."
+    },
+    "fachschaft": {
+      "title": "II. DIE FACHSCHAFT",
+      "sections": {
+        "begriff": {
+          "title": "§ 1 BEGRIFFSBESTIMMUNG UND RECHTSSTELLUNG",
+          "content": "(1) Alle Mitglieder der verfassten Studierendenschaft, deren Studiengänge der Fachschaft zugeordnet sind, bilden die Fachschaft Wirtschaftswissenschaften.\n(2) Die Studierendenschaft ist rechtsfähige Körperschaft des öffentlichen Rechtes und als solches Glied der Martin-Luther-Universität Halle-Wittenberg. Die Fachschaft Wirtschaftswissenschaften ist damit eine rechtsfähige Teilkörperschaft der MLU Halle-Wittenberg.\n(3) Die Fachschaft Wirtschaftswissenschaften ordnet ihre Angelegenheiten im Rahmen der gesetzlichen Regelungen, insbesondere dem HSG LSA, der Grundordnung der MLU Halle-Wittenberg, der Satzung der Studierendenschaft der MLU Halle-Wittenberg, der Finanzordnung der Studierendenschaft der MLU Halle- Wittenberg, sowie dieser Geschäftsordnung selbstständig."
+        },
+        "organ": {
+          "title": "§ 2 ORGAN DER FACHSCHAFT",
+          "content": "(1) Das Organ der Fachschaft Wirtschafswissenschaften ist der FSR WiWi.\n(2) Besondere Organe sind darüber hinaus:\n1. die entsprechenden Vertreter*innen der Fachschaft im Fakultätsrat und\n2. die entsprechenden Vertreter*innen der Fachschaft im Studierendenrat."
+        }
+      }
+    },
+    "fachschaftsrat": {
+      "title": "III. DER FACHSCHAFTSRAT",
+      "sections": {
+        "rechte": {
+          "title": "§ 3 RECHTE UND AUFGABEN DES FACHSCHAFTSRATES",
+          "content": "(1) Der FSR WiWi vertritt die Interessen der Fachschaft. Er ist das beschlussfassende Organ der Fachschaft und verwaltet ihre Angelegenheiten im Rahmen der gesetzlichen Bestimmungen, insbesondere dem HSG LSA, der Grundordnung der MLU Halle-Wittenberg, der Satzung der Studierendenschaft der MLU Halle-Wittenberg, der Finanzordnung der Studierendenschaft der MLU Halle- Wittenberg, sowie dieser Geschäftsordnung selbstständig."
+        },
+        "konstituierung": {
+          "title": "§ 4 KONSTITUIERUNG",
+          "content": "(1) Der Wahlausschuss und die Wahlleitung des Studierendenrates berufen die konstituierende Sitzung des FSR WiWi ein und führen sie durch. Es gilt § 14 der Satzung der Studierendenschaft.\n(2) Der FSR WiWi wählt in der konstituierenden Sitzung aus seiner Mitte:\n1. eine*n vorsitzende*n Sprecher*in,\n2. zwei Sprecher*innen für Finanzen."
+        },
+        "wahlen": {
+          "title": "§ 5 WAHLEN",
+          "content": "(1) Alle Wahlen werden durch die jeweilige Sitzungsleitung geleitet.\n(2) Die Wahl wird als Abstimmung per Handzeichen durchgeführt werden, sofern kein gewähltes Mitglied eine geheime Wahl beantragt. Im Falle einer geheimen Wahl wird mit verdeckten Stimmzetteln abgestimmt. Die Auszählung ist von mindestens zwei Personen durchzuführen, welche nicht für die Wahl kandidieren. Gewählt ist, wer die einfache Mehrheit der Stimmen der gewählten Mitglieder auf sich vereinigt.\n(3) Eine Wahl in Abwesenheit ist möglich, sofern die Kandidatur schriftlich erklärt wurde und das Fernbleiben nach §12 dieser Geschäftsordnung entschuldigt ist.\n(4) Gewählte müssen zur Annahme der Wahl aufgefordert werden. Nehmen die Gewählten die Wahl nicht an, so kann die Wahl nach den Maßgaben der vorstehenden Absätze unmittelbar wiederholt werden."
+        },
+        "mitgliedschaft": {
+          "title": "§ 6 MITGLIEDSCHAFT IM FACHSCHAFTSRAT",
+          "content": "(1) Satzungsgemäße Mitglieder des FSR WiWi sind die direkt gewählten Mitglieder beziehungsweise die aufgrund der Beendigung von Mandaten nachgerückten Mitglieder.\n(2) Wurden für ein Mandat keine Vertreter*in gewählt oder stehen bei einer Beendigung eines Mandates keine Nachrückenden zur Verfügung, wird dieses Mandat bis zur nächsten Wahl nicht neu vergeben.\n(3) Der FSR WiWi ermöglicht die Mitarbeit durch eine freie Mitgliedschaft. Freie Mitglieder können alle Positionen mit Ausnahme von Finanzer*innen- und Vorstandsposten übernehmen. Der FSR WiWi begrüßt die Übernahme von Verantwortung in Referaten und Arbeitsgruppen durch freie Mitglieder.\n(4) Die Qualifikation zur Aufnahme einer freien Mitgliedschaft ist gegeben, wenn drei ordnungsgemäß geladene Sitzungen besucht wurden, oder wenn eine Person von einem gewählten Mitglied vorgeschlagen wird. Nach Qualifikation und Interesse des*r Kandidat*in auf eine freie Mitgliedschaft, wird die Aufnahme unter den gewählten Mitgliedern abgestimmt. Die Wahl erfolgt nach dem §5 dieser Geschäftsordnung.\n(5) Gewählte Mitglieder des FSR WiWi können einen Antrag auf Aufhebung der freien Mitgliedschaft Einzelner stellen. Für die Abwahl ist eine einfache Mehrheit der gewählten Mitglieder nötig.\n(6) Die Amtszeit der Mitglieder beginnt mit dem Tag der konstituierenden Sitzung gemäß §14 Abs. 2 der Satzung der Studierendenschaft.\n(7) Die Amtszeit endet:\n1. durch schriftlich erklärten Rücktritt,\n2. durch Exmatrikulation,\n3. durch Wechsel der Fachschaft,\n4. durch Austritt aus der Studierendenschaft oder spätestens\n5. am Tag der konstituierenden Sitzung nach einer Neuwahl des Fachschaftsrates.\n(8) Ferner verliert ein Mitglied sein Mandat, wenn es zu drei aufeinander folgenden, ordnungsgemäß geladenen Sitzungen unentschuldigt fernbleibt. Ein Mandatsverlust muss betroffenen Person schriftlich mitgeteilt werden. Innerhalb von vier Wochen nach der Benachrichtigung kann die betroffene Person begründeten Widerspruch erheben. Wird dem Widerspruch stattgegeben, ist der Mandatsverlust rückgängig zu machen.\n(9) Eine Beurlaubung ist möglich. Für die Zeit der Beurlaubung erhält der*die nächste Nachrücker*in das Mandat."
+        },
+        "rechteMitglieder": {
+          "title": "§ 7 RECHTE UND PFLICHTEN DER MITGLIEDER DES FACHSCHAFTSRATES",
+          "content": "(1) Die Mitglieder des Fachschaftsrates sind verpflichtet, an den Arbeiten des Fachschaftsrates aktiv mitzuwirken.\n(2) Sie unterliegen in persönlichen, vertraulichen und nichtöffentlichen Angelegenheiten der Schweigepflicht.\n(3) Weitere Rechte und Pflichten der Mitglieder des Fachschaftsrates ergeben sich direkt aus § 27 der Satzung der Studierendenschaft."
+        },
+        "vorstand": {
+          "title": "§ 8 VORSTAND DES FACHSCHAFTSRATES",
+          "content": "(1) Der oder die vorsitzende*r Sprecher*in repräsentiert den Fachschaftsrat nach außen und koordiniert den Fachschaftsrat intern.\n(2) Der Vorstand besteht aus dem oder der vorsitzendenden Sprecher*in, einem oder einer stellvertretenden Sprecher*in und den Sprecher*innen für Finanzen.\n(3) Vorstandsmitglieder können vom FSR WiWi durch ein Misstrauensvotum abgewählt werden. Hierfür ist eine Mehrheit von zwei Dritteln der gewählten Mitglieder des Fachschaftsrates notwendig.\n(4) Der Rücktritt von einem Vorstandsmitglied ist jederzeit möglich. Der Rücktritt ist schriftlich oder in einer ordentlich geladen Sitzung gegenüber den Mitgliedern des Fachschaftsrates zu erklären. Die ordnungsgemäße Einarbeitung der Nachfolger*in ist sicherzustellen. Gleiches gilt im Falle einer Neuwahl des FSR WiWi.\n(5) Soweit nicht anders geregelt, sind im offiziellen Schriftverkehr und bei Verträgen der Vorstand vertretungsberechtigt.\n(6) Kann eine Aufgabe nicht eindeutig zugeordnet werden, so ist zunächst der Vorstand zuständig."
+        },
+        "referate": {
+          "title": "§ 9 REFERATE UND SPRECHER*INNEN FÜR BESONDERE AUFGABEN",
+          "content": "(1) Der FSR WiWi bildet neben dem Vorstand Arbeitsgruppen und Referate.\n(2) Der oder die vorsitzende Sprecher*in ist befugt, auch die Bereiche, die durch die Arbeitsgruppen und Referate betreut werden, zu leiten und zu koordinieren.\n(3) Die Referate haben das Recht zur Mitwirkung, insbesondere im Hinblick auf die ordnungsgemäße und eigenverantwortliche Erfüllung ihrer Aufgaben."
+        },
+        "ausschuesse": {
+          "title": "§ 10 AUSSCHÜSSE",
+          "content": "(1) Der FSR WiWi kann Ausschüsse zur Unterstützung der Fachschaftsarbeit bilden.\n(2) Die Ausschüsse sind vom FSR WiWi zu berufen und sind ihm unterstellt."
+        },
+        "einladung": {
+          "title": "§ 11 EINLADUNG ZU SITZUNGEN",
+          "content": "(1) Zu Sitzungen des FSR WiWi werden alle Mitglieder in angemessener Frist eingeladen. Die Frist beträgt mindestens zwei Werktage.\n(2) Die Einladung erfolgt schriftlich und enthält den Termin, die Tagesordnung und den Ort der Sitzung."
+        },
+        "beschlussfaehigkeit": {
+          "title": "§ 12 BESCHLUSSFÄHIGKEIT",
+          "content": "(1) Der FSR WiWi ist beschlussfähig, wenn mehr als die Hälfte der Mitglieder anwesend ist. Bei Beschlussunfähigkeit muss die Sitzung wiederholt werden.\n(2) Beschlüsse werden in einfacher Mehrheit gefasst. Bei Stimmengleichheit entscheidet die Stimme des oder der vorsitzenden Sprecher*in."
+        },
+        "protokoll": {
+          "title": "§ 13 PROTOKOLL",
+          "content": "(1) Über die Sitzungen ist ein Protokoll zu führen.\n(2) Das Protokoll ist zeitnah zu erstellen und allen Mitgliedern des FSR WiWi zur Verfügung zu stellen."
+        }
+      }
+    },
+    "schlussbestimmungen": {
+      "title": "IV. SCHLUSSBESTIMMUNGEN",
+      "content": "(1) Diese Geschäftsordnung tritt mit der Annahme durch den FSR WiWi in Kraft. Sie ersetzt die Geschäftsordnung vom 03.07.2022.\n(2) Änderungen dieser Geschäftsordnung können nur mit einer Mehrheit von zwei Dritteln der gewählten Mitglieder des FSR WiWi beschlossen werden."
+    }
+  }
+},
+"mitglieder": {
+  "title": "FSR Legislatur",
+  "elected_members": "Gewählte Mitglieder ab",
+  "table": {
+      "name": "Name",
+      "position": "Position",
+      "tasks": "Aufgaben"
+  }
+},
+"about": {
+  "title": "Über uns - Fachschaftsrat WiWi",
+  "subtitle": "Deine Interessenvertretung an der Martin-Luther-Universität Halle-Wittenberg",
+  "aboutSection": {
+    "title": "Was ist die Fachschaft?",
+    "text1": "Mit der Immatrikulation an der Martin-Luther-Universität bist du automatisch Mitglied der Studierendenschaft Wirtschaftswissenschaften. Der Fachschaftsrat ist die gewählte Vertretung der Studierenden, die sich um eure Anliegen kümmert.",
+    "text2": "Der Studierendenrat (StuRa) vertritt die Gesamtheit der Studierenden, während der Fachschaftsrat speziell für den Fachbereich Wirtschaftswissenschaften zuständig ist."
+  },
+  "contactSection": {
+    "title": "Kontakt"
+  },
+  "cards": {
+    "studip": {
+      "title": "Stud.IP",
+      "content": "Econ Students Council",
+      "button": "Besuchen"
+    },
+    "facebook": {
+      "title": "Facebook",
+      "content": "FSR WiWi Halle",
+      "button": "Folgen"
+    },
+    "instagram": {
+      "title": "Instagram",
+      "content": "@fsr.wiwi.halle",
+      "button": "Folgen"
+    }
+  }
+}
+
+
+}

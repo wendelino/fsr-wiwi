@@ -74,6 +74,10 @@ const config = {
       },
     },
   },
+
+  safelist: [
+    'backdrop-blur-xl', // Füge diese Zeile hinzu, falls purge das Entfernen erzwingt
+  ],
   plugins: [require("tailwindcss-animate")],
 } satisfies Config
 
