@@ -4,6 +4,8 @@ import { PaperclipIcon } from "lucide-react";
 import Navigate from "./Navigate";
 import Link from "next/link";
 import { getTranslation, TranslationProps } from "@/locales/getTranslation";
+
+
 export default async function page({ params }: { params: { lang: string } }) {
 
   const {awareness: t} = await getTranslation(params.lang)

@@ -40,8 +40,8 @@ export default async function page({ params }: { params: { lang: string } }) {
           <h3 className="text-xl font-semibold mb-2">
             {t.sections.fachschaft.sections.begriff.title}
           </h3> 
-          {t.sections.fachschaft.sections.begriff.content.split("\n").map(e => (
-                <p className="mb-2">{e}</p>
+          {t.sections.fachschaft.sections.begriff.content.split("\n").map((e, index) => (
+                <p key={index} className="mb-2">{e}</p>
               ))}
         </section>
         <section id="organ" className="mb-4">
@@ -62,8 +62,8 @@ export default async function page({ params }: { params: { lang: string } }) {
           ([key, section]) => (
             <section id={key} className="mb-4" key={key}>
               <h3 className="text-xl font-semibold mb-2">{section.title}</h3>
-              {section.content.split("\n").map(e => (
-                <p>{e}</p>
+              {section.content.split("\n").map((e, index) => (
+                <p key={index}> {e}</p>
               ))}
             </section>
           )
