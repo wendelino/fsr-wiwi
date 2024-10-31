@@ -7,7 +7,7 @@ export default async function Page() {
 
   const locations = await getLocations();
 
-  const Map = dynamic(() => import("../../../components/MyMap"), {
+  const Map = dynamic(() => import("@/components/MyMap"), {
     loading: () => (
       <div className="w-full h-full animate-pulse bg-secondary flex items-center justify-center text-xl font-semibold">
         Loading ...

@@ -3,20 +3,18 @@ import { Button } from "@/components/ui/button";
 import { PaperclipIcon } from "lucide-react";
 import Navigate from "./Navigate";
 import Link from "next/link";
+import { getTranslation, TranslationProps } from "@/locales/getTranslation";
+export default async function page({ params }: { params: { lang: string } }) {
 
-export default function page() {
+  const {awareness: t} = await getTranslation(params.lang)
+
   return (
     <>
-      <div className="relative flex flex-col gap-16 items-center justify-center py-8 mb-8">
+      <div className="relative flex flex-col gap-16 h-100 items-center justify-center py-8 mb-8">
         <img src="/logo.png" className="absolute max-h-full mt-8 opacity-10 " />
-        <Header>Awareness</Header>
-        <SubHeader className="text-center">
-          Allumfassendes Awareness-Konzept für den Fachschaftsrat des
-          wirtschaftswissenschaftlichen Bereichs der Juristischen und
-          Wirtschaftswissenschaftlichen Fakultät (im Nachfolgenden „FSR“
-          genannt)
-        </SubHeader>
-        <SubHeader>Fassung vom 17.07.2024</SubHeader>
+        <Header>{t.title}</Header>
+        <SubHeader className="text-center">{t.subheader}</SubHeader>
+        <SubHeader>{t.version}</SubHeader>
       </div>
       <a href="/files/awareness_fsr_wiwi.pdf" download>
         <Button>

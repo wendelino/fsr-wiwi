@@ -2,6 +2,7 @@ import { getEvents } from "@/app/_actions/event";
 import { EventProps } from "@/components/Event";
 import { Register4Event } from "@/components/RegisterForm";
 import { Header, SubHeader } from "@/components/TextComponents"; 
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
 
 export default async function page({ params }: { params: { event: string } }) {
@@ -28,7 +29,17 @@ export async function generateStaticParams() {
   const events  = await getEvents(); 
  
   return events.map((item) => ({
-    event: decodeURIComponent(item.title)
+    event: encodeURIComponent(item.title)
   }))
 }
- 
+  
+export async function generateMetadata({ params }: { params: { event: string } }): Promise<Metadata> {
+  const { event } = params
+  const events  = await getEvents(); 
+  const data = events.find(({ title }) => encodeURIComponent(title) == event)
+
+  return {
+    title: `${data?.title || 'nicht gefunden'}`,
+    description: `${data?.description || ''}`,
+  }
+}

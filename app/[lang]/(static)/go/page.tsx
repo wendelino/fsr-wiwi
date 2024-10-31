@@ -1,9 +1,13 @@
 import { Header, SubHeader } from "@/components/TextComponents";
 import { Button } from "@/components/ui/button";
 import { PaperclipIcon } from "lucide-react";
-import Navigate from "./Navigate";
+import Navigate from "./Navigate"; 
 
-export default function page() {
+export default async function page({ params }: { params: { lang: string } }) {
+
+  
+ 
+
   return (
     <>
       <div className="relative flex flex-col gap-16 items-center justify-center py-8 mb-8">

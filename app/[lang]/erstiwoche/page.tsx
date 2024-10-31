@@ -1,8 +1,8 @@
+import { getEvents } from "@/app/_actions/event";
 import Countdown from "@/components/CountDown";
 import DayCard, { DayProps } from "@/components/Day";
 import { EventProps, EventWithLocation } from "@/components/Event";
-import { Header } from "@/components/TextComponents";
-import { getEvents } from "../_actions/event";
+import { Header } from "@/components/TextComponents"; 
 
 export default async function Page() {
   const events = await getEvents();
