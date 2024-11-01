@@ -1,3 +1,4 @@
+ "use server"
  import en from "./en.json";
 import de from "./de.json";
 import { cookies } from "next/headers";
