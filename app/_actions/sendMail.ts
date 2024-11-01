@@ -1,40 +1,51 @@
 "use server";
- 
-const token = "dsgjeriz7z3zFEHIEUFHE32784z";
+
+const token = process.env.ACCESS_SECRET;
 
 const mailOptions = {
   from: '"FSR Wiwi" <fachschaftsrat@wiwi.uni-halle.de>',
   replyTo: "fachschaftsrat@wiwi.uni-halle.de",
   priority: "high",
 
-  recipient: "wendelin.beddermann@web.de", 
-  subject: "Test E-Mai1l", // Subject of the email
-  html: "<p>This is the HTML content of the email</p>",
-}; 
+  recipient: "wendelin.beddermann@web.de",
+  subject: "Test E-Mail", // Subject of the email
+  html: "<p>Content</p>",
+};
 
-export interface sendMailProps { 
+export interface sendMailProps {
   name: string;
-  to: string;
+  recipient?: string;
+  replyTo?: string;
   subject: string;
   html: string;
-  from?: string
+  from?: string;
 }
-export async function sendMail({to, name, subject, html, from}: sendMailProps) {
-
-  
+export async function sendMail({
+  recipient,
+  name,
+  subject,
+  html,
+  from,
+  replyTo
+}: sendMailProps) {
   const response = await fetch("https://mailer-api.lnio.de/send-mail", {
     method: "POST",
     cache: "no-store",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,  
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({...mailOptions, to, name, subject, html, from}),
+    body: JSON.stringify({
+      ...mailOptions,
+      recipient: recipient || mailOptions.recipient,
+      replyTo: replyTo || mailOptions.replyTo,
+      name,
+      subject,
+      html,
+      from: from || mailOptions.from,
+    }),
   });
 
   const json = await response.json();
-
-  console.log(json);
-
   return json;
 }

@@ -22,7 +22,8 @@ import { useState } from "react";
 import { CheckCircleIcon, XCircleIcon } from "lucide-react";
 import { sendMail } from "@/app/_actions/sendMail";
 import { Textarea } from "./ui/textarea";
-import EmailTemplate from "./EmailTemplate";
+import { message_user } from "@/email_templates/message_user";
+import { message_admin } from "@/email_templates/message_admin"; 
 
 interface FormState {
   loading: boolean;
@@ -58,10 +59,25 @@ export function ContactForm() {
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    setLoading(true);
-    console.log("res");
-    const html = EmailTemplate(data);
-    await sendMail({html, to: data.email, subject:`Anfrage vom ${new Date().toLocaleDateString()}`, name: data.name});
+    setLoading(true);  
+
+
+    //User Bestätigungs Email
+    await sendMail({
+      html: message_user(data),
+      recipient: data.email,
+      subject: `Anfrage vom ${new Date().toLocaleDateString()}`,
+      name: data.name,
+    });
+
+    //Webseite Email
+    await sendMail({
+      html: message_admin(data), 
+      subject: `Neue Anfrage von ${data.name}`,
+      name: data.name,
+      replyTo: data.email,
+      from: '"FSR Webseite" <fachschaftsrat@wiwi.uni-halle.de>',
+    });
     const res = { success: true };
     console.log(res);
 
@@ -86,10 +102,7 @@ export function ContactForm() {
             <FormItem>
               <FormLabel>E-Mail *</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="email@example.com"
-                  {...field}
-                />
+                <Input placeholder="email@example.com" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -102,10 +115,7 @@ export function ContactForm() {
             <FormItem>
               <FormLabel>Name *</FormLabel>
               <FormControl>
-                <Input
-                  placeholder="Ferdinand"
-                  {...field}
-                />
+                <Input placeholder="Ferdinand" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
