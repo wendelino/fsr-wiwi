@@ -63,7 +63,7 @@ export function ContactForm() {
 
 
     //User Bestätigungs Email
-    await sendMail({
+    const user_mail = await sendMail({
       html: message_user(data),
       recipient: data.email,
       subject: `Anfrage vom ${new Date().toLocaleDateString()}`,
@@ -71,17 +71,14 @@ export function ContactForm() {
     });
 
     //Webseite Email
-    await sendMail({
+    const admin_mail = await sendMail({
       html: message_admin(data), 
       subject: `Neue Anfrage von ${data.name}`,
       name: data.name,
       replyTo: data.email,
       from: '"FSR Webseite" <fachschaftsrat@wiwi.uni-halle.de>',
-    });
-    const res = { success: true };
-    console.log(res);
-
-    if (res.success) {
+    }); 
+    if (user_mail && admin_mail) {
       setFormSubmitted(true);
     } else setError(true);
   }

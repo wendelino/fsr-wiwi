@@ -38,7 +38,6 @@ export async function setLocale(lang: string) {
   
   if (!isAviableLocale(lang)) return;
   cookies().set("lang", lang);
-  console.log("setrted!!");
 }
 
 export async function getTranslation(lang: string) {

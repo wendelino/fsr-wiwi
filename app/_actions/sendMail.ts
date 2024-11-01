@@ -44,8 +44,6 @@ export async function sendMail({
       html,
       from: from || mailOptions.from,
     }),
-  });
-
-  const json = await response.json();
-  return json;
+  }); 
+  return response.ok;
 }
