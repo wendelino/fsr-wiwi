@@ -12,7 +12,7 @@ export interface TranslationProps {
 
 
 export async function setLocale(lang: string) {
-  // cookies().set("lang", lang) 
+  cookies().set("lang", lang) 
 }
 
 export async function getTranslation(lang: string) {
