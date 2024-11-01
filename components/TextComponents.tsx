@@ -13,7 +13,7 @@ export function Header({
   return (
     <div 
       className={cn(
-        "font-bold text-3xl py-8 lg:text-5xl lg:py-16",
+        "font-bold text-3xl py-8 md:text-5xl md:py-16",
          className
       )}
     >
@@ -32,7 +32,7 @@ export function SubHeader({
   return (
     <div 
       className={cn(
-        "font-bold text-lg py-4 lg:text-2xl",
+        "font-bold text-lg py-4 md:text-2xl",
          className
       )}
     >

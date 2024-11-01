@@ -1,0 +1,157 @@
+{
+    "global": {
+      "not-found": "No encontrado",
+      "current": "Actual",
+      "nav": {
+        "about": "Quiénes somos",
+        "about_us": "Sobre nosotros",
+        "members": "Miembros",
+        "rules_of_procedure": "Reglamento",
+        "awareness": "Conciencia",
+        "first_week": "Semana de bienvenida",
+        "guide": "Guía de bienvenida",
+        "program": "Programa",
+        "site_map": "Mapa del sitio",
+        "registration": "Registro",
+        "contact": "Contacto"
+      }
+    },
+    "home": {
+      "welcome": "Bienvenido",
+      "councilName": "Consejo de Estudiantes de Ciencias Económicas de la Universidad Martin Luther de Halle",
+      "whatIsCouncilHeader": "¿Qué significa Consejo de Estudiantes?",
+      "whatIsCouncilContent": [
+        "Al matricularte en la Universidad Martin Luther, no solo te conviertes en estudiante de esta universidad, sino que también eres automáticamente miembro del estudiantado de Ciencias Económicas. Este es el conjunto de estudiantes de la facultad de Ciencias Económicas.",
+        "El Consejo de Estudiantes es el representante electo de los estudiantes de Ciencias Económicas que se encarga de los problemas y asuntos de los estudiantes. El Consejo de Estudiantes de la Universidad (StuRa) representa al conjunto de los estudiantes de la universidad."
+      ],
+      "projectSupportHeader": "Solicitudes de apoyo para proyectos",
+      "projectSupportContent": "Si tienes un proyecto que necesita apoyo, puedes solicitar financiación de proyectos en el Consejo de Estudiantes de Ciencias Económicas. Aquí encontrarás el",
+      "projectSupportLinkText": "instructivo para la solicitud",
+      "joinMeetingHeader": "¿Interesado? ¡Únete a la próxima reunión!",
+      "joinMeetingContent": "Nuestras reuniones son públicas y se realizan en la Facultad de Ciencias Económicas, en Große Steinstraße 73 (sala 201). Los estudiantes del área de Ciencias Económicas están cordialmente invitados a asistir. Cada segundo martes a las 19:00.",
+      "usefulLinksHeader": "Enlaces útiles",
+      "studip": "StudIP",
+      "loewenportal": "Löwenportal",
+      "stura": "StuRa",
+      "studmail": "StudMail",
+      "followUsOnInstagram": "Síguenos en Instagram",
+      "meaningOfFachschaft": {
+        "header": "¿Qué significa Fachschaft?",
+        "paragraph1": "Al matricularte en la Universidad Martin Luther, no solo te conviertes en estudiante de esta universidad, sino que también eres automáticamente miembro del estudiantado de Ciencias Económicas. Este es el conjunto de estudiantes de la facultad de Ciencias Económicas.",
+        "paragraph2": "El Consejo de Estudiantes es el representante electo de los estudiantes de Ciencias Económicas que se encarga de los problemas y asuntos de los estudiantes. El Consejo de Estudiantes de la Universidad (StuRa) representa al conjunto de los estudiantes de la universidad."
+      },
+      "projectFunding": {
+        "header": "Solicitudes de apoyo para proyectos",
+        "paragraph": "Si tienes un proyecto que necesita apoyo, puedes solicitar financiación de proyectos en el Consejo de Estudiantes de Ciencias Económicas. Aquí encontrarás el instructivo para la solicitud."
+      },
+      "meeting": {
+        "header": "¿Interesado? ¡Únete a la próxima reunión!",
+        "paragraph": "Nuestras reuniones son públicas y se realizan en la Facultad de Ciencias Económicas, en Große Steinstraße 73 (sala 201). Los estudiantes del área de Ciencias Económicas están cordialmente invitados a asistir. Cada segundo martes a las 19:00."
+      },
+      "usefulLinks": {
+        "header": "Enlaces útiles"
+      },
+      "followUs": {
+        "header": "Síguenos en Instagram"
+      }
+    },
+    "awareness": {
+      "title": "Conciencia",
+      "subheader": "Concepto integral de conciencia para el Consejo de Estudiantes de Ciencias Económicas de la Facultad de Derecho y Ciencias Económicas (en adelante, “FSR”)",
+      "version": "Versión del 17/07/2024",
+      "whatIsAwareness": "¿Qué es la conciencia?",
+      "whatIsAwarenessText": "“Ser consciente” significa “tener consciencia de algo”. Esto es el punto de partida del trabajo de conciencia, que busca sensibilizar sobre diversas formas de discriminación y violencia (física o psicológica) y prevenirlas.",
+      "goal": "El objetivo es crear un llamado “Espacio Seguro” donde todos los involucrados puedan sentirse cómodos, seguros y visibles. Es un proceso de aprendizaje tanto individual como colectivo que se implementa tanto internamente como en todas nuestras actividades del FSR. Este concepto está dirigido a todos nuestros miembros y participantes de nuestras actividades, así como a nuestro trabajo interno en el FSR.",
+      "definition": "Definición de términos",
+      "selfUnderstanding": "Autoentendimiento",
+      "codeOfConduct": "Código de Conducta",
+      "affectedPerson": "¿Qué puedo hacer como persona afectada?",
+      "supportingAffected": "¿Cómo puedo apoyar a las personas afectadas?",
+      "selfAwareness": "Autoconciencia"
+    },
+    "go": {
+      "header": "Reglamento",
+      "subHeader1": "del Estudiantado y el Consejo de Estudiantes de Ciencias Económicas de la Facultad de Derecho y Ciencias Económicas de la Universidad Martin Luther de Halle-Wittenberg",
+      "subHeader2": "Versión del 03/07/2024",
+      "download": "Descargar como PDF",
+      "sections": {
+        "preambel": {
+          "title": "I. PREÁMBULO",
+          "content": "El estudiantado de Ciencias Económicas está compuesto por los miembros del estudiantado del área de Ciencias Económicas de la Facultad de Derecho y Ciencias Económicas de la Universidad Martin Luther de Halle-Wittenberg, § 5 No. 3 de la Constitución del Estudiantado. El Consejo de Estudiantes de Ciencias Económicas, en adelante llamado “FSR WiWi”, establece el siguiente reglamento en conformidad con el § 29 de la Constitución del Estudiantado como órgano del mismo."
+        },
+        "fachschaft": {
+          "title": "II. EL ESTUDIANTADO",
+          "sections": {
+            "begriff": {
+              "title": "§ 1 DEFINICIÓN Y ESTATUS LEGAL",
+              "content": "(1) Todos los miembros del estudiantado de la Universidad, cuyos programas académicos están asignados al estudiantado, constituyen el Estudiantado de Ciencias Económicas.\n(2) El estudiantado es una corporación pública con personalidad jurídica y, como tal, es parte de la Universidad Martin Luther de Halle-Wittenberg. El Estudiantado de Ciencias Económicas es así una subentidad jurídica de la MLU Halle-Wittenberg.\n(3) El Estudiantado de Ciencias Económicas gestiona sus asuntos de forma autónoma en el marco de las normativas legales, en particular la HSG LSA, la Constitución de la MLU Halle-Wittenberg, el Reglamento del Estudiantado de la MLU Halle-Wittenberg, el Reglamento Financiero del Estudiantado de la MLU Halle-Wittenberg y este reglamento."
+            },
+            "organ": {
+              "title": "§ 2 ÓRGANO DEL ESTUDIANTADO",
+              "content": "(1) El órgano del Estudiantado de Ciencias Económicas es el FSR WiWi.\n(2) Además, los órganos especiales son:\n1. los representantes del estudiantado en el Consejo de la Facultad y\n2. los representantes del estudiantado en el Consejo de Estudiantes (StuRa)."
+            }
+          }
+        },
+        "fachschaftsrat": {
+          "title": "III. EL CONSEJO DE ESTUDIANTES",
+          "sections": {
+            "rechte": {
+              "title": "§ 3 DERECHOS Y DEBERES DEL CONSEJO DE ESTUDIANTES",
+              "content": "(1) El FSR WiWi representa los intereses del estudiantado. Es el órgano decisorio del estudiantado y gestiona sus asuntos en el marco de las disposiciones legales, en particular la HSG LSA, la Constitución de la MLU Halle-Wittenberg, el Reglamento del Estudiantado de la MLU Halle-Wittenberg, el Reglamento Financiero del Estudiantado de la MLU Halle-Wittenberg y este reglamento."
+            },
+            "konstituierung": {
+              "title": "§ 4 CONSTITUCIÓN",
+              "content": "(1) El comité electoral y la dirección electoral del Consejo de Estudiantes convocan y conducen la sesión constitutiva del FSR WiWi. Se aplica el § 14 de la Constitución del Estudiantado.\n(2) En la sesión constitutiva, el FSR WiWi elige de entre sus miembros:\n1. un portavoz presidente,\n2. dos portavoces de finanzas."
+            },
+            "wahlen": {
+              "title": "§ 5 ELECCIONES",
+              "content": "(1) Todas las elecciones son dirigidas por la dirección de la sesión.\n(2) La elección se realizará mediante votación a mano alzada, a menos que un miembro electo solicite una votación secreta. En el caso de una votación secreta, se votará con papeletas cubiertas. El recuento de votos debe realizarse públicamente.\n(3) La elección será decidida por mayoría simple.\n(4) El procedimiento electoral será documentado en el acta de la sesión."
+            },
+            "uebergabe": {
+              "title": "§ 6 ENTREGA Y RECEPCIÓN",
+              "content": "(1) Para asegurar la continuidad en el trabajo del FSR WiWi, es necesaria una entrega adecuada de la gestión de asuntos y una transición documentada de tareas entre los equipos salientes y entrantes.\n(2) Durante la entrega, se deben transferir todos los documentos y recursos relacionados con el trabajo del FSR WiWi a los nuevos miembros."
+            }
+          }
+        }
+      }
+    },
+    "mitglieder": {
+      "title": "Legislatura del FSR",
+      "elected_members": "Miembros electos desde",
+      "table": {
+        "name": "Nombre",
+        "position": "Posición",
+        "tasks": "Tareas"
+      }
+    },
+    "about": {
+      "title": "Sobre nosotros - Consejo Estudiantil WiWi",
+      "subtitle": "Tu representación estudiantil en la Universidad Martin Luther de Halle-Wittenberg",
+      "aboutSection": {
+        "title": "¿Qué es el Consejo Estudiantil?",
+        "text1": "Con la inscripción en la Universidad Martin Luther, eres automáticamente miembro del estudiantado de la Facultad de Ciencias Económicas. El Consejo Estudiantil es la representación elegida de los estudiantes y aborda sus inquietudes.",
+        "text2": "El Consejo Estudiantil (StuRa) representa a todos los estudiantes, mientras que el Consejo de Estudiantes de Economía apoya específicamente a la Facultad de Ciencias Económicas."
+      },
+      "contactSection": {
+        "title": "Contacto"
+      },
+      "cards": {
+        "studip": {
+          "title": "Stud.IP",
+          "content": "Consejo de Estudiantes de Economía",
+          "button": "Visitar"
+        },
+        "facebook": {
+          "title": "Facebook",
+          "content": "FSR WiWi Halle",
+          "button": "Seguir"
+        },
+        "instagram": {
+          "title": "Instagram",
+          "content": "@fsr.wiwi.halle",
+          "button": "Seguir"
+        }
+      }
+    }
+  }
+  

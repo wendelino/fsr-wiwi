@@ -1,19 +1,44 @@
- "use server"
- import en from "./en.json";
+"use server";
+import en from "./en.json";
 import de from "./de.json";
+import es from "./es.json";
 import { cookies } from "next/headers";
+import { NextRequest } from "next/server";
 
-const translations = { en, de }; 
+const translations = { de, en, es };
+const locales = Object.keys(translations) as Array<keyof typeof translations>;
 
+export async function aviableLocales() {
+  return locales;
+}
+
+function isAviableLocale(lang: string) { 
+  return locales.includes(lang as keyof typeof translations)
+}
 
 export interface TranslationProps {
   lang: string;
   page: "home" | "awareness";
 }
 
+export async function getLocale(request: NextRequest) {
+  let lang = request?.cookies.get("lang")?.value;
 
-export async function setLocale(lang: string) {
-  cookies().set("lang", lang) 
+  if (!lang) {
+    const device_lang = request.headers.get("accept-language");
+
+    lang = device_lang?.split(",")[1].split(";")[0];
+  }
+
+  if (lang && lang in translations) return lang;
+  return "de";
+}
+
+export async function setLocale(lang: string) { 
+  
+  if (!isAviableLocale(lang)) return;
+  cookies().set("lang", lang);
+  console.log("setrted!!");
 }
 
 export async function getTranslation(lang: string) {

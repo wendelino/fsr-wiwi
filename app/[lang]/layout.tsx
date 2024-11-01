@@ -75,7 +75,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NavBar />
+          <NavBar lang={params.lang} />
           <main className="flex-1 min-h-[53vh]">
             <WidthWrapper>{children}</WidthWrapper>
           </main>

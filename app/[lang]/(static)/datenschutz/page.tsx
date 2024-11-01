@@ -27,7 +27,7 @@ export default function page() {
         Grosse Steinstrasse 73 <br />
         06108 Halle (Saale) <br />
         E-Mail: fachschaftsrat@wiwi.uni-halle.de <br />
-        Website: https://fsr-wiwi.vercel.app/
+        Website: https://fsr-wiwi-halle.de
       </p>
       
       <SubHeader>Erfassung von allgemeinen Daten und Informationen</SubHeader>
@@ -63,7 +63,7 @@ export default function page() {
       <p>Wir verwenden innerhalb des Website-Besuchs das verbreitete SSL-Verfahren (Secure Socket Layer) in Verbindung mit der jeweils höchsten Verschlüsselungsstufe, die von Ihrem Browser unterstützt wird. In der Regel handelt es sich dabei um eine 256-Bit-Verschlüsselung. Falls Ihr Browser keine 256-Bit-Verschlüsselung unterstützt, greifen wir stattdessen auf 128-Bit-v3-Technologie zurück. Ob eine einzelne Seite unseres Internetauftrittes verschlüsselt übertragen wird, erkennen Sie an der geschlossenen Darstellung des Schüssel- beziehungsweise Schloss-Symbols in der unteren Statusleiste Ihres Browsers.</p>
 
       <SubHeader>Aktualität und Änderung dieser Datenschutzerklärung</SubHeader>
-      <p>Diese Datenschutzerklärung ist aktuell gültig und hat den Stand August 2024. Durch die Weiterentwicklung unserer Website und Angebote darüber oder aufgrund geänderter gesetzlicher beziehungsweise behördlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung zu ändern. Die jeweils aktuelle Datenschutzerklärung kann jederzeit auf der Website unter https://fsr-wiwi.vercel.app/datenschutz abgerufen und ausgedruckt werden.</p>
+      <p>Diese Datenschutzerklärung ist aktuell gültig und hat den Stand August 2024. Durch die Weiterentwicklung unserer Website und Angebote darüber oder aufgrund geänderter gesetzlicher beziehungsweise behördlicher Vorgaben kann es notwendig werden, diese Datenschutzerklärung zu ändern. Die jeweils aktuelle Datenschutzerklärung kann jederzeit auf der Website unter <a href="/datenschutz">https://fsr-wiwi-halle.de/datenschutz</a> abgerufen und ausgedruckt werden.</p>
    
     
     </>

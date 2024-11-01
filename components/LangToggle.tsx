@@ -21,6 +21,7 @@ export function LangToggle() {
   const languages = [
     { value: "en", label: "English", flag: "🇬🇧" },
     { value: "de", label: "Deutsch", flag: "🇩🇪" }, 
+    { value: "es", label: "Spanisch", flag: "🇪🇸" }, 
   ]; 
   
 

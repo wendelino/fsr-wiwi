@@ -18,7 +18,7 @@ export default async function page({ params }: { params: { lang: string } }) {
           <img
             src="https://fachschaft.wiwi.uni-halle.de/im/1603205731_616_00_420.png"
             alt="Überblick über den Fachschaftsrat"
-            className="rounded-lg shadow-lg size-fit bg-border mx-auto"
+            className="rounded-lg shadow-lg size-cover bg-border mx-auto"
           />
           <div className="flex flex-col justify-center">
             <h2 className="text-3xl font-semibold text-text">{t.aboutSection.title}</h2>

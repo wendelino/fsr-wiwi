@@ -27,11 +27,7 @@ export default function Footer() {
           </div>
         </div>
         <p className="opacity-50 pt-8">
-          © Fachschaftsrat Wirtschafswissenschaften 2024 | All Rights Reserved |{" "}
-          Powered by{" "}
-          <Link className="text-semibold underline" href="https://neventer.vercel.app">
-            Neventer
-          </Link>
+          © Fachschaftsrat Wirtschafswissenschaften 2024 | All Rights Reserved 
         </p>
       </WidthWrapper>
     </footer>

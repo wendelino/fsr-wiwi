@@ -1,7 +1,20 @@
 {
   "global": {
     "not-found": "Nicht gefunden",
-    "current": "Aktuell"
+    "current": "Aktuell",
+    "nav": {
+      "about": "Wer wir sind",
+      "about_us": "Über uns",
+      "members": "Mitglieder",
+      "rules_of_procedure": "Geschäftsordnung",
+      "awareness": "Awareness",
+      "first_week": "Erstiwoche",
+      "guide": "Ersti Guide",
+      "program": "Programm",
+      "site_map": "Lageplan",
+      "registration": "Anmeldung",
+      "contact": "Kontakt"
+    }    
   },
   "home": {
     "welcome": "Willkommen", 
