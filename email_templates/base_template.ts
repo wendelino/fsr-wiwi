@@ -89,7 +89,7 @@ export default function base_template(content: string) {
           <div class="email-container">
               <div class="content-wrapper">
                   <div class="logo-container">
-                      <img class="logo" src="https://fsr-wiwi.vercel.app/logo.png" alt="FSR WiWi Logo" />
+                      <img class="logo" height="128" width="128" src="https://fsr-wiwi.vercel.app/logo.png" alt="FSR WiWi Logo" />
                   </div>
                   
                   ${content}

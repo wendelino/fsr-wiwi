@@ -1,17 +1,56 @@
 import { ContactForm } from "@/components/ContactForm";
 import InstagramEmbed from "@/components/InstagramEmbed";
 import { Header, SubHeader } from "@/components/TextComponents";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Kontakt",
+  description: "Schreib uns eine Nachricht, wir melden uns bei dir :)",
+  keywords: [
+    "Fachschaftsrat",
+    "FSR",
+    "Wirtschaftswissenschaften",
+    "Halle",
+    "Halle-Wittenberg",
+    "Martin Luther Universität",
+    "Universität",
+    "MLU",
+    "Kontakt",
+    "Hilfe",
+    "Email"
+  ],
+  openGraph: {
+    url: "https://fsr-wiwi-halle.de/kontakt",
+    type: "website",
+    title: "Kontakt",
+    description:
+      "Kontakt zum Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
+    images: [
+      {
+        url: "https://fsr-wiwi-halle.de/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Logo",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kontakt",
+    description:
+      "Kontakt zum Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
+  },
+};
 
 export default function page() {
   return (
     <>
-    <div className="grid md:grid-cols-2 mt-16 lg:gap-32 items-center p-8 md:px-16  rounded-xl shadow-xl border">
-      <Header>
-        Schreib uns eine <span className="fsr-gradient">Nachricht</span>
-      </Header> 
-      <ContactForm />
-
-    </div>
+      <div className="grid md:grid-cols-2 mt-16 lg:gap-32 items-center p-8 md:px-16  rounded-xl shadow-xl border">
+        <Header>
+          Schreib uns eine <span className="fsr-gradient">Nachricht</span>
+        </Header>
+        <ContactForm />
+      </div>
 
       {/* <Header>Kontakt</Header>
       <div className="flex flex-col gap-2 text-lg font-semibold mb-32">

@@ -27,6 +27,7 @@ export const metadata: Metadata = {
   ],
   openGraph: {
     url: "https://fsr-wiwi-halle.de",
+    siteName: "FSR Wiwi",
     type: "website",
     title: "Fachschaftsrat Wiwi Halle",
     description:
@@ -51,7 +52,7 @@ export const metadata: Metadata = {
   },
 };
 export async function generateStaticParams() {
-  return [{ lang: 'en' }, { lang: 'de' }]
+  return [{ lang: "en" }, { lang: "de" }];
 }
 
 export default function RootLayout({
@@ -63,11 +64,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang={params.lang}>
-      <script
-        defer
-        src="https://analytics.lnio.de/script.js"
-        data-website-id="d72a7bb9-59d3-40b7-934a-a48d8dceca3f"
-      />
+      <head>
+        <script
+          defer
+          src="https://analytics.lnio.de/script.js"
+          data-website-id="d72a7bb9-59d3-40b7-934a-a48d8dceca3f"
+        />
+      </head>
       <body className={cn(inter.className, "flex flex-col min-h-screen")}>
         <ThemeProvider
           attribute="class"
@@ -77,7 +80,7 @@ export default function RootLayout({
         >
           <NavBar lang={params.lang} />
           <main className="flex-1 min-h-[53vh]">
-            <WidthWrapper>{children}</WidthWrapper>
+            <WidthWrapper className=" flex flex-col gap-20">{children}</WidthWrapper>
           </main>
           <Footer />
           <ScrollTop />

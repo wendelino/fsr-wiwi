@@ -58,7 +58,7 @@
 @layer base {
   :root { 
     --fsr1: 350, 63%, 41%;
-    --fsr2: 351, 50%, 60%;
+    --fsr2: 350, 36%, 74%;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;

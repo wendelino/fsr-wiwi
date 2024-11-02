@@ -2,6 +2,9 @@
 import { cn } from "@/lib/utils"; 
 import { useState, useEffect } from 'react';
 import { EventProps } from "./Event";
+import { TypeAnimation } from "react-type-animation";
+import { setTimeout } from "timers/promises";
+
 
 export function Header({
   children,
@@ -41,25 +44,16 @@ export function SubHeader({
   );
 }
 
-export function AnimatedText({text}: {text: string}) {
-  const [displayedText, setDisplayedText] = useState(text[0]);
-
-  useEffect(() => {
-    let currentIndex = 0;
-    const interval = setInterval(() => {
-      if (currentIndex < text.length) {
-        setDisplayedText(text.substring(0, currentIndex + 1) + "|");
-        currentIndex += 1;
-      } else {
-        clearInterval(interval);
-        setDisplayedText(text)
-      }
-    }, 150); // Intervall in Millisekunden
-
-    return () => clearInterval(interval);
-  }, [text]);
-
-  return <span>{displayedText}</span>;
+export function AnimatedText({text, className}: {text: string, className?: string}) {
+  return   <TypeAnimation
+  sequence={[
+    text
+  ]} 
+  wrapper="span"
+  speed={20}
+  repeat={1}
+  className={className}
+/>
 }
 
 

@@ -16,6 +16,7 @@ function NavLayout({ lang }: { lang: string }) {
   return (
     <> 
         <NavLink href="/about">{t.about}</NavLink>
+        <NavLink href="/asq">ASQ</NavLink>
       
       <NavDropdown title={t.about_us}>
         <NavLink href="/mitglieder">{t.members}</NavLink>

@@ -7,7 +7,7 @@ const mailOptions = {
   replyTo: "fachschaftsrat@wiwi.uni-halle.de",
   priority: "high",
 
-  recipient: "wendelin.beddermann@web.de",
+  recipient: "fachschaftsrat@wiwi.uni-halle.de",
   subject: "Test E-Mail", // Subject of the email
   html: "<p>Content</p>",
 };
