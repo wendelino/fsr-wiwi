@@ -89,7 +89,7 @@ export const AnimatedHeader = ({ children, className }: BaseProps) => {
 
   return (
     <motion.h2
-      className="text-4xl font-bold mb-12 text-center"
+      className={cn("text-2xl lg:text-4xl font-bold mb-12", className)}
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}

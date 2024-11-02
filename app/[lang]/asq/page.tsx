@@ -122,11 +122,12 @@ export default function Page() {
         >
           <div className="relative  px-4 py-12 ">
             <AnimatedHeader>Deine Vorteile und Aufgaben</AnimatedHeader>
-            <ul className="flex flex-col gap-6">
+            <ul className="flex flex-col gap-6 ">
               {tasks.map((task, index) => (
                 <AnimatedListItem index={index} key={index} className="gap-6"> 
-                    <task.icon className="h-8 w-8 text-fsr" /> 
-                  <p className="text-foreground">{task.text}</p>
+                <span className={"w-8 h-8 text-fsr"}><task.icon className="h-8 w-8 " /> </span>
+                    
+                  <p className="text-foreground ">{task.text}</p>
                 </AnimatedListItem>
               ))}
             </ul>
@@ -141,8 +142,8 @@ export default function Page() {
       </FadeInSection>
 
       <FadeInSection>
-        <section className="grid lg:grid-cols-2 gap-8 items-center mb-16 p-8">
-          <AnimatedHeader> Der Bewerbungsprozess</AnimatedHeader>
+        <section className="grid lg:grid-cols-2 gap-8 items-start lg:items-center mb-16 p-8 ">
+          <AnimatedHeader  > Der Bewerbungsprozess</AnimatedHeader>
           <div className="">
             <ol className="relative border-l  border-muted">
               <li className="mb-10 ml-6">
@@ -261,7 +262,7 @@ export default function Page() {
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-3">
-              <AccordionTrigger>
+              <AccordionTrigger className="text-start">
                 Kann ich das ASQ-Modul auch in Teilzeit absolvieren?
               </AccordionTrigger>
               <AccordionContent>
