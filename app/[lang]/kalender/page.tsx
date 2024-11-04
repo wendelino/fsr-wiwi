@@ -32,17 +32,17 @@ export default async function Page() {
                 href={`kalender/${encodeURIComponent(event.title)}`}
                 className="border-b py-5 flex items-center cursor-pointer"
               >
-                <div className="flex flex-col gap-1">
+                <div className="flex flex-col gap-1 ">
+                  <span className="underline text-fsr font-semibold ">
+                    {event.title}
+                  </span>
                   <span className="flex gap-2">
                     <span className="text-foreground/70">
                       {format(event.start, "HH:mm")}-
                       {format(event.end, "HH:mm")}
                     </span>
-                    <span className="underline text-fsr font-semibold">
-                      {event.title}
-                    </span>
+                    {event.description.slice(0, 60)}...
                   </span>
-                  <span className="">{event.description.slice(0, 60)}...</span>
                 </div>
 
                 <ChevronRight className="ml-auto w-6 h-6" />

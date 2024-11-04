@@ -4,7 +4,6 @@ import { Section } from "@/components/Framer/Section";
 import MyMap from "@/components/MyMap";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
-import { redirect } from "next/navigation";
 
 export default async function page({
   params,
