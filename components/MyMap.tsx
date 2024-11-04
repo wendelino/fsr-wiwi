@@ -4,12 +4,15 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import { LocationCard, LocationProps } from "./Event";
+import { LatLngExpression } from "leaflet";
 
 export default function MyMap({locations}: {locations: LocationProps[]}) { 
 
+  const center: LatLngExpression = [locations[0].lat, locations[0].long]
+
   return (
     <MapContainer
-      center={[51.48654, 11.97353]}
+      center={center}
       zoom={15}
       scrollWheelZoom={false}
       className="w-full h-full rounded-lg shadow-xl z-0"

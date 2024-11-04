@@ -80,7 +80,7 @@ export default function RootLayout({
         >
           <NavBar lang={params.lang} />
           <main className="flex-1 min-h-[53vh]">
-            <WidthWrapper className=" flex flex-col gap-20">{children}</WidthWrapper>
+            <WidthWrapper className=" flex flex-col gap-16 lg:gap-32">{children}</WidthWrapper>
           </main>
           <Footer />
           <ScrollTop />

@@ -32,6 +32,8 @@ import DemoContainer, {
   ProgressBar,
 } from "@/components/Framer";
 import Link from "next/link";
+import { PageHeader } from "@/components/Framer/PageHeader";
+import { Section } from "@/components/Framer/Section";
 
 const tasks = [
   {
@@ -63,31 +65,16 @@ const tasks = [
 export default function Page() {
   return (
     <>
-      <header className="relative p-5 text-center my-16 overflow-hidde">
-        <div className="relative z-10">
-          <motion.h1
-            className="text-5xl font-bold mb-4"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            ASQ beim FSR WiWi
-          </motion.h1>
-          <motion.p
-            className="mt-2 text-xl max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
+      <PageHeader
+        title="ASQ beim FSR WiWi"
+        subtitle="
             Entdecke neue Möglichkeiten, sammle wertvolle Erfahrungen und
             verdiene 5 ECTS-Punkte mit dem Allgemeinen
             Schlüsselqualifikationsmodul beim Fachschaftsrat
-            Wirtschaftswissenschaften!
-          </motion.p>
-        </div>
-      </header>
+            Wirtschaftswissenschaften!"
+      />
 
-      <FadeInSection>
+      <Section>
         <ul className="grid gap-6 lg:grid-cols-3">
           <AnimatedListItem index={1} className=" flex-col items-start">
             <h3 className="font-bold text-xl">Das Modul </h3>
@@ -111,39 +98,28 @@ export default function Page() {
             </p>
           </AnimatedListItem>
         </ul>
-      </FadeInSection>
+      </Section>
 
-      <FadeInSection>
-        <motion.section
-          className="mb-16 relative overflow-hidden"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="relative  px-4 py-12 ">
-            <AnimatedHeader>Deine Vorteile und Aufgaben</AnimatedHeader>
-            <ul className="flex flex-col gap-6 ">
-              {tasks.map((task, index) => (
-                <AnimatedListItem index={index} key={index} className="gap-6"> 
-                <span className={"w-8 h-8 text-fsr"}><task.icon className="h-8 w-8 " /> </span>
-                    
-                  <p className="text-foreground ">{task.text}</p>
-                </AnimatedListItem>
-              ))}
-            </ul>
-          </div>
-          <motion.div
-            className="absolute inset-0 bg-grid-primary/5 z-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-          />
-        </motion.section>
-      </FadeInSection>
+      <Section>
+        <div className="relative  px-4 py-12 ">
+          <AnimatedHeader>Deine Vorteile und Aufgaben</AnimatedHeader>
+          <ul className="flex flex-col gap-6 ">
+            {tasks.map((task, index) => (
+              <AnimatedListItem index={index} key={index} className="gap-6">
+                <span className={"w-8 h-8 text-fsr"}>
+                  <task.icon className="h-8 w-8 " />{" "}
+                </span>
 
-      <FadeInSection>
+                <p className="text-foreground ">{task.text}</p>
+              </AnimatedListItem>
+            ))}
+          </ul>
+        </div>
+      </Section>
+
+      <Section>
         <section className="grid lg:grid-cols-2 gap-8 items-start lg:items-center mb-16 p-8 ">
-          <AnimatedHeader  > Der Bewerbungsprozess</AnimatedHeader>
+          <AnimatedHeader> Der Bewerbungsprozess</AnimatedHeader>
           <div className="">
             <ol className="relative border-l  border-muted">
               <li className="mb-10 ml-6">
@@ -151,7 +127,7 @@ export default function Page() {
                   <svg
                     className="w-3.5 h-3.5 text-primary"
                     aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg" 
+                    xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                   >
                     <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
@@ -170,7 +146,7 @@ export default function Page() {
                   <svg
                     className="w-3.5 h-3.5 text-primary"
                     aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg" 
+                    xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                   >
                     <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
@@ -208,7 +184,7 @@ export default function Page() {
                   <svg
                     className="w-3.5 h-3.5 text-primary"
                     aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg" 
+                    xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                   >
                     <path d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 14a6 6 0 1 1 0-12 6 6 0 0 1 0 12z" />
@@ -226,11 +202,10 @@ export default function Page() {
             </ol>
           </div>
         </section>
-      </FadeInSection>
+      </Section>
 
-      <FadeInSection>
-        <section className="mb-16 grid "> 
-        <AnimatedHeader> Häufig gestellte Fragen</AnimatedHeader>
+      <Section>
+      <AnimatedHeader> Häufig gestellte Fragen</AnimatedHeader>
           <Accordion type="single" collapsible className=" ">
             <AccordionItem value="item-1">
               <AccordionTrigger>
@@ -274,24 +249,23 @@ export default function Page() {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-        </section>
-      </FadeInSection>
+      </Section>
 
       <FadeInSection className="py-32">
         <section className="text-center">
-        <AnimatedHeader>Bereit für eine neue Herausforderung?</AnimatedHeader> 
+          <AnimatedHeader>Bereit für eine neue Herausforderung?</AnimatedHeader>
           <p className="mb-8">
             Wir freuen uns auf deine Bewerbung und darauf, dich im Team begrüßen
             zu dürfen!
           </p>
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <Link href="mailto:fachschaftsrat@wiwi.uni-halle.de">
-            <Button
-              size="lg"
-              className="bg-primary text-primary-foreground hover:bg-primary/90"
-            >
-              Jetzt bewerben
-            </Button>
+              <Button
+                size="lg"
+                className="bg-primary text-primary-foreground hover:bg-primary/90"
+              >
+                Jetzt bewerben
+              </Button>
             </Link>
           </motion.div>
         </section>

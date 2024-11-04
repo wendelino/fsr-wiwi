@@ -7,7 +7,7 @@ export async function getLocations() {
       `https://eventec.vercel.app/api/locations?org_link=${orgLink}&nocache=${Date.now()}`,
       {
         method: "GET",
-        cache: 'no-store'
+        // cache: 'no-store'
       } 
     );
     const data = await response.json();

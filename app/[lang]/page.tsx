@@ -1,4 +1,5 @@
-import { FadeInSection, Fsr_letters } from "@/components/Framer";
+import { FadeInSection, Fsr_letters } from "@/components/Framer"; 
+import { AnimatedPinLink } from "@/components/Framer/3DPin";
 import InstagramEmbed from "@/components/InstagramEmbed";
 import { AnimatedText, Header } from "@/components/TextComponents";
 import { Card } from "@/components/ui/card";
@@ -39,6 +40,14 @@ export default async function Home({ params }: { params: { lang: string } }) {
         </FadeInSection>
       </header>
 
+
+      <FadeInSection className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 "> 
+        <AnimatedPinLink href="/about" title="Über uns" subtitle="Wer und was ist der FSR?" />
+        <AnimatedPinLink href="/asq" title="ASQ" subtitle="Alle Infos zum ASQ bei uns" />
+        <AnimatedPinLink href="/mitglieder" title="Mitglieder" subtitle="Unsere aktuell gewählten Mitglieder" />
+        <AnimatedPinLink href="/kontakt" title="Kontakt" subtitle="Wir freuen uns darauf, von dir zu hören!" />
+      </FadeInSection>
+      
       <FadeInSection>
         <Header>{t.meaningOfFachschaft.header}</Header>
         <div className="text-lg text-foreground/80">

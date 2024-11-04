@@ -37,6 +37,7 @@
     text-fill-color: transparent;
   }
 
+
   .fade-in {
     opacity: 0;
     transform: translateY(20px);
@@ -56,7 +57,7 @@
   }
 }
 @layer base {
-  :root { 
+  :root {  
     --fsr1: 350, 63%, 41%;
     --fsr2: 350, 36%, 74%;
     --background: 0 0% 100%;
