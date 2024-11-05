@@ -9,7 +9,7 @@ export async function getEvents() {
     `https://eventec.vercel.app/api/events?org_link=${orgLink}&nocache=${Date.now()}`,
     {
       method: "GET",
-      // cache: 'no-store'
+      cache: 'no-store'
     } 
   );
   const data = await response.json(); 

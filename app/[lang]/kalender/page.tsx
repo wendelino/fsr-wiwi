@@ -1,11 +1,9 @@
-import { getEvents } from "@/app/_actions/event";
-import Countdown from "@/components/CountDown";
+import { getEvents } from "@/app/_actions/event"; 
 import DayCard, { DayProps } from "@/components/Day";
 import { EventProps, EventWithLocation } from "@/components/Event";
 import { ListItem } from "@/components/Framer/ListItem";
 import { PageHeader } from "@/components/Framer/PageHeader";
-import { Section } from "@/components/Framer/Section";
-import { Header } from "@/components/TextComponents";
+import { Section } from "@/components/Framer/Section"; 
 import { format } from "date-fns";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
@@ -23,7 +21,7 @@ export default async function Page() {
       {days.map((day) => (
         <Section key={day.date}>
           <div className="flex items-center gap-4 text-lg font-semibold">
-            {day.date}
+            {format(day.date, "dd.MM.yyyy")}
             <div className="border-t border-foreground flex-1" />
           </div>
           {day.events.map((event, index) => (
@@ -56,29 +54,18 @@ export default async function Page() {
 }
 
 function groupEventsByDay(events: EventWithLocation[] | undefined): DayProps[] {
-  if (!events) {
-    return [];
-  }
+  if (!events) return [];
 
-  const groupedEvents: Record<string, EventWithLocation[]> = events.reduce(
+  const groupedEvents = events.reduce<Record<string, EventWithLocation[]>>(
     (acc, event) => {
-      const dateKey = format(event.start, "dd.MM.yyyy"); // YYYY-MM-DD
-      if (!acc[dateKey]) {
-        acc[dateKey] = [];
-      }
-      acc[dateKey].push(event);
+      const dateKey = format(event.start, "yyyy-MM-dd"); // use sortable format directly
+      (acc[dateKey] ||= []).push(event); // conditional initialization with push
       return acc;
     },
-    {} as Record<string, EventWithLocation[]>
+    {}
   );
 
-  const days = Object.keys(groupedEvents).map((date) => ({
-    date,
-    events: groupedEvents[date],
-  }));
-
-  // Sortiere die Tage nach Datum
-  days.sort((b, a) => new Date(a.date).getTime() - new Date(b.date).getTime());
-
-  return days;
+  return Object.entries(groupedEvents)
+    .map(([date, events]) => ({ date, events })) // map directly to DayProps
+    .sort((b, a) => a.date.localeCompare(b.date)); // lexicographical sort with consistent date format
 }
