@@ -25,8 +25,9 @@ function Loading() {
     <>
       <PageHeader loading />
       <div className="space-y-4">
-        <Skeleton className="h-4 w-3/4" />
+        <Skeleton className="h-4 w-full" />
         <Skeleton className="h-4 w-1/2" />
+        <Skeleton className="h-4 w-3/4" />
       </div>
     </>
   );
@@ -50,7 +51,7 @@ async function Content({ title }: { title: string }) {
     format(event.end, " hh:mm");
 
   return (
-    <>
+    <> 
       <PageHeader title={event.title} subtitle={date} />
       <Section>{event.description}</Section>
       <Section className="h-96 shadow-lg">

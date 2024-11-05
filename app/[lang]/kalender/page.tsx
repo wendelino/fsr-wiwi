@@ -24,8 +24,8 @@ function Loading() {
       <PageHeader loading />
       {Array.from({ length: 5 }, (_, i) => (
         <div className="space-y-4" key={i}>
-          <Skeleton className="h-4 w-3/4" />
-          <Skeleton className="h-4 w-1/2" />
+          <Skeleton className="h-6 w-3/4" />
+          <Skeleton className="h-4 w-1/3" />
         </div>
       ))}
     </>
