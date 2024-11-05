@@ -1,14 +1,38 @@
-import { getEvents } from "@/app/_actions/event"; 
-import DayCard, { DayProps } from "@/components/Day";
+import { getEvents } from "@/app/_actions/event";
+import { DayProps } from "@/components/Day";
 import { EventProps, EventWithLocation } from "@/components/Event";
 import { ListItem } from "@/components/Framer/ListItem";
 import { PageHeader } from "@/components/Framer/PageHeader";
-import { Section } from "@/components/Framer/Section"; 
+import { Section } from "@/components/Framer/Section";
+import { Skeleton } from "@/components/ui/skeleton";
 import { format } from "date-fns";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { Suspense } from "react";
 
-export default async function Page() {
+export default function Page() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <Content />
+    </Suspense>
+  );
+}
+
+function Loading() {
+  return (
+    <>
+      <PageHeader loading />
+      {Array.from({ length: 5 }, (_, i) => (
+        <div className="space-y-4" key={i}>
+          <Skeleton className="h-4 w-3/4" />
+          <Skeleton className="h-4 w-1/2" />
+        </div>
+      ))}
+    </>
+  );
+}
+
+async function Content() {
   const events = await getEvents();
   const days: DayProps[] = groupEventsByDay(events);
 
