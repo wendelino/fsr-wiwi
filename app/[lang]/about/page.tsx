@@ -4,10 +4,9 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
+  CardTitle
 } from "@/components/ui/card";
 import { getTranslation } from "@/locales/getTranslation";
 import { ExternalLink, Facebook, Instagram } from "lucide-react";

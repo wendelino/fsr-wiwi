@@ -1,31 +1,70 @@
 import { getEvents } from "@/app/_actions/event";
 import { DayProps } from "@/components/Day";
-import { EventProps, EventWithLocation } from "@/components/Event";
+import { EventWithLocation } from "@/components/Event";
 import { ListItem } from "@/components/Framer/ListItem";
 import { PageHeader } from "@/components/Framer/PageHeader";
 import { Section } from "@/components/Framer/Section";
 import { Skeleton } from "@/components/ui/skeleton";
 import { format } from "date-fns";
 import { ChevronRight } from "lucide-react";
+import { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 
+export const metadata: Metadata= {
+  title: "Eventkalender | FSR Wiwi Halle",
+  description:
+    "Bleib auf dem Laufenden über die neuesten Veranstaltungen",
+  openGraph: {
+    title: "Eventkalender | FSR Wiwi Halle",
+    description:
+      "Bleib auf dem Laufenden über die neuesten Veranstaltungen",
+    url: "https://fsr-wiwi-halle.de/kalender",
+    siteName: "Fachschaftsrat Wirtschaftswissenschaften",
+    images: [
+      {
+        url: "https://fsr-wiwi-halle.de/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "Eventkalender | FSR Wiwi Halle",
+      },
+    ],
+    locale: "de_DE",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Eventkalender | FSR Wiwi Halle",
+    description:
+      "Bleib auf dem Laufenden über die neuesten Veranstaltungen",
+    images: ["https://fsr-wiwi-halle.de/logo.png"],
+  },
+};
+
+
+
 export default function Page() {
   return (
-    <Suspense fallback={<Loading />}>
-      <Content />
-    </Suspense>
+    <>
+      <PageHeader
+        title="Eventkalender"
+        subtitle={"Bleib auf dem Laufenden über die neuesten Veranstaltungen"}
+      /> 
+      <Suspense fallback={<Loading />}>
+        <Content />
+      </Suspense>
+    </>
   );
 }
 
 function Loading() {
   return (
     <>
-      <PageHeader loading />
       {Array.from({ length: 5 }, (_, i) => (
         <div className="space-y-4" key={i}>
-          <Skeleton className="h-6 w-3/4" />
+          <Skeleton className="h-6 w-full" />
           <Skeleton className="h-4 w-1/3" />
+          <Skeleton className="h-4 w-3/4" />
         </div>
       ))}
     </>
@@ -37,11 +76,7 @@ async function Content() {
   const days: DayProps[] = groupEventsByDay(events);
 
   return (
-    <>
-      <PageHeader
-        title="Eventkalender"
-        subtitle={"Bleib auf dem Laufenden über die neuesten Veranstaltungen"}
-      />
+    <> 
       {days.map((day) => (
         <Section key={day.date}>
           <div className="flex items-center gap-4 text-lg font-semibold">
@@ -54,19 +89,15 @@ async function Content() {
                 href={`kalender/${encodeURIComponent(event.title)}`}
                 className="border-b py-5 flex items-center cursor-pointer"
               >
-                <div className="flex flex-col gap-1 ">
-                  <span className="underline text-fsr font-semibold ">
+                <div>
+                  <h4 className="underline text-fsr font-semibold mb-1">
                     {event.title}
+                  </h4>
+                  <span className="text-foreground/70 mr-2">
+                    {format(event.start, "HH:mm")}-{format(event.end, "HH:mm")}
                   </span>
-                  <span className="flex gap-2">
-                    <span className="text-foreground/70">
-                      {format(event.start, "HH:mm")}-
-                      {format(event.end, "HH:mm")}
-                    </span>
-                    {event.description.slice(0, 60)}...
-                  </span>
+                  {event.description.slice(0, 60)}...
                 </div>
-
                 <ChevronRight className="ml-auto w-6 h-6" />
               </Link>
             </ListItem>

@@ -1,39 +1,26 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import { motion, useAnimation } from "framer-motion";
 import {
-  Calendar,
-  DollarSign,
-  Users,
-  Briefcase,
-  Coffee,
-  GraduationCap,
-  EuroIcon,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+  AnimatedHeader,
+  AnimatedListItem
+} from "@/components/Framer";
+import { PageHeader } from "@/components/Framer/PageHeader";
+import { Section } from "@/components/Framer/Section";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import DemoContainer, {
-  AnimatedHeader,
-  AnimatedListItem,
-  FadeInSection,
-  ProgressBar,
-} from "@/components/Framer";
+import { Button } from "@/components/ui/button";
+import {
+  Briefcase,
+  Calendar,
+  Coffee,
+  EuroIcon,
+  GraduationCap,
+  Users,
+} from "lucide-react";
+import { Metadata } from "next";
 import Link from "next/link";
-import { PageHeader } from "@/components/Framer/PageHeader";
-import { Section } from "@/components/Framer/Section";
 
 const tasks = [
   {
@@ -61,6 +48,36 @@ const tasks = [
     text: "Sammle wertvolle praktische Erfahrungen für dein Studium und zukünftige Karriere",
   },
 ];
+
+export const metadata: Metadata = {
+  title: "ASQ beim FSR WiWi",
+  description:
+    "Entdecke neue Möglichkeiten, sammle wertvolle Erfahrungen und verdiene 5 ECTS-Punkte mit dem Allgemeinen Schlüsselqualifikationsmodul beim Fachschaftsrat Wirtschaftswissenschaften!",
+  openGraph: {
+    title: "ASQ beim FSR WiWi",
+    description:
+      "Entdecke neue Möglichkeiten, sammle wertvolle Erfahrungen und verdiene 5 ECTS-Punkte mit dem Allgemeinen Schlüsselqualifikationsmodul beim Fachschaftsrat Wirtschaftswissenschaften!",
+    url: "https://fsr-wiwi-halle.de/asq",
+    siteName: "Fachschaftsrat Wirtschaftswissenschaften",
+    images: [
+      {
+        url: "https://fsr-wiwi-halle.de/logo.png",
+        width: 1200,
+        height: 630,
+        alt: "ASQ beim FSR WiWi",
+      },
+    ],
+    locale: "de_DE",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ASQ beim FSR WiWi",
+    description:
+      "Entdecke neue Möglichkeiten, sammle wertvolle Erfahrungen und verdiene 5 ECTS-Punkte mit dem Allgemeinen Schlüsselqualifikationsmodul beim Fachschaftsrat Wirtschaftswissenschaften!",
+    images: ["https://fsr-wiwi-halle.de/logo.png"],
+  },
+};
 
 export default function Page() {
   return (
@@ -205,71 +222,65 @@ export default function Page() {
       </Section>
 
       <Section>
-      <AnimatedHeader> Häufig gestellte Fragen</AnimatedHeader>
-          <Accordion type="single" collapsible className=" ">
-            <AccordionItem value="item-1">
-              <AccordionTrigger>
-                Was ist der Leistungsnachweis?
-              </AccordionTrigger>
-              <AccordionContent>
-                Der Leistungsnachweis besteht aus drei Teilen:
-                <ol className="list-decimal pl-6 mt-2">
-                  <li>Dein eigenes Semesterprojekt</li>
-                  <li>Unterstützung von FSR-Projekten</li>
-                  <li>
-                    Ein Bericht im Umfang von 3 bis 5 Seiten über die Art und
-                    den Umfang der Tätigkeit mit Lernerfolgen bzw. erworbenen
-                    Kompetenzen
-                  </li>
-                </ol>
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2">
-              <AccordionTrigger>
-                Wie viel Zeit muss ich investieren?
-              </AccordionTrigger>
-              <AccordionContent>
-                Das ASQ-Modul entspricht einem Arbeitsaufwand von 150 Stunden.
-                Dies verteilt sich über das gesamte Semester, sodass du im
-                Durchschnitt mit etwa 10 Stunden pro Woche rechnen kannst. Die
-                genaue Zeiteinteilung ist jedoch flexibel und kann je nach
-                Projektphase variieren.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-3">
-              <AccordionTrigger className="text-start">
-                Kann ich das ASQ-Modul auch in Teilzeit absolvieren?
-              </AccordionTrigger>
-              <AccordionContent>
-                Grundsätzlich ist das ASQ-Modul als Vollzeitaktivität während
-                eines Semesters konzipiert. In Ausnahmefällen und nach
-                Rücksprache mit dem FSR und dem ASQ-Büro könnte eine
-                Teilzeitvariante über zwei Semester möglich sein. Dies muss
-                jedoch individuell geprüft und vereinbart werden.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
+        <AnimatedHeader> Häufig gestellte Fragen</AnimatedHeader>
+        <Accordion type="single" collapsible className=" ">
+          <AccordionItem value="item-1">
+            <AccordionTrigger>Was ist der Leistungsnachweis?</AccordionTrigger>
+            <AccordionContent>
+              Der Leistungsnachweis besteht aus drei Teilen:
+              <ol className="list-decimal pl-6 mt-2">
+                <li>Dein eigenes Semesterprojekt</li>
+                <li>Unterstützung von FSR-Projekten</li>
+                <li>
+                  Ein Bericht im Umfang von 3 bis 5 Seiten über die Art und den
+                  Umfang der Tätigkeit mit Lernerfolgen bzw. erworbenen
+                  Kompetenzen
+                </li>
+              </ol>
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2">
+            <AccordionTrigger>
+              Wie viel Zeit muss ich investieren?
+            </AccordionTrigger>
+            <AccordionContent>
+              Das ASQ-Modul entspricht einem Arbeitsaufwand von 150 Stunden.
+              Dies verteilt sich über das gesamte Semester, sodass du im
+              Durchschnitt mit etwa 10 Stunden pro Woche rechnen kannst. Die
+              genaue Zeiteinteilung ist jedoch flexibel und kann je nach
+              Projektphase variieren.
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-3">
+            <AccordionTrigger className="text-start">
+              Kann ich das ASQ-Modul auch in Teilzeit absolvieren?
+            </AccordionTrigger>
+            <AccordionContent>
+              Grundsätzlich ist das ASQ-Modul als Vollzeitaktivität während
+              eines Semesters konzipiert. In Ausnahmefällen und nach Rücksprache
+              mit dem FSR und dem ASQ-Büro könnte eine Teilzeitvariante über
+              zwei Semester möglich sein. Dies muss jedoch individuell geprüft
+              und vereinbart werden.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
       </Section>
 
-      <FadeInSection className="py-32">
-        <section className="text-center">
-          <AnimatedHeader>Bereit für eine neue Herausforderung?</AnimatedHeader>
-          <p className="mb-8">
-            Wir freuen uns auf deine Bewerbung und darauf, dich im Team begrüßen
-            zu dürfen!
-          </p>
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link href="mailto:fachschaftsrat@wiwi.uni-halle.de">
-              <Button
-                size="lg"
-                className="bg-primary text-primary-foreground hover:bg-primary/90"
-              >
-                Jetzt bewerben
-              </Button>
-            </Link>
-          </motion.div>
-        </section>
-      </FadeInSection>
+      <Section className="flex flex-col items-center py-32">
+        <AnimatedHeader>Bereit für eine neue Herausforderung?</AnimatedHeader>
+        <p className="mb-8">
+          Wir freuen uns auf deine Bewerbung und darauf, dich im Team begrüßen
+          zu dürfen!
+        </p>
+        <Link href="mailto:fachschaftsrat@wiwi.uni-halle.de">
+          <Button
+            size="lg"
+            className="bg-primary text-primary-foreground hover:bg-primary/90"
+          >
+            Jetzt bewerben
+          </Button>
+        </Link>
+      </Section>
     </>
   );
 }
