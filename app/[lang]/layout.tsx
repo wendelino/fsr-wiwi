@@ -11,8 +11,11 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  icons: "https://fsr-wiwi-halle.de/favicon.ico",
-  title: "Fachschaftsrat Wiwi Halle",
+  icons: "https://fsr-wiwi-halle.de/favicon.ico", 
+  title: {
+    template: '%s | FSR Wiwi',
+    default: 'FSR Wiwi Halle',  
+  },
   description:
     "Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
   keywords: [
@@ -29,7 +32,10 @@ export const metadata: Metadata = {
     url: "https://fsr-wiwi-halle.de",
     siteName: "FSR Wiwi",
     type: "website",
-    title: "Fachschaftsrat Wiwi Halle",
+    title: {
+      template: '%s | FSR Wiwi',
+      default: 'FSR Wiwi Halle',  
+    },
     description:
       "Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
     images: [
@@ -43,7 +49,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fachschaftsrat Wiwi Halle",
+    title: {
+      template: '%s | FSR Wiwi',
+      default: 'FSR Wiwi Halle',  
+    },
     description:
       "Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
   },

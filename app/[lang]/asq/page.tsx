@@ -50,11 +50,11 @@ const tasks = [
 ];
 
 export const metadata: Metadata = {
-  title: "ASQ beim FSR WiWi",
+  title: "ASQ",
   description:
     "Entdecke neue Möglichkeiten, sammle wertvolle Erfahrungen und verdiene 5 ECTS-Punkte mit dem Allgemeinen Schlüsselqualifikationsmodul beim Fachschaftsrat Wirtschaftswissenschaften!",
   openGraph: {
-    title: "ASQ beim FSR WiWi",
+    title: "ASQ",
     description:
       "Entdecke neue Möglichkeiten, sammle wertvolle Erfahrungen und verdiene 5 ECTS-Punkte mit dem Allgemeinen Schlüsselqualifikationsmodul beim Fachschaftsrat Wirtschaftswissenschaften!",
     url: "https://fsr-wiwi-halle.de/asq",
@@ -64,7 +64,7 @@ export const metadata: Metadata = {
         url: "https://fsr-wiwi-halle.de/logo.png",
         width: 1200,
         height: 630,
-        alt: "ASQ beim FSR WiWi",
+        alt: "ASQ",
       },
     ],
     locale: "de_DE",
@@ -72,7 +72,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "ASQ beim FSR WiWi",
+    title: "ASQ",
     description:
       "Entdecke neue Möglichkeiten, sammle wertvolle Erfahrungen und verdiene 5 ECTS-Punkte mit dem Allgemeinen Schlüsselqualifikationsmodul beim Fachschaftsrat Wirtschaftswissenschaften!",
     images: ["https://fsr-wiwi-halle.de/logo.png"],
@@ -83,7 +83,7 @@ export default function Page() {
   return (
     <>
       <PageHeader
-        title="ASQ beim FSR WiWi"
+        title="ASQ"
         subtitle="
             Entdecke neue Möglichkeiten, sammle wertvolle Erfahrungen und
             verdiene 5 ECTS-Punkte mit dem Allgemeinen

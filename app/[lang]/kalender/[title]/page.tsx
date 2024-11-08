@@ -5,7 +5,21 @@ import MyMap from "@/components/MyMap";
 import { Skeleton } from "@/components/ui/skeleton";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
+import { Metadata } from "next";
 import { Suspense } from "react";
+
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { lang: string; title: string }
+}): Promise<Metadata> {
+  const title = decodeURIComponent(params.title);
+
+  return {
+    title: `${title}`, 
+  };
+}
 
 export default function page({
   params,

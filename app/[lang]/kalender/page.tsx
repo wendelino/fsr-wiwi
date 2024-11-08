@@ -12,11 +12,11 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 export const metadata: Metadata= {
-  title: "Eventkalender | FSR Wiwi Halle",
+  title: "Eventkalender",
   description:
     "Bleib auf dem Laufenden über die neuesten Veranstaltungen",
   openGraph: {
-    title: "Eventkalender | FSR Wiwi Halle",
+    title: "Eventkalender",
     description:
       "Bleib auf dem Laufenden über die neuesten Veranstaltungen",
     url: "https://fsr-wiwi-halle.de/kalender",
@@ -26,7 +26,7 @@ export const metadata: Metadata= {
         url: "https://fsr-wiwi-halle.de/logo.png",
         width: 1200,
         height: 630,
-        alt: "Eventkalender | FSR Wiwi Halle",
+        alt: "Eventkalender",
       },
     ],
     locale: "de_DE",
@@ -34,7 +34,7 @@ export const metadata: Metadata= {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Eventkalender | FSR Wiwi Halle",
+    title: "Eventkalender",
     description:
       "Bleib auf dem Laufenden über die neuesten Veranstaltungen",
     images: ["https://fsr-wiwi-halle.de/logo.png"],
