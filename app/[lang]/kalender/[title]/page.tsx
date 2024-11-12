@@ -61,9 +61,9 @@ async function Content({ title }: { title: string }) {
     );
 
   const date =
-    format(event.start, "EEEE dd.MM.yyyy, hh:mm ", { locale: de }) +
+    format(event.start, "EEEE dd.MM.yyyy, HH:mm ", { locale: de }) +
     "-" +
-    format(event.end, " hh:mm");
+    format(event.end, " HH:mm");
 
   return (
     <> 
