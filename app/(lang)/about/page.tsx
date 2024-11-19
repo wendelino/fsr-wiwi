@@ -40,8 +40,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function page({ params }: { params: { lang: string } }) {
-  const { about: t } = await getTranslation(params.lang);
+// export default async function page({ params }: { params: { lang: string } }) {
+export default async function page( ) {
+  const { about: t } = await getTranslation("de");
   return (
     <>
       <PageHeader title={t.title} subtitle={t.subtitle} />

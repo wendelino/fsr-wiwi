@@ -15,11 +15,11 @@ function NavLayout({ lang }: { lang: string }) {
   const t = global.nav
   return (
     <> 
-        <NavLink href="/about">{t.about}</NavLink>
         <NavLink href="/asq">ASQ</NavLink>
         <NavLink href="/kalender">Kalender</NavLink>
       
-      <NavDropdown title={t.about_us}>
+      <NavDropdown title={"Über uns"}>
+      <NavLink href="/about">{t.about}</NavLink>
         <NavLink href="/mitglieder">{t.members}</NavLink>
         <NavLink href="/go">{t.rules_of_procedure}</NavLink>
         <NavLink href="/awareness">{t.awareness}</NavLink>
@@ -35,9 +35,9 @@ function NavLayout({ lang }: { lang: string }) {
       <NavLink href="/kontakt">{t.contact}</NavLink>
 
       <div className="flex items-center gap-3 md:ml-2  border-t md:border-t-transparent p-3 md:p-0  justify-center ">
-        <ThemeToggle />
-        <div className="h-6 border-r" />
-        <LangToggle />
+      <div className="h-6 border-r" /><ThemeToggle />
+        {/* 
+        <LangToggle /> */}
       </div>
     </>
   );

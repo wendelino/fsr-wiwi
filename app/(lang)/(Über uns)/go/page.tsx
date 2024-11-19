@@ -3,11 +3,7 @@ import { Button } from "@/components/ui/button";
 import { PaperclipIcon } from "lucide-react";
 import Navigate from "./Navigate"; 
 
-export default async function page({ params }: { params: { lang: string } }) {
-
-  
- 
-
+export default async function page() { 
   return (
     <>
       <div className="relative flex flex-col gap-16 items-center justify-center py-8 mb-8">

@@ -7,8 +7,9 @@ import WidthWrapper from "@/components/WidthWrapper";
 import { getTranslation } from "@/locales/getTranslation";
 import Image from "next/image";
 
-export default async function Home({ params }: { params: { lang: string } }) {
-  const { home: t } = await getTranslation(params.lang);
+// export default async function Home({ params }: { params: { lang: string } }) {
+export default async function Home() {
+  const { home: t } = await getTranslation("de");
 
   return (
     <>

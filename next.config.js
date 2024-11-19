@@ -8,6 +8,11 @@ module.exports = {
           destination: '/:locale/mitglieder/2024',  
           permanent: false,
         },
+        {
+          source: '/mitglieder',
+          destination: '/mitglieder/2024',  
+          permanent: false,
+        },
       ]
     },
   }

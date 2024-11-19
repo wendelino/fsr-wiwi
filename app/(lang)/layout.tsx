@@ -11,10 +11,10 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  icons: "https://fsr-wiwi-halle.de/favicon.ico", 
+  icons: "https://fsr-wiwi-halle.de/favicon.ico",
   title: {
-    template: '%s | FSR Wiwi',
-    default: 'FSR Wiwi Halle',  
+    template: "%s | FSR Wiwi",
+    default: "FSR Wiwi Halle",
   },
   description:
     "Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
@@ -33,8 +33,8 @@ export const metadata: Metadata = {
     siteName: "FSR Wiwi",
     type: "website",
     title: {
-      template: '%s | FSR Wiwi',
-      default: 'FSR Wiwi Halle',  
+      template: "%s | FSR Wiwi",
+      default: "FSR Wiwi Halle",
     },
     description:
       "Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
@@ -50,8 +50,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: {
-      template: '%s | FSR Wiwi',
-      default: 'FSR Wiwi Halle',  
+      template: "%s | FSR Wiwi",
+      default: "FSR Wiwi Halle",
     },
     description:
       "Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
@@ -60,19 +60,52 @@ export const metadata: Metadata = {
     canonical: "https://fsr-wiwi-halle.de",
   },
 };
-export async function generateStaticParams() {
-  return [{ lang: "en" }, { lang: "de" }];
-}
+// export async function generateStaticParams() {
+//   return [{ lang: "en" }, { lang: "de" }];
+// }
+
+// export default function RootLayout({
+//   children,
+//   params,
+// }: Readonly<{
+//   children: React.ReactNode;
+//   params: { lang: string };
+// }>) {
+//   return (
+//     <html lang={params.lang}>
+//       <head>
+//         <script
+//           defer
+//           src="https://analytics.lnio.de/script.js"
+//           data-website-id="d72a7bb9-59d3-40b7-934a-a48d8dceca3f"
+//         />
+//       </head>
+//       <body className={cn(inter.className, "flex flex-col min-h-screen")}>
+//         <ThemeProvider
+//           attribute="class"
+//           defaultTheme="system"
+//           enableSystem
+//           disableTransitionOnChange
+//         >
+//           <NavBar lang={params.lang} />
+//           <main className="flex-1 min-h-[53vh]">
+//             <WidthWrapper className=" flex flex-col gap-16 lg:gap-32">{children}</WidthWrapper>
+//           </main>
+//           <Footer />
+//           <ScrollTop />
+//         </ThemeProvider>
+//       </body>
+//     </html>
+//   );
+// }
 
 export default function RootLayout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { lang: string };
 }>) {
   return (
-    <html lang={params.lang}>
+    <html lang={"de"}>
       <head>
         <script
           defer
@@ -87,9 +120,11 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NavBar lang={params.lang} />
+          <NavBar lang={"de"} />
           <main className="flex-1 min-h-[53vh]">
-            <WidthWrapper className=" flex flex-col gap-16 lg:gap-32">{children}</WidthWrapper>
+            <WidthWrapper className=" flex flex-col gap-16 lg:gap-32">
+              {children}
+            </WidthWrapper>
           </main>
           <Footer />
           <ScrollTop />

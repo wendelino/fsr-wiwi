@@ -6,9 +6,10 @@ import Link from "next/link";
 import { getTranslation, TranslationProps } from "@/locales/getTranslation";
 
 
-export default async function page({ params }: { params: { lang: string } }) {
+// export default async function page({ params }: { params: { lang: string } }) {
+export default async function page( ) {
 
-  const {awareness: t} = await getTranslation(params.lang)
+  const {awareness: t} = await getTranslation("de")
 
   return (
     <>
