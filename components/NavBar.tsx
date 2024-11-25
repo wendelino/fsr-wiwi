@@ -12,14 +12,14 @@ import { clientTranslation } from "@/locales/clientTranslation";
 
 function NavLayout({ lang }: { lang: string }) {
   const { global } = clientTranslation(lang);
-  const t = global.nav
+  const t = global.nav;
   return (
-    <> 
-        <NavLink href="/asq">ASQ</NavLink>
-        <NavLink href="/kalender">Kalender</NavLink>
-      
+    <>
+      <NavLink href="/asq">ASQ</NavLink>
+      <NavLink href="/kalender">Kalender</NavLink>
+
       <NavDropdown title={"Über uns"}>
-      <NavLink href="/about">{t.about}</NavLink>
+        <NavLink href="/about">{t.about}</NavLink>
         <NavLink href="/mitglieder">{t.members}</NavLink>
         <NavLink href="/go">{t.rules_of_procedure}</NavLink>
         <NavLink href="/awareness">{t.awareness}</NavLink>
@@ -34,11 +34,8 @@ function NavLayout({ lang }: { lang: string }) {
 
       <NavLink href="/kontakt">{t.contact}</NavLink>
 
-      <div className="flex items-center gap-3 md:ml-2  border-t md:border-t-transparent p-3 md:p-0  justify-center ">
-      <div className="h-6 border-r" /><ThemeToggle />
-        {/* 
-        <LangToggle /> */}
-      </div>
+    
+    
     </>
   );
 }
@@ -61,7 +58,15 @@ export default function NavBar({ lang }: { lang: string }) {
             <span className="font-semibold">FSR Wiwi</span>
           </Link>
 
-          <nav className="md:hidden">
+          <nav className="hidden md:flex items-center gap-2">
+            <NavLayout lang={lang} />
+          </nav>
+          <section className="flex ml-auto md:ml-0 justify-end md:justify-start items-center px-2">
+
+          <ThemeToggle />
+          </section>
+
+          <nav className="md:hidden flex items-center ml-2">
             {!isOpen ? (
               <Button
                 variant={"ghost"}
@@ -89,10 +94,6 @@ export default function NavBar({ lang }: { lang: string }) {
                 <NavLayout lang={lang} />
               </div>
             </aside>
-          </nav>
-
-          <nav className="hidden md:flex items-center gap-2">
-            <NavLayout lang={lang}/>
           </nav>
         </WidthWrapper>
         <div />
