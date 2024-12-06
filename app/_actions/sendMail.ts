@@ -1,4 +1,5 @@
 "use server";
+ 
 
 const token = process.env.ACCESS_SECRET;
 
@@ -28,6 +29,7 @@ export async function sendMail({
   from,
   replyTo
 }: sendMailProps) {
+  console.log("Sending mail to ", recipient); 
   const response = await fetch("https://mailer-api.lnio.de/send-mail", {
     method: "POST",
     cache: "no-store",
@@ -45,5 +47,7 @@ export async function sendMail({
       from: from || mailOptions.from,
     }),
   }); 
+  console.log("Mail sending: ",response.ok + "\n");
+  
   return response.ok;
 }
