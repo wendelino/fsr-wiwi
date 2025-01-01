@@ -105,7 +105,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang={"de"}>
+    <html lang={"de"} suppressHydrationWarning>
       <head>
         <script
           defer
@@ -119,6 +119,7 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
+          
         >
           <NavBar lang={"de"} />
           <main className="flex-1 min-h-[53vh]">

@@ -16,6 +16,7 @@ export default async function Home() {
       <header className="h-[66vh]">
         <Image
           src="/campus.jpg"
+          priority={true}
           alt="Campus Image"
           width={1750}
           height={748}

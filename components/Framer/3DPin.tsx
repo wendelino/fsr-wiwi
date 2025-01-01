@@ -57,7 +57,7 @@ export const PinContainer = ({
           </div>
         </div>
       </div>
-      <PinPerspective title={title} href={href} />
+      {/* <PinPerspective title={title} href={href} /> */}
     </Link>
   );
 };
