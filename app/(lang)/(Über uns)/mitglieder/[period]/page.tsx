@@ -30,10 +30,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { lang: string; period: string };
+ params: Promise<{ lang: string; period: string }>;
 }): Promise<Metadata> {
-  const { period } = params;
-  const { mitglieder: t, global: gt } = await getTranslation(params.lang);
+  const { period, lang } = await params;
+  const { mitglieder: t, global: gt } = await getTranslation(lang);
 
   const legislatur = legislaturData.find(({ period: p }) => p == period);
 
@@ -74,11 +74,13 @@ const NavigationBar: FC<NavigationBarProps> = ({ currentPeriod }) => {
 export default async function page({
   params,
 }: {
-  params: { lang: string; period: string };
+  params: Promise<{ lang: string; period: string }>;
 }) {
-  const { mitglieder: t } = await getTranslation(params.lang);
 
-  const { period } = params;
+  const p = await params
+  const { mitglieder: t } = await getTranslation(p.lang);
+
+  const { period } = p;
   const legislatur = legislaturData.find(({ period: p }) => p == period);
 
   if (!legislatur) redirect("./");

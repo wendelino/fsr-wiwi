@@ -2,11 +2,19 @@
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import { LocationCard, LocationProps } from "./Event";
-
-const MapContainer = dynamic(() => import("react-leaflet").then(mod => mod.MapContainer), { ssr: false });
-const TileLayer = dynamic(() => import("react-leaflet").then(mod => mod.TileLayer), { ssr: false });
-const Marker = dynamic(() => import("react-leaflet").then(mod => mod.Marker), { ssr: false });
-const Popup = dynamic(() => import("react-leaflet").then(mod => mod.Popup), { ssr: false });
+import "leaflet-defaulticon-compatibility";
+import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
+import "leaflet/dist/leaflet.css";
+import React, { useMemo, useState } from "react";
+import {
+  Circle,
+  MapContainer,
+  Marker,
+  Polyline,
+  Popup,
+  TileLayer,
+  Tooltip,
+} from "react-leaflet";
 
 // Typ für LatLngExpression importieren
 import { LatLngExpression } from "leaflet";
@@ -17,7 +25,7 @@ export default function MyMap({ locations }: { locations: LocationProps[] }) {
     import("./MyMap.css"); 
   }, []);
 
-  const center: LatLngExpression = [locations[0].lat, locations[0].long];
+  const center: LatLngExpression = locations.length > 0 ? [locations[0].lat, locations[0].long] : [51.1657, 10.4515]; // Standardkoordinaten, falls keine Orte vorhanden sind
 
   return (
     <MapContainer

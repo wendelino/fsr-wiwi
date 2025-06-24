@@ -1,20 +1,12 @@
  
 import { getLocations } from "@/app/_actions/getLocations";
-import { Header } from "@/components/TextComponents"; 
-import dynamic from "next/dynamic";
+import MyMap from "@/components/MyMap";
+import { Header } from "@/components/TextComponents";
 
 export default async function Page() {
 
   const locations = await getLocations();
-
-  const Map = dynamic(() => import("@/components/MyMap"), {
-    loading: () => (
-      <div className="w-full h-full animate-pulse bg-secondary flex items-center justify-center text-xl font-semibold">
-        Loading ...
-      </div>
-    ),
-    ssr: false,
-  });
+ 
 
   return (
     <div>
@@ -24,7 +16,7 @@ export default async function Page() {
         </span>
       </Header>
       <div className="w-full h-[50vh] rounded-lg shadow-xl z-0">
-        <Map locations={locations} />
+        <MyMap locations={locations} />
       </div>
     </div>
   );

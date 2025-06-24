@@ -27,9 +27,9 @@ function NavLayout({ lang }: { lang: string }) {
 
       <NavDropdown title={t.first_week}>
         <NavLink href="/files/guide.pdf">{t.guide}</NavLink>
-        <NavLink href="/erstiwoche">{t.program}</NavLink>
+        {/* <NavLink href="/erstiwoche">{t.program}</NavLink> */}
         <NavLink href="/lageplan">{t.site_map}</NavLink>
-        <NavLink href="/anmeldung">{t.registration}</NavLink>
+        {/* <NavLink href="/anmeldung">{t.registration}</NavLink> */}
       </NavDropdown>
 
       <NavLink href="/kontakt">{t.contact}</NavLink>

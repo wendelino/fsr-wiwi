@@ -35,9 +35,11 @@ export async function getLocale(request: NextRequest) {
 }
 
 export async function setLocale(lang: string) { 
+  console.log("DEPRECATED: setLocale function is deprecated");
   
-  if (!isAviableLocale(lang)) return;
-  cookies().set("lang", lang);
+  
+  // if (!isAviableLocale(lang)) return;
+  // cookies().set("lang", lang);
 }
 
 export async function getTranslation(lang: string) {

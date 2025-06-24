@@ -1,3 +1,4 @@
+"use server"
 import { getEvents } from "@/app/_actions/event";
 import { PageHeader } from "@/components/Framer/PageHeader";
 import { Section } from "@/components/Framer/Section";
@@ -12,21 +13,23 @@ import { Suspense } from "react";
 export async function generateMetadata({
   params,
 }: {
-  params: { lang: string; title: string }
+  params: Promise<{ lang: string; title: string }>;
 }): Promise<Metadata> {
-  const title = decodeURIComponent(params.title);
+  const p = await params;
+  const title = decodeURIComponent(p.title);
 
   return {
     title: `${title}`, 
   };
 }
 
-export default function page({
+export default async function page({
   params,
 }: {
-  params: { lang: string; title: string };
+  params: Promise<{ lang: string; title: string }>;
 }) {
-  const title = decodeURIComponent(params.title);
+  const p = await params;
+  const title = decodeURIComponent(p.title);
 
   return (
     <Suspense fallback={<Loading />}>
