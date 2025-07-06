@@ -1,5 +1,6 @@
  
 import { getLocations } from "@/app/_actions/getLocations";
+import { MapLoader } from "@/components/MapLoader";
 import MyMap from "@/components/MyMap";
 import { Header } from "@/components/TextComponents";
 
@@ -16,7 +17,7 @@ export default async function Page() {
         </span>
       </Header>
       <div className="w-full h-[50vh] rounded-lg shadow-xl z-0">
-        <MyMap locations={locations} />
+        <MapLoader locations={locations} />
       </div>
     </div>
   );

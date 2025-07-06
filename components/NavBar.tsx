@@ -1,14 +1,13 @@
 "use client";
 import { cn } from "@/lib/utils";
+import { clientTranslation } from "@/locales/clientTranslation";
 import { ChevronDown, Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import WidthWrapper from "./WidthWrapper";
 import { useEffect, useState } from "react";
-import { Button } from "./ui/button";
 import { ThemeToggle } from "./ThemeToggle";
-import { LangToggle } from "./LangToggle";
-import { clientTranslation } from "@/locales/clientTranslation";
+import { Button } from "./ui/button";
+import WidthWrapper from "./WidthWrapper";
 
 function NavLayout({ lang }: { lang: string }) {
   const { global } = clientTranslation(lang);
@@ -26,7 +25,7 @@ function NavLayout({ lang }: { lang: string }) {
       </NavDropdown>
 
       <NavDropdown title={t.first_week}>
-        <NavLink href="/files/guide.pdf">{t.guide}</NavLink>
+        <NavLink prefetch={false} href="/files/guide.pdf">{t.guide}</NavLink>
         {/* <NavLink href="/erstiwoche">{t.program}</NavLink> */}
         <NavLink href="/lageplan">{t.site_map}</NavLink>
         {/* <NavLink href="/anmeldung">{t.registration}</NavLink> */}
