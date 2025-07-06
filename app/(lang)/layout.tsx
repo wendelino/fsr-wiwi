@@ -109,7 +109,7 @@ export default function RootLayout({
       <head>
         <script
           defer
-          src="https://analytics.lnio.de/script.js"
+          src="https://analytics.m.lnio.de/script.js"
           data-website-id="d72a7bb9-59d3-40b7-934a-a48d8dceca3f"
         />
       </head>
