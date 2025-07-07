@@ -61,9 +61,9 @@ export default function IframeConsent({
         "flex flex-col  bg-muted items-center justify-center p-8 "
       )}
     >
-        <h1 className="text-lg font-semibold mb-4">Extern: {label}</h1>
+        <h1 className="text-lg font-semibold mb-4">Externe Inhalte von {label}</h1>
       <p className="text-center text-muted-foreground">
-        {disclaimerText}<br></br> Weitere Infos beim Anbieter:{" "}
+        {disclaimerText}<br></br> Weitere Infos beim Anbieter{" "}
         <Link
           href={providerLink}
           target="_blank"
@@ -80,7 +80,7 @@ export default function IframeConsent({
           checked={rememberChoice}
           onCheckedChange={(checked: boolean) => setRememberChoice(checked)}
         />
-        <span>Entscheidung merken</span>
+        <span className="text-sm">Entscheidung merken</span>
       </label>
     </div>
   );

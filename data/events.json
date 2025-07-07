@@ -358,17 +358,5 @@
     "location_id": "hrsaal-xii",
     "createdAt": "2024-11-05T13:13:50.552Z",
     "updatedAt": "2024-11-05T13:13:50.552Z"
-  },
-  {
-    "id": "cm5z0buad0000jt96dzd0mgpk",
-    "user_id": "fsr-wiwi",
-    "title": "Titel 1",
-    "start": "2024-12-03T08:00:00.000Z",
-    "end": "2024-10-03T08:00:00.000Z",
-    "is_public": true,
-    "description": "be",
-    "location_id": null,
-    "createdAt": "2025-01-16T07:26:30.421Z",
-    "updatedAt": "2025-01-16T07:25:51.795Z"
   }
 ]
