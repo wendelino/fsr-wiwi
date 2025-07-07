@@ -8,33 +8,37 @@ import { useEffect, useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 import { Button } from "./ui/button";
 import WidthWrapper from "./WidthWrapper";
+import { siteConfig } from "@/lib/siteConfig";
 
 function NavLayout({ lang }: { lang: string }) {
   const { global } = clientTranslation(lang);
+  const { pages } = siteConfig;
   const t = global.nav;
   return (
     <>
-      <NavLink href="/asq">ASQ</NavLink>
-      <NavLink href="/kalender">Kalender</NavLink>
-
-      <NavDropdown title={"Über uns"}>
-        <NavLink href="/about">{t.about}</NavLink>
-        <NavLink href="/mitglieder">{t.members}</NavLink>
-        <NavLink href="/go">{t.rules_of_procedure}</NavLink>
-        <NavLink href="/awareness">{t.awareness}</NavLink>
-      </NavDropdown>
-
-      <NavDropdown title={t.first_week}>
-        <NavLink prefetch={false} href="/files/guide.pdf">{t.guide}</NavLink>
-        {/* <NavLink href="/erstiwoche">{t.program}</NavLink> */}
-        <NavLink href="/lageplan">{t.site_map}</NavLink>
-        {/* <NavLink href="/anmeldung">{t.registration}</NavLink> */}
-      </NavDropdown>
-
-      <NavLink href="/kontakt">{t.contact}</NavLink>
-
-    
-    
+      {pages.map((page) => {
+        if (page.dropdown) {
+          return (
+            <NavDropdown key={page.label} title={page.label}>
+              {page.dropdown.map((item) => (
+                <NavLink
+                  key={item.label}
+                  href={item.href}
+                  prefetch={item.prefetch ?? true}
+                >
+                  {item.label}
+                </NavLink>
+              ))}
+            </NavDropdown>
+          );
+        } else {
+          return (
+            <NavLink key={page.label} href={page.href}>
+              {page.label}
+            </NavLink>
+          );
+        }
+      })}
     </>
   );
 }
@@ -61,8 +65,7 @@ export default function NavBar({ lang }: { lang: string }) {
             <NavLayout lang={lang} />
           </nav>
           <section className="flex ml-auto md:ml-0 justify-end md:justify-start items-center px-2">
-
-          <ThemeToggle />
+            <ThemeToggle />
           </section>
 
           <nav className="md:hidden flex items-center ml-2">
