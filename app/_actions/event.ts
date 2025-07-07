@@ -1,18 +1,11 @@
 import { EventWithLocation } from "@/components/Event";
+import { promises as fs } from "fs";
+import path from "path";
 
-export async function getEvents() {
-  console.log("get Events...");
-
-  const orgLink = "fsr-wiwi";
-
-  const eventecURL = `https://eventec.vercel.app/api/events?org_link=${orgLink}&nocache=${Date.now()}`;
-
-  const url2 = "https://app.lnio.de/cms/veranstaltung/api?user_id=fsr-wiwi";
-  const response = await fetch(url2, {
-    method: "GET",
-    cache: "no-store",
-  });
-  const data = await response.json();
+export async function getEvents() { 
+  const filePath = path.join(process.cwd(), "data/events.json");
+  const fileContents = await fs.readFile(filePath, "utf-8");
+  const data = JSON.parse(fileContents);
 
   const events: EventWithLocation[] = data.map((e: any) => ({
     ...e,

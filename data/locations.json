@@ -1,0 +1,107 @@
+[
+  {
+    "id": "clzb4s6sb0001z45zed5xcjc7",
+    "user_id": "fsr-wiwi",
+    "label": "Wiwi Fakultät",
+    "lat": 51.4846166687747,
+    "long": 11.9732737541199
+  },
+  {
+    "id": "audimax",
+    "user_id": "fsr-wiwi",
+    "label": "Audimax",
+    "lat": 51.4857491031306,
+    "long": 11.970232129097
+  },
+  {
+    "id": "ssr",
+    "user_id": "fsr-wiwi",
+    "label": "SSR",
+    "lat": 51.4892965472904,
+    "long": 11.9732576608658
+  },
+  {
+    "id": "unisportplatz",
+    "user_id": "fsr-wiwi",
+    "label": "Unisportplatz",
+    "lat": 51.4897875559511,
+    "long": 11.9551312923431
+  },
+  {
+    "id": "stura-innenhof",
+    "user_id": "fsr-wiwi",
+    "label": "Stura Innenhof",
+    "lat": 51.4860397233419,
+    "long": 11.9685637950897
+  },
+  {
+    "id": "lwencampus",
+    "user_id": "fsr-wiwi",
+    "label": "Löwencampus",
+    "lat": 51.486303618251,
+    "long": 11.9690251350403
+  },
+  {
+    "id": "franckesche-stiftungen",
+    "user_id": "fsr-wiwi",
+    "label": "Franckesche Stiftungen",
+    "lat": 51.4778081078205,
+    "long": 11.9709348678589
+  },
+  {
+    "id": "marktplatz",
+    "user_id": "fsr-wiwi",
+    "label": "Marktplatz",
+    "lat": 51.4826523796565,
+    "long": 11.9697976112366
+  },
+  {
+    "id": "harzmensa",
+    "user_id": "fsr-wiwi",
+    "label": "Harzmensa",
+    "lat": 51.4896405879269,
+    "long": 11.9676357507706
+  },
+  {
+    "id": "neuwerk-mensa",
+    "user_id": "fsr-wiwi",
+    "label": "Neuwerk Mensa",
+    "lat": 51.4907762376183,
+    "long": 11.9574004411697
+  },
+  {
+    "id": "charles-bronson",
+    "user_id": "fsr-wiwi",
+    "label": "Charles Bronson",
+    "lat": 51.4896572888626,
+    "long": 11.9840884208679
+  },
+  {
+    "id": "heidecampus",
+    "user_id": "fsr-wiwi",
+    "label": "Heidecampus",
+    "lat": 51.4973724668565,
+    "long": 11.9347679615021
+  },
+  {
+    "id": "reileck",
+    "user_id": "fsr-wiwi",
+    "label": "Reileck ",
+    "lat": 51.4953987079553,
+    "long": 11.9663858413696
+  },
+  {
+    "id": "delitzscher-str-73",
+    "user_id": "fsr-wiwi",
+    "label": "Delitzscher Str. 73",
+    "lat": 51.4788170951367,
+    "long": 12.0155560970306
+  },
+  {
+    "id": "hrsaal-xii",
+    "user_id": "fsr-wiwi",
+    "label": "Hörsaal XII",
+    "lat": 51.4864472362482,
+    "long": 11.9693148136139
+  }
+]

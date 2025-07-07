@@ -1,14 +1,15 @@
-"use server"
+"use server";
 import { getEvents } from "@/app/_actions/event";
+import { getLocationById } from "@/app/_actions/getLocations";
 import { PageHeader } from "@/components/Framer/PageHeader";
 import { Section } from "@/components/Framer/Section";
+import { MapLoader } from "@/components/MapLoader";
 import MyMap from "@/components/MyMap";
 import { Skeleton } from "@/components/ui/skeleton";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
 import { Metadata } from "next";
 import { Suspense } from "react";
-
 
 export async function generateMetadata({
   params,
@@ -19,7 +20,7 @@ export async function generateMetadata({
   const title = decodeURIComponent(p.title);
 
   return {
-    title: `${title}`, 
+    title: `${title}`,
   };
 }
 
@@ -63,18 +64,21 @@ async function Content({ title }: { title: string }) {
       />
     );
 
+  const location = await getLocationById(event.location_id || ""); 
   const date =
     format(event.start, "EEEE dd.MM.yyyy, HH:mm ", { locale: de }) +
     "-" +
     format(event.end, " HH:mm");
 
   return (
-    <> 
+    <>
       <PageHeader title={event.title} subtitle={date} />
       <Section>{event.description}</Section>
-      <Section className="h-96 shadow-lg">
-        <MyMap locations={[event.location!]} />
-      </Section>
+      {location && (
+        <Section className="h-96 shadow-lg">
+          <MapLoader locations={[location!]} />
+        </Section>
+      )}
     </>
   );
 }

@@ -39,7 +39,7 @@ export type LocationProps = {
   long: number;
 };
 
-export type EventWithLocation = EventProps & { location: LocationProps | null };
+export type EventWithLocation = EventProps & { location_id: string | null };
 
 export default function EventCard({ event }: { event: EventWithLocation }) {
   const handleSafeCalendar = () => {
@@ -98,11 +98,11 @@ export default function EventCard({ event }: { event: EventWithLocation }) {
     <Drawer>
       <DrawerTrigger asChild>
         <div className="flex flex-col items-start fsr-background-1 p-2 text-white rounded-lg gap-1.5 relative text-sm shadow-lg">
-          {event.location && (
+          {/* {event.location && (
             <span className="bg-secondary text-foreground  flex items-center pr-2 py-1 rounded-lg">
               <MapPin height={16} /> {event.location?.label}
             </span>
-          )}
+          )} */}
 
           {special && (
             <div className="bg-foreground z-[3] text-background font-bold rounded-full px-2 py-1 absolute right-[-12px] top-[-4px] animate-bounce">
@@ -136,11 +136,11 @@ export default function EventCard({ event }: { event: EventWithLocation }) {
         <div className="mx-auto w-full max-w-sm">
           <DrawerHeader>
             <div className="flex gap-2 pb-6">
-              {event.location && (
+              {/* {event.location && (
                 <span className="bg-secondary text-foreground  flex items-center pr-2 py-1 rounded-lg">
                   <MapPin height={16} /> {event.location?.label}
                 </span>
-              )}
+              )} */}
             </div>
             <DrawerTitle>{event.title}</DrawerTitle>
             <span className="font-extralight py-2">
