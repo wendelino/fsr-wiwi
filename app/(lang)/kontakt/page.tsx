@@ -2,6 +2,7 @@ import { ContactForm } from "@/components/ContactForm";
 import { H3 } from "@/components/Framer/H3";
 import { PageHeader } from "@/components/Framer/PageHeader";
 import { Section } from "@/components/Framer/Section";
+import IframeConsent from "@/components/iframe-consent";
 import InstagramEmbed from "@/components/InstagramEmbed";
 import { Header, SubHeader } from "@/components/TextComponents";
 import { Button } from "@/components/ui/button";
@@ -57,13 +58,12 @@ export default function page() {
         subtitle="
     Wir freuen uns darauf, von dir zu hören! Kontaktiere uns gerne für Fragen, Anregungen oder Kooperationen. Das Team des Fachschaftsrats Wirtschaftswissenschaften steht dir zur Verfügung."
       />
-      <Section className="grid md:grid-cols-2 lg:gap-32 items-center p-8 md:px-16  rounded-xl shadow-xl border"> 
+      <Section className="grid md:grid-cols-2 lg:gap-32 items-center p-8 md:px-16  rounded-xl shadow-xl border">
         <Header>
           Schreib uns eine <span className="fsr-gradient">Nachricht</span>
         </Header>
         <ContactForm />
-
-      </Section> 
+      </Section>
 
       <Section className="grid md:grid-cols-2 gap-8  items-center ">
         <div className="flex flex-col gap-8 justify-center bg-border/20 p-8 rounded-xl shadow-lg h-72">
@@ -108,6 +108,7 @@ export default function page() {
           Folg uns auf <span className="text-gradient">Instagram</span>
         </Header>
         <InstagramEmbed />
+      
       </Section>
     </>
   );
