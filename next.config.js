@@ -5,12 +5,12 @@ module.exports = {
       return [
         {
           source: '/:locale/mitglieder',
-          destination: '/:locale/mitglieder/2024',  
+          destination: '/:locale/mitglieder/2025',  
           permanent: false,
         },
         {
           source: '/mitglieder',
-          destination: '/mitglieder/2024',  
+          destination: '/mitglieder/2025',  
           permanent: false,
         },
       ]
