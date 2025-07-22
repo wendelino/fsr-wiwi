@@ -23,7 +23,8 @@ import { CheckCircleIcon, XCircleIcon } from "lucide-react";
 import { sendMail } from "@/app/_actions/sendMail";
 import { Textarea } from "./ui/textarea";
 import { message_user } from "@/email_templates/message_user";
-import { message_admin } from "@/email_templates/message_admin"; 
+import { message_admin } from "@/email_templates/message_admin";
+import { handleMessage } from "@/app/_actions/sendTelegramMessage";
 
 interface FormState {
   loading: boolean;
@@ -59,26 +60,18 @@ export function ContactForm() {
   });
 
   async function onSubmit(data: z.infer<typeof FormSchema>) {
-    setLoading(true);  
-
-
-    //User Bestätigungs Email
-    const user_mail = await sendMail({
-      html: message_user(data),
-      recipient: data.email,
-      subject: `Anfrage vom ${new Date().toLocaleDateString()}`,
-      name: data.name,
-    });
+    setLoading(true);
 
     //Webseite Email
-    const admin_mail = await sendMail({
-      html: message_admin(data), 
-      subject: `Neue Anfrage von ${data.name}`,
-      name: data.name,
-      replyTo: data.email,
-      from: '"FSR Webseite" <fachschaftsrat@wiwi.uni-halle.de>',
-    }); 
-    if (user_mail && admin_mail) {
+    const admin_mail = await handleMessage({
+      message: data.message,
+      first_name: data.name,
+      last_name: "",
+      email: data.email,
+      phone: "",
+    });
+
+    if (admin_mail.success) {
       setFormSubmitted(true);
     } else setError(true);
   }
@@ -178,7 +171,6 @@ function SuccessForm() {
         <CheckCircleIcon className="h-full w-full animate-bounce" />
       </div>
       <span className="text-2xl font-bold">Erfolgreich abgeschickt!</span>
-      Schau in deinem Postfach nach {";)"}
     </div>
   );
 }
