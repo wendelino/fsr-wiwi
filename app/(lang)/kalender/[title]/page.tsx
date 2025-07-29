@@ -73,7 +73,7 @@ async function Content({ title }: { title: string }) {
   return (
     <>
       <PageHeader title={event.title} subtitle={date} />
-      <Section>{event.description}</Section>
+      <Section className="whitespace-pre-line">{event.description}</Section>
       {location && (
         <Section className="h-96 shadow-lg">
           <MapLoader locations={[location!]} />

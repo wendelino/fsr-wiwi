@@ -358,5 +358,71 @@
     "location_id": "hrsaal-xii",
     "createdAt": "2024-11-05T13:13:50.552Z",
     "updatedAt": "2024-11-05T13:13:50.552Z"
+  },
+  {
+    "id": "nice-auf-eis-28-07",
+    "user_id": "fsr-wiwi",
+    "title": "Nice auf Eis – auf ein Neues 🥂",
+    "start": "2025-07-28T16:00:00.000Z",
+    "end": "2025-07-28T20:00:00.000Z",
+    "is_public": true,
+    "description": "Die Klausurenphase ist (fast) geschafft – Zeit, den Kopf frei zu kriegen! 😎\nLust auf einen entspannten Abend mit nicen Getränken, guten Vibes und netten Leuten? Dann schau vorbei und stoß mit uns auf den Sommer an! ✨\n\n📍 Innenhof der WiWi-Fakultät\n📅 Montag, 28.07\n🕕 18 Uhr - 22 Uhr\n\nOb zum Anstoßen, Quatschen oder einfach nur Chillen – wir freuen uns auf euch! 🧡",
+    "createdAt": "2025-07-29T00:00:00.000Z",
+    "updatedAt": "2025-07-29T00:00:00.000Z"
+  },
+  {
+    "id": "lange-nacht-der-wissenschaften-2025",
+    "user_id": "fsr-wiwi",
+    "title": "Lange Nacht der Wissenschaften 2025",
+    "start": "2025-07-04T15:00:00.000Z",
+    "end": "2025-07-05T00:00:00.000Z",
+    "is_public": true,
+    "description": "Liebe Studis,\n\nbald ist es wieder so weit! 🎉 Die Lange Nacht der Wissenschaften steht an und wir sind mit Getränken im WiWi-Innenhof dabei. Neben Vorträgen im Großen Hörsaal und musikalischer Unterhaltung im Hof werden wir euch an unserer Bar mit allem, was das Herz begehrt, beglücken. 🥂\n\nWo sonst bekommt man noch Aperol für 4€ oder Currywurst für 3,50€?\n\n📍 WiWi Innenhof\n🗓 Freitag, 04.07.2025\n🕔 17 – 0 Uhr\n\nVorbeischauen lohnt sich also! 👀\n\nWir freuen uns auf euch!\nEuer FSR WiWi 🦁❤️",
+    "createdAt": "2025-07-29T00:00:00.000Z",
+    "updatedAt": "2025-07-29T00:00:00.000Z"
+  },
+  {
+    "id": "nice-auf-eis-fsr-kennenlernen",
+    "user_id": "fsr-wiwi",
+    "title": "🍊 Nice auf Eis – mit dem neuen FSR! 🥂",
+    "start": "2025-06-24T17:30:00.000Z",
+    "end": "2025-06-24T19:30:00.000Z",
+    "is_public": true,
+    "description": "Der Sommer ruft – und wir antworten mit Aperol & Sekt auf Eis! 😎\nLust auf einen coolen Abend, gute Vibes und nette Leute? Dann komm vorbei und lern den neuen WiWi-FSR kennen! 💬✨\n\n📍 Innenhof der WiWi-Fakultät\n📅 Dienstag, 24. Juni\n🕕 19:30 – 21:30 Uhr\n\nOb zum Anstoßen, Quatschen oder einfach nur Chillen – wir freuen uns auf euch! 🧡",
+    "createdAt": "2025-07-29T00:00:00.000Z",
+    "updatedAt": "2025-07-29T00:00:00.000Z"
+  },
+  {
+    "id": "repetitorium-mathe-wii-2025",
+    "user_id": "fsr-wiwi",
+    "title": "Repetitorium Mathematik WII",
+    "start": "2025-06-28T07:00:00.000Z",
+    "end": "2025-06-29T14:00:00.000Z",
+    "is_public": true,
+    "description": "Du bist im WiWi-Bachelor und möchtest ideal auf deine kommenden Klausuren vorbereitet werden? 📚 Dann haben wir etwas für dich 🤫\n\nAm 28. und 29.06. bieten wir die Möglichkeit, den gesamten Inhalt des Moduls „Mathematik WII“ über zwei Tage zu wiederholen. Der Kurs wird von einer Tutorin oder einem Tutor geleitet, die den Stoff aufbereiten und mit euch bearbeiten. Zusätzlich gibt es Übungsmaterial.\n\nDafür suchen wir auch noch Leute, die sich diesen Job zutrauen würden! Selbstverständlich wird die Mühe auch entlohnt.\n\n🗓 28. & 29.06.2025\n🕘 Samstag ab 9 Uhr, Sonntag ab 10 Uhr\n💰 Teilnahmegebühr: 16,50€ (für beide Tage)\n📌 Anmeldung vom 20.06. bis zum 26.06. über:\nhttps://www.eventbrite.com/e/repetitorium-mathematik-wii-tickets-1418401901269?aff=oddtdtcreator\n\nBei Fragen oder Interesse an der Tutorenstelle: fachschaftsrat@wiwi.uni-halle.de",
+    "createdAt": "2025-07-29T00:00:00.000Z",
+    "updatedAt": "2025-07-29T00:00:00.000Z"
+  },
+  {
+    "id": "weihnachtsflohmarkt-2024",
+    "user_id": "fsr-wiwi",
+    "title": "Weihnachtsflohmarkt 🎄",
+    "start": "2024-12-16T15:00:00.000Z",
+    "end": "2024-12-16T20:00:00.000Z",
+    "is_public": true,
+    "description": "🎁 Weihnachtsstimmung, Geschenke und Glühwein – unser Weihnachtsflohmarkt ist zurück! \n\n📍 WiWi-Fakultät\n📅 Montag, 16.12.2024\n🕓 16 – 21 Uhr\n\nKommt vorbei, stöbert durch liebevoll zusammengestellte Stände und genießt die vorweihnachtliche Stimmung!",
+    "createdAt": "2025-07-29T00:00:00.000Z",
+    "updatedAt": "2025-07-29T00:00:00.000Z"
+  },
+  {
+    "id": "gluehweinhütte-2024",
+    "user_id": "fsr-wiwi",
+    "title": "Glühweinhütte im Dezember 🎅🍷",
+    "start": "2024-12-02T15:00:00.000Z",
+    "end": "2024-12-20T20:00:00.000Z",
+    "is_public": true,
+    "description": "Es ist wieder soweit – die Glühweinhütte ist zurück! 🎄🎅\n\nAb dem zweiten Dezember, also nächste Woche Montag, stehen wir im WiWi-Innenhof die nächsten drei Wochen von Montag bis Freitag für euch bereit, um euch mit Glühwein durch die Vorweihnachtszeit zu begleiten. Ob als kleine Motivation für eure Veranstaltung oder als Aufwärmung in der kalten Zeit, bedienen wir euch mit Tee, Punsch und natürlich reichlich Glühwein! 🍷\n\nWir freuen uns auf euch – bleibt gespannt auf kleine Überraschungen und Specials! 😉\n\n📍 WiWi-Innenhof\n📅 02.12 – 20.12.2024 (Mo–Fr)\n🕓 16 – 21 Uhr\n\nEuer FSR WiWi ❤️",
+    "createdAt": "2025-07-29T00:00:00.000Z",
+    "updatedAt": "2025-07-29T00:00:00.000Z"
   }
 ]
