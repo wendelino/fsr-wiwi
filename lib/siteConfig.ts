@@ -24,7 +24,7 @@ export const siteConfig = {
     { href: "/kontakt", label: "Kontakt" },
   ],
   company: {
-    owner: "Fachschaftsrat Wirtschafswissenschaften",
+    owner: "Fachschaftsrat Wirtschaftswissenschaften",
     plz: "06108",
     ort: "Halle (Saale)",
     strasse: "Grosse Steinstrasse 73",

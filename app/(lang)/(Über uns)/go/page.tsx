@@ -69,7 +69,7 @@ export default async function page() {
             § 2 ORGAN DER FACHSCHAFT
           </h3>
           <p>
-            (1) Das Organ der Fachschaft Wirtschafswissenschaften ist der FSR
+            (1) Das Organ der Fachschaft Wirtschaftswissenschaften ist der FSR
             WiWi.
             <br />
             (2) Besondere Organe sind darüber hinaus:
