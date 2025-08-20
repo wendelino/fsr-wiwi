@@ -13,13 +13,16 @@ export async function getEvents(ctx?: {page?: number, tag?:string, limit?:number
     const token = process.env.CMS_TOKEN;
     const limit = ctx?.limit || 10;
     const page = ctx?.page || 0;
-    const tag = ctx?.tag ? `/${ctx.tag}` : null
+    const tag = ctx?.tag ? `/${ctx.tag}` : ""
     const url = `${BASE_URL}${tag}?limit=${limit}&page=${page}`;
 
+    console.log(url);
+    
+
     const response = await fetch(url, {
-      // next: {
-      //   revalidate: 1,
-      // },
+      next: {
+        revalidate: 3600,
+      },
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
