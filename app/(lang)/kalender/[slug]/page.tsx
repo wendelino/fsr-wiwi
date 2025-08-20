@@ -1,10 +1,7 @@
 "use server";
-import { getEvents } from "@/app/_actions/event";
-import { getLocationById } from "@/app/_actions/getLocations";
+import { getEvent } from "@/app/_actions/event";
 import { PageHeader } from "@/components/Framer/PageHeader";
 import { Section } from "@/components/Framer/Section";
-import { MapLoader } from "@/components/MapLoader";
-import MyMap from "@/components/MyMap";
 import { Skeleton } from "@/components/ui/skeleton";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
@@ -14,27 +11,28 @@ import { Suspense } from "react";
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ lang: string; title: string }>;
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const p = await params;
-  const title = decodeURIComponent(p.title);
+  const slug = decodeURIComponent(p.slug);
+  const { event } = await getEvent(slug);
 
   return {
-    title: `${title}`,
+    title: `${event?.title || "Event 404"}`,
   };
 }
 
 export default async function page({
   params,
 }: {
-  params: Promise<{ lang: string; title: string }>;
+  params: Promise<{ slug: string }>;
 }) {
   const p = await params;
-  const title = decodeURIComponent(p.title);
+  const slug = decodeURIComponent(p.slug);
 
   return (
     <Suspense fallback={<Loading />}>
-      <Content title={title} />
+      <Content slug={slug} />
     </Suspense>
   );
 }
@@ -52,19 +50,18 @@ function Loading() {
   );
 }
 
-async function Content({ title }: { title: string }) {
-  const events = await getEvents();
-  const event = events.find((e) => e.title == title);
+async function Content({ slug }: { slug: string }) {
+  const { event } = await getEvent(slug);
 
   if (!event)
     return (
       <PageHeader
-        title={title + " nicht gefunden"}
+        title={"Event nicht gefunden"}
         subtitle={"Dieses Event scheint nicht zu existieren."}
       />
     );
 
-  const location = await getLocationById(event.location_id || ""); 
+  // const location = await getLocationById(event.location_id || "");
   const date =
     format(event.start, "EEEE dd.MM.yyyy, HH:mm ", { locale: de }) +
     "-" +
@@ -74,11 +71,11 @@ async function Content({ title }: { title: string }) {
     <>
       <PageHeader title={event.title} subtitle={date} />
       <Section className="whitespace-pre-line">{event.description}</Section>
-      {location && (
+      {/* {location && (
         <Section className="h-96 shadow-lg">
           <MapLoader locations={[location!]} />
         </Section>
-      )}
+      )} */}
     </>
   );
 }

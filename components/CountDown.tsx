@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 
 export default function Countdown() {
   const calculateTimeLeft = () => {
-    const targetDate = new Date("2024-10-01T00:00:00").getTime(); // Ziel-Datum als Zeitstempel
+    const targetDate = new Date("2025-10-06T00:00:00").getTime(); // Ziel-Datum als Zeitstempel
     const now = new Date().getTime(); // Aktuelles Datum als Zeitstempel
     const difference = targetDate - now;
 

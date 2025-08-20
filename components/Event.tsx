@@ -14,13 +14,13 @@ import {
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
 import { MapPin, MoveRightIcon } from "lucide-react";
-import { createEvent } from "ics"; 
+import { createEvent } from "ics";
 import Link from "next/link";
 type Location_DB = {
   label: string;
   lat: number;
   long: number;
-}
+};
 export type EventProps = {
   id: string;
   title: string;
@@ -41,7 +41,7 @@ export type LocationProps = {
 
 export type EventWithLocation = EventProps & { location_id: string | null };
 
-export default function EventCard({ event }: { event: EventWithLocation }) {
+export default function EventCard({ event }: { event: EventItem }) {
   const handleSafeCalendar = () => {
     const icsEvent: any = {
       start: [
@@ -83,7 +83,7 @@ export default function EventCard({ event }: { event: EventWithLocation }) {
   };
 
   const special = [
-    "Streik, Gewerkschaften, TVStud!", 
+    "Streik, Gewerkschaften, TVStud!",
     "Impro Theater Workshop",
     "Einführungsveranstaltung",
     "Stadtrallye",
@@ -97,30 +97,35 @@ export default function EventCard({ event }: { event: EventWithLocation }) {
   return (
     <Drawer>
       <DrawerTrigger asChild>
-        <div className="flex flex-col items-start fsr-background-1 p-2 text-white rounded-lg gap-1.5 relative text-sm shadow-lg">
+        <div className="flex flex-col items-start  border-red-300 dark:border-border border p-3  rounded-lg gap-1.5 relative text-sm shadow-lg">
           {/* {event.location && (
             <span className="bg-secondary text-foreground  flex items-center pr-2 py-1 rounded-lg">
               <MapPin height={16} /> {event.location?.label}
             </span>
           )} */}
 
-          {special && (
+          {/* {special && (
             <div className="bg-foreground z-[3] text-background font-bold rounded-full px-2 py-1 absolute right-[-12px] top-[-4px] animate-bounce">
               EMPFOHLEN!
             </div>
-          )}
+          )} */}
 
           {event.rest_seats == 0 && (
             <div className="absolute rounded-lg inset-0 bg-background/80 flex justify-center items-center text-2xl font-bold text-foreground ">
               Ausgebucht!
             </div>
           )}
-          <div className="flex flex-col">
-            <span className="font-semibold">{event.title}</span>
-            <span className="font-extralight">
-              <strong>{format(event.start, "HH:mm")} </strong>
-              bis <strong>{format(event.end, "HH:mm")}</strong>
+          <div className="flex flex-col items-stretch w-full">
+            <span className="font-medium">{event.title}</span>
+            <span className="font-light text-muted-foreground">
+              <strong>{format(event.start, "HH:mm")} </strong>-{" "}
+              <strong>{format(event.end, "HH:mm")}</strong>
             </span>
+            <div className=" border-t pt-2 mt-2 w-full">
+              <div className="text-muted-foreground text-sm line-clamp-1">
+                {event.description}
+              </div>
+            </div>
           </div>
           <div className="flex justify-end w-full gap-2 flex-wrap">
             {event.registrable && <Badge>Anmeldepflichtig!</Badge>}

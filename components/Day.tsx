@@ -4,7 +4,7 @@ import EventCard, {  EventWithLocation } from "./Event";
 
 export interface DayProps {
   date: string;
-  events: EventWithLocation[];
+  events: EventItem[];
 }
 
 export default function DayCard({ day }: { day: DayProps }) {

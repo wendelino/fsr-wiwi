@@ -5,12 +5,11 @@ import { AnimatedText, Header } from "@/components/TextComponents";
 import { Card } from "@/components/ui/card";
 import WidthWrapper from "@/components/WidthWrapper";
 import { getTranslation } from "@/locales/getTranslation";
-import Image from "next/image";
+import Image from "next/image"; 
 
 // export default async function Home({ params }: { params: { lang: string } }) {
 export default async function Home() {
-  const { home: t } = await getTranslation("de");
-
+  const { home: t } = await getTranslation("de"); 
   return (
     <>
       <header className="h-[66vh]">
