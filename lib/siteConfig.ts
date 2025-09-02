@@ -29,7 +29,7 @@ export const siteConfig = {
     owner: "Fachschaftsrat Wirtschaftswissenschaften",
     plz: "06108",
     ort: "Halle (Saale)",
-    strasse: "Grosse Steinstrasse 73",
+    strasse: "Große Steinstraße 73",
     mail: "fachschaftsrat@wiwi.uni-halle.de",
   },
   footerDescription:

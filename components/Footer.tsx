@@ -17,7 +17,7 @@ export default function Footer() {
               fachschaftsrat@wiwi.uni-halle.de
             </Link>
             <p className="text-center lg:text-start">
-              Grosse Steinstrasse 73 <br />
+              Große Steinstraße 73 <br />
               06108 Halle (Saale)
             </p>
           </div>

@@ -24,7 +24,7 @@ export default function page() {
       </p>
       <p>
         Fachschaftsrat Wirtschaftswissenschaften <br />
-        Grosse Steinstrasse 73 <br />
+        Große Steinstraße 73 <br />
         06108 Halle (Saale) <br />
         E-Mail: fachschaftsrat@wiwi.uni-halle.de <br />
         Website: https://fsr-wiwi-halle.de

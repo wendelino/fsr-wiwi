@@ -98,7 +98,7 @@ export default function base_template(content: string) {
                       <strong>Fachschaftsrat des wirtschaftswissenschaftlichen Bereichs</strong><br />
                       der Juristischen und Wirtschaftswissenschaftlichen Fakultät<br />
                       <br />
-                      Grosse Steinstrasse 73<br />
+                      Große Steinstraße 73<br />
                       06108 Halle (Saale)<br />
                       <br />
                       <a href="mailto:fachschaftsrat@wiwi.uni-halle.de">fachschaftsrat@wiwi.uni-halle.de</a>

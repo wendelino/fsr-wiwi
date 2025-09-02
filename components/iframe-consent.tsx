@@ -11,14 +11,14 @@ type IframeProps = {
     className?: string;
   };
   label: string;
-  disclaimerText: string;
+  disclaimerText?: string;
   providerLink: string;
 };
 
 export default function IframeConsent({
   iframe,
   label,
-  disclaimerText,
+  disclaimerText = "",
   providerLink,
 }: IframeProps) {
   const LOCAL_STORAGE_KEY =
@@ -41,7 +41,7 @@ export default function IframeConsent({
     setConsentGiven(true);
   };
 
-  const style = cn("w-full min-h-96 rounded-xl", iframe.className);
+  const style = cn("w-full min-h-72 rounded-xl", iframe.className);
 
   if (consentGiven) {
     return (
@@ -71,7 +71,7 @@ export default function IframeConsent({
           className="underline"
         >
           {label}
-        </Link>
+        </Link>.
       </p>
 
       <Button className="mt-8"  onClick={handleAccept}>Externe Inhalte laden</Button>
