@@ -9,16 +9,19 @@ import { setTimeout } from "timers/promises";
 export function Header({
   children,
   className,
+  id
 }: {
   children: React.ReactNode;
   className?: string;
+  id?: string;
 }) {
   return (
     <div 
       className={cn(
-        "font-bold text-3xl py-8 md:text-5xl md:py-16",
+        "font-bold text-3xl py-8 md:text-5xl md:py-16 scroll-mt-16",
          className
       )}
+      id={id}
     >
       {children}
     </div>

@@ -18,6 +18,7 @@ export const siteConfig = {
       label: "Ersti-Woche",
       dropdown: [
         { href: "/erstiwoche", label: "Übersicht" },
+        { href: "/erstiwoche/#programm", label: "Programm" },
         { href: "/files/guide.pdf", label: "Ersti-Guide", prefetch: false },
         // { href: "/lageplan", label: "Lageplan" },
       ],

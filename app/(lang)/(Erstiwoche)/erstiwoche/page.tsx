@@ -1,18 +1,29 @@
 import { getEvents } from "@/app/_actions/event";
 import Countdown from "@/components/CountDown";
 import DayCard, { DayProps } from "@/components/Day";
-import { EventProps, EventWithLocation } from "@/components/Event";
-import { Header } from "@/components/TextComponents"; 
+import { Header } from "@/components/TextComponents";
+import ErstiInfo from "./info";
+import SponsorGrid from "@/components/SponsorGrid";
 
 export default async function page() {
   const {events} = await getEvents({ tag: "ersti25", limit: 100 });
   const days: DayProps[] = groupEventsByDay(events);
 
+  const sponsors = [
+    { src: "schogetten-logo.png", href: "https://example.com", label: "Schogetten" }, 
+    { src: "leuchtturm.svg", href: "https://leuchtturm1917.de", label: "Leuchtturm1917" }, 
+    { src: "lioko.svg", href: "https://www.lioko-mexikaner.de", label: "Lioko-Mexikaner" }, 
+    { src: "nabio.svg", href: "https://nabio.de", label: "Nabio" },  
+    { src: "wilkinson.svg", href: "https://wilkinsonsword.de", label: "Wilkinson Sword" }, 
+    {src: "freitag.jpg", href: "https://freitag.ch/de_DE", label: "Freitag" }, 
+  ];
+
   return (
     <div>
+      <ErstiInfo />
       <Countdown />
 
-      <Header>
+      <Header id="programm">
         Unser <span className="fsr-gradient">Programm</span> für euch
       </Header>
 
@@ -21,6 +32,8 @@ export default async function page() {
           <DayCard key={index} day={e} />
         ))}
       </div>
+
+      <SponsorGrid items={sponsors} />
     </div>
   );
 }
