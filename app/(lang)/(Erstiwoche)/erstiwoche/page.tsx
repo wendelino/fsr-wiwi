@@ -4,6 +4,7 @@ import DayCard, { DayProps } from "@/components/Day";
 import { Header } from "@/components/TextComponents";
 import ErstiInfo from "./info";
 import SponsorGrid, { SponsorOfferGrid } from "@/components/SponsorGrid";
+import WeekGrid from "@/components/WeekGrid";
 
 export default async function page() {
   const { events } = await getEvents({ tag: "ersti25", limit: 100 });
@@ -51,6 +52,8 @@ export default async function page() {
       <Header id="programm">
         Unser <span className="fsr-gradient">Programm</span> für euch
       </Header>
+
+      {/* <WeekGrid events={events} startDate={new Date("2025-10-06")} /> */}
 
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {days.map((e, index) => (
