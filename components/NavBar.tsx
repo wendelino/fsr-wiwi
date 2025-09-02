@@ -1,14 +1,14 @@
 "use client";
+import { siteConfig } from "@/lib/siteConfig";
 import { cn } from "@/lib/utils";
 import { clientTranslation } from "@/locales/clientTranslation";
 import { ChevronDown, Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
-import { ThemeToggle } from "./ThemeToggle";
+import { ThemeButton } from "./ThemeToggle";
 import { Button } from "./ui/button";
 import WidthWrapper from "./WidthWrapper";
-import { siteConfig } from "@/lib/siteConfig";
 
 function NavLayout({ lang }: { lang: string }) {
   const { global } = clientTranslation(lang);
@@ -65,7 +65,7 @@ export default function NavBar({ lang }: { lang: string }) {
             <NavLayout lang={lang} />
           </nav>
           <section className="flex ml-auto md:ml-0 justify-end md:justify-start items-center px-2">
-            <ThemeToggle />
+            <ThemeButton />
           </section>
 
           <nav className="md:hidden flex items-center ml-2">
