@@ -3,19 +3,44 @@ import Countdown from "@/components/CountDown";
 import DayCard, { DayProps } from "@/components/Day";
 import { Header } from "@/components/TextComponents";
 import ErstiInfo from "./info";
-import SponsorGrid from "@/components/SponsorGrid";
+import SponsorGrid, { SponsorOfferGrid } from "@/components/SponsorGrid";
 
 export default async function page() {
-  const {events} = await getEvents({ tag: "ersti25", limit: 100 });
+  const { events } = await getEvents({ tag: "ersti25", limit: 100 });
   const days: DayProps[] = groupEventsByDay(events);
 
   const sponsors = [
-    { src: "schogetten-logo.png", href: "https://example.com", label: "Schogetten" }, 
-    { src: "leuchtturm.svg", href: "https://leuchtturm1917.de", label: "Leuchtturm1917" }, 
-    { src: "lioko.svg", href: "https://www.lioko-mexikaner.de", label: "Lioko-Mexikaner" }, 
-    { src: "nabio.svg", href: "https://nabio.de", label: "Nabio" },  
-    { src: "wilkinson.svg", href: "https://wilkinsonsword.de", label: "Wilkinson Sword" }, 
-    {src: "freitag.jpg", href: "https://freitag.ch/de_DE", label: "Freitag" }, 
+    {
+      src: "schogetten-logo.png",
+      href: "https://example.com",
+      label: "Schogetten",
+    },
+    {
+      src: "leuchtturm.svg",
+      href: "https://leuchtturm1917.de",
+      label: "Leuchtturm1917",
+    },
+    {
+      src: "lioko.svg",
+      href: "https://www.lioko-mexikaner.de",
+      label: "Lioko-Mexikaner",
+    },
+    { src: "nabio.svg", href: "https://nabio.de", label: "Nabio" },
+    {
+      src: "wilkinson.svg",
+      href: "https://wilkinsonsword.de",
+      label: "Wilkinson Sword",
+    },
+    { src: "freitag.jpg", href: "https://freitag.ch/de_DE", label: "Freitag" },
+  ];
+
+  const offers = [
+    {
+      link: "https://freitag.ch/mission/community/smart-brains",
+      image: "freitag-deal.jpg",
+      label: "Freitag Deal",
+      text: "SMART BAGS FOR SMART BRAINS: Studierende, Lernende und Schüler*innen sparen bis zum 15. Oktober 25% auf vier ausgewählte FREITAG Taschen. Jetzt zugreifen und nachhaltig in deine Zukunft investieren!",
+    },
   ];
 
   return (
@@ -34,6 +59,8 @@ export default async function page() {
       </div>
 
       <SponsorGrid items={sponsors} />
+
+      <SponsorOfferGrid items={offers} />
     </div>
   );
 }
