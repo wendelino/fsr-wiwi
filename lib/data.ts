@@ -16,13 +16,20 @@ export const legislaturData: FsrLegislatur[] = [
     legislatur_start: "24.06.2025",
     members: [
       { name: "Florence Hollerung", position: "Vorsitzende", tasks: "" },
-      { name: "Julius Dallorso", position: "Sprecher für Finanzen", tasks: "" }, 
-      { name: "Florian Geyer", position: "Sprecher für Finanzen", tasks: "Veranstaltungen" }, 
-      { name: "Annika Diers", position: "", tasks: "Öffentlichkeitsarbeit" }, 
-      { name: "Maja Juhnke", position: "", tasks: "Öffentlichkeitsarbeit" }, 
-      { name: "Dennis Behnsen", position: "", tasks: "Veranstaltungen" }, 
-      { name: "Nele Gutt", position: "", tasks: "" }, 
-      { name: "Benjamin Knöppel", position: "", tasks: "" }, 
+      { name: "Julius Dallorso", position: "Sprecher für Finanzen", tasks: "" },
+      {
+        name: "Florian Geyer",
+        position: "Sprecher für Finanzen",
+        tasks: "Veranstaltungen",
+      },
+      { name: "Annika Diers", position: "", tasks: "Öffentlichkeitsarbeit" },
+      { name: "Maja Juhnke", position: "", tasks: "Öffentlichkeitsarbeit" },
+      { name: "Dennis Behnsen", position: "", tasks: "Veranstaltungen" },
+      { name: "Nele Gutt", position: "", tasks: "" },
+      { name: "Benjamin Knöppel", position: "", tasks: "" },
+      { name: "Elias Kaal", position: "", tasks: "" },
+      { name: "Ferdinand Kirchfeld", position: "", tasks: "" },
+      { name: "Tristan Boge", position: "", tasks: "" },
     ],
   },
   {
@@ -165,5 +172,5 @@ export const legislaturData: FsrLegislatur[] = [
         tasks: "Arbeitskreis Sommerevents",
       },
     ],
-  }
+  },
 ];

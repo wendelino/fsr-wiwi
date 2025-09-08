@@ -33,6 +33,9 @@ export default async function page() {
       label: "Wilkinson Sword",
     },
     { src: "freitag.jpg", href: "https://freitag.ch/de_DE", label: "Freitag" },
+    {src: "carla.png", href: "https://carlundcarla.de", label: "CarlundCarla.de"},
+    {src:"partyfly.svg", href: "https://partyfly.de", label: "Partyfly"},
+    {src:"wgheld.png", href: "https://wgheld.de", label: "WG-Held"},
   ];
 
   const offers = [
@@ -42,6 +45,11 @@ export default async function page() {
       label: "Freitag Deal",
       text: "SMART BAGS FOR SMART BRAINS: Studierende, Lernende und Schüler*innen sparen bis zum 15. Oktober 25% auf vier ausgewählte FREITAG Taschen. Jetzt zugreifen und nachhaltig in deine Zukunft investieren!",
     },
+    {
+      link: "https://wilkinsonsword.de",
+      image: "wilkinson_o.jpg",
+      label: "Wilkinson Sword Germany",
+      text: "Wilkinson ist der weltweite Experte für Rasierer, Rasierklingen & Rasurprodukte. Perfekt rasiert – immer und überall – mit Wilkinson Sword."    },
   ];
 
   return (

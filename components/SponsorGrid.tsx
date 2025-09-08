@@ -4,6 +4,7 @@ import { Header } from "./TextComponents";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "./ui/button";
+import { cn } from "@/lib/utils";
 export type SponsorItem = {
   src: string;
   href: string;
@@ -59,8 +60,9 @@ interface SponsorOfferProps {
   label: string;
   image?: string;
   text?: string;
+  orientation?: "left" | "right";
 }
-export function SponsorOffer({ link, label, image, text }: SponsorOfferProps) {
+export function SponsorOffer({ link, label, image, text, orientation = "left" }: SponsorOfferProps) {
   return (
     <div className="grid md:grid-cols-2 gap-2 rounded-xl border justify-between overflow-hidden bg-muted/50">
       {image && (
@@ -72,7 +74,7 @@ export function SponsorOffer({ link, label, image, text }: SponsorOfferProps) {
           className="h-auto w-full object-cover"
         />
       )}
-      <div className="flex flex-col gap-8 p-4 sm:p-8 justify-center">
+      <div className={cn("flex flex-col gap-8 p-4 sm:p-8 justify-center", orientation === "right" && "md:order-first")}>
         <p className="text-lg font-semibold">{label}</p>
         <p>{text}</p>
 
@@ -89,8 +91,8 @@ export function SponsorOffer({ link, label, image, text }: SponsorOfferProps) {
 export function SponsorOfferGrid({ items }: { items: SponsorOfferProps[] }) {
   return (
     <div className="space-y-8 mt-16">
-      {items.map((item) => (
-        <SponsorOffer key={item.label} {...item} />
+      {items.map((item, i) => (
+        <SponsorOffer key={item.label} {...item} orientation={i % 2 === 0 ? "left" : "right"} />
       ))}
     </div>
   );

@@ -30,7 +30,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
- params: Promise<{ lang: string; period: string }>;
+  params: Promise<{ lang: string; period: string }>;
 }): Promise<Metadata> {
   const { period, lang } = await params;
   const { mitglieder: t, global: gt } = await getTranslation(lang);
@@ -76,8 +76,7 @@ export default async function page({
 }: {
   params: Promise<{ lang: string; period: string }>;
 }) {
-
-  const p = await params
+  const p = await params;
   const { mitglieder: t } = await getTranslation(p.lang);
 
   const { period } = p;
