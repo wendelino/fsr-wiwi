@@ -26,7 +26,7 @@ export default function SponsorGrid({ items, className }: SponsorGridProps) {
       <Header>
         Unsere <span className="fsr-gradient">Sponsoren</span>
       </Header>
-      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6  gap-6 sm:gap-8">
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6   gap-6 sm:gap-8">
         {items.map((item) => (
           <a
             key={`${item.label}-${item.href}`}
