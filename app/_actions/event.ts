@@ -15,13 +15,12 @@ export async function getEvents(ctx?: {page?: number, tag?:string, limit?:number
     const page = ctx?.page || 0;
     const tag = ctx?.tag ? `/${ctx.tag}` : ""
     const url = `${BASE_URL}${tag}?limit=${limit}&page=${page}`;
-
-    console.log(url);
+ 
     
 
     const response = await fetch(url, {
       next: {
-        revalidate: 3600,
+        revalidate: 300,
       },
       headers: {
         Authorization: `Bearer ${token}`,

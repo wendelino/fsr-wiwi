@@ -1,10 +1,9 @@
 import { getEvents } from "@/app/_actions/event";
 import Countdown from "@/components/CountDown";
 import DayCard, { DayProps } from "@/components/Day";
+import SponsorGrid, { SponsorOfferGrid } from "@/components/SponsorGrid";
 import { Header } from "@/components/TextComponents";
 import ErstiInfo from "./info";
-import SponsorGrid, { SponsorOfferGrid } from "@/components/SponsorGrid";
-import WeekGrid from "@/components/WeekGrid";
 
 export default async function page() {
   const { events } = await getEvents({ tag: "ersti25", limit: 100 });
@@ -15,6 +14,11 @@ export default async function page() {
       src: "schogetten-logo.png",
       href: "https://example.com",
       label: "Schogetten",
+    },
+    {
+      src: "buehnen.jpg",
+      href: "https://www.buehnen-halle.de",
+      label: "Bühnen Halle",
     },
     {
       src: "leuchtturm.svg",
