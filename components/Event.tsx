@@ -110,7 +110,7 @@ export default function EventCard({ event }: { event: EventItem }) {
             </div>
           )} */}
 
-          {event.rest_seats == 0 && (
+          {event.restSeats == 0 && (
             <div className="absolute rounded-lg inset-0 bg-background/80 flex justify-center items-center text-2xl font-bold text-foreground ">
               Ausgebucht!
             </div>
@@ -129,9 +129,9 @@ export default function EventCard({ event }: { event: EventItem }) {
           </div>
           <div className="flex justify-end w-full gap-2 flex-wrap">
             {event.registrable && <Badge>Anmeldepflichtig!</Badge>}
-            {event.rest_seats ? (
+            {event.restSeats ? (
               <Badge variant={"secondary"}>
-                {event.rest_seats} Plätze übrig!
+                {event.restSeats} Plätze übrig!
               </Badge>
             ) : null}
           </div>
