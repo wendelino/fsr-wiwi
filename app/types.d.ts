@@ -6,6 +6,7 @@ declare type EventItem = {
   description: string;
   registrable: boolean;
   maxGuests: number | null;
+  restSeats: number | null;
   masterOnly: boolean | null;
   slug: string;
   tagsNew: string[];
