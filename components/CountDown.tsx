@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 
-export default function Countdown() {
+export default function Countdown() { 
   const calculateTimeLeft = () => {
     const targetDate = new Date("2025-10-06T00:00:00").getTime(); // Ziel-Datum als Zeitstempel
     const now = new Date().getTime(); // Aktuelles Datum als Zeitstempel
@@ -31,20 +31,26 @@ export default function Countdown() {
     return timeLeft;
   };
 
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,  
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+});
 
-  useEffect(() => {
+  useEffect(() => { 
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
     return () => clearInterval(timer);
   }, []);
+ 
 
   return (
     <div className="font-bold text-2xl flex flex-col gap-6 p-4 bg-secondary rounded-xl items-center my-8 shadow-lg">
         Start der Erstiwoche
-      <div className="font-semibold text-3xl flex gap-3 ">
+      <div className="font-semibold text-3xl flex gap-3  ">
         <TimeDisplay label="Tage" value={timeLeft.days} />
         :
         <TimeDisplay label="Stunden" value={timeLeft.hours} />

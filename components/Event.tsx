@@ -81,19 +81,7 @@ export default function EventCard({ event }: { event: EventItem }) {
       URL.revokeObjectURL(url);
     });
   };
-
-  const special = [
-    "Streik, Gewerkschaften, TVStud!",
-    "Impro Theater Workshop",
-    "Einführungsveranstaltung",
-    "Stadtrallye",
-    "Kneipentour Master",
-    "Speedmeeting",
-    "Kneipentour Internationals",
-    "Kneipentour Master Raucher*innen",
-    "Kneipentour Master NICHT-Raucher*innen",
-  ].includes(event.title);
-
+ 
   return (
     <Drawer>
       <DrawerTrigger asChild>

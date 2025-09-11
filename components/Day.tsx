@@ -10,6 +10,8 @@ export interface DayProps {
 export default function DayCard({ day }: { day: DayProps }) {
   const sortedEvents = [...day.events].sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime());
 
+  const groupedEvents = groupByTime(sortedEvents)
+
 
   return (
     <div className="  flex flex-col gap-4">
@@ -18,11 +20,26 @@ export default function DayCard({ day }: { day: DayProps }) {
         <span className="text-sm font-light">
           {format(day.date, "dd.MM.yyyy")}
         </span>
-      </div>
-
+      </div> 
       {sortedEvents.map((e, index) => (
         <EventCard event={e} key={index} />
       ))}
     </div>
   );
+}
+
+
+function groupByTime(events: EventItem[]) {
+  const groups: Record<string, EventItem[]> = {};
+
+  for (const event of events) {
+    const key = format(event.start, "HH:mm");
+
+    if (!groups[key]) {
+      groups[key] = [];
+    }
+    groups[key].push(event);
+  }
+
+  return groups;
 }
