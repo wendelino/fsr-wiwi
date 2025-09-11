@@ -1,4 +1,5 @@
 "use client";
+import { Dot } from "lucide-react";
 import { useState, useEffect } from "react";
 
 export default function Countdown() { 
@@ -48,16 +49,16 @@ export default function Countdown() {
  
 
   return (
-    <div className="font-bold text-2xl flex flex-col gap-6 p-4 bg-secondary rounded-xl items-center my-8 shadow-lg">
+    <div className="font-bold  text-2xl flex flex-col gap-6 p-4 bg-secondary rounded-xl items-center my-8 shadow-lg">
         Start der Erstiwoche
-      <div className="font-semibold text-3xl flex gap-3  ">
-        <TimeDisplay label="Tage" value={timeLeft.days} />
-        :
-        <TimeDisplay label="Stunden" value={timeLeft.hours} />
-        :
-        <TimeDisplay label="Minuten" value={timeLeft.minutes} />
-        :
-        <TimeDisplay label="Sekunden" value={timeLeft.seconds} />
+      <div className="font-semibold sm:text-3xl text-xl flex flex-wrap  gap-1  ">
+        <TimeDisplay label="Tage" value={timeLeft.days} /> 
+        
+        <TimeDisplay label="Std." value={timeLeft.hours} /> 
+        
+        <TimeDisplay label="Min." value={timeLeft.minutes} /> 
+        
+        <TimeDisplay label="Sek." value={timeLeft.seconds} />
       </div>
     </div>
   );
@@ -65,9 +66,9 @@ export default function Countdown() {
 
 function TimeDisplay({ label, value }: { label: string; value: number }) {
   return (
-    <div className="flex flex-col items-center pt-0.5">
-      <div>{value}</div>
-      <div className="font-normal text-base">{label}</div>
+    <div className="flex flex-col items-center   gap-1 border min-w-16 sm:min-w-24 bg-muted-foreground/20 rounded-md p-1 sm:p-2">
+      <div className="font-mono text-xl sm:text-4xl tabular-nums  text-center">{value.toString().padStart(2, '0')}</div>
+      <div className="font-normal  sm:text-base text-xs">{label}</div>
     </div>
   );
 }
