@@ -181,9 +181,9 @@ export function Register4Event({ event }: { event: EventProps }) {
   );
 }
 
-export function SelectEvent({ events }: { events: EventProps[] }) {
+export function SelectEvent({ events }: { events: EventItem[] }) {
   const router = useRouter();
-  const [selectedEvent, setSelectedEvent] = useState<EventProps | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
   const EventFormSchema = z.object({
     event: z.string({ message: "Dieses Feld ist erforderlich." }),
   });
@@ -208,37 +208,35 @@ export function SelectEvent({ events }: { events: EventProps[] }) {
         className="space-y-6 flex flex-col w-full max-w-md border p-8 rounded-lg shadow-lg"
       >
         <FormField
-            control={form.control}
-            name="event"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Veranstaltung auswählen</FormLabel>
-                <Select
-                  onValueChange={(value) => {
-                    field.onChange(value);
-                    handleEventChange(value);
-                  }}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue
-                        placeholder={<AnimatedEvents events={events} />}
-                      />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {events.map((e) => (
-                      <SelectItem key={e.title} value={e.title}>
-                        {e.title}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          control={form.control}
+          name="event"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Veranstaltung auswählen</FormLabel>
+              <Select
+                onValueChange={(value) => {
+                  field.onChange(value);
+                  handleEventChange(value);
+                }}
+                defaultValue={field.value}
+              >
+                <FormControl>
+                  <SelectTrigger>
+                    <SelectValue placeholder={"Wähle eine Veranstaltung"} />
+                  </SelectTrigger>
+                </FormControl>
+                <SelectContent>
+                  {events.map((e) => (
+                    <SelectItem key={e.slug} value={e.slug}>
+                      {e.title}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
         {selectedEvent && (
           <div className="flex flex-col gap-8 ">

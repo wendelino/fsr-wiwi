@@ -3,6 +3,16 @@ export const siteConfig = {
   name: "FSR Wiwi",
   url: "https://fsr-wiwi-halle.de",
   pages: [
+    {
+      label: "Ersti-Woche",
+      dropdown: [
+        { href: "/erstiwoche", label: "Übersicht" },
+        { href: "/erstiwoche/#programm", label: "Programm" },
+        { href: "/anmeldung", label: "Anmeldung" },
+        { href: "/files/guide.pdf", label: "Ersti-Guide", prefetch: false },
+        // { href: "/lageplan", label: "Lageplan" },
+      ],
+    },
     { href: "/asq", label: "ASQ" },
     { href: "/kalender", label: "Kalender" },
     {
@@ -12,15 +22,6 @@ export const siteConfig = {
         { href: "/mitglieder", label: "Mitglieder" },
         { href: "/go", label: "Geschäftsordnung" },
         { href: "/awareness", label: "Awareness" },
-      ],
-    },
-    {
-      label: "Ersti-Woche",
-      dropdown: [
-        { href: "/erstiwoche", label: "Übersicht" },
-        { href: "/erstiwoche/#programm", label: "Programm" },
-        { href: "/files/guide.pdf", label: "Ersti-Guide", prefetch: false },
-        // { href: "/lageplan", label: "Lageplan" },
       ],
     },
     { href: "/kontakt", label: "Kontakt" },

@@ -54,13 +54,14 @@ export function AnimatedText({text, className}: {text: string, className?: strin
   ]} 
   wrapper="span"
   speed={20}
-  repeat={1}
+  repeat={2
+  }
   className={className}
 />
 }
 
 
-export function AnimatedEvents({events}: {events: EventProps[]}) {
+export function AnimatedEvents({events}: {events: EventItem[]}) {
  
 
   const [currentEvent, setCurrentEvent] = useState(events[0]?.title || ""); // Initiale Veranstaltung

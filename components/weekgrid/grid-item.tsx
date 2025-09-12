@@ -159,7 +159,7 @@ export default function GridItem({
           <DrawerFooter>
             {event.registrable && (
               <Button asChild>
-                <Link href={"erstiwoche/anmeldung/" + event.title}>
+                <Link href={"anmeldung/" + event.slug}>
                   Jetzt anmelden
                 </Link>
               </Button>
