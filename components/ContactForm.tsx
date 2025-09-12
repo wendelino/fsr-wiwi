@@ -20,7 +20,7 @@ import { Input } from "./ui/input";
 
 import { handleMessage } from "@/app/_actions/sendTelegramMessage";
 import { CheckCircleIcon, XCircleIcon } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Altcha from "./altcha";
 import { Textarea } from "./ui/textarea";
 
@@ -46,12 +46,10 @@ export function ContactForm() {
       message: "Bitte akzeptiere unsere Datenschutzerklärung.",
     }),
   });
-  const altchaRef = useRef<{ value: string | null }>(null)
 
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [altcha, setAltcha] = useState(false)
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -79,19 +77,12 @@ export function ContactForm() {
   if (formSubmitted) return <SuccessForm />;
   if (error) return <ErrorForm />;
 
-  useEffect(() => {
-    setAltcha(true)
-  }, []);
-
-
-
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className="flex flex-col gap-6"
       >
-        <div>ref{altchaRef.current?.value}</div>
         <FormField
           control={form.control}
           name="email"
@@ -160,7 +151,7 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        {altcha && <Altcha ref={altchaRef} />}
+        <Altcha />
         <Button type="submit" disabled={loading}>
           {loading ? "Laden..." : "Absenden"}
         </Button>

@@ -1,10 +1,10 @@
 import { getEvents } from "@/app/_actions/event";
 import Countdown from "@/components/CountDown";
-import DayCard, { DayProps } from "@/components/Day";
+import { DayProps } from "@/components/Day";
 import SponsorGrid, { SponsorOfferGrid } from "@/components/SponsorGrid";
 import { Header } from "@/components/TextComponents";
-import ErstiInfo from "./info";
 import WeekGrid from "@/components/weekgrid/weekgrid";
+import ErstiInfo from "./info";
 
 
 export default async function page() {
