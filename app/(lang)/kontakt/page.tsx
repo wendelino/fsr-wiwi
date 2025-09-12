@@ -1,4 +1,5 @@
 import { ContactForm } from "@/components/ContactForm";
+import { TestForm } from "@/components/test-form";
 import { H3 } from "@/components/Framer/H3";
 import { PageHeader } from "@/components/Framer/PageHeader";
 import { Section } from "@/components/Framer/Section";
@@ -56,6 +57,7 @@ export default function page() {
         subtitle="
     Wir freuen uns darauf, von dir zu hören! Kontaktiere uns gerne für Fragen, Anregungen oder Kooperationen. Das Team des Fachschaftsrats Wirtschaftswissenschaften steht dir zur Verfügung."
       />
+      
       <Section className="grid md:grid-cols-2 lg:gap-32 items-center p-8 md:px-16  rounded-xl shadow-xl border">
         <Header>
           Schreib uns eine <span className="fsr-gradient">Nachricht</span>

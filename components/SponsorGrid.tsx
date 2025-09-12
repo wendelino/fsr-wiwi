@@ -41,7 +41,7 @@ export default function SponsorGrid({ items, className }: SponsorGridProps) {
                 alt={item.label}
                 fill
                 sizes="(max-width: 640px) 45vw, (max-width: 1024px) 30vw, 16vw"
-                className="object-contain  grayscale contrast-100 brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition"
+                className="object-contain "// grayscale contrast-100 brightness-90 group-hover:grayscale-0 group-hover:brightness-100 transition
                 priority={false}
               />
             </div>

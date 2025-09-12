@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils";
 import WidthWrapper from "@/components/WidthWrapper";
 import ScrollTop from "@/components/ScrollTop";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -129,6 +130,7 @@ export default function RootLayout({
           </main>
           <Footer />
           <ScrollTop />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
