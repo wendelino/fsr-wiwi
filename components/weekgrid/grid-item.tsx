@@ -100,6 +100,9 @@ export default function GridItem({
       URL.revokeObjectURL(url);
     });
   };
+
+  const { title, description, registrable, start, end, slug, restSeats } =
+    event;
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -112,10 +115,10 @@ export default function GridItem({
         >
           <div className="flex items-center justify-between gap-2 text-foreground">
             <div className="font-medium line-clamp-1">
-              {length ? `${length} Slots` : event.title}
+              {length ? `${length} Slots` : title}
             </div>
             <div className="shrink-0 tabular-nums">
-              {format(event.start, "HH:mm")}–{format(event.end, "HH:mm")}
+              {format(start, "HH:mm")}–{format(end, "HH:mm")}
             </div>
           </div>
           {length ? (
@@ -125,19 +128,19 @@ export default function GridItem({
             </div>
           ) : (
             <div className="mt-0.5 text-[11px] text-muted-foreground line-clamp-1">
-              {event.description}
+              {description}
             </div>
           )}
           {!length && (
             <div className="flex justify-end w-full gap-2 flex-wrap mt-2">
-              {event.registrable && (
+              {registrable && (
                 <Badge className=" font-medium">Anmeldepflichtig!</Badge>
               )}
             </div>
           )}
         </div>
       </DialogTrigger>
-      <DialogContent >
+      <DialogContent className="max-h-screen overflow-y-auto">
         <DialogHeader>
           <div className="flex gap-2 pb-6">
             {/* {event.location && (
@@ -146,21 +149,40 @@ export default function GridItem({
                   </span>
                 )} */}
           </div>
-          <DialogTitle>{event.title}</DialogTitle>
-          <span className="font-extralight py-2">
-            <strong>{format(event.start, "HH:mm")} </strong>
-            bis <strong>{format(event.end, "HH:mm")}</strong>
-          </span>
+          <DialogTitle>{title}</DialogTitle>
 
-          <DialogDescription>{event.description}</DialogDescription>
+          <DialogDescription>
+            {" "}
+            <span className="font-extralight py-2">
+              <strong>{format(start, "HH:mm")} </strong>
+              bis <strong>{format(end, "HH:mm")}</strong>
+            </span>
+          </DialogDescription>
         </DialogHeader>
-        <DialogFooter>
-          {event.registrable && (
-            <Button asChild>
-              <Link href={"anmeldung/" + event.slug}>Jetzt anmelden</Link>
-            </Button>
+        <div className="my-2">
+          {registrable && (
+            <div className="flex justify-center  w-full gap-2 flex-wrap mb-4">
+              <Badge variant="secondary">Anmeldepflichtig</Badge>
+              <Badge>{restSeats} Plätze übrig</Badge>
+            </div>
           )}
-          <Button onClick={handleSafeCalendar}>Im Kalender sichern</Button>
+          <div className="text-sm whitespace-pre-line">{description}</div>
+        </div>
+        <DialogFooter className="gap-2 ">
+          <Button onClick={handleSafeCalendar} variant="secondary">
+            Im Kalender sichern
+          </Button>
+          {registrable && (
+            <>
+              {restSeats == 0 ? (
+                <Button disabled>Event ausgebucht</Button>
+              ) : (
+                <Button asChild>
+                  <Link href={"anmeldung/" + slug}>Zur Anmeldung</Link>
+                </Button>
+              )}
+            </>
+          )}
         </DialogFooter>
       </DialogContent>
     </Dialog>
