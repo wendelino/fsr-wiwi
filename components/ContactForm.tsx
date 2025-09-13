@@ -40,8 +40,8 @@ export function ContactForm() {
     email: z
       .string({ message: "Dieses Feld ist erforderlich." })
       .email({ message: "Ungültige E-Mail-Adresse" }),
-    message: z.string({ message: "Dieses Feld ist erforderlich." }),
-    name: z.string({ message: "Dieses Feld ist erforderlich." }),
+    message: z.string().min(1, { message: "Dieses Feld ist erforderlich." }),
+    name: z.string().min(1, { message: "Dieses Feld ist erforderlich." }),
     dsgvo: z.boolean().refine((value) => value === true, {
       message: "Bitte akzeptiere unsere Datenschutzerklärung.",
     }),

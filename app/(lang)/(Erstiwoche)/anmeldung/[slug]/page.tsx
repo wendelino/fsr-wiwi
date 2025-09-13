@@ -6,6 +6,22 @@ import { format } from "date-fns";
 import { de } from "date-fns/locale";
 import { Info, XCircle } from "lucide-react";
 import Link from "next/link";
+import { Metadata } from "next";
+ 
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const p = await params;
+  const slug = decodeURIComponent(p.slug);
+  const { event } = await getEvent(slug);
+
+  return {
+    title: `${event?.title || "Event 404"}`,
+  };
+}
 
 interface PageProps {
   params: Promise<{ slug: string }>;

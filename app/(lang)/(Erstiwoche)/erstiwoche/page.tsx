@@ -5,7 +5,12 @@ import SponsorGrid, { SponsorOfferGrid } from "@/components/SponsorGrid";
 import { Header } from "@/components/TextComponents";
 import WeekGrid from "@/components/weekgrid/weekgrid";
 import ErstiInfo from "./info";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+  title: "Ersti-Woche",
+  description: "Alles über die Ersti-Woche 2025",
+};
 
 export default async function page() {
   const { events } = await getEvents({ tag: "ersti25", limit: 100 });
@@ -39,9 +44,13 @@ export default async function page() {
       label: "Wilkinson Sword",
     },
     { src: "freitag.jpg", href: "https://freitag.ch/de_DE", label: "Freitag" },
-    {src: "carla.png", href: "https://carlundcarla.de", label: "CarlundCarla.de"},
-    {src:"partyfly.svg", href: "https://partyfly.de", label: "Partyfly"},
-    {src:"wgheld.png", href: "https://wgheld.de", label: "WG-Held"},
+    {
+      src: "carla.png",
+      href: "https://carlundcarla.de",
+      label: "CarlundCarla.de",
+    },
+    { src: "partyfly.svg", href: "https://partyfly.de", label: "Partyfly" },
+    { src: "wgheld.png", href: "https://wgheld.de", label: "WG-Held" },
   ];
 
   const offers = [
@@ -55,14 +64,13 @@ export default async function page() {
       link: "https://wilkinsonsword.de",
       image: "wilkinson_o.jpg",
       label: "Wilkinson Sword Germany",
-      text: "Wilkinson ist der weltweite Experte für Rasierer, Rasierklingen & Rasurprodukte. Perfekt rasiert – immer und überall – mit Wilkinson Sword."    },
+      text: "Wilkinson ist der weltweite Experte für Rasierer, Rasierklingen & Rasurprodukte. Perfekt rasiert – immer und überall – mit Wilkinson Sword.",
+    },
   ];
-
-
 
   return (
     <div>
-      <ErstiInfo /> 
+      <ErstiInfo />
       <Countdown />
 
       <Header id="programm">

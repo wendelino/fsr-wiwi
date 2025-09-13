@@ -52,6 +52,7 @@ interface GenericFormProps<TFieldValues extends FieldValues>
   defaultValues: DefaultValues<TFieldValues>;
   mode?: "create" | "edit";
   disableCaptcha?: boolean;
+  disableStyling?: boolean;
   className?: string;
   formClassName?: string;
   children: ChildrenRenderProp<TFieldValues>;
@@ -72,6 +73,7 @@ export default function GenericForm<TValues extends FieldValues>(
     onSuccess,
     onError,
     disableCaptcha = false,
+    disableStyling = false,
     className,
     formClassName,
     children,
@@ -142,16 +144,17 @@ export default function GenericForm<TValues extends FieldValues>(
   //   }
 
   if (phase === "success") {
-    return <FinalForm result={result} />;
+    return <FinalForm result={result} config={config} />;
   }
   if (phase === "error") {
-    return <FinalForm result={result} />;
+    return <FinalForm result={result} config={config} />;
   }
 
   return (
     <div
       className={cn(
-        " mx-auto  max-w-md sm:border sm:p-8 sm:rounded-xl sm:shadow-xl",
+        " mx-auto  max-w-md w-full",
+        !disableStyling && "sm:border sm:p-8 sm:rounded-xl sm:shadow-xl",
         className
       )}
     >
@@ -183,7 +186,7 @@ export default function GenericForm<TValues extends FieldValues>(
   );
 }
 
-function FinalForm({ result }: { result: FormFnRes | null }) {
+function FinalForm({ result, config }: { result: FormFnRes | null, config?: GenericFormConfig }) {
   const { sx, msg } = result ?? {
     sx: false,
     msg: "Ein Fehler ist aufgetreten.",
@@ -202,11 +205,17 @@ function FinalForm({ result }: { result: FormFnRes | null }) {
       <span className="text-xl font-bold">{msg}</span>
       {sx ? (
         <span className="text-center">
-          Bei Fragen kannst du uns jederzeit{" "}
-          <Link href="/kontakt" className="underline">
-            kontaktieren
-          </Link>
-          {" :)"}
+          {config?.submitSuccessText ? (
+            <>{config.submitSuccessText}</>
+          ) : (
+            <>
+              Bei Fragen kannst du uns jederzeit{" "}
+              <Link href="/kontakt" className="underline">
+                kontaktieren
+              </Link>
+              {" :)"}
+            </>
+          )}
         </span>
       ) : (
         <span className="text-center">

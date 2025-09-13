@@ -1,5 +1,5 @@
-import { ContactForm } from "@/components/ContactForm";
-import { TestForm } from "@/components/test-form";
+ 
+import ContactForm from "@/components/forms/contact-form";
 import { H3 } from "@/components/Framer/H3";
 import { PageHeader } from "@/components/Framer/PageHeader";
 import { Section } from "@/components/Framer/Section";
