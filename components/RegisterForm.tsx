@@ -62,10 +62,10 @@ export function Register4Event({ event }: { event: EventItem }) {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       dsgvo: false,
-      course: "altcha",
-      name: "aktivieren",
-      surname: "asd",
-      email: "t@t.de",
+      course: "",
+      name: "",
+      surname: "",
+      email: "",
     },
   });
 
@@ -188,7 +188,7 @@ export function Register4Event({ event }: { event: EventItem }) {
           )}
         />
 
-        {/* <Altcha /> */}
+        <Altcha />
         <Button type="submit" disabled={formState.loading}>
           {formState.loading ? "Laden..." : "Anmelden"}
         </Button>
