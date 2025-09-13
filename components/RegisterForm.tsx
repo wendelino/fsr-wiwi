@@ -56,6 +56,7 @@ export function Register4Event({ event }: { event: EventItem }) {
       message: "Bitte akzeptiere unsere Datenschutzerklärung.",
     }),
   });
+  type FormSchesma = z.infer<typeof FormSchema>;
 
   const [formState, setFormState] = useState<FormState>(initialFormState);
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -297,7 +298,7 @@ function SuccessForm() {
         <CheckCircleIcon className="h-full w-full animate-bounce" />
       </div>
       <span className="text-xl font-bold">Erfolgreich angemeldet!</span>
-      Schau in deinem Postfach nach {";)"}
+      Wir freuen uns auf dich {";)"}
     </div>
   );
 }

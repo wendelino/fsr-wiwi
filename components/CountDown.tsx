@@ -1,6 +1,5 @@
 "use client";
-import { Dot } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Countdown() { 
   const calculateTimeLeft = () => {

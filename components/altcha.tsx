@@ -32,34 +32,34 @@ const Altcha = ({ onStateChange, onVerified }: AltchaProps) => {
     };
   }, []);
 
-//   const handleStateChange = async (ev: Event | CustomEvent) => {
-//     return;
+  //   const handleStateChange = async (ev: Event | CustomEvent) => {
+  //     return;
 
-//     if (!("detail" in ev)) return;
-//     const detail = (ev as CustomEvent).detail;
-//     const payload = detail?.payload;
-//     onStateChange?.(ev);
+  //     if (!("detail" in ev)) return;
+  //     const detail = (ev as CustomEvent).detail;
+  //     const payload = detail?.payload;
+  //     onStateChange?.(ev);
 
-//     if (!payload) return;
-//     const res = await fetch("/api/altcha", {
-//       method: "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body: JSON.stringify({ payload }),
-//     });
-//     const json = await res.json().catch(() => ({}));
-//     if (!res.ok) {
-//       toast({
-//         title: "Überprüfung fehlgeschlagen",
-//         description: json?.message || JSON.stringify(json),
-//         variant: "destructive",
-//       });
-//       (widgetRef.current as unknown as { reset(): void })?.reset?.();
+  //     if (!payload) return;
+  //     const res = await fetch("/api/altcha", {
+  //       method: "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body: JSON.stringify({ payload }),
+  //     });
+  //     const json = await res.json().catch(() => ({}));
+  //     if (!res.ok) {
+  //       toast({
+  //         title: "Überprüfung fehlgeschlagen",
+  //         description: json?.message || JSON.stringify(json),
+  //         variant: "destructive",
+  //       });
+  //       (widgetRef.current as unknown as { reset(): void })?.reset?.();
 
-//       return;
-//     }
-//     onVerified?.();
-//     return false;
-//   };
+  //       return;
+  //     }
+  //     onVerified?.();
+  //     return false;
+  //   };
 
   if (!isReady) return null;
 
@@ -67,7 +67,7 @@ const Altcha = ({ onStateChange, onVerified }: AltchaProps) => {
     label: "Ich bin kein Bot",
     verifying: "Kurz abchecken ob du kein Bot bist...",
     verified: "Erfolgreich verifiziert.",
-  }
+  };
   return (
     <altcha-widget
       ref={widgetRef}
@@ -88,6 +88,7 @@ const Altcha = ({ onStateChange, onVerified }: AltchaProps) => {
       floating
       delay={500}
       expire={120000}
+      //disablerefetchonexpire
       //   onverified={handleStateChange}
       //   auto="onsubmit"
       //   debug

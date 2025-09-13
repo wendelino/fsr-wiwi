@@ -1,4 +1,5 @@
 "use server";
+import { FormFnRes } from "@/components/forms/generic-form";
 import { siteConfig } from "@/lib/siteConfig";
 
 interface Props {
@@ -18,7 +19,10 @@ type POST_Response = {
 const BASE_URL = `${siteConfig.apiEndpoint}/participant`;
 const token = process.env.CMS_TOKEN;
 
-export async function addGuestToEvent({ eventSlug, guest }: Props) {
+export async function addGuestToEvent({
+  eventSlug,
+  guest,
+}: Props): Promise<FormFnRes> {
   const body = {
     eventSlug,
     guest,
@@ -36,19 +40,19 @@ export async function addGuestToEvent({ eventSlug, guest }: Props) {
 
     if (!response.ok) {
       console.error("Failed to add guest:", response.statusText);
-      return false;
+      return { sx: false, msg: `Fehler - ${response.statusText}` };
     }
 
     const data: POST_Response = await response.json();
 
     if (response.ok) {
       console.log("Guest successfully added to event:", data);
-      return true;
+      return { sx: true, msg: data.msg };
     } else {
       console.error("Failed to add guest:", data);
     }
   } catch (error) {
     console.error("Error making API request:", error);
   }
-  return false;
+  return { sx: false, msg: `Fehler - API Request fehlgeschlagen` };
 }

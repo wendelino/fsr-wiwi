@@ -1,7 +1,7 @@
 "use server";
 import { getEvent } from "@/app/_actions/event";
+import RegisterForm from "@/components/forms/register-form";
 import { PageHeader } from "@/components/Framer/PageHeader";
-import { Register4Event } from "@/components/RegisterForm";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
 import { Info, XCircle } from "lucide-react";
@@ -58,7 +58,7 @@ export default async function page({ params }: PageProps) {
   const Icon = handlers().icon;
   const Title = handlers().title;
 
-  if (!event.registrable) {
+  if (!event.registrable || event.restSeats === 0) {
     return (
       <>
         <PageHeader title={event.title} subtitle={date} />
@@ -81,16 +81,8 @@ export default async function page({ params }: PageProps) {
 
   return (
     <>
-      <div className="flex flex-col items-center">
-        <div className="text-lg sm:text-xl font-lg -mb-8 lg:-mb-20 mt-8 py-2">
-          Anmeldung für
-        </div>
-        <PageHeader title={event.title} subtitle={date} />
-      </div>
-
-      <div className=" mx-auto  max-w-md sm:border sm:p-8 rounded-lg sm:shadow-lg">
-        <Register4Event event={event} />
-      </div>
+      <PageHeader title={event.title} subtitle={date} />
+      <RegisterForm event={event} />
     </>
   );
 }

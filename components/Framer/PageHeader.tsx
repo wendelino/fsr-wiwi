@@ -24,7 +24,7 @@ export const PageHeader = ({ className, title, subtitle, loading }: BaseProps) =
       </div>
     )
     return (
-      <div className="p-5 text-center py-8 lg:pt-20 ">
+      <div className="p-5 text-center py-8 pb-0 md:pb-8 md:pt-20 ">
         <H1>{title}</H1>
         <P className="lg:text-xl max-w-2xl text-muted-foreground">{subtitle}</P>
       </div>
