@@ -26,6 +26,8 @@ export const siteConfig = {
     },
     { href: "/kontakt", label: "Kontakt" },
   ],
+  apiEndpoint: "https://cms.fsr-wiwi-halle.de/api/public", 
+  // apiEndpoint: "http://localhost:3000/api/public",  
   company: {
     owner: "Fachschaftsrat Wirtschaftswissenschaften",
     plz: "06108",

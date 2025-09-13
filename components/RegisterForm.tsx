@@ -1,10 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { addGuestToEvent } from "@/app/_actions/sign-up";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -16,6 +17,12 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { format } from "date-fns";
+import { de } from "date-fns/locale";
+import { CheckCircleIcon, XCircleIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import Altcha from "./altcha";
 import { Input } from "./ui/input";
 import {
   Select,
@@ -24,15 +31,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { AnimatedEvents, Header, SubHeader } from "./TextComponents";
-import { useState } from "react";
-import { CheckCircleIcon, XCircleIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { format } from "date-fns";
-import { de } from "date-fns/locale";
-import { EventProps, LocationCard } from "./Event";
-import { addGuestToEvent } from "@/app/_actions/sign-up";
-import { Skeleton } from "./ui/skeleton";
 // import { sendMail } from "@/app/_actions/sendMail";
 
 interface FormState {
@@ -46,13 +44,14 @@ const initialFormState: FormState = {
   error: false,
 };
 
-export function Register4Event({ event }: { event: EventProps }) {
+export function Register4Event({ event }: { event: EventItem }) {
   const FormSchema = z.object({
-    name: z.string({ message: "Dieses Feld ist erforderlich." }),
-    surname: z.string({ message: "Dieses Feld ist erforderlich." }),
+    name: z.string().min(1, { message: "Dieses Feld ist erforderlich." }),
+    surname: z.string().min(1, { message: "Dieses Feld ist erforderlich." }),
     email: z
       .string({ message: "Dieses Feld ist erforderlich." })
       .email({ message: "Ungültige E-Mail-Adresse" }),
+    course: z.string().min(1, { message: "Dieses Feld ist erforderlich." }),
     dsgvo: z.boolean().refine((value) => value === true, {
       message: "Bitte akzeptiere unsere Datenschutzerklärung.",
     }),
@@ -63,6 +62,10 @@ export function Register4Event({ event }: { event: EventProps }) {
     resolver: zodResolver(FormSchema),
     defaultValues: {
       dsgvo: false,
+      course: "altcha",
+      name: "aktivieren",
+      surname: "asd",
+      email: "t@t.de",
     },
   });
 
@@ -80,13 +83,10 @@ export function Register4Event({ event }: { event: EventProps }) {
           Dein FSR Wiwi <3
         </p>`;
 
-    const guest = {
-      firstName: data.name,
-      lastName: data.surname,
-      email: data.email,
-    };
-
-    const res = await addGuestToEvent({ eventId: event.id, guest });
+    const res = await addGuestToEvent({
+      eventSlug: event.slug,
+      guest: { ...data },
+    });
     if (res) {
       setFormState((prev) => ({ ...prev, submitted: true }));
       // await sendMail(data.email, html, "Anmeldungsbestätigung " + event.title);
@@ -100,7 +100,7 @@ export function Register4Event({ event }: { event: EventProps }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 flex flex-col w-full max-w-md border p-8 rounded-lg shadow-lg"
+        className="space-y-6 flex flex-col w-full"
       >
         <FormField
           control={form.control}
@@ -109,7 +109,11 @@ export function Register4Event({ event }: { event: EventProps }) {
             <FormItem>
               <FormLabel>Vorname *</FormLabel>
               <FormControl>
-                <Input placeholder="Max" {...field} autoComplete="given-name" />
+                <Input
+                  placeholder="Ferdinand"
+                  {...field}
+                  autoComplete="given-name"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -147,6 +151,19 @@ export function Register4Event({ event }: { event: EventProps }) {
         />
         <FormField
           control={form.control}
+          name="course"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Studiengang *</FormLabel>
+              <FormControl>
+                <Input placeholder="Wirtschaftsinformatik B.Sc." {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
           name="dsgvo"
           render={({ field }) => (
             <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
@@ -170,6 +187,8 @@ export function Register4Event({ event }: { event: EventProps }) {
             </FormItem>
           )}
         />
+
+        {/* <Altcha /> */}
         <Button type="submit" disabled={formState.loading}>
           {formState.loading ? "Laden..." : "Anmelden"}
         </Button>
@@ -271,144 +290,13 @@ export function SelectEvent({ events }: { events: EventItem[] }) {
   );
 }
 
-export function AdminLogin() {
-  const FormSchema = z.object({
-    password: z.string({ message: "Dieses Feld ist erforderlich." }),
-  });
-
-  const [loading, setLoading] = useState(false);
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-  });
-
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
-    setLoading(true);
-
-    const res = { success: true };
-  }
-
-  return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 flex flex-col max-w-md mx-auto border p-8 rounded-lg shadow-lg"
-      >
-        <FormField
-          control={form.control}
-          name="password"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Passwort *</FormLabel>
-              <FormControl>
-                <Input placeholder="1234" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-
-        <Button type="submit" disabled={loading}>
-          {loading ? "Laden..." : "Anmelden"}
-        </Button>
-      </form>
-    </Form>
-  );
-}
-
-export function RegisterNewsletter() {
-  const FormSchema = z.object({
-    email: z
-      .string({ message: "Dieses Feld ist erforderlich." })
-      .email({ message: "Ungültige E-Mail-Adresse" }),
-    dsgvo: z.boolean().refine((value) => value === true, {
-      message: "Bitte akzeptiere unsere Datenschutzerklärung.",
-    }),
-  });
-
-  const [formSubmitted, setFormSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-    defaultValues: {
-      dsgvo: false,
-    },
-  });
-
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
-    setLoading(true);
-
-    const res = { success: true };
-    if (res.success) {
-      setFormSubmitted(true);
-    } else setError(true);
-  }
-
-  if (formSubmitted) return <SuccessForm />;
-  if (error) return <ErrorForm />;
-
-  return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="space-y-6 flex flex-col w-full  border p-8 rounded-lg shadow-lg"
-      >
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>E-Mail *</FormLabel>
-              <FormControl>
-                <Input placeholder="Coming soon..." {...field} disabled />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="dsgvo"
-          render={({ field }) => (
-            <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4">
-              <FormControl>
-                <Checkbox
-                  checked={field.value}
-                  onCheckedChange={field.onChange}
-                />
-              </FormControl>
-              <div className="space-y-1 leading-none">
-                <FormLabel>Datenschutzerklärung *</FormLabel>
-                <FormDescription>
-                  Ich habe die{" "}
-                  <Link className="underline" href="/datenschutz">
-                    Datenschutzerklärung
-                  </Link>{" "}
-                  gelesen und akzeptiere diese
-                </FormDescription>
-                <FormMessage />
-              </div>
-            </FormItem>
-          )}
-        />
-        <Button type="submit" disabled={loading}>
-          {loading ? "Laden..." : "Anmelden"}
-        </Button>
-        <FormDescription>
-          Felder mit einem <strong>*</strong> sind Pflichtfelder.
-        </FormDescription>
-      </form>
-    </Form>
-  );
-}
-
 function SuccessForm() {
   return (
-    <div className="flex flex-col items-center w-full gap-4 max-w-md border p-8 rounded-lg shadow-lg">
-      <div className="text-green-800 w-full h-32 flex justify-center my-8">
+    <div className="flex flex-col items-center w-full gap-4">
+      <div className="text-green-800 w-full h-16 flex justify-center my-8">
         <CheckCircleIcon className="h-full w-full animate-bounce" />
       </div>
-      <span className="text-2xl font-bold">Erfolgreich angemeldet!</span>
+      <span className="text-xl font-bold">Erfolgreich angemeldet!</span>
       Schau in deinem Postfach nach {";)"}
     </div>
   );
@@ -416,14 +304,19 @@ function SuccessForm() {
 
 function ErrorForm() {
   return (
-    <div className="flex flex-col items-center w-full gap-4 max-w-md border p-8 rounded-lg shadow-lg">
-      <div className="text-red-800 w-full h-32 flex justify-center my-8">
+    <div className="flex flex-col items-center w-full gap-4">
+      <div className="text-red-800 w-full h-16 flex justify-center my-8">
         <XCircleIcon className="h-full w-full animate-bounce" />
       </div>
-      <span className="text-2xl font-bold">
-        Leider ist ein Fehler passiert {":/"}
+      <span className="text-xl font-bold">
+        Das hat nicht geklappt {":/"}
       </span>
-      Bitte kontaktiere uns per E-Mail!
+      <span>
+        Versuche es erneut oder{" "}
+        <Link href="/kontakt" className="underline">
+          kontaktiere uns
+        </Link>.
+      </span>
     </div>
   );
 }

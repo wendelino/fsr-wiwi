@@ -1,36 +1,54 @@
- 
-interface Props { 
-  eventId: string;
+"use server";
+import { siteConfig } from "@/lib/siteConfig";
+
+interface Props {
+  eventSlug: string;
   guest: {
-    firstName: string;
-    lastName: string;
+    name: string;
+    surname: string;
     email: string;
+    course: string;
   };
 }
+type POST_Response = {
+  msg: string;
+  success: boolean;
+};
 
-export async function addGuestToEvent({ eventId, guest }: Props) {
-  const apiUrl = "https://eventec.vercel.app/api/sign-up"; 
-  const apiKey = "your-expected-api-key"
+const BASE_URL = `${siteConfig.apiEndpoint}/participant`;
+const token = process.env.CMS_TOKEN;
+
+export async function addGuestToEvent({ eventSlug, guest }: Props) {
+  const body = {
+    eventSlug,
+    guest,
+  };
 
   try {
-    const response = await fetch(apiUrl, {
+    const response = await fetch(BASE_URL, {
       method: "POST",
       headers: {
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ apiKey, eventId, guest }),
+      body: JSON.stringify(body),
     });
 
-    const data = await response.json();
+    if (!response.ok) {
+      console.error("Failed to add guest:", response.statusText);
+      return false;
+    }
+
+    const data: POST_Response = await response.json();
 
     if (response.ok) {
       console.log("Guest successfully added to event:", data);
-      return true
+      return true;
     } else {
-      console.error("Failed to add guest:", data); 
+      console.error("Failed to add guest:", data);
     }
   } catch (error) {
     console.error("Error making API request:", error);
   }
-  return false
+  return false;
 }

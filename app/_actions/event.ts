@@ -1,11 +1,14 @@
 "use server";
 
+import { siteConfig } from "@/lib/siteConfig";
+
 type GET_Response = {
   items: EventItem[];
   nextCursor: string | null;
 };
 
-const BASE_URL = "https://cms.fsr-wiwi-halle.de/api/public/event";
+const BASE_URL = `${siteConfig.apiEndpoint}/event`;
+const token = process.env.CMS_TOKEN;
 
 export async function getEvents(ctx?: {
   page?: number;
@@ -14,11 +17,12 @@ export async function getEvents(ctx?: {
   filter?: { registrable?: boolean };
 }) {
   try {
-    const token = process.env.CMS_TOKEN;
     const limit = ctx?.limit || 10;
     const page = ctx?.page || 0;
     const tag = ctx?.tag ? `/${ctx.tag}` : "";
-    const filter = ctx?.filter ? `&filter=${encodeURIComponent(JSON.stringify(ctx.filter))}` : "";
+    const filter = ctx?.filter
+      ? `&filter=${encodeURIComponent(JSON.stringify(ctx.filter))}`
+      : "";
     const url = `${BASE_URL}${tag}?limit=${limit}&page=${page}${filter}`;
 
     const response = await fetch(url, {
@@ -53,10 +57,9 @@ export async function getEvents(ctx?: {
 
 export async function getEvent(slug: string) {
   try {
-    const token = process.env.CMS_TOKEN;
     const url = `${BASE_URL}?slug=${slug}`;
 
-    const response = await fetch(url, { 
+    const response = await fetch(url, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",

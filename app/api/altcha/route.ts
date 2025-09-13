@@ -21,7 +21,7 @@ export async function GET(request: Request) {
     if (limitReached) return limitReached;
     const challenge = await createChallenge({
       hmacKey: ALTCHA_HMAC_KEY,
-      maxNumber: 500_000,
+      maxNumber: 300_000,
       expires: new Date(Date.now() + CHALLENGE_TTL_MS),
     });
     return NextResponse.json(challenge);
