@@ -4,15 +4,17 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 import { H1 } from "./H1";
 import { P } from "./P";
 import { Skeleton } from "../ui/skeleton";
+import { cn } from "@/lib/utils";
 
 interface BaseProps { 
   className?: string;
   title?: string;
   subtitle?: string;
-  loading?: boolean
+  loading?: boolean;
+  disableMuted?: boolean;
 }
 
-export const PageHeader = ({ className, title, subtitle, loading }: BaseProps) => {
+export const PageHeader = ({ className, title, subtitle, loading, disableMuted }: BaseProps) => {
     const [isFirstRender, setIsFirstRender] = useState(true);
   
     useEffect(() => setIsFirstRender(false), []);
@@ -26,7 +28,7 @@ export const PageHeader = ({ className, title, subtitle, loading }: BaseProps) =
     return (
       <div className="p-5 text-center py-8 pb-0 md:pb-8 md:pt-20 ">
         <H1>{title}</H1>
-        <P className="lg:text-xl max-w-2xl text-muted-foreground">{subtitle}</P>
+        <P className={cn("lg:text-xl max-w-2xl", !disableMuted && "text-muted-foreground")}>{subtitle}</P>
       </div>
     );
   };
