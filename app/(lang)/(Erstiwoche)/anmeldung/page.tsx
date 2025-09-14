@@ -1,12 +1,11 @@
 import { getEvents } from "@/app/_actions/event";
-import { EventProps } from "@/components/Event";
-import { SelectEvent } from "@/components/RegisterForm";
+import { SelectEventForm } from "@/components/forms/select-event-form";
 import { Header } from "@/components/TextComponents";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Anmeldung",
-  description: "Anmelden für Veranstaltungen der Ersti-Woche 2025", 
+  description: "Anmelden für Veranstaltungen der Ersti-Woche 2025",
   openGraph: {
     url: "https://fsr-wiwi-halle.de/anmeldung",
     type: "website",
@@ -30,7 +29,7 @@ export default async function page() {
   return (
     <div className="flex flex-col items-center">
       <Header>Anmeldung</Header>
-      <SelectEvent events={events} />
+      <SelectEventForm events={events} />
     </div>
   );
 }
