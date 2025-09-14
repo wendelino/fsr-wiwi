@@ -19,6 +19,15 @@ export async function generateMetadata({
 
   return {
     title: `${event?.title || "Event 404"}`,
+    description: event?.description.slice(0, 100) || "Event 404",
+    openGraph: {
+      title: `${event?.title || "Event 404"}`,
+      description: event?.description.slice(0, 100) || "Event 404",
+    },
+    twitter: {
+      title: `${event?.title || "Event 404"}`,
+      description: event?.description.slice(0, 100) || "Event 404",
+    },
   };
 }
 

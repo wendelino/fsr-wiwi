@@ -50,6 +50,14 @@ export async function generateMetadata({
       "Universität",
       "MLU",
     ],
+    openGraph: {
+      title: `${t.title} ${legislatur?.period || gt["not-found"]}`,
+      description: `${t.elected_members} ${legislatur?.period || ""}`,
+    },
+    twitter: {
+      title: `${t.title} ${legislatur?.period || gt["not-found"]}`,
+      description: `${t.elected_members} ${legislatur?.period || ""}`,
+    },
   };
 }
 

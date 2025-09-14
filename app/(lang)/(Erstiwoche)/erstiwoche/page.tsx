@@ -10,6 +10,14 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Ersti-Woche",
   description: "Alles über die Ersti-Woche 2025",
+  openGraph: {
+    title: "Ersti-Woche",
+    description: "Alles über die Ersti-Woche 2025",
+  },
+  twitter: {
+    title: "Ersti-Woche",
+    description: "Alles über die Ersti-Woche 2025",
+  },
 };
 
 export default async function page() {

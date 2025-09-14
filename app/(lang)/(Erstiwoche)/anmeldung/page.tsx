@@ -6,7 +6,18 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Anmeldung",
-  description: "Anmelden für Veranstaltungen der Ersti-Woche 2025",
+  description: "Anmelden für Veranstaltungen der Ersti-Woche 2025", 
+  openGraph: {
+    url: "https://fsr-wiwi-halle.de/anmeldung",
+    type: "website",
+    title: "Anmeldung",
+    description: "Anmelden für Veranstaltungen der Ersti-Woche 2025",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Anmeldung",
+    description: "Anmelden für Veranstaltungen der Ersti-Woche 2025",
+  },
 };
 
 export default async function page() {
