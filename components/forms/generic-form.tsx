@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { CheckCircleIcon, XCircleIcon } from "lucide-react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 type FormPhase = "idle" | "loading" | "success" | "error";
 
@@ -151,7 +152,10 @@ export default function GenericForm<TValues extends FieldValues>(
   }
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, y: 10, scale: 0.9 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      transition={{ duration: 0.3 }}
       className={cn(
         " mx-auto  max-w-md w-full",
         !disableStyling && "sm:border sm:p-8 sm:rounded-xl sm:shadow-xl",
@@ -182,11 +186,17 @@ export default function GenericForm<TValues extends FieldValues>(
           </Button>
         </form>
       </Form>
-    </div>
+    </motion.div>
   );
 }
 
-function FinalForm({ result, config }: { result: FormFnRes | null, config?: GenericFormConfig }) {
+function FinalForm({
+  result,
+  config,
+}: {
+  result: FormFnRes | null;
+  config?: GenericFormConfig;
+}) {
   const { sx, msg } = result ?? {
     sx: false,
     msg: "Ein Fehler ist aufgetreten.",

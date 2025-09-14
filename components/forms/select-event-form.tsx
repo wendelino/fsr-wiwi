@@ -35,7 +35,7 @@ export function SelectEventForm({ events }: { events: EventItem[] }) {
         </SelectTrigger>
         <SelectContent>
           {events.map((e) => (
-            <SelectItem key={e.slug} value={e.slug}>
+            <SelectItem key={e.slug} value={e.slug} disabled={e.restSeats === 0}>
               {e.title}
             </SelectItem>
           ))}

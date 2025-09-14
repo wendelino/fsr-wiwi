@@ -134,7 +134,13 @@ export default function GridItem({
           {!length && (
             <div className="flex justify-end w-full gap-2 flex-wrap mt-2">
               {registrable && (
-                <Badge className=" font-medium">Anmeldepflichtig!</Badge>
+                <>
+                  {restSeats == 0 ? (
+                    <Badge variant="destructive">Ausgebucht!</Badge>
+                  ) : (
+                    <Badge className=" font-medium">Anmeldepflichtig!</Badge>
+                  )}
+                </>
               )}
             </div>
           )}
