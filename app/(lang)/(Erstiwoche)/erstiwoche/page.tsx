@@ -47,7 +47,7 @@ export default async function page() {
     },
     { src: "nabio.svg", href: "https://nabio.de", label: "Nabio" },
     {
-      src: "wilkinson.svg",
+      src: "wilkinson.png",
       href: "https://wilkinsonsword.de",
       label: "Wilkinson Sword",
     },
