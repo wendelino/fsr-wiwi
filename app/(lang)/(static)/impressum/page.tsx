@@ -6,7 +6,8 @@ export default function page() {
       <Header>Impressum</Header>
       <SubHeader>Angaben gemäß § 5 TMG</SubHeader>
       <p>
-        Fachschaftsrat Wirtschaftswissenschaften <br />
+        Fachschaftsrat des wirtschaftswissenschaftlichen Bereichs der
+        Juristischen und Wirtschaftswissenschaftlichen Fakultät <br />
         Große Steinstraße 73 <br />
         06108 Halle (Saale) <br />
         Deutschland <br />
@@ -14,7 +15,7 @@ export default function page() {
 
       <SubHeader>Vertreten durch</SubHeader>
       <p>
-        Den Vorsitzenden des Fachschaftsrates Wirtschaftswissenschaften <br /> 
+        Den Vorsitzenden des Fachschaftsrates Wirtschaftswissenschaften <br />
       </p>
 
       <SubHeader>Kontakt</SubHeader>
