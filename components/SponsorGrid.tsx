@@ -71,12 +71,12 @@ export function SponsorOffer({ link, label, image, text, orientation = "left" }:
           alt={label}
           width={400}
           height={600}
-          className="h-auto w-full object-cover"
+          className="h-full w-full object-cover"
         />
       )}
       <div className={cn("flex flex-col gap-8 p-4 sm:p-8 justify-center", orientation === "right" && "md:order-first")}>
         <p className="text-lg font-semibold">{label}</p>
-        <p>{text}</p>
+        <p className="text-muted-foreground whitespace-pre-wrap">{text}</p>
 
         <Button asChild>
         <Link href={link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1">
@@ -90,7 +90,7 @@ export function SponsorOffer({ link, label, image, text, orientation = "left" }:
 
 export function SponsorOfferGrid({ items }: { items: SponsorOfferProps[] }) {
   return (
-    <div className="space-y-8 mt-16">
+    <div className="space-y-8 lg:space-y-16 mt-16">
       {items.map((item, i) => (
         <SponsorOffer key={item.label} {...item} orientation={i % 2 === 0 ? "left" : "right"} />
       ))}

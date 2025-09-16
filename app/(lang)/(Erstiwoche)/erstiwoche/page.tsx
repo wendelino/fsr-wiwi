@@ -69,6 +69,13 @@ export default async function page() {
       text: "SMART BAGS FOR SMART BRAINS: Studierende, Lernende und Schüler*innen sparen bis zum 15. Oktober 25% auf vier ausgewählte FREITAG Taschen. Jetzt zugreifen und nachhaltig in deine Zukunft investieren!",
     },
     {
+      link: "https://www.buehnen-halle.de/de/program/sein-oder-nichtsein-to-be-or-not-to-be/253233",
+      image: "buehnen_o.jpg",
+      label:
+        "Sein oder Nichtsein - Komödie von Nick Whitby nach dem Film von Ernst Lubitsch",
+      text: "Am Polski-Theater in Warschau läuft alles wie gewohnt – bis die deutsche Besatzung 1939 das Spiel abrupt verändert. Ausgerechnet eine Schauspieltruppe wird nun in einen gefährlichen Spionagefall verwickelt: Eine geheime Liste von Widerstandskämpfern darf nicht in die Hände der Nazis fallen. Die einzige Waffe der Schauspielerinnen und Schauspieler ist ihr Können – und so wird Verkleidung zur Überlebensstrategie. Mit viel Tempo, Witz und klugem Theatergeist zeigt die Inszenierung von Tobias Materna, wie aus Spiel bitterer Ernst werden kann – und wie Humor selbst in dunklen Zeiten Widerstand bedeutet.\n\n Special für Studis: Am 08.10. könnt ihr die Vorstellung zum Last Minute Preis von nur 8 € besuchen.",
+    },
+    {
       link: "https://wilkinsonsword.de",
       image: "wilkinson_o.jpg",
       label: "Wilkinson Sword Germany",
