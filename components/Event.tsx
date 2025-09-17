@@ -13,9 +13,11 @@ import {
 } from "@/components/ui/drawer";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-import { MapPin, MoveRightIcon } from "lucide-react";
+import { Calendar, MapPin, MoveRightIcon } from "lucide-react";
 import { createEvent } from "ics";
 import Link from "next/link";
+import { handleSafeCalendar } from "@/lib/utils";
+import { Section } from "./Framer/Section";
 type Location_DB = {
   label: string;
   lat: number;
@@ -42,46 +44,6 @@ export type LocationProps = {
 export type EventWithLocation = EventProps & { location_id: string | null };
 
 export default function EventCard({ event }: { event: EventItem }) {
-  const handleSafeCalendar = () => {
-    const icsEvent: any = {
-      start: [
-        event.start.getFullYear(),
-        event.start.getMonth() + 1,
-        event.start.getDate(),
-        event.start.getHours(),
-        event.start.getMinutes(),
-      ],
-      end: [
-        event.end.getFullYear(),
-        event.end.getMonth() + 1,
-        event.end.getDate(),
-        event.end.getHours(),
-        event.end.getMinutes(),
-      ],
-      title: event.title,
-      description: event.description,
-      status: "CONFIRMED",
-      busyStatus: "BUSY",
-    };
-
-    createEvent(icsEvent, (error, value) => {
-      if (error) {
-        console.error(error);
-        return;
-      }
-
-      const blob = new Blob([value], { type: "text/calendar;charset=utf-8" });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = "events.ics";
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(url);
-    });
-  };
- 
   return (
     <Drawer>
       <DrawerTrigger asChild>
@@ -117,11 +79,6 @@ export default function EventCard({ event }: { event: EventItem }) {
           </div>
           <div className="flex justify-end w-full gap-2 flex-wrap">
             {event.registrable && <Badge>Anmeldepflichtig!</Badge>}
-            {event.restSeats ? (
-              <Badge variant={"secondary"}>
-                {event.restSeats} Plätze übrig!
-              </Badge>
-            ) : null}
           </div>
         </div>
       </DrawerTrigger>
@@ -147,12 +104,14 @@ export default function EventCard({ event }: { event: EventItem }) {
           <DrawerFooter>
             {event.registrable && (
               <Button asChild>
-                <Link href={"erstiwoche/anmeldung/" + event.title}>
+                <Link href={"erstiwoche/anmeldung/" + event.slug}>
                   Jetzt anmelden
                 </Link>
               </Button>
             )}
-            <Button onClick={handleSafeCalendar}>Im Kalender sichern</Button>
+            <Button onClick={() => handleSafeCalendar(event)}>
+              Im Kalender sichern
+            </Button>
             <DrawerClose asChild>
               <Button variant="outline">Zurück</Button>
             </DrawerClose>
@@ -215,5 +174,26 @@ export function LocationCard({ location }: { location: Location_DB }) {
         </Button>
       </div>
     </div>
+  );
+}
+
+export function FullEventView({ event }: { event: EventItem }) {
+  return (
+    <>
+      <Section className="whitespace-pre-line">{event.description}</Section>
+      <Section className="flex justify-end gap-2">
+        <Button onClick={() => handleSafeCalendar(event)} variant="secondary">
+          <Calendar className="size-4 mr-2" />
+          Im Kalender sichern
+        </Button>
+        {event.registrable && (
+          <Button asChild>
+            <Link href={"/anmeldung/" + event.slug}>
+              Jetzt anmelden
+            </Link>
+          </Button>
+        )}
+      </Section>
+    </>
   );
 }

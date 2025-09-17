@@ -3,10 +3,14 @@ import { getEvent } from "@/app/_actions/event";
 import { PageHeader } from "@/components/Framer/PageHeader";
 import { Section } from "@/components/Framer/Section";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Button } from "@/components/ui/button";
 import { format } from "date-fns";
 import { de } from "date-fns/locale";
 import { Metadata } from "next";
+import Link from "next/link";
 import { Suspense } from "react";
+import { handleSafeCalendar } from "@/lib/utils";
+import { FullEventView } from "@/components/Event";
 
 export async function generateMetadata({
   params,
@@ -79,12 +83,7 @@ async function Content({ slug }: { slug: string }) {
   return (
     <>
       <PageHeader title={event.title} subtitle={date} />
-      <Section className="whitespace-pre-line">{event.description}</Section>
-      {/* {location && (
-        <Section className="h-96 shadow-lg">
-          <MapLoader locations={[location!]} />
-        </Section>
-      )} */}
+      <FullEventView event={event} />
     </>
   );
 }

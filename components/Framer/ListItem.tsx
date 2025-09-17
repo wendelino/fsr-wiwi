@@ -22,7 +22,7 @@ export const ListItem = ({
       <motion.li
         key={index}
         className={cn(
-          "list-none",
+          "list-none w-full",
           className
         )}
         initial={{ x: -50, y: 20, opacity: 0 }}

@@ -41,12 +41,12 @@ export default function InfiniteScroll({
   }, [inView]);
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 w-full ">
       {/* {events.map((event) => (
         <EventPreview key={event.id} event={event} />
       ))} */}
       {groupEventsByDay(events).map((day) => (
-        <Section key={day.date}>
+        <Section key={day.date} className="w-full ">
           <div className="flex items-center gap-4 text-lg font-semibold">
             {format(day.date, "dd.MM.yyyy")}
             <div className="border-t border-foreground flex-1" />
