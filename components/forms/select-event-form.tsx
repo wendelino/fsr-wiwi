@@ -1,6 +1,10 @@
 "use client";
+import { format } from "date-fns";
+import { de } from "date-fns/locale";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { Button } from "../ui/button";
+import { Label } from "../ui/label";
 import {
   Select,
   SelectContent,
@@ -8,10 +12,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { Label } from "../ui/label";
-import { Button } from "../ui/button";
-import { format } from "date-fns";
-import { de } from "date-fns/locale";
 
 export function SelectEventForm({ events }: { events: EventItem[] }) {
   const router = useRouter();
@@ -28,6 +28,7 @@ export function SelectEventForm({ events }: { events: EventItem[] }) {
 
   return (
     <div className="space-y-6 flex flex-col w-full max-w-md border p-8 rounded-lg shadow-lg">
+   
       <Label>Veranstaltung auswählen</Label>
       <Select onValueChange={handleEventChange}>
         <SelectTrigger>
@@ -35,7 +36,11 @@ export function SelectEventForm({ events }: { events: EventItem[] }) {
         </SelectTrigger>
         <SelectContent>
           {events.map((e) => (
-            <SelectItem key={e.slug} value={e.slug} disabled={e.restSeats === 0}>
+            <SelectItem
+              key={e.slug}
+              value={e.slug}
+              disabled={e.restSeats === 0}
+            >
               {e.title}
             </SelectItem>
           ))}

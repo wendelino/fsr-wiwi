@@ -65,7 +65,7 @@ export default function RegisterForm({ event }: { event: EventItem }) {
         description: "Bitte trage deine Daten ein.",
         submitText: "Anmelden",
         submitLoadingText: "Laden...",
-        submitSuccessText: "Erfolgreich gesendet!",
+        submitSuccessText: "Du bekommst eine Bestätigung per E-Mail.",
         submitErrorText: "Senden fehlgeschlagen. Versuche es erneut.",
         showRequiredHint: true,
       }}

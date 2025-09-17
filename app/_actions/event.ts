@@ -37,11 +37,7 @@ export async function getEvents(ctx?: {
     });
     const data: GET_Response = await response.json();
 
-    const events: EventItem[] = data.items.map((e) => ({
-      ...e,
-      start: new Date(e.start),
-      end: new Date(e.end),
-    }));
+    const events: EventItem[] = data.items.map(eventF);
     return {
       events,
       nextCursor: data.nextCursor,
@@ -68,11 +64,7 @@ export async function getEvent(slug: string) {
     });
     const data: GET_Response = await response.json();
 
-    const events: EventItem[] = data.items.map((e) => ({
-      ...e,
-      start: new Date(e.start),
-      end: new Date(e.end),
-    }));
+    const events: EventItem[] = data.items.map(eventF);
     return {
       event: events[0] || null,
     };
@@ -82,4 +74,15 @@ export async function getEvent(slug: string) {
       event: null,
     };
   }
+}
+
+function eventF(i: EventItem): EventItem {
+  return {
+    ...i,
+    start: new Date(i.start),
+    end: new Date(i.end),
+    
+    maxGuests: null, // Override in API
+    restSeats: null, // Override in API
+  };
 }

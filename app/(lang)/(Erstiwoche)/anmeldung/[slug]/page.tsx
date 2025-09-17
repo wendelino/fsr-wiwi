@@ -77,10 +77,14 @@ export default async function page({ params }: PageProps) {
 
   return (
     <div className="space-y-6">
-      <PageHeader title={event.title} subtitle={date} />
-      <InfoCard type="info" displayContact={false}>
-        Noch <span className="font-bold mx-1 underline">{event.restSeats}</span>{" "}
-        Plätze übrig!
+      <PageHeader title={event.title} subtitle={date} /> 
+      <InfoCard type="warning">
+        Da wir nur eine begrenzte Anzahl an Plätzen haben, versuchen wir diese
+        möglichst fair zu verteilen. Am Montag (6.10) um 15 Uhr werden die
+        Anmeldungen geschlossen und die Plätze im Losverfahren verteilt. Du
+        bekommst dann eine E-Mail mit einer Zu- oder Absage für deine
+        Anmeldungen. Wir bitten um Verständnis, dass wir nicht alle Anmeldungen
+        annehmen können.
       </InfoCard>
       <RegisterForm event={event} />
     </div>
