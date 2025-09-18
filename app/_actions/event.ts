@@ -7,7 +7,7 @@ type GET_Response = {
   nextCursor: string | null;
 };
 
-const BASE_URL = `${siteConfig.apiEndpoint}/event`;
+const BASE_URL = `${process.env.CMS_ENDPOINT}/event`;
 const token = process.env.CMS_TOKEN;
 
 export async function getEvents(ctx?: {

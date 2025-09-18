@@ -16,7 +16,7 @@ type POST_Response = {
   success: boolean;
 };
 
-const BASE_URL = `${siteConfig.apiEndpoint}/participant`;
+const BASE_URL = `${process.env.CMS_ENDPOINT}/participant`;
 const token = process.env.CMS_TOKEN;
 
 export async function addGuestToEvent({

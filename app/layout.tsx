@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "../globals.css";
+import "./globals.css";
 import NavBar from "@/components/NavBar";
 import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
@@ -123,7 +123,7 @@ export default function RootLayout({
           
         >
           <NavBar lang={"de"} />
-          <main className="flex-1 min-h-[53vh]">
+          <main className="flex-1 min-h-[53vh] pt-8">
             <WidthWrapper className=" flex flex-col gap-8 lg:gap-16">
               {children}
             </WidthWrapper>
