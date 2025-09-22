@@ -132,7 +132,7 @@ export default function GridItem({
             </div>
           )}
           {!length && (
-            <div className="flex justify-end w-full gap-2 flex-wrap mt-2">
+            <div className="flex justify-start w-full gap-2 flex-wrap mt-2">
               {registrable && (
                 <>
                   {restSeats == 0 ? (
@@ -144,6 +144,8 @@ export default function GridItem({
               )}
             </div>
           )}
+
+          <ChevronRight className="size-4 inline-block absolute right-1 bottom-1 bg-background text-muted-foreground rounded-full" />
         </div>
       </DialogTrigger>
       <DialogContent className="max-h-screen overflow-y-auto">

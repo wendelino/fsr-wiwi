@@ -116,7 +116,7 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
   return (
     <div className="w-full">
       {/* Mobile Liste */}
-      {/* <div className="sm:hidden space-y-6">
+      <div className="sm:hidden space-y-6">
         {weekDays.map((day) => {
           const groups = groupEventsForDay(day);
           return (
@@ -137,44 +137,44 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
                 )}
                 {groups.map((g) => {
                   const isGroup = g.events.length > 1;
+                  const event = g.events[0];
                   return (
-                    <div key={g.id} className="border rounded-md p-3 bg-card">
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="text-sm font-medium">
-                          {format(g.start, "HH:mm")}–{format(g.end, "HH:mm")}
-                        </div>
-                        {isGroup ? (
-                          <button
-                            type="button"
-                            className="text-xs px-2 py-1 rounded bg-muted hover:bg-muted/80"
-                            onClick={() =>
-                              setOpenGroupId((v) => (v === g.id ? null : g.id))
-                            }
+                    <div
+                      key={g.id} 
+                      className="relative"
+                      onClick={() =>
+                        isGroup &&
+                        setOpenGroupId((v) => (v === g.id ? null : g.id))
+                      }
+                    >
+                      <GridItem
+                        event={event}
+                        length={isGroup ? g.events.length : undefined}
+                      />
+
+                      {/* Gruppen-Overlay */}
+                      {isGroup && openGroupId === g.id ? (
+                        <>
+                          <div
+                            className="absolute z-10 mt-1 w-full rounded-md border border-muted-foreground/40 bg-muted text-popover-foreground shadow-xl -top-1"
+                            onClick={(e) => e.stopPropagation()}
                           >
-                            {g.events.length} Events anzeigen
-                          </button>
-                        ) : null}
-                      </div>
-                      {!isGroup ? (
-                        <div className="mt-1 text-sm">{g.events[0]?.title}</div>
-                      ) : openGroupId === g.id ? (
-                        <ul className="mt-2 space-y-1 text-sm">
-                          {g.events.map((e) => (
-                            <li
-                              key={(e as any).id}
-                              className="rounded p-2 bg-muted"
+                            <Button
+                              type="button"
+                              className="size-6 p-1 absolute -right-2 -top-2"
+                              onClick={() => setOpenGroupId(null)}
                             >
-                              <div className="font-medium">
-                                {(e as any).title}
-                              </div>
-                              {(e as any).description ? (
-                                <div className="text-xs text-muted-foreground">
-                                  {(e as any).description}
-                                </div>
-                              ) : null}
-                            </li>
-                          ))}
-                        </ul>
+                              <X className="size-5 inline-block " />
+                            </Button>
+                            <ul className="max-h-[66vh] overflow-auto p-1 space-y-1 pt-6">
+                              {g.events.map((e) => (
+                                <li key={e.id}>
+                                  <GridItem event={e} />
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                        </>
                       ) : null}
                     </div>
                   );
@@ -183,11 +183,11 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
             </div>
           );
         })}
-      </div> */}
+      </div>
 
       {/* Desktop/Tablet Raster */}
-      <div className=" sm:block overflow-x-auto">
-        <div className="min-w-[500px] w-full">
+      <div className="hidden sm:block overflow-x-auto">
+        <div className="min-w-[900px] w-full">
           {/* Kopfzeile Wochentage */}
           <div className="grid grid-cols-[48px_repeat(6,1fr)]">
             <div className="h-16" />
@@ -292,7 +292,7 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
                                 </Button>
                                 <ul className="max-h-[66vh] overflow-auto p-1 space-y-1 pt-6">
                                   {g.events.map((e) => (
-                                    <li key={e.id} >
+                                    <li key={e.id}>
                                       <GridItem event={e} />
                                     </li>
                                   ))}

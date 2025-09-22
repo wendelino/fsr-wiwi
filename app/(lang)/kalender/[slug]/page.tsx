@@ -3,6 +3,7 @@ import { getEvent } from "@/app/_actions/event";
 import { FullEventView } from "@/components/Event";
 import { PageHeader } from "@/components/Framer/PageHeader";
 import { Skeleton } from "@/components/ui/skeleton";
+import { de } from "date-fns/locale";
 import { format } from "date-fns";
 import { Metadata } from "next";
 import { Suspense } from "react";
@@ -71,9 +72,9 @@ async function Content({ slug }: { slug: string }) {
 
   // const location = await getLocationById(event.location_id || "");
   const date =
-    format(event.start, "EEEE dd.MM.yyyy, HH:mm ") +
+    format(event.start, "EEEE dd.MM.yyyy, HH:mm ", { locale: de }) +
     "-" +
-    format(event.end, " HH:mm");
+    format(event.end, " HH:mm", { locale: de });
 
   return (
     <>
