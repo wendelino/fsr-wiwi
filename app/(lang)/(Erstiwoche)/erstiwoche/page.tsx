@@ -60,6 +60,7 @@ export default async function page() {
     { src: "partyfly.svg", href: "https://partyfly.de", label: "Partyfly" },
     { src: "wgheld.png", href: "https://wgheld.de", label: "WG-Held" },
     { src: "heinz.svg", href: "https://www.heinz.com/de-DE", label: "Heinz" },
+    { src: "ostkarte.jpg", href: "https://ostkarte.com", label: "Heinz" },
   ];
 
   const offers = [

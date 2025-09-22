@@ -32,7 +32,7 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
 
   // Wochentage (Mo-Fr)
   const weekDays = useMemo(() => {
-    return Array.from({ length: 5 }, (_, i) => {
+    return Array.from({ length: 6 }, (_, i) => {
       const date = new Date(startDate);
       date.setHours(0, 0, 0, 0);
       date.setDate(startDate.getDate() + i);
@@ -187,9 +187,9 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
 
       {/* Desktop/Tablet Raster */}
       <div className=" sm:block overflow-x-auto">
-        <div className="min-w-[900px]">
+        <div className="min-w-[500px] w-full">
           {/* Kopfzeile Wochentage */}
-          <div className="grid grid-cols-[48px_repeat(5,1fr)]">
+          <div className="grid grid-cols-[48px_repeat(6,1fr)]">
             <div className="h-16" />
             {weekDays.map((day) => (
               <div
@@ -207,7 +207,7 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
           </div>
 
           {/* Körper: Zeitspalte + Tages-Spalten */}
-          <div className="grid grid-cols-[48px_repeat(5,1fr)]">
+          <div className="grid grid-cols-[48px_repeat(6,1fr)]">
             {/* Zeitspalte */}
             <div className="border-r" style={{ height: containerHeight }}>
               {scaleTimes.map((t, idx) => (
