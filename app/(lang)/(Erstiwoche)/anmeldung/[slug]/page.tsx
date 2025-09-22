@@ -2,7 +2,7 @@
 import { getEvent } from "@/app/_actions/event";
 import RegisterForm from "@/components/forms/register-form";
 import { PageHeader } from "@/components/Framer/PageHeader";
-import { format } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
 import { de } from "date-fns/locale";
 import { Metadata } from "next";
 import { InfoCard } from "@/components/info-card";
@@ -52,12 +52,13 @@ export default async function page({ params }: PageProps) {
           Das Event existiert nicht oder wurde gelöscht.
         </InfoCard>
       </div>
-    );
-
+    ); 
   const date =
-    format(event.start, "EEEE dd.MM.yyyy, HH:mm ", { locale: de }) +
+    formatInTimeZone(event.start, "Europe/Berlin", "EEEE dd.MM.yyyy, HH:mm ", {
+      locale: de,
+    }) +
     "-" +
-    format(event.end, " HH:mm");
+    formatInTimeZone(event.end, "Europe/Berlin", " HH:mm", { locale: de });
     
 
   if (!event.registrable || event.restSeats === 0) {

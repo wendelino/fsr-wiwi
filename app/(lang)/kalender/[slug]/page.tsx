@@ -7,6 +7,7 @@ import { de } from "date-fns/locale";
 import { format } from "date-fns";
 import { Metadata } from "next";
 import { Suspense } from "react";
+import { formatInTimeZone } from "date-fns-tz";
 
 export async function generateMetadata({
   params,
@@ -72,9 +73,11 @@ async function Content({ slug }: { slug: string }) {
 
   // const location = await getLocationById(event.location_id || "");
   const date =
-    format(event.start, "EEEE dd.MM.yyyy, HH:mm ", { locale: de }) +
+    formatInTimeZone(event.start, "Europe/Berlin", "EEEE dd.MM.yyyy, HH:mm ", {
+      locale: de,
+    }) +
     "-" +
-    format(event.end, " HH:mm", { locale: de });
+    formatInTimeZone(event.end, "Europe/Berlin", " HH:mm", { locale: de });
 
   return (
     <>
