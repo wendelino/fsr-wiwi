@@ -6,6 +6,7 @@ import { Header } from "@/components/TextComponents";
 import WeekGrid from "@/components/weekgrid/weekgrid";
 import ErstiInfo from "./info";
 import { Metadata } from "next";
+import SaveCalendarButton from "@/components/weekgrid/save-calendar-button";
 
 export const metadata: Metadata = {
   title: "Ersti-Woche",
@@ -90,9 +91,13 @@ export default async function page() {
       <ErstiInfo />
       <Countdown />
 
-      <Header id="programm">
-        Unser <span className="fsr-gradient">Programm</span> für euch
-      </Header>
+      <div className="flex flex-col md:flex-row justify-between flex-wrap items-center gap-4">
+        <Header id="programm">
+          Unser <span className="fsr-gradient">Programm</span> für euch
+        </Header>
+
+        <SaveCalendarButton events={events} />
+      </div>
 
       <WeekGrid events={events} startDate={new Date("2025-10-06")} />
 
