@@ -101,11 +101,7 @@ export default async function page() {
 
       <WeekGrid events={events} startDate={new Date("2025-10-06")} />
 
-      {/* <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {days.map((e, index) => (
-          <DayCard key={index} day={e} />
-        ))}
-      </div> */}
+  
 
       <SponsorGrid items={sponsors} />
 

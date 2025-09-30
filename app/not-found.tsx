@@ -11,7 +11,7 @@ export default function page() {
         <div className="font-semibold text-xl pb-8  ">
           Ooops... Seite nicht gefunden {":("}
         </div>
-        <Button>
+        <Button data-umami-event="404-Button">
           <Link href="/">Zur Startseite {"–>"}</Link>
         </Button>
       </div>

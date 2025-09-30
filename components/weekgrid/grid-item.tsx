@@ -177,7 +177,7 @@ export default function GridItem({
           <div className="text-sm whitespace-pre-line">{description}</div>
         </div>
         <DialogFooter className="gap-2 ">
-          <Button onClick={handleSafeCalendar} variant="secondary">
+          <Button onClick={handleSafeCalendar} variant="secondary" data-umami-event={"SafeCalendar-GRID-"+event.slug}>
             Im Kalender sichern
           </Button>
           {registrable && (
@@ -185,7 +185,7 @@ export default function GridItem({
               {restSeats == 0 ? (
                 <Button disabled>Event ausgebucht</Button>
               ) : (
-                <Button asChild>
+                <Button asChild data-umami-event={"Signup-GRID-"+event.slug}>
                   <Link href={"anmeldung/" + slug}>Zur Anmeldung</Link>
                 </Button>
               )}

@@ -1,23 +1,10 @@
 "use client";
-import { format } from "date-fns";
 
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
-import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
-import { Calendar, MapPin, MoveRightIcon } from "lucide-react";
-import { createEvent } from "ics";
-import Link from "next/link";
 import { handleSafeCalendar } from "@/lib/utils";
+import { Calendar, MapPin } from "lucide-react";
+import Link from "next/link";
 import { Section } from "./Framer/Section";
+import { Button } from "./ui/button";
 type Location_DB = {
   label: string;
   lat: number;
@@ -42,85 +29,7 @@ export type LocationProps = {
 };
 
 export type EventWithLocation = EventProps & { location_id: string | null };
-
-export default function EventCard({ event }: { event: EventItem }) {
-  return (
-    <Drawer>
-      <DrawerTrigger asChild>
-        <div className="flex flex-col items-start  border-red-300 dark:border-border border p-3  rounded-lg gap-1.5 relative text-sm shadow-lg">
-          {/* {event.location && (
-            <span className="bg-secondary text-foreground  flex items-center pr-2 py-1 rounded-lg">
-              <MapPin height={16} /> {event.location?.label}
-            </span>
-          )} */}
-
-          {/* {special && (
-            <div className="bg-foreground z-[3] text-background font-bold rounded-full px-2 py-1 absolute right-[-12px] top-[-4px] animate-bounce">
-              EMPFOHLEN!
-            </div>
-          )} */}
-
-          {event.restSeats == 0 && (
-            <div className="absolute rounded-lg inset-0 bg-background/80 flex justify-center items-center text-2xl font-bold text-foreground ">
-              Ausgebucht!
-            </div>
-          )}
-          <div className="flex flex-col items-stretch w-full">
-            <span className="font-medium">{event.title}</span>
-            <span className="font-light text-muted-foreground">
-              <strong>{format(event.start, "HH:mm")} </strong>-{" "}
-              <strong>{format(event.end, "HH:mm")}</strong>
-            </span>
-            <div className=" border-t pt-2 mt-2 w-full">
-              <div className="text-muted-foreground text-sm line-clamp-1">
-                {event.description}
-              </div>
-            </div>
-          </div>
-          <div className="flex justify-end w-full gap-2 flex-wrap">
-            {event.registrable && <Badge>Anmeldepflichtig!</Badge>}
-          </div>
-        </div>
-      </DrawerTrigger>
-      <DrawerContent>
-        <div className="mx-auto w-full max-w-sm">
-          <DrawerHeader>
-            <div className="flex gap-2 pb-6">
-              {/* {event.location && (
-                <span className="bg-secondary text-foreground  flex items-center pr-2 py-1 rounded-lg">
-                  <MapPin height={16} /> {event.location?.label}
-                </span>
-              )} */}
-            </div>
-            <DrawerTitle>{event.title}</DrawerTitle>
-            <span className="font-extralight py-2">
-              <strong>{format(event.start, "HH:mm")} </strong>
-              bis <strong>{format(event.end, "HH:mm")}</strong>
-            </span>
-
-            <DrawerDescription>{event.description}</DrawerDescription>
-          </DrawerHeader>
-
-          <DrawerFooter>
-            {event.registrable && (
-              <Button asChild>
-                <Link href={"erstiwoche/anmeldung/" + event.slug}>
-                  Jetzt anmelden
-                </Link>
-              </Button>
-            )}
-            <Button onClick={() => handleSafeCalendar(event)}>
-              Im Kalender sichern
-            </Button>
-            <DrawerClose asChild>
-              <Button variant="outline">Zurück</Button>
-            </DrawerClose>
-          </DrawerFooter>
-        </div>
-      </DrawerContent>
-    </Drawer>
-  );
-}
+ 
 
 export function LocationCard({ location }: { location: Location_DB }) {
   const handleGoogle = () =>
@@ -182,12 +91,12 @@ export function FullEventView({ event }: { event: EventItem }) {
     <>
       <Section className="whitespace-pre-line">{event.description}</Section>
       <Section className="flex justify-end gap-2">
-        <Button onClick={() => handleSafeCalendar(event)} variant="secondary">
-          <Calendar className="size-4 mr-2" />
+        <Button onClick={() => handleSafeCalendar(event)} variant="secondary" data-umami-event={"SaveCalendar-"+event.slug}>
+          <Calendar className="size-4 mr-2"  />
           Im Kalender sichern
         </Button>
         {event.registrable && (
-          <Button asChild>
+          <Button asChild data-umami-event={"Signup-"+event.slug}>
             <Link href={"/anmeldung/" + event.slug}>
               Jetzt anmelden
             </Link>

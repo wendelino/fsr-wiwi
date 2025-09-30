@@ -74,7 +74,7 @@ export default function IframeConsent({
         </Link>.
       </p>
 
-      <Button className="mt-8"  onClick={handleAccept}>Externe Inhalte laden</Button>
+      <Button className="mt-8"  onClick={handleAccept} data-umami-event="IframeConsent-Accept">Externe Inhalte laden</Button>
       <label className="flex items-center space-x-2 mt-2">
         <Checkbox
           checked={rememberChoice}

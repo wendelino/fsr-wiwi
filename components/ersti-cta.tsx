@@ -34,10 +34,10 @@ export function ErstiWocheCTA({ className }: ErstiWocheCTAProps) {
         </div>
 
         <div className="flex w-full flex-col gap-2 md:w-auto md:flex-row">
-          <Button asChild size="lg">
+          <Button asChild size="lg" data-umami-event="E-CTA-Programm">
             <Link href="/erstiwoche#programm">Zum Programm</Link>
           </Button>
-          <Button asChild size="lg" variant="secondary">
+          <Button asChild size="lg" variant="secondary" data-umami-event="E-CTA-MehrInfos">
             <Link href="/erstiwoche">Mehr Infos</Link>
           </Button>
         </div>
