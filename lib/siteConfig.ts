@@ -9,7 +9,7 @@ export const siteConfig = {
         { href: "/erstiwoche", label: "Übersicht" },
         { href: "/erstiwoche/#programm", label: "Programm" },
         { href: "/anmeldung", label: "Anmeldung" },
-        { href: "/files/guide25.pdf", label: "Ersti-Guide", prefetch: false },
+        { href: "/files/ersti-guide-2025.pdf", label: "Ersti-Guide", prefetch: false },
         // { href: "/lageplan", label: "Lageplan" },
       ],
     },
