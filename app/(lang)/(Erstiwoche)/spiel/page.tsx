@@ -119,7 +119,7 @@ export default function Page() {
             </div>
             <div>
               <p className="font-semibold">Platz 3</p>
-              <p className="text-muted-foreground">15 € Thalia-Gutschein + weitere kleine Überraschungen</p>
+              <p className="text-muted-foreground">Junge Bühnen Card + weitere kleine Überraschungen</p>
             </div>
           </li>
         </ul>
