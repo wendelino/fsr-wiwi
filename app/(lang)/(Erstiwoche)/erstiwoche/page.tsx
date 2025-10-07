@@ -7,6 +7,7 @@ import WeekGrid from "@/components/weekgrid/weekgrid";
 import ErstiInfo from "./info";
 import { Metadata } from "next";
 import SaveCalendarButton from "@/components/weekgrid/save-calendar-button";
+import PartyCTA from "@/components/party-cta";
 
 export const metadata: Metadata = {
   title: "Ersti-Woche",
@@ -88,6 +89,7 @@ export default async function page() {
 
   return (
     <div>
+    <PartyCTA />
       <ErstiInfo />
       <Countdown />
 
