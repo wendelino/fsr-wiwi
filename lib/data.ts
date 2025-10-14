@@ -15,7 +15,7 @@ export const legislaturData: FsrLegislatur[] = [
     period: "2025",
     legislatur_start: "24.06.2025",
     members: [
-      { name: "Florence Hollerung", position: "Vorsitzende", tasks: "" },
+      { name: "Florence Hollerung", position: "Vorsitzende", tasks: "Bildung" },
       { name: "Julius Dallorso", position: "Sprecher für Finanzen", tasks: "" },
       {
         name: "Florian Geyer",
@@ -24,8 +24,7 @@ export const legislaturData: FsrLegislatur[] = [
       },
       { name: "Annika Diers", position: "", tasks: "Öffentlichkeitsarbeit" },
       { name: "Maja Juhnke", position: "", tasks: "Öffentlichkeitsarbeit" },
-      { name: "Dennis Behnsen", position: "", tasks: "Veranstaltungen" },
-      { name: "Nele Gutt", position: "", tasks: "" },
+      { name: "Dennis Behnsen", position: "", tasks: "Veranstaltungen" }, 
       { name: "Benjamin Knöppel", position: "", tasks: "" },
       { name: "Elias Kaal", position: "", tasks: "" },
       { name: "Ferdinand Kirchfeld", position: "", tasks: "" },
