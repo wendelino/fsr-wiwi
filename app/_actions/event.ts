@@ -37,8 +37,7 @@ export async function getEvents(ctx?: {
     const data: GET_Response = await response.json();
 
     const events: EventItem[] = data.items.map(eventF);
-
-    console.log("events", data.items.map(e => {return {title: e.title, r: e.registrable}}));
+ 
     return {
       events,
       nextCursor: data.nextCursor,

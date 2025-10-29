@@ -1,6 +1,5 @@
 "use server";
 import { FormFnRes } from "@/components/forms/generic-form";
-import { siteConfig } from "@/lib/siteConfig";
 
 interface Props {
   eventSlug: string;
@@ -46,8 +45,7 @@ export async function addGuestToEvent({
     const data: POST_Response = await response.json();
 
     if (response.ok) {
-      console.log("Guest successfully added to event:", data);
-      return { sx: true, msg: data.msg };
+      return { sx: data.success, msg: data.msg };
     } else {
       console.error("Failed to add guest:", data);
     }
