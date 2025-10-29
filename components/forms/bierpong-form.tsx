@@ -85,7 +85,7 @@ export default function BierpongForm({ event }: { event: EventItem }) {
                     />
                     <FormField
                         control={form.control}
-                        name="surname"
+                        name="name"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Dein Name *</FormLabel>
@@ -102,7 +102,7 @@ export default function BierpongForm({ event }: { event: EventItem }) {
                     />
                     <FormField
                         control={form.control}
-                        name="course"
+                        name="surname"
                         render={({ field }) => (
                             <FormItem>
                                 <FormLabel>Dein Teammate *</FormLabel>
