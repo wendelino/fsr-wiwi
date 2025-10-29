@@ -13,7 +13,7 @@ export async function getEvents(ctx?: {
   page?: number;
   tag?: string;
   limit?: number;
-  filter?: { registrable?: boolean };
+  filter?: { registrable?: boolean, upcoming?: boolean };
 }) {
   try {
     const limit = ctx?.limit || 10;
@@ -37,6 +37,8 @@ export async function getEvents(ctx?: {
     const data: GET_Response = await response.json();
 
     const events: EventItem[] = data.items.map(eventF);
+
+    console.log("events", data.items.map(e => {return {title: e.title, r: e.registrable}}));
     return {
       events,
       nextCursor: data.nextCursor,

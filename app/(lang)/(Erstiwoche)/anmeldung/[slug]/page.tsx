@@ -6,6 +6,7 @@ import { formatInTimeZone } from "date-fns-tz";
 import { de } from "date-fns/locale";
 import { Metadata } from "next";
 import { InfoCard } from "@/components/info-card";
+import BierpongForm from "@/components/forms/bierpong-form";
 
 export async function generateMetadata({
   params,
@@ -73,18 +74,18 @@ export default async function page({ params }: PageProps) {
       </>
     );
   }
+  if (event.slug === "bierpong-turnier") {
+    return (
+      <div className="space-y-6">
+        <PageHeader title={event.title} subtitle={date} />  
+        <BierpongForm event={event} />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
-      <PageHeader title={event.title} subtitle={date} /> 
-      <InfoCard type="warning">
-        Da wir nur eine begrenzte Anzahl an Plätzen haben, versuchen wir diese
-        möglichst fair zu verteilen. Am Montag (6.10) um 15 Uhr werden die
-        Anmeldungen geschlossen und die Plätze im Losverfahren verteilt. Du
-        bekommst dann eine E-Mail mit einer Zu- oder Absage für deine
-        Anmeldungen. Wir bitten um Verständnis, dass wir nicht alle Anmeldungen
-        annehmen können.
-      </InfoCard>
+      <PageHeader title={event.title} subtitle={date} />  
       <RegisterForm event={event} />
     </div>
   );
