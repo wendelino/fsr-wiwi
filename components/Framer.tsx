@@ -1,16 +1,15 @@
 "use client";
 
-import { ReactNode, useEffect, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 import {
   motion,
-  MotionValue,
   useAnimation,
   useScroll,
   useSpring,
-  useTransform,
-} from "framer-motion";
+  useTransform
+} from "motion/react";
+import { ReactNode, useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { cn } from "@/lib/utils";
 
 interface BaseProps {
   children: React.ReactNode;

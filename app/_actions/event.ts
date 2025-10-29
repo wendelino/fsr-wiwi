@@ -1,6 +1,5 @@
 "use server";
 
-import { siteConfig } from "@/lib/siteConfig";
 
 type GET_Response = {
   items: EventItem[];
