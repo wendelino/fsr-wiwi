@@ -53,14 +53,14 @@ export default async function page({ params }: PageProps) {
           Das Event existiert nicht oder wurde gelöscht.
         </InfoCard>
       </div>
-    ); 
+    );
   const date =
     formatInTimeZone(event.start, "Europe/Berlin", "EEEE dd.MM.yyyy, HH:mm ", {
       locale: de,
     }) +
     "-" +
     formatInTimeZone(event.end, "Europe/Berlin", " HH:mm", { locale: de });
-    
+
 
   if (!event.registrable || event.restSeats === 0) {
     return (
@@ -77,7 +77,11 @@ export default async function page({ params }: PageProps) {
   if (event.slug === "bierpong-turnier") {
     return (
       <div className="space-y-6">
-        <PageHeader title={event.title} subtitle={date} />  
+        <PageHeader title={event.title} subtitle={date} />
+        <InfoCard type="info">
+          Bitte meldet euer 2er-Team nur einmal an!
+          Eine Anmeldung pro Team genügt, nicht jede Person einzeln.
+        </InfoCard>
         <BierpongForm event={event} />
       </div>
     );
@@ -85,7 +89,7 @@ export default async function page({ params }: PageProps) {
 
   return (
     <div className="space-y-6">
-      <PageHeader title={event.title} subtitle={date} />  
+      <PageHeader title={event.title} subtitle={date} />
       <RegisterForm event={event} />
     </div>
   );
