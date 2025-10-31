@@ -78,7 +78,7 @@ export default async function page({ params }: PageProps) {
     return (
       <div className="space-y-6">
         <PageHeader title={event.title} subtitle={date} />
-        <InfoCard type="info">
+        <InfoCard type="info"> 
           Bitte meldet euer 2er-Team nur einmal an!
           Eine Anmeldung pro Team genügt, nicht jede Person einzeln.
         </InfoCard>

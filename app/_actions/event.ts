@@ -80,9 +80,6 @@ function eventF(i: EventItem): EventItem {
   return {
     ...i,
     start: new Date(i.start),
-    end: new Date(i.end),
-    
-    maxGuests: null, // Override in API
-    restSeats: null, // Override in API
+    end: new Date(i.end), 
   };
 }
