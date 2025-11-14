@@ -116,6 +116,7 @@ export default function RootLayout({
         <Script
           src="https://rybbit.s.m.lnio.de/api/script.js"
           data-site-id="1"
+          data-track-errors="true"
           async
         />
       </head>
