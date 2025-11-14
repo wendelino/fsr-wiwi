@@ -29,7 +29,7 @@ const Schema = z.object({
     z.object({
       name: z.string().min(1, { message: "Dieses Feld ist erforderlich." }),
     })
-  ),
+  ).optional(),
 });
 const MAX_NUMBER_OF_FRIENDS = 2;
 export default function BarHoppingForm({ event }: { event: EventItem }) {
@@ -162,7 +162,7 @@ export default function BarHoppingForm({ event }: { event: EventItem }) {
                       field.onChange(newValue);
                     }}
                     className="w-full"
-                    disabled={field.value?.length >= MAX_NUMBER_OF_FRIENDS}
+                    disabled={(field.value?.length ?? 0) >= MAX_NUMBER_OF_FRIENDS}
                   >
                     <Plus className="h-4 w-4 mr-2" />
                     Person hinzufügen
