@@ -8,6 +8,7 @@ import WidthWrapper from "@/components/WidthWrapper";
 import ScrollTop from "@/components/ScrollTop";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -108,10 +109,14 @@ export default function RootLayout({
   return (
     <html lang={"de"} suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
-        <script
-          defer
+        <Script
           src="https://analytics.m.lnio.de/script.js"
           data-website-id="d72a7bb9-59d3-40b7-934a-a48d8dceca3f"
+        />
+        <Script
+          src="https://rybbit.s.m.lnio.de/api/script.js"
+          data-site-id="1"
+          async
         />
       </head>
       <body className={cn(inter.className, "flex flex-col min-h-screen")}>
@@ -120,7 +125,6 @@ export default function RootLayout({
           defaultTheme="light"
           enableSystem
           disableTransitionOnChange
-          
         >
           <NavBar lang={"de"} />
           <main className="flex-1 min-h-[53vh] pt-8">
