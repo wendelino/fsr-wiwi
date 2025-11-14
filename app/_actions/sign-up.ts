@@ -3,12 +3,13 @@ import { FormFnRes } from "@/components/forms/generic-form";
 
 interface Props {
   eventSlug: string;
+  eventType?: "bar-hopping";
   guest: {
     name: string;
     surname: string;
     email: string;
-    course: string;
-    teammates?: {
+    course?: string;
+    friends?: {
       name: string;
     }[];
   };
@@ -21,15 +22,7 @@ type POST_Response = {
 const BASE_URL = `${process.env.CMS_ENDPOINT}/participant`;
 const token = process.env.CMS_TOKEN;
 
-export async function addGuestToEvent({
-  eventSlug,
-  guest,
-}: Props): Promise<FormFnRes> {
-  const body = {
-    eventSlug,
-    guest,
-  };
-
+export async function addGuestToEvent(body: Props): Promise<FormFnRes> {
   try {
     const response = await fetch(BASE_URL, {
       method: "POST",

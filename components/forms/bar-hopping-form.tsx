@@ -1,20 +1,20 @@
 "use client";
+import { addGuestToEvent } from "@/app/_actions/sign-up";
 import GenericForm, { FormFnRes } from "@/components/forms/generic-form";
-import { z } from "zod";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
+  FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
-  FormControl,
   FormMessage,
-  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Button } from "@/components/ui/button";
-import { Trash2, Plus } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
-import { addGuestToEvent } from "@/app/_actions/sign-up";
+import { z } from "zod";
 
 const Schema = z.object({
   name: z.string().min(1, { message: "Dieses Feld ist erforderlich." }),
@@ -25,18 +25,21 @@ const Schema = z.object({
   dsgvo: z.boolean().refine((value) => value === true, {
     message: "Bitte akzeptiere unsere Datenschutzerklärung.",
   }),
-  teammates: z.array(
+  friends: z.array(
     z.object({
       name: z.string().min(1, { message: "Dieses Feld ist erforderlich." }),
     })
   ),
 });
+const MAX_NUMBER_OF_FRIENDS = 3;
 export default function BarHoppingForm({ event }: { event: EventItem }) {
   async function onCreate(values: z.infer<typeof Schema>): Promise<FormFnRes> {
-    return {
-      sx: false,
-      msg: "Fehler beim Anmelden",
-    };
+    const res = await addGuestToEvent({
+      eventSlug: event.slug,
+      eventType: "bar-hopping",
+      guest: values,
+    });
+    return res;
   }
   const def = {
     dsgvo: false,
@@ -51,12 +54,6 @@ export default function BarHoppingForm({ event }: { event: EventItem }) {
       defaultValues={def}
       mode="create"
       onCreate={onCreate}
-      onSuccess={() => {
-        /* optional */
-      }}
-      onError={() => {
-        /* optional */
-      }}
       config={{
         title: "Anmeldeformular",
         description: "Bitte trage deine Daten ein.",
@@ -119,16 +116,16 @@ export default function BarHoppingForm({ event }: { event: EventItem }) {
           </p>
           <FormField
             control={form.control}
-            name="teammates"
+            name="friends"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Teammates</FormLabel>
+                <FormLabel>Mein +1 (optional)</FormLabel>
                 <div className="space-y-2">
                   {field.value?.map((_, index) => (
                     <FormField
                       key={index}
                       control={form.control}
-                      name={`teammates.${index}.name`}
+                      name={`friends.${index}.name`}
                       render={({ field: teammateField }) => (
                         <FormItem>
                           <div className="flex gap-2">
@@ -165,9 +162,10 @@ export default function BarHoppingForm({ event }: { event: EventItem }) {
                       field.onChange(newValue);
                     }}
                     className="w-full"
+                    disabled={field.value?.length >= MAX_NUMBER_OF_FRIENDS}
                   >
                     <Plus className="h-4 w-4 mr-2" />
-                    Teammate hinzufügen
+                    hinzufügen
                   </Button>
                 </div>
                 <FormMessage />
