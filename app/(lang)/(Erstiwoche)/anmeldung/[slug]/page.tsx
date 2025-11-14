@@ -7,6 +7,7 @@ import { de } from "date-fns/locale";
 import { Metadata } from "next";
 import { InfoCard } from "@/components/info-card";
 import BierpongForm from "@/components/forms/bierpong-form";
+import BarHoppingForm from "@/components/forms/bar-hopping-form";
 
 export async function generateMetadata({
   params,
@@ -61,7 +62,6 @@ export default async function page({ params }: PageProps) {
     "-" +
     formatInTimeZone(event.end, "Europe/Berlin", " HH:mm", { locale: de });
 
-
   if (!event.registrable || event.restSeats === 0) {
     return (
       <>
@@ -74,15 +74,11 @@ export default async function page({ params }: PageProps) {
       </>
     );
   }
-  if (event.slug === "bierpong-turnier") {
+  if (event.slug === "bar-tour") {
     return (
       <div className="space-y-6">
-        <PageHeader title={event.title} subtitle={date} />
-        <InfoCard type="info"> 
-          Bitte meldet euer 2er-Team nur einmal an!
-          Eine Anmeldung pro Team genügt, nicht jede Person einzeln.
-        </InfoCard>
-        <BierpongForm event={event} />
+        <PageHeader title={event.title} subtitle={date} /> 
+        <BarHoppingForm event={event} />
       </div>
     );
   }

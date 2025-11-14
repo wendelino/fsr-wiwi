@@ -8,6 +8,9 @@ interface Props {
     surname: string;
     email: string;
     course: string;
+    teammates?: {
+      name: string;
+    }[];
   };
 }
 type POST_Response = {

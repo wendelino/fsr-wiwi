@@ -32,7 +32,5 @@ export const siteConfig = {
     ort: "Halle (Saale)",
     strasse: "Große Steinstraße 73",
     mail: "fachschaftsrat@wiwi.uni-halle.de",
-  },
-  footerDescription:
-    "Ihr Partner für professionelle Gartengestaltung und -pflege seit über 20 Jahren.",
+  }, 
 }; 
