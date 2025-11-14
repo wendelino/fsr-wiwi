@@ -31,7 +31,7 @@ const Schema = z.object({
     })
   ),
 });
-const MAX_NUMBER_OF_FRIENDS = 3;
+const MAX_NUMBER_OF_FRIENDS = 2;
 export default function BarHoppingForm({ event }: { event: EventItem }) {
   async function onCreate(values: z.infer<typeof Schema>): Promise<FormFnRes> {
     const res = await addGuestToEvent({
@@ -165,7 +165,7 @@ export default function BarHoppingForm({ event }: { event: EventItem }) {
                     disabled={field.value?.length >= MAX_NUMBER_OF_FRIENDS}
                   >
                     <Plus className="h-4 w-4 mr-2" />
-                    hinzufügen
+                    Person hinzufügen
                   </Button>
                 </div>
                 <FormMessage />
