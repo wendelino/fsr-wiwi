@@ -103,7 +103,7 @@ export default function BarHoppingForm({ event }: { event: EventItem }) {
               <FormItem>
                 <FormLabel>Deine E-Mail *</FormLabel>
                 <FormControl>
-                  <Input placeholder="max-mustermann@beispiel.de" {...field} />
+                  <Input placeholder="ferdinand-mustermann@beispiel.de" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -131,7 +131,7 @@ export default function BarHoppingForm({ event }: { event: EventItem }) {
                           <div className="flex gap-2">
                             <FormControl>
                               <Input
-                                placeholder="Max Mustermann"
+                                placeholder="Dennis Mustermann"
                                 {...teammateField}
                               />
                             </FormControl>
