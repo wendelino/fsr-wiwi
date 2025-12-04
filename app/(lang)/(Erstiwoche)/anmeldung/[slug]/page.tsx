@@ -8,6 +8,7 @@ import { Metadata } from "next";
 import { InfoCard } from "@/components/info-card";
 import BierpongForm from "@/components/forms/bierpong-form";
 import BarHoppingForm from "@/components/forms/bar-hopping-form";
+import AbsolventForm from "@/components/forms/absolvent-form";
 
 export async function generateMetadata({
   params,
@@ -74,11 +75,12 @@ export default async function page({ params }: PageProps) {
       </>
     );
   }
-  if (event.slug === "bar-tour") {
+  if (event.slug === "absolventinnenfeier") {
     return (
       <div className="space-y-6">
         <PageHeader title={event.title} subtitle={date} /> 
-        <BarHoppingForm event={event} />
+        <p className="text-lg text-center max-w-md mx-auto py-8">{event.description}</p>
+        <AbsolventForm event={event} />
       </div>
     );
   }
