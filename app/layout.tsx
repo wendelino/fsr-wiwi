@@ -111,14 +111,8 @@ export default function RootLayout({
       <head>
         <Script
           src="https://analytics.m.lnio.de/script.js"
-          data-website-id="d72a7bb9-59d3-40b7-934a-a48d8dceca3f"
-        />
-        <Script
-          src="https://rybbit.s.m.lnio.de/api/script.js"
-          data-site-id="1"
-          data-track-errors="true"
-          async
-        />
+          data-website-id="d72a7bb9-59d3-40b7-934a-a48d8dceca3f"async
+        /> 
       </head>
       <body className={cn(inter.className, "flex flex-col min-h-screen")}>
         <ThemeProvider
