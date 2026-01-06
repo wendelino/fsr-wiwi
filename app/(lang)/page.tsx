@@ -53,17 +53,7 @@ export default async function Home() {
           <p className="mb-6">{t.meaningOfFachschaft.paragraph1}</p>
           <p className="mb-6">{t.meaningOfFachschaft.paragraph2}</p>
         </div>
-      </FadeInSection>
-
-      <FadeInSection> 
-        <Image
-              src="/fsr-ovdf.jpeg"
-              alt="FSR Overview"
-              width={1024}
-              height={512}
-              className="w-full"
-            />
-      </FadeInSection>
+      </FadeInSection> 
       <FadeInSection>
         <Card className="mb-16 px-6 sm:px-10 py-10 bg-secondary shadow-lg rounded-lg">
           <h2 className="text-3xl font-bold">{t.projectFunding.header}</h2>
