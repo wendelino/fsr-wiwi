@@ -21,7 +21,9 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-  admin: {
+  maxDepth: 5,
+  admin: { 
+    autoRefresh: true,
     components: {
       // The `BeforeLogin` component renders a message that you see while logging into your admin panel.
       // Feel free to delete this at any time. Simply remove the line below.
@@ -56,6 +58,20 @@ export default buildConfig({
         },
       ],
     },
+    meta: {
+      title: 'FSR | Intern',
+      description: 'FSR | Intern',
+      icons: [
+        {
+          rel: 'icon',
+          type: 'image/png',
+          url: '/favicon.png',
+        },
+      ],
+    },
+    timezones: {
+      defaultTimezone: 'Europe/Berlin',
+    }
   },
   // This config helps us configure global or default features that the other editors can inherit
   editor: defaultLexical,

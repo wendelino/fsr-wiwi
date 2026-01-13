@@ -22,6 +22,10 @@ import {
 } from '@payloadcms/plugin-seo/fields'
 
 export const Pages: CollectionConfig<'pages'> = {
+  labels: {
+    singular: 'Seite',
+    plural: 'Seiten',
+  },
   slug: 'pages',
   access: {
     create: authenticated,
