@@ -28,7 +28,7 @@ export const generateMeta = async (args: {
 
   const title = doc?.meta?.title
     ? doc?.meta?.title + ' | Payload Website Template'
-    : 'Payload Website Template'
+    : 'FSR WIWI PAYLOAD'
 
   return {
     description: doc?.meta?.description,
