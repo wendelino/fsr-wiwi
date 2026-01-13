@@ -1,9 +1,0 @@
-# *
-User-agent: *
-Allow: /
-
-# Host
-Host: https://fsr-wiwi-halle.de
-
-# Sitemaps
-Sitemap: https://fsr-wiwi-halle.de/sitemap.xml
