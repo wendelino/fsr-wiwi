@@ -1,3 +1,5 @@
+import { s3Storage } from '@payloadcms/storage-s3'
+ 
 import { formBuilderPlugin } from '@payloadcms/plugin-form-builder'
 import { nestedDocsPlugin } from '@payloadcms/plugin-nested-docs'
 import { redirectsPlugin } from '@payloadcms/plugin-redirects'
@@ -11,7 +13,7 @@ import { searchFields } from '@/search/fieldOverrides'
 import { beforeSyncWithSearch } from '@/search/beforeSync'
 
 import { Page, Post } from '@/payload-types'
-import { getServerSideURL } from '@/utilities/getURL'
+import { getServerSideURL } from '@/utilities/getURL' 
 
 const generateTitle: GenerateTitle<Post | Page> = ({ doc }) => {
   return doc?.title ? `${doc.title} | Payload Website Template` : 'Payload Website Template'
@@ -22,6 +24,8 @@ const generateURL: GenerateURL<Post | Page> = ({ doc }) => {
 
   return doc?.slug ? `${url}/${doc.slug}` : url
 }
+ 
+
 
 export const plugins: Plugin[] = [
   redirectsPlugin({
@@ -49,6 +53,27 @@ export const plugins: Plugin[] = [
   nestedDocsPlugin({
     collections: ['categories'],
     generateURL: (docs) => docs.reduce((url, doc) => `${url}/${doc.slug}`, ''),
+  }),
+  s3Storage({
+    collections: { 
+      media: {
+        prefix: 'website-data',
+      },
+    },
+    
+    bucket: process.env.S3_BUCKET!,
+    disableLocalStorage: true, 
+
+    
+    config: {
+      forcePathStyle: true, 
+      credentials: {
+        accessKeyId: process.env.S3_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.S3_SECRET_ACCESS_KEY!,
+      },
+      endpoint: process.env.S3_ENDPOINT, 
+      region: "eu-central-1",
+    },
   }),
   seoPlugin({
     generateTitle,
@@ -81,7 +106,7 @@ export const plugins: Plugin[] = [
     },
   }),
   searchPlugin({
-    collections: ['posts'],
+    collections: ['posts', 'events'],
     beforeSync: beforeSyncWithSearch,
     searchOverrides: {
       fields: ({ defaultFields }) => {
