@@ -4,30 +4,55 @@ import useClickableCard from '@/utilities/useClickableCard'
 import Link from 'next/link'
 import React, { Fragment } from 'react'
 
-import type { Post } from '@/payload-types'
+import type { Post, Page, Event } from '@/payload-types'
 
 import { Media } from '@/components/Media'
 
-export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>
+export type CardPostData = {
+  slug?: string | null
+  categories?: Post['categories']
+  meta?: Post['meta']
+  title?: string | null
+}
+
+export type CardPageData = {
+  slug?: string | null
+  meta?: Page['meta']
+  title?: string | null
+}
+
+export type CardEventData = {
+  slug?: string | null
+  title?: string | null
+  meta?: Event['meta']
+  start?: string | null
+  end?: string | null
+  location?: string | null
+}
+
+export type CardData = CardPostData | CardPageData | CardEventData
 
 export const Card: React.FC<{
   alignItems?: 'center'
   className?: string
-  doc?: CardPostData
-  relationTo?: 'posts'
+  doc?: CardData
+  relationTo?: 'posts' | 'pages' | 'events'
   showCategories?: boolean
   title?: string
 }> = (props) => {
   const { card, link } = useClickableCard({})
-  const { className, doc, relationTo, showCategories, title: titleFromProps } = props
+  const { className, doc, relationTo = 'posts', showCategories, title: titleFromProps } = props
 
-  const { slug, categories, meta, title } = doc || {}
+  const { slug, meta, title } = doc || {}
+  const categories = doc && 'categories' in doc ? doc.categories : undefined
   const { description, image: metaImage } = meta || {}
 
   const hasCategories = categories && Array.isArray(categories) && categories.length > 0
   const titleToUse = titleFromProps || title
   const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
-  const href = `/${relationTo}/${slug}`
+  
+  // Generate href based on collection type
+  const href = relationTo === 'posts' ? `/posts/${slug}` : relationTo === 'events' ? `/events/${slug}` : `/${slug}`
 
   return (
     <article
@@ -38,8 +63,8 @@ export const Card: React.FC<{
       ref={card.ref}
     >
       <div className="relative w-full ">
-        {!metaImage && <div className="">No image</div>}
-        {metaImage && typeof metaImage !== 'string' && <Media resource={metaImage} size="33vw" />}
+        {!metaImage && <div className="aspect-video bg-muted flex items-center justify-center text-muted-foreground">Kein Bild</div>}
+        {metaImage && typeof metaImage === 'object' && <Media resource={metaImage} size="33vw" />}
       </div>
       <div className="p-4">
         {showCategories && hasCategories && (

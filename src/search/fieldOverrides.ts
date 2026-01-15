@@ -58,4 +58,31 @@ export const searchFields: Field[] = [
       },
     ],
   },
+  {
+    name: 'eventStart',
+    type: 'date',
+    label: 'Event Start',
+    admin: {
+      readOnly: true,
+      condition: (data) => data?.doc?.relationTo === 'events',
+    },
+  },
+  {
+    name: 'eventEnd',
+    type: 'date',
+    label: 'Event End',
+    admin: {
+      readOnly: true,
+      condition: (data) => data?.doc?.relationTo === 'events',
+    },
+  },
+  {
+    name: 'eventLocation',
+    type: 'text',
+    label: 'Event Location',
+    admin: {
+      readOnly: true,
+      condition: (data) => data?.doc?.relationTo === 'events',
+    },
+  },
 ]

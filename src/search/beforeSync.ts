@@ -5,18 +5,24 @@ export const beforeSyncWithSearch: BeforeSync = async ({ req, originalDoc, searc
     doc: { relationTo: collection },
   } = searchDoc
 
-  const { slug, id, categories, title, meta } = originalDoc
+  const { slug, id, categories, title, meta, description, start, end, location } = originalDoc
 
   const modifiedDoc: DocToSync = {
     ...searchDoc,
     slug,
     meta: {
-      ...meta,
       title: meta?.title || title,
       image: meta?.image?.id || meta?.image,
-      description: meta?.description,
+      description: meta?.description || (typeof description === 'string' ? description : undefined),
     },
     categories: [],
+  }
+
+  // Add event-specific fields for events collection
+  if (collection === 'events') {
+    modifiedDoc.eventStart = start
+    modifiedDoc.eventEnd = end
+    modifiedDoc.eventLocation = location
   }
 
   if (categories && Array.isArray(categories) && categories.length > 0) {

@@ -791,6 +791,14 @@ export interface Event {
   start: string;
   end: string;
   location?: string | null;
+  meta?: {
+    title?: string | null;
+    /**
+     * Maximum upload file size: 12MB. Recommended file size for images is <500KB.
+     */
+    image?: (number | null) | Media;
+    description?: string | null;
+  };
   /**
    * When enabled, the slug will auto-generate from the title field on save and autosave.
    */
@@ -859,6 +867,10 @@ export interface Search {
         value: number | Post;
       }
     | {
+        relationTo: 'pages';
+        value: number | Page;
+      }
+    | {
         relationTo: 'events';
         value: number | Event;
       };
@@ -876,6 +888,9 @@ export interface Search {
         id?: string | null;
       }[]
     | null;
+  eventStart?: string | null;
+  eventEnd?: string | null;
+  eventLocation?: string | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1257,6 +1272,13 @@ export interface EventsSelect<T extends boolean = true> {
   start?: T;
   end?: T;
   location?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        image?: T;
+        description?: T;
+      };
   generateSlug?: T;
   slug?: T;
   updatedAt?: T;
@@ -1570,6 +1592,9 @@ export interface SearchSelect<T extends boolean = true> {
         title?: T;
         id?: T;
       };
+  eventStart?: T;
+  eventEnd?: T;
+  eventLocation?: T;
   updatedAt?: T;
   createdAt?: T;
 }
