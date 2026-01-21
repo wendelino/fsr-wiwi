@@ -29,8 +29,7 @@ export default async function Page() {
     },
     sort: '-start',
   })
-
-  console.log(events.docs[0])
+ 
 
   return (
     <div className="pt-24 pb-24">
