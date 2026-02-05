@@ -1,12 +1,11 @@
-import { FadeInSection, Fsr_letters } from "@/components/Framer"; 
-import { AnimatedPinLink } from "@/components/Framer/3DPin";
+import { FadeInSection, Fsr_letters } from "@/components/Framer";  
 import InstagramEmbed from "@/components/InstagramEmbed";
 import { AnimatedText, Header } from "@/components/TextComponents";
 import { Card } from "@/components/ui/card";
 import WidthWrapper from "@/components/WidthWrapper";
 import { getTranslation } from "@/locales/getTranslation";
-import Image from "next/image"; 
-import { ErstiWocheCTA } from "@/components/ersti-cta";
+import Image from "next/image";  
+import AltklausurenCTA from "@/components/altklausuren-cta";
 
 // export default async function Home({ params }: { params: { lang: string } }) {
 export default async function Home() {
@@ -41,11 +40,11 @@ export default async function Home() {
           </WidthWrapper>
         </FadeInSection>
       </header>
+ 
 
       <FadeInSection>
-        <ErstiWocheCTA />
+        <AltklausurenCTA />
       </FadeInSection>
- 
       
       <FadeInSection>
         <Header>{t.meaningOfFachschaft.header}</Header>

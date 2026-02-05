@@ -9,6 +9,7 @@ import { Header } from "@/components/TextComponents";
 import { Button } from "@/components/ui/button";
 import { Mail, MapPin } from "lucide-react";
 import { Metadata } from "next";
+import AltklausurenCTA from "@/components/altklausuren-cta";
 
 export const metadata: Metadata = {
   title: "Kontakt",
@@ -57,6 +58,8 @@ export default function page() {
         subtitle="
     Wir freuen uns darauf, von dir zu hören! Kontaktiere uns gerne für Fragen, Anregungen oder Kooperationen. Das Team des Fachschaftsrats Wirtschaftswissenschaften steht dir zur Verfügung."
       />
+
+      <AltklausurenCTA />
       
       <Section className="grid md:grid-cols-2 lg:gap-32 items-center p-8 md:px-16  rounded-xl shadow-xl border">
         <Header>
