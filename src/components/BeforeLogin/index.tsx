@@ -1,14 +1,13 @@
-import React from 'react'
+import React from "react";
 
 const BeforeLogin: React.FC = () => {
-  return (
-    <div>
-      <p>
-        <b>Welcome to your dashboard! FSR | Intern</b>
-        {' This is where site admins will log in to manage your website.'}
-      </p>
-    </div>
-  )
-}
+	return (
+		<div>
+			<p>
+				<b>FSR | Interner Login</b>
+			</p>
+		</div>
+	);
+};
 
-export default BeforeLogin
+export default BeforeLogin;

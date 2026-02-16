@@ -181,7 +181,11 @@ export const HeaderNav = ({ data }: { data: HeaderType }) => {
 	};
 
 	return (
-		<section className={cn("py-4")}>
+		<section
+			className={cn(
+				"py-4 fixed top-0 z-50 w-full bg-gradient-to-t from-background/50 to-background backdrop-blur-sm",
+			)}
+		>
 			<div className="container">
 				{/* Desktop Menu */}
 				<nav className="hidden items-center justify-between lg:flex">
@@ -199,7 +203,7 @@ export const HeaderNav = ({ data }: { data: HeaderType }) => {
 								{logo.title}
 							</span>
 						</a>
-						<div className="flex items-center">
+						<div className="flex items-center bg-background rounded-lg ">
 							<NavigationMenu>
 								<NavigationMenuList>
 									{menu.map((item) => renderMenuItem(item))}

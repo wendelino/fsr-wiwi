@@ -1531,7 +1531,7 @@ export function FullMap({
 		<Map
 			center={[start.lng, start.lat]}
 			zoom={14}
-			className="h-[80vh] p-0 overflow-hidden"
+			className="h-[66vh] p-0 overflow-hidden"
 		>
 			<MapControls
 				position="bottom-right"
