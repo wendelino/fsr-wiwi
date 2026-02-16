@@ -82,6 +82,12 @@
     --warning: 34 51% 25%;
     --error: 10 39% 43%;
   }
+  .maplibregl-popup-content {
+    @apply bg-transparent! shadow-none! p-0! rounded-none!;
+  }
+  .maplibregl-popup-tip {
+    @apply hidden!;
+  }
 }
 
 @layer base {

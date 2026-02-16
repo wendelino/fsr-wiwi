@@ -10,8 +10,13 @@
     "cssVariables": true,
     "prefix": ""
   },
+  "iconLibrary": "lucide",
   "aliases": {
     "components": "@/components",
     "utils": "@/utilities/ui"
+  },
+  "registries": {
+    "@mapcn": "https://mapcn.dev/r/{name}.json",
+    "@shadcnblocks": "https://shadcnblocks.com/r/{name}.json"
   }
 }
