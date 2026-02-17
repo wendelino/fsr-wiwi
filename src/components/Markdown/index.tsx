@@ -21,7 +21,7 @@ export function Markdown({ content, className }: MarkdownProps) {
       <ReactMarkdown
         components={{
           // Custom code block with syntax highlighting
-          code({ node, className, children, ...props }) {
+          code({ node: _node, className, children, ...props }) {
             const match = /language-(\w+)/.exec(className || "");
             const language = match ? match[1] : "";
             const inline = !(className && className.includes("language-"));

@@ -159,7 +159,7 @@ const mapNavItem = (
           .map((subpage) => ({
             title: subpage?.link?.label || fallbackLabel,
             url: mapLinkToHref(subpage.link),
-            newTab: subpage?.link?.newTab,
+            newTab: subpage?.link?.newTab ?? false,
           }))
       : undefined,
   };

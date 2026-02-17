@@ -18,7 +18,6 @@ export const Logo = (props: Props) => {
   const priority = priorityFromProps || "low";
 
   return (
-    /* eslint-disable @next/next/no-img-element */
     <Image
       alt="Payload Logo"
       className={clsx("h-[48px] w-full", className)}

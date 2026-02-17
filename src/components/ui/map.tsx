@@ -1572,7 +1572,7 @@ export type { MapRef, MapViewport };
 
 export function FullMap({
   start,
-  end,
+  end: _end,
   routes,
 }: {
   start: { lng: number; lat: number };
