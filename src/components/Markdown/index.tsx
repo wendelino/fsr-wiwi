@@ -82,7 +82,7 @@ export function Markdown({ content, className }: MarkdownProps) {
           a({ children, href, ...props }) {
             return (
               <a
-                className="text-blue-600 underline hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300"
+                className="text-rose-900 transition-colors hover:text-rose-700 dark:text-rose-500 dark:hover:text-rose-400"
                 href={href}
                 rel={
                   href?.startsWith("http") ? "noopener noreferrer" : undefined

@@ -79,6 +79,8 @@ export default buildConfig({
     pool: {
       connectionString: process.env.DATABASE_URL || "",
     },
+    // Prevent repeated dev-time schema introspection on every refresh.
+    push: false,
   }),
   collections: [Pages, Posts, Events, Media, Categories, Users],
   cors: [getServerSideURL()].filter(Boolean),

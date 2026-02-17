@@ -18,10 +18,17 @@ export async function Footer() {
         </Link>
 
         <div className="flex flex-col-reverse items-start gap-4 md:flex-row md:items-center">
+          <CMSLink
+            className="text-muted-foreground/50 text-xs"
+            label="Login"
+            url="/admin"
+          />
           <ThemeSelector />
           <nav className="flex flex-col gap-4 md:flex-row">
             {navItems.map(({ link }, i) => {
-              return <CMSLink className="text-white" key={i} {...link} />;
+              return (
+                <CMSLink className="text-white" key={link.label} {...link} />
+              );
             })}
           </nav>
         </div>

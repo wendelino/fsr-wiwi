@@ -10,6 +10,11 @@ const NEXT_PUBLIC_SERVER_URL =
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "10mb",
+    },
+  },
   images: {
     remotePatterns: [
       ...[NEXT_PUBLIC_SERVER_URL, "https://s3-api.m.lnio.de"].map((item) => {

@@ -5,11 +5,15 @@
     "rules": {
       "style": {
         "useTemplate": "info",
+        "noNestedTernary": "warn",
         "useConsistentTypeDefinitions": {
           "options": {
             "style": "type"
           }
         }
+      },
+      "suspicious": {
+        "noArrayIndexKey": "warn"
       }
     }
   }

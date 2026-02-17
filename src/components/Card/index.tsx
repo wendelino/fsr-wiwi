@@ -75,12 +75,12 @@ export const Card: React.FC<{
     >
       <div className="relative w-full">
         {!metaImage && (
-          <div className="flex aspect-video items-center justify-center bg-muted text-muted-foreground">
+          <div className="flex h-40 items-center justify-center bg-muted text-muted-foreground">
             Kein Bild
           </div>
         )}
         {metaImage && typeof metaImage === "object" && (
-          <Media resource={metaImage} size="33vw" />
+          <Media imgClassName="h-40 w-full object-cover" resource={metaImage} />
         )}
       </div>
       <div className="p-4">
@@ -98,9 +98,9 @@ export const Card: React.FC<{
                     const isLast = index === categories.length - 1;
 
                     return (
-                      <Fragment key={index}>
+                      <Fragment key={category.id}>
                         {categoryTitle}
-                        {!isLast && <Fragment>, &nbsp;</Fragment>}
+                        {!isLast && <>, &nbsp;</>}
                       </Fragment>
                     );
                   }
@@ -121,7 +121,7 @@ export const Card: React.FC<{
           </div>
         )}
         {description && (
-          <div className="mt-2">
+          <div className="mt-2 line-clamp-2">
             {description && <p>{sanitizedDescription}</p>}
           </div>
         )}

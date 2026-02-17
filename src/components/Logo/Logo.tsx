@@ -20,7 +20,7 @@ export const Logo = (props: Props) => {
   return (
     <Image
       alt="Payload Logo"
-      className={clsx("h-[48px] w-full", className)}
+      className={clsx("h-[48px] w-[48px]", className)}
       decoding="async"
       fetchPriority={priority}
       height={192}
