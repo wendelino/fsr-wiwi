@@ -1,4 +1,5 @@
 import configPromise from "@payload-config";
+import { SearchIcon } from "lucide-react";
 import type { Metadata } from "next/types";
 import { getPayload } from "payload";
 import {
@@ -80,7 +81,9 @@ export default async function Page({
     <div className="pt-24 pb-24">
       <div className="container mb-16">
         <div className="prose dark:prose-invert max-w-none text-center">
-          <h1 className="mb-8 lg:mb-16">Suchen</h1>
+          <h1 className="mb-8 lg:mb-16">
+            <SearchIcon className="inline-block size-8" /> Suchen und finden
+          </h1>
 
           <div className="mx-auto max-w-[50rem]">
             <Search />
@@ -89,7 +92,7 @@ export default async function Page({
       </div>
 
       {searchResults.totalDocs > 0 ? (
-        <CollectionArchive posts={results} />
+        <CollectionArchive extended posts={results} />
       ) : (
         <div className="container">Keine Ergebnisse gefunden.</div>
       )}
@@ -99,6 +102,6 @@ export default async function Page({
 
 export function generateMetadata(): Metadata {
   return {
-    title: "Payload Website Template Search",
+    title: "Suchen | Fachschaftsrat Wirtschaftswissenschaften Halle",
   };
 }
