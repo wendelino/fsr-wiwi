@@ -9,6 +9,7 @@
     "skipLibCheck": true,
     "noEmit": true,
     "incremental": true,
+    "tsBuildInfoFile": ".tsbuild/tsconfig.tsbuildinfo",
     "jsx": "preserve",
     "module": "esnext",
     "moduleResolution": "bundler",
