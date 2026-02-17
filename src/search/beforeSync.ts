@@ -1,11 +1,25 @@
-import { BeforeSync, DocToSync } from '@payloadcms/plugin-search/types'
+import type { BeforeSync, DocToSync } from "@payloadcms/plugin-search/types";
 
-export const beforeSyncWithSearch: BeforeSync = async ({ req, originalDoc, searchDoc }) => {
+export const beforeSyncWithSearch: BeforeSync = async ({
+  req,
+  originalDoc,
+  searchDoc,
+}) => {
   const {
     doc: { relationTo: collection },
-  } = searchDoc
+  } = searchDoc;
 
-  const { slug, id, categories, title, meta, description, start, end, location } = originalDoc
+  const {
+    slug,
+    id,
+    categories,
+    title,
+    meta,
+    description,
+    start,
+    end,
+    location,
+  } = originalDoc;
 
   const modifiedDoc: DocToSync = {
     ...searchDoc,
@@ -13,54 +27,56 @@ export const beforeSyncWithSearch: BeforeSync = async ({ req, originalDoc, searc
     meta: {
       title: meta?.title || title,
       image: meta?.image?.id || meta?.image,
-      description: meta?.description || (typeof description === 'string' ? description : undefined),
+      description:
+        meta?.description ||
+        (typeof description === "string" ? description : undefined),
     },
     categories: [],
-  }
+  };
 
   // Add event-specific fields for events collection
-  if (collection === 'events') {
-    modifiedDoc.eventStart = start
-    modifiedDoc.eventEnd = end
-    modifiedDoc.eventLocation = location
+  if (collection === "events") {
+    modifiedDoc.eventStart = start;
+    modifiedDoc.eventEnd = end;
+    modifiedDoc.eventLocation = location;
   }
 
   if (categories && Array.isArray(categories) && categories.length > 0) {
-    const populatedCategories: { id: string | number; title: string }[] = []
+    const populatedCategories: { id: string | number; title: string }[] = [];
     for (const category of categories) {
       if (!category) {
-        continue
+        continue;
       }
 
-      if (typeof category === 'object') {
-        populatedCategories.push(category)
-        continue
+      if (typeof category === "object") {
+        populatedCategories.push(category);
+        continue;
       }
 
       const doc = await req.payload.findByID({
-        collection: 'categories',
+        collection: "categories",
         id: category,
         disableErrors: true,
         depth: 0,
         select: { title: true },
         req,
-      })
+      });
 
       if (doc !== null) {
-        populatedCategories.push(doc)
+        populatedCategories.push(doc);
       } else {
         console.error(
-          `Failed. Category not found when syncing collection '${collection}' with id: '${id}' to search.`,
-        )
+          `Failed. Category not found when syncing collection '${collection}' with id: '${id}' to search.`
+        );
       }
     }
 
     modifiedDoc.categories = populatedCategories.map((each) => ({
-      relationTo: 'categories',
+      relationTo: "categories",
       categoryID: String(each.id),
       title: each.title,
-    }))
+    }));
   }
 
-  return modifiedDoc
-}
+  return modifiedDoc;
+};

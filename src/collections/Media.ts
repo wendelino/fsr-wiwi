@@ -1,16 +1,15 @@
-import type { CollectionConfig } from 'payload'
-
 import {
   FixedToolbarFeature,
   InlineToolbarFeature,
   lexicalEditor,
-} from '@payloadcms/richtext-lexical' 
+} from "@payloadcms/richtext-lexical";
+import type { CollectionConfig } from "payload";
 
-import { anyone } from '../access/anyone'
-import { authenticated } from '../access/authenticated' 
+import { anyone } from "../access/anyone";
+import { authenticated } from "../access/authenticated";
 
 export const Media: CollectionConfig = {
-  slug: 'media',
+  slug: "media",
   folders: true,
   access: {
     create: authenticated,
@@ -20,30 +19,34 @@ export const Media: CollectionConfig = {
   },
   fields: [
     {
-      name: 'alt',
-      type: 'text',
+      name: "alt",
+      type: "text",
       // required: true,
     },
     {
-      name: 'caption',
-      type: 'richText',
+      name: "caption",
+      type: "richText",
       editor: lexicalEditor({
         features: ({ rootFeatures }) => {
-          return [...rootFeatures, FixedToolbarFeature(), InlineToolbarFeature()]
+          return [
+            ...rootFeatures,
+            FixedToolbarFeature(),
+            InlineToolbarFeature(),
+          ];
         },
       }),
     },
   ],
   upload: {
-    disableLocalStorage: true, 
-    adminThumbnail: 'thumbnail',
-    focalPoint: true, 
+    disableLocalStorage: true,
+    adminThumbnail: "thumbnail",
+    focalPoint: true,
     imageSizes: [
       {
-        name: 'thumbnail',
+        name: "thumbnail",
         width: 200,
         formatOptions: {
-          format: 'webp',
+          format: "webp",
           options: {
             quality: 75,
             effort: 4,
@@ -51,10 +54,10 @@ export const Media: CollectionConfig = {
         },
       },
       {
-        name: 'small',
+        name: "small",
         width: 600,
         formatOptions: {
-          format: 'webp',
+          format: "webp",
           options: {
             quality: 80,
             effort: 4,
@@ -62,10 +65,10 @@ export const Media: CollectionConfig = {
         },
       },
       {
-        name: 'medium',
+        name: "medium",
         width: 900,
         formatOptions: {
-          format: 'webp',
+          format: "webp",
           options: {
             quality: 80,
             effort: 4,
@@ -73,10 +76,10 @@ export const Media: CollectionConfig = {
         },
       },
       {
-        name: 'large',
+        name: "large",
         width: 1400,
         formatOptions: {
-          format: 'webp',
+          format: "webp",
           options: {
             quality: 82,
             effort: 5,
@@ -84,12 +87,12 @@ export const Media: CollectionConfig = {
         },
       },
       {
-        name: 'og',
+        name: "og",
         width: 1200,
         height: 630,
-        crop: 'center',
+        crop: "center",
         formatOptions: {
-          format: 'webp',
+          format: "webp",
           options: {
             quality: 85,
             effort: 5,
@@ -98,4 +101,4 @@ export const Media: CollectionConfig = {
       },
     ],
   },
-}
+};

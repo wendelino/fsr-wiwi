@@ -1,15 +1,13 @@
 "use client";
 
 import type {
-	PayloadAdminBarProps,
-	PayloadMeUser,
+  PayloadAdminBarProps,
+  PayloadMeUser,
 } from "@payloadcms/admin-bar";
-
-import { cn } from "@/utilities/ui";
-import { useSelectedLayoutSegments } from "next/navigation";
 import { PayloadAdminBar } from "@payloadcms/admin-bar";
+import { useRouter, useSelectedLayoutSegments } from "next/navigation";
 import React, { useState } from "react";
-import { useRouter } from "next/navigation";
+import { cn } from "@/utilities/ui";
 
 import "./index.scss";
 
@@ -18,79 +16,79 @@ import { getClientSideURL } from "@/utilities/getURL";
 const baseClass = "admin-bar";
 
 const collectionLabels = {
-	pages: {
-		plural: "Pages",
-		singular: "Page",
-	},
-	posts: {
-		plural: "Posts",
-		singular: "Post",
-	},
-	projects: {
-		plural: "Projects",
-		singular: "Project",
-	},
+  pages: {
+    plural: "Pages",
+    singular: "Page",
+  },
+  posts: {
+    plural: "Posts",
+    singular: "Post",
+  },
+  projects: {
+    plural: "Projects",
+    singular: "Project",
+  },
 };
 
 const Title: React.FC = () => <span>Dashboard</span>;
 
 export const AdminBar: React.FC<{
-	adminBarProps?: PayloadAdminBarProps;
+  adminBarProps?: PayloadAdminBarProps;
 }> = (props) => {
-	const { adminBarProps } = props || {};
-	const segments = useSelectedLayoutSegments();
-	const [show, setShow] = useState(false);
-	const collection = (
-		collectionLabels[segments?.[1] as keyof typeof collectionLabels]
-			? segments[1]
-			: "pages"
-	) as keyof typeof collectionLabels;
-	const router = useRouter();
+  const { adminBarProps } = props || {};
+  const segments = useSelectedLayoutSegments();
+  const [show, setShow] = useState(false);
+  const collection = (
+    collectionLabels[segments?.[1] as keyof typeof collectionLabels]
+      ? segments[1]
+      : "pages"
+  ) as keyof typeof collectionLabels;
+  const router = useRouter();
 
-	const onAuthChange = React.useCallback((user: PayloadMeUser) => {
-		setShow(Boolean(user?.id));
-	}, []);
+  const onAuthChange = React.useCallback((user: PayloadMeUser) => {
+    setShow(Boolean(user?.id));
+  }, []);
 
-	return (
-		<div
-			className={cn(
-				baseClass,
-				"p-2 bg-black text-white fixed top-0 z-50 rounded-xl m-2 ",
-				{
-					block: show,
-					hidden: !show,
-				},
-			)}
-		>
-			<PayloadAdminBar
-				{...adminBarProps}
-				className="py-2 flex flex-col gap-2 text-xs  text-white"
-				classNames={{
-					controls: "font-medium text-white",
-					logo: "text-white",
-					user: "text-white",
-				}}
-				cmsURL={getClientSideURL()}
-				collectionSlug={collection}
-				collectionLabels={{
-					plural: collectionLabels[collection]?.plural || "Pages",
-					singular: collectionLabels[collection]?.singular || "Page",
-				}}
-				logo={<Title />}
-				onAuthChange={onAuthChange}
-				onPreviewExit={() => {
-					fetch("/next/exit-preview").then(() => {
-						router.push("/");
-						router.refresh();
-					});
-				}}
-				style={{
-					backgroundColor: "transparent",
-					padding: 0,
-					position: "relative",
-					zIndex: "unset",
-				}}
-			/>
-		</div>
-	);
+  return (
+    <div
+      className={cn(
+        baseClass,
+        "fixed top-0 z-50 m-2 rounded-xl bg-black p-2 text-white",
+        {
+          block: show,
+          hidden: !show,
+        }
+      )}
+    >
+      <PayloadAdminBar
+        {...adminBarProps}
+        className="flex flex-col gap-2 py-2 text-white text-xs"
+        classNames={{
+          controls: "font-medium text-white",
+          logo: "text-white",
+          user: "text-white",
+        }}
+        cmsURL={getClientSideURL()}
+        collectionLabels={{
+          plural: collectionLabels[collection]?.plural || "Pages",
+          singular: collectionLabels[collection]?.singular || "Page",
+        }}
+        collectionSlug={collection}
+        logo={<Title />}
+        onAuthChange={onAuthChange}
+        onPreviewExit={() => {
+          fetch("/next/exit-preview").then(() => {
+            router.push("/");
+            router.refresh();
+          });
+        }}
+        style={{
+          backgroundColor: "transparent",
+          padding: 0,
+          position: "relative",
+          zIndex: "unset",
+        }}
+      />
+    </div>
+  );
 };
