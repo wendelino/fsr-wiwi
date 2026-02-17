@@ -1,4 +1,5 @@
-import { ArrowRightCircle } from "lucide-react";
+import { format } from "date-fns";
+import { ArrowRightCircle, Calendar, MapPin, Timer } from "lucide-react";
 import Link from "next/link";
 import type React from "react";
 import { Card, type CardData } from "@/components/Card";
@@ -79,13 +80,7 @@ export const CollectionArchive: React.FC<Props> = (props) => {
         <ElementWrapper title="Events">
           {data.events.map((result) => {
             if (typeof result === "object" && result !== null) {
-              return (
-                <LinkWrapper
-                  key={result.slug}
-                  {...result}
-                  slug={"events/" + result.slug}
-                />
-              );
+              return <EventWrapper key={result.slug} {...result} />;
             }
 
             return null;
@@ -203,5 +198,105 @@ const LinkWrapper = ({
         <ArrowRightCircle className="ml-auto size-5" />
       </Link>
     </div>
+  );
+};
+
+const formatEventDuration = (
+  start: string | Date | null | undefined,
+  end: string | Date | null | undefined
+): string => {
+  if (!(start && end)) {
+    return "";
+  }
+
+  const startDate = new Date(start);
+  const endDate = new Date(end);
+  const diffMs = endDate.getTime() - startDate.getTime();
+
+  if (Number.isNaN(diffMs) || diffMs <= 0) {
+    return "";
+  }
+
+  const totalMinutes = Math.round(diffMs / 60_000);
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+
+  if (hours && minutes) {
+    return `${hours} Std. ${minutes} Min.`;
+  }
+
+  if (hours) {
+    return `${hours} Std.`;
+  }
+
+  return `${minutes} Min.`;
+};
+
+const EventWrapper = ({
+  slug,
+  title,
+  start,
+  end,
+  location,
+}: {
+  slug?: string | null;
+  title?: string | null;
+  start?: string | Date | null;
+  location?: string | null;
+  end?: string | Date | null;
+}) => {
+  if (!(slug && title && start && location)) {
+    return null;
+  }
+
+  const startDate = new Date(start);
+  const endDate = end ? new Date(end) : null;
+  const hasValidStart = !Number.isNaN(startDate.getTime());
+  const hasValidEnd = endDate ? !Number.isNaN(endDate.getTime()) : false;
+
+  if (!hasValidStart) {
+    return null;
+  }
+
+  const baseDateLabel = format(startDate, "dd.MM.yyyy");
+  const baseTimeLabel = format(startDate, "HH:mm");
+  const dateLabel = baseDateLabel;
+  const timeLabel = baseTimeLabel;
+
+  const durationLabel = formatEventDuration(
+    hasValidStart ? startDate : null,
+    hasValidEnd ? endDate : null
+  );
+
+  return (
+    <Link
+      className="group flex h-full items-center gap-4 rounded-xl border border-border bg-card/80 p-5 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:bg-card"
+      href={`/events/${slug}`}
+    >
+      <div className="flex min-w-0 flex-1 flex-col gap-3">
+        <h3 className="line-clamp-2 font-semibold text-lg md:text-xl">
+          {title}
+        </h3>
+        {location && (
+          <span className="flex items-center gap-1.5">
+            <MapPin className="size-3.5 text-primary" />
+            {location}
+          </span>
+        )}
+        <div className="flex flex-wrap items-center gap-2 text-muted-foreground text-sm">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/70 px-2.5 py-1">
+            <Calendar className="size-3.5 text-primary" />
+            {dateLabel}, {timeLabel}
+          </span>
+          {durationLabel && (
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-background/70 px-2.5 py-1">
+              <Timer className="size-3.5 text-primary" />
+              {durationLabel}
+            </span>
+          )}
+        </div>
+      </div>
+      <ArrowRightCircle className="size-5 text-muted-foreground transition-colors group-hover:text-primary" />
+    </Link>
   );
 };

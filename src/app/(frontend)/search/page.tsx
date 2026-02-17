@@ -71,6 +71,9 @@ export default async function Page({
     slug: doc.slug,
     meta: doc.meta,
     categories: doc.categories,
+    start: doc.eventStart,
+    end: doc.eventEnd,
+    location: doc.eventLocation,
     relationTo:
       typeof doc.doc === "object" && doc.doc?.relationTo
         ? (doc.doc.relationTo as "posts" | "pages" | "events")
