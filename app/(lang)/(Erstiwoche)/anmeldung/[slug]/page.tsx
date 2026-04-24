@@ -78,7 +78,7 @@ export default async function page({ params }: PageProps) {
 		return (
 			<div className="space-y-6">
 				<PageHeader title={event.title} subtitle={date} />
-				<p className="  max-w-md mx-auto pb-8 whitespace-pre-line">
+				<p className="sm:text-base text-sm  max-w-md mx-auto pb-4 whitespace-pre-line">
 					{event.description}
 				</p>
 				<InfoCard type="info" displayContact={false}>
