@@ -9,13 +9,27 @@ export async function Footer() {
   const footerData: Footer = await getCachedGlobal("footer", 1)();
 
   const navItems = footerData?.navItems || [];
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="mt-auto border-border border-t bg-black text-white dark:bg-card">
-      <div className="container flex flex-col gap-8 py-8 md:flex-row md:justify-between">
-        <Link className="flex items-center" href="/">
-          <Logo className="h-48 w-48" />
-        </Link>
+      <div className="container flex flex-col gap-10 py-10 md:flex-row md:justify-between">
+        <div className="flex flex-col gap-6">
+          <Link className="flex items-center" href="/">
+            <Logo className="h-48 w-48" />
+          </Link>
+
+          <div className="flex flex-col gap-1 text-sm text-white/70">
+            <a
+              className="transition-colors hover:text-white"
+              href="mailto:fachschaftsrat@wiwi.uni-halle.de"
+            >
+              fachschaftsrat@wiwi.uni-halle.de
+            </a>
+            <span>Große Steinstraße 73</span>
+            <span>06108 Halle (Saale)</span>
+          </div>
+        </div>
 
         <div className="flex flex-col-reverse items-start gap-4 md:flex-row md:items-center">
           <CMSLink
@@ -31,6 +45,13 @@ export async function Footer() {
               );
             })}
           </nav>
+        </div>
+      </div>
+
+      <div className="border-border border-t">
+        <div className="container py-4 text-center text-white/50 text-xs">
+          © Fachschaftsrat Wirtschaftswissenschaften {currentYear} | All Rights
+          Reserved
         </div>
       </div>
     </footer>

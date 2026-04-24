@@ -16,6 +16,7 @@ import { Content } from "../../blocks/Content/config";
 import { FormBlock } from "../../blocks/Form/config";
 import { MarkdownBlock } from "../../blocks/Markdown/config";
 import { MediaBlock } from "../../blocks/MediaBlock/config";
+import { StepByStep } from "../../blocks/StepByStep/config";
 import { populatePublishedAt } from "../../hooks/populatePublishedAt";
 import { generatePreviewPath } from "../../utilities/generatePreviewPath";
 import { revalidateDelete, revalidatePage } from "./hooks/revalidatePage";
@@ -82,6 +83,7 @@ export const Pages: CollectionConfig<"pages"> = {
                 MediaBlock,
                 Archive,
                 FormBlock,
+                StepByStep,
               ],
               required: true,
               admin: {
