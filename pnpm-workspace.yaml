@@ -1,5 +1,0 @@
-onlyBuiltDependencies:
-  - sharp
-  - unrs-resolver
-packages:
-  - "."  # hier stehen alle Unterordner mit package.json drin
