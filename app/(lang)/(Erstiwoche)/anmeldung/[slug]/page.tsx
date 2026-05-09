@@ -8,6 +8,8 @@ import type { Metadata } from "next";
 import { InfoCard } from "@/components/info-card";
 import BierpongForm from "@/components/forms/bierpong-form";
 import Link from "next/link";
+import UnilympicsForm from "@/components/forms/unilympics-form";
+import Image from "next/image";
 
 export async function generateMetadata({
 	params,
@@ -74,26 +76,14 @@ export default async function page({ params }: PageProps) {
 			</>
 		);
 	}
-	if (event.slug === "bierpong-turnier-2026") {
+	if (event.slug === "unilympics") {
 		return (
 			<div className="space-y-6">
 				<PageHeader title={event.title} subtitle={date} />
-				<p className="sm:text-base text-sm  max-w-md mx-auto pb-4 whitespace-pre-line">
+				<div className="sm:text-base text-sm  max-w-lg mx-auto pb-3 whitespace-pre-line relative ">
 					{event.description}
-				</p>
-				<InfoCard type="info" displayContact={false}>
-					Hier findest du unser{" "}
-					<Link
-						className="underline font-medium text-fsr"
-						href="/files/regeln-bierpong.pdf"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						Bierpong-Regelwerk
-					</Link>
-					.
-				</InfoCard>
-				<BierpongForm event={event} />
+				</div>
+				<UnilympicsForm event={event} />
 			</div>
 		);
 	}
