@@ -20,7 +20,7 @@ export const siteConfig = {
       dropdown: [
         { href: "/about", label: "Über uns" },
         { href: "/mitglieder", label: "Mitglieder" },
-        { href: "/go", label: "Geschäftsordnung" },
+        // { href: "/go", label: "Geschäftsordnung" },
         { href: "/awareness", label: "Awareness" },
       ],
     },
