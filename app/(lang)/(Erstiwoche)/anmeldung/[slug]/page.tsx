@@ -91,6 +91,11 @@ export default async function page({ params }: PageProps) {
 	return (
 		<div className="space-y-6">
 			<PageHeader title={event.title} subtitle={date} />
+			<h3 className="text-center text-xl font-bold">Über das Event</h3>
+			<div className="sm:text-base text-sm  max-w-md mx-auto pb-3 whitespace-pre-line relative ">
+				{event.description}
+			</div>
+
 			<RegisterForm event={event} />
 		</div>
 	);
