@@ -22,12 +22,12 @@ export default function ErstiInfo() {
         <li>Chillige Treffpunkte zum entspannten Ankommen</li>
       </ul>
 
-      <SubHeader>Gewinnspiel</SubHeader>
+      {/* <SubHeader>Gewinnspiel</SubHeader>
       <p className="text-muted-foreground">
         Zusätzlich gibt es ein Gewinnspiel während der Ersti‑Woche! Nehmt an unseren
         Veranstaltungen teil und behaltet unsere Kanäle im Blick – mit etwas Glück
         gewinnt ihr coole Preise.
-      </p>
+      </p> */}
 
       <p className="text-muted-foreground">
         Alle Termine und Details findet ihr direkt hier auf der Seite im Programm.

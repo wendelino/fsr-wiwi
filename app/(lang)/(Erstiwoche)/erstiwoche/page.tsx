@@ -6,8 +6,7 @@ import { Header } from "@/components/TextComponents";
 import WeekGrid from "@/components/weekgrid/weekgrid";
 import ErstiInfo from "./info";
 import { Metadata } from "next";
-import SaveCalendarButton from "@/components/weekgrid/save-calendar-button";
-import PartyCTA from "@/components/party-cta";
+import SaveCalendarButton from "@/components/weekgrid/save-calendar-button"; 
 
 export const metadata: Metadata = {
   title: "Ersti-Woche",
@@ -85,8 +84,7 @@ export default async function page() {
   ];
 
   return (
-    <div>
-    <PartyCTA />
+    <div> 
       <ErstiInfo />
       <Countdown />
 
@@ -98,13 +96,13 @@ export default async function page() {
         <SaveCalendarButton events={events} />
       </div>
 
-      <WeekGrid events={events} startDate={new Date("2025-10-06")} />
+      <WeekGrid events={events} startDate={new Date("2026-10-05")} />
 
-  
+{/*   
 
       <SponsorGrid items={sponsors} />
 
-      <SponsorOfferGrid items={offers} />
+      <SponsorOfferGrid items={offers} /> */}
     </div>
   );
 }

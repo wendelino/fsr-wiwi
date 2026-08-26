@@ -19,6 +19,8 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
+
+  return <div></div>
   return (
     <div className="space-y-8">
       <img
