@@ -32,7 +32,7 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
 
   // Wochentage (Mo-Fr)
   const weekDays = useMemo(() => {
-    return Array.from({ length: 6 }, (_, i) => {
+    return Array.from({ length: 5 }, (_, i) => {
       const date = new Date(startDate);
       date.setHours(0, 0, 0, 0);
       date.setDate(startDate.getDate() + i);
