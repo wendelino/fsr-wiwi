@@ -1,11 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { differenceInMinutes, format, isSameDay } from "date-fns";
+import { formatInTimeZone, toZonedTime } from "date-fns-tz";
 import { de } from "date-fns/locale";
-import { cn } from "@/lib/utils";
-import { ChevronRight, X } from "lucide-react";
-import { Badge } from "../ui/badge";
+import { X } from "lucide-react";
 import GridItem from "./grid-item";
 import { Button } from "../ui/button";
 
@@ -14,11 +12,23 @@ interface WeekGridProps {
   startDate: Date; // Montag der Woche
 }
 
-// Anzeige-Konstanten
+const BERLIN_TZ = "Europe/Berlin";
+
+// Anzeige-Konstanten (Berliner Ortszeit)
 const START_HOUR = 10;
 const END_HOUR = 24; // exklusiv für die Höhe (8-20 = 12h)
 const SLOT_MINUTES = 30;
 const ROW_HEIGHT_PX = 32; // visuelle Höhe pro 30 Minuten
+
+const formatBerlin = (date: Date, formatStr: string) =>
+  formatInTimeZone(date, BERLIN_TZ, formatStr, { locale: de });
+
+const berlinDateKey = (date: Date) => formatBerlin(date, "yyyy-MM-dd");
+
+const berlinMinutesOfDay = (date: Date) => {
+  const zoned = toZonedTime(date, BERLIN_TZ);
+  return zoned.getHours() * 60 + zoned.getMinutes();
+};
 
 type EventGroup = {
   id: string;
@@ -30,14 +40,13 @@ type EventGroup = {
 export default function WeekGrid({ events, startDate }: WeekGridProps) {
   const [openGroupId, setOpenGroupId] = useState<string | null>(null);
 
-  // Wochentage (Mo-Fr)
+  // Wochentage (Mo-Fr) in Berliner Kalendertagen
   const weekDays = useMemo(() => {
-    return Array.from({ length: 5 }, (_, i) => {
-      const date = new Date(startDate);
-      date.setHours(0, 0, 0, 0);
-      date.setDate(startDate.getDate() + i);
-      return date;
-    });
+    const [year, month, day] = berlinDateKey(startDate).split("-").map(Number);
+    return Array.from({ length: 5 }, (_, i) =>
+      // 12:00 UTC bleibt am selben Kalendertag in Berlin (UTC+1/+2)
+      new Date(Date.UTC(year, month - 1, day + i, 12, 0, 0))
+    );
   }, [startDate]);
 
   const totalSlots = useMemo(
@@ -46,27 +55,18 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
   );
   const containerHeight = totalSlots * ROW_HEIGHT_PX;
 
-  // Hilfsfunktionen
-  const getDayStart = (day: Date) => {
-    const d = new Date(day);
-    d.setHours(START_HOUR, 0, 0, 0);
-    return d;
-  };
-  const getDayEnd = (day: Date) => {
-    const d = new Date(day);
-    d.setHours(END_HOUR, 0, 0, 0);
-    return d;
-  };
-
   const groupEventsForDay = (day: Date): EventGroup[] => {
-    const dayEvents = events.filter((e) => isSameDay(new Date(e.start), day));
+    const dayKey = berlinDateKey(day);
+    const dayEvents = events.filter(
+      (e) => berlinDateKey(new Date(e.start)) === dayKey
+    );
 
     const map = new Map<string, EventGroup>();
     for (const e of dayEvents) {
       const start = new Date(e.start);
       const end = new Date((e as any).end ?? start.getTime() + 60 * 60 * 1000);
       // Key nur über identische Start- und Endzeit (auf die Minute genau)
-      const key = `${day.toDateString()}__${start.toISOString()}__${end.toISOString()}`;
+      const key = `${dayKey}__${start.toISOString()}__${end.toISOString()}`;
       const existing = map.get(key);
       if (existing) {
         existing.events.push(e);
@@ -80,19 +80,16 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
     );
   };
 
-  const computeBlockStyle = (day: Date, start: Date, end: Date) => {
-    const dayStart = getDayStart(day);
-    const dayEnd = getDayEnd(day);
-    const clampedStartMs = Math.max(start.getTime(), dayStart.getTime());
-    const clampedEndMs = Math.min(end.getTime(), dayEnd.getTime());
+  const computeBlockStyle = (start: Date, end: Date) => {
+    const dayStartMin = START_HOUR * 60;
+    const dayEndMin = END_HOUR * 60;
+    const clampedStartMin = Math.max(berlinMinutesOfDay(start), dayStartMin);
+    const clampedEndMin = Math.min(berlinMinutesOfDay(end), dayEndMin);
 
-    const minutesFromDayStart = Math.max(
-      0,
-      differenceInMinutes(clampedStartMs, dayStart)
-    );
+    const minutesFromDayStart = Math.max(0, clampedStartMin - dayStartMin);
     const durationMinutes = Math.max(
       SLOT_MINUTES,
-      differenceInMinutes(clampedEndMs, clampedStartMs)
+      clampedEndMin - clampedStartMin
     );
 
     const top = (minutesFromDayStart / SLOT_MINUTES) * ROW_HEIGHT_PX;
@@ -100,18 +97,14 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
     return { top, height };
   };
 
-  // Zeiten für die Skala (30-Minuten-Schritte)
+  // Zeiten für die Skala (30-Minuten-Schritte, Berliner Ortszeit)
   const scaleTimes = useMemo(() => {
-    const arr: Date[] = [];
+    const arr: { hours: number; minutes: number }[] = [];
     for (let h = START_HOUR; h < END_HOUR; h++) {
-      const t1 = new Date(startDate);
-      t1.setHours(h, 0, 0, 0);
-      const t2 = new Date(startDate);
-      t2.setHours(h, 30, 0, 0);
-      arr.push(t1, t2);
+      arr.push({ hours: h, minutes: 0 }, { hours: h, minutes: 30 });
     }
     return arr;
-  }, [startDate]);
+  }, []);
 
   return (
     <div className="w-full">
@@ -123,10 +116,10 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
             <div key={day.toISOString()} className="">
               <div className="flex items-baseline justify-between">
                 <div className="font-semibold">
-                  {format(day, "EEEE", { locale: de })}
+                  {formatBerlin(day, "EEEE")}
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  {format(day, "dd.MM.yyyy")}
+                  {formatBerlin(day, "dd.MM.yyyy")}
                 </div>
               </div>
               <div className="mt-2 space-y-2">
@@ -197,10 +190,10 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
                 className="h-16 border-b p-2 text-center"
               >
                 <div className="font-semibold">
-                  {format(day, "EEEE", { locale: de })}
+                  {formatBerlin(day, "EEEE")}
                 </div>
                 <div className="text-sm text-muted-foreground">
-                  {format(day, "dd.MM.yyyy")}
+                  {formatBerlin(day, "dd.MM.yyyy")}
                 </div>
               </div>
             ))}
@@ -214,7 +207,7 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
                 <div
                   key={idx}
                   className={`flex items-start pr-1 text-[11px] tabular-nums ${
-                    format(t, "mm") === "00"
+                    t.minutes === 0
                       ? "text-foreground"
                       : "text-muted-foreground"
                   }`}
@@ -223,7 +216,7 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
                     borderBottom: "1px solid hsl(var(--border))",
                   }}
                 >
-                  {format(t, "HH:mm")}
+                  {`${String(t.hours).padStart(2, "0")}:${String(t.minutes).padStart(2, "0")}`}
                 </div>
               ))}
             </div>
@@ -254,11 +247,7 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
                   {/* Event-Blöcke */}
                   <div className="absolute inset-0">
                     {groups.map((g) => {
-                      const { top, height } = computeBlockStyle(
-                        day,
-                        g.start,
-                        g.end
-                      );
+                      const { top, height } = computeBlockStyle(g.start, g.end);
                       const isGroup = g.events.length > 1;
                       const event = g.events[0];
                       return (

@@ -1,4 +1,4 @@
-import { format } from "date-fns";
+import { formatInTimeZone } from "date-fns-tz";
 import { ChevronRight } from "lucide-react";
 import { Badge } from "../ui/badge";
 
@@ -16,6 +16,10 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
+
+const BERLIN_TZ = "Europe/Berlin";
+const formatBerlinTime = (date: Date) =>
+  formatInTimeZone(date, BERLIN_TZ, "HH:mm");
 
 export default function GridItem({
   event,
@@ -38,7 +42,7 @@ export default function GridItem({
             {length ? `${length} Slots` : event.title}
           </div>
           <div className="shrink-0 tabular-nums">
-            {format(event.start, "HH:mm")}–{format(event.end, "HH:mm")}
+            {formatBerlinTime(event.start)}–{formatBerlinTime(event.end)}
           </div>
         </div>
         {length ? (
@@ -118,7 +122,7 @@ export default function GridItem({
               {length ? `${length} Slots` : title}
             </div>
             <div className="shrink-0 tabular-nums">
-              {format(start, "HH:mm")}–{format(end, "HH:mm")}
+              {formatBerlinTime(start)}–{formatBerlinTime(end)}
             </div>
           </div>
           {length ? (
@@ -162,8 +166,8 @@ export default function GridItem({
           <DialogDescription>
             {" "}
             <span className="font-extralight py-2">
-              <strong>{format(start, "HH:mm")} </strong>
-              bis <strong>{format(end, "HH:mm")}</strong>
+              <strong>{formatBerlinTime(start)} </strong>
+              bis <strong>{formatBerlinTime(end)}</strong>
             </span>
           </DialogDescription>
         </DialogHeader>

@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export default async function page() {
-  const { events } = await getEvents({ tag: "ersti25", limit: 100 }); 
+  const { events } = await getEvents({ tag: "ersti26", limit: 100 }); 
   const sponsors = [
     {
       src: "schogetten-logo.png",
