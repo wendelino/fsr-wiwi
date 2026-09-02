@@ -83,8 +83,13 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
   const computeBlockStyle = (start: Date, end: Date) => {
     const dayStartMin = START_HOUR * 60;
     const dayEndMin = END_HOUR * 60;
-    const clampedStartMin = Math.max(berlinMinutesOfDay(start), dayStartMin);
-    const clampedEndMin = Math.min(berlinMinutesOfDay(end), dayEndMin);
+    const startMin = berlinMinutesOfDay(start);
+    // Endzeiten um/nach Mitternacht liegen am Folgetag (00:00); Dauer statt Uhrzeit nutzen.
+    const durationMin = Math.max(0, (end.getTime() - start.getTime()) / 60_000);
+    const endMin = startMin + durationMin;
+
+    const clampedStartMin = Math.max(startMin, dayStartMin);
+    const clampedEndMin = Math.min(endMin, dayEndMin);
 
     const minutesFromDayStart = Math.max(0, clampedStartMin - dayStartMin);
     const durationMinutes = Math.max(
@@ -182,7 +187,7 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
       <div className="hidden sm:block overflow-x-auto">
         <div className="min-w-[900px] w-full">
           {/* Kopfzeile Wochentage */}
-          <div className="grid grid-cols-[48px_repeat(6,1fr)]">
+          <div className="grid grid-cols-[48px_repeat(5,1fr)]">
             <div className="h-16" />
             {weekDays.map((day) => (
               <div
@@ -200,7 +205,7 @@ export default function WeekGrid({ events, startDate }: WeekGridProps) {
           </div>
 
           {/* Körper: Zeitspalte + Tages-Spalten */}
-          <div className="grid grid-cols-[48px_repeat(6,1fr)]">
+          <div className="grid grid-cols-[48px_repeat(5,1fr)]">
             {/* Zeitspalte */}
             <div className="border-r" style={{ height: containerHeight }}>
               {scaleTimes.map((t, idx) => (

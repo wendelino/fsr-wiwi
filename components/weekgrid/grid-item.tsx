@@ -1,4 +1,4 @@
-import { formatInTimeZone } from "date-fns-tz";
+import { formatInTimeZone, toZonedTime } from "date-fns-tz";
 import { ChevronRight } from "lucide-react";
 import { Badge } from "../ui/badge";
 
@@ -21,6 +21,18 @@ const BERLIN_TZ = "Europe/Berlin";
 const formatBerlinTime = (date: Date) =>
   formatInTimeZone(date, BERLIN_TZ, "HH:mm");
 
+const berlinDateKey = (date: Date) => formatInTimeZone(date, BERLIN_TZ, "yyyy-MM-dd");
+
+/** Endzeiten um Mitternacht als 24:00 statt 00:00 (Folgetag). */
+const formatBerlinEndTime = (start: Date, end: Date) => {
+  const zoned = toZonedTime(end, BERLIN_TZ);
+  const endsAtMidnightNextDay =
+    berlinDateKey(end) !== berlinDateKey(start) &&
+    zoned.getHours() === 0 &&
+    zoned.getMinutes() === 0;
+  return endsAtMidnightNextDay ? "24:00" : formatBerlinTime(end);
+};
+
 export default function GridItem({
   event,
   length,
@@ -42,7 +54,7 @@ export default function GridItem({
             {length ? `${length} Slots` : event.title}
           </div>
           <div className="shrink-0 tabular-nums">
-            {formatBerlinTime(event.start)}–{formatBerlinTime(event.end)}
+            {formatBerlinTime(event.start)}–{formatBerlinEndTime(event.start, event.end)}
           </div>
         </div>
         {length ? (
@@ -122,7 +134,7 @@ export default function GridItem({
               {length ? `${length} Slots` : title}
             </div>
             <div className="shrink-0 tabular-nums">
-              {formatBerlinTime(start)}–{formatBerlinTime(end)}
+              {formatBerlinTime(start)}–{formatBerlinEndTime(start, end)}
             </div>
           </div>
           {length ? (
@@ -167,7 +179,7 @@ export default function GridItem({
             {" "}
             <span className="font-extralight py-2">
               <strong>{formatBerlinTime(start)} </strong>
-              bis <strong>{formatBerlinTime(end)}</strong>
+              bis <strong>{formatBerlinEndTime(start, end)}</strong>
             </span>
           </DialogDescription>
         </DialogHeader>
