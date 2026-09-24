@@ -12,6 +12,23 @@ export interface FsrLegislatur {
 
 export const legislaturData: FsrLegislatur[] = [
   {
+    period: "2026",
+    legislatur_start: "24.06.2026",
+    members: [
+      { name: "Annika Maria Diers", position: "Stellv. Vorsitzende", tasks: "" },
+      { name: "Anna-Maja Hahn", position: "", tasks: "" },
+      { name: "Ferdinand Kirchfeld", position: "", tasks: "" },
+      { name: "Hannah Leonie Volkmer", position: "", tasks: "" },
+      { name: "Florian Geyer", position: "Sprecher für Finanzen", tasks: "" },
+      { name: "Jan Lucas Werny", position: "Sprecher für Finanzen", tasks: "" },
+      { name: "Julius Valentin Dallorso", position: "Vorsitzender", tasks: "" },
+      { name: "Emil Lampert", position: "", tasks: "" },
+      { name: "Dennis Behnsen", position: "", tasks: "" },
+      { name: "Tristan Boge", position: "", tasks: "" },
+      { name: "Benjamin Knöppel", position: "", tasks: "" },
+    ],
+  },
+  {
     period: "2025",
     legislatur_start: "24.06.2025",
     members: [
