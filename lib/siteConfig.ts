@@ -1,6 +1,15 @@
 import { ERSTI_GUIDE, ERSTI_PAGE, ERSTI_PROGRAM } from "@/lib/ersti";
 
-export const siteConfig = {
+export type NavItem = { href: string; label: string; prefetch?: boolean };
+export type NavPage = NavItem | { label: string; dropdown: NavItem[] };
+
+export const siteConfig: {
+  logo: string;
+  name: string;
+  url: string;
+  pages: NavPage[];
+  company: Record<"owner" | "plz" | "ort" | "strasse" | "mail", string>;
+} = {
   logo: "/logo.png",
   name: "FSR Wiwi",
   url: "https://fsr-wiwi-halle.de",
