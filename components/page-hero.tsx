@@ -50,7 +50,8 @@ export function PageHero({
           {eyebrow && <Eyebrow onDark>{eyebrow}</Eyebrow>}
           <h1
             className={cn(
-              "mt-2 max-w-4xl font-black",
+              // Lange Titel (z. B. "Infoveranstaltung") auf dem Handy trennen statt überlaufen
+              "mt-2 max-w-4xl hyphens-auto break-words font-black",
               poster
                 ? "text-[clamp(3rem,10vw,6.5rem)] uppercase leading-[0.9] tracking-tighter"
                 : "text-[clamp(2.4rem,7vw,4.75rem)] leading-[0.95] tracking-tight"

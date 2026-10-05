@@ -61,8 +61,9 @@ export default function ContactForm({ className }: { className?: string }) {
       }}
       config={{
         submitText: "Absenden",
-        submitLoadingText: "Laden...",
-        submitSuccessText: "Wir werden uns schnellstmöglich bei dir melden :)",
+        submitLoadingText: "Wird gesendet …",
+        successTitle: "Nachricht gesendet",
+        submitSuccessText: "Wir melden uns so schnell wie möglich bei dir.",
         submitErrorText: "Senden fehlgeschlagen. Versuche es erneut.",
         showRequiredHint: true,
       }}

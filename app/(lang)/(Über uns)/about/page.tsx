@@ -1,17 +1,27 @@
-import { PageHeader } from "@/components/Framer/PageHeader";
-import { Section } from "@/components/Framer/Section";
+import { MeetingCard } from "@/components/meeting-card";
+import { HeroLead, PageHero } from "@/components/page-hero";
+import { SectionHeading } from "@/components/section-heading";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle
-} from "@/components/ui/card";
+import { ERSTI_PAGE } from "@/lib/ersti";
+import { siteConfig } from "@/lib/siteConfig";
 import { getTranslation } from "@/locales/getTranslation";
-import { ExternalLink, Facebook, Instagram } from "lucide-react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  BookOpen,
+  Facebook,
+  GraduationCap,
+  HandCoins,
+  Instagram,
+  Mail,
+  MapPin,
+  PartyPopper,
+  ShieldCheck,
+  Users,
+} from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
+
 export const metadata: Metadata = {
   title: "Über uns",
   description:
@@ -40,112 +50,181 @@ export const metadata: Metadata = {
   },
 };
 
-// export default async function page({ params }: { params: { lang: string } }) {
-export default async function page( ) {
+const STUDIP_URL =
+  "https://studip.uni-halle.de/dispatch.php/course/overview?cid=ee8c88937076ac5fe253303faf816cbe";
+const FUNDING_URL = "https://wcms.itz.uni-halle.de/download.php?down=56894&elem=2139305";
+
+// Inhalte aus unserer Infografik (public/fsr-ovdf.jpeg)
+const offers = [
+  {
+    icon: GraduationCap,
+    title: "ASQ beim FSR",
+    points: [
+      "In jedem Semester",
+      "Gestalte dein eigenes Projekt",
+      "Knüpfe Kontakte in Lehre, Forschung und Verwaltung",
+      "Triff neue Leute und blicke hinter die Kulissen von Uni und Veranstaltungen",
+    ],
+    link: { href: "/asq", label: "Mehr zum ASQ" },
+  },
+  {
+    icon: HandCoins,
+    title: "Projektförderung",
+    points: [
+      "Du hast eine Idee für ein Projekt, eine Sportveranstaltung, möchtest dich politisch engagieren oder eine Party veranstalten?",
+      "Wir fördern dein Projekt finanziell, unterstützen dich bei der Werbung und leihen Technik aus.",
+    ],
+    link: { href: FUNDING_URL, label: "Merkblatt zum Antrag", external: true },
+  },
+  {
+    icon: PartyPopper,
+    title: "Projekte & Initiativen",
+    points: [
+      "Absolventenfeier und Innenhofpartys",
+      "Fußballturnier und Drachenbootrennen",
+      "Podiumsdiskussionen, Workshops",
+      "Ersti-Rallye, Glühweinhütte und vieles mehr",
+    ],
+    link: { href: "/kalender", label: "Zum Kalender" },
+  },
+];
+
+const more = [
+  { href: ERSTI_PAGE, icon: PartyPopper, title: "Ersti-Woche", text: "Euer Start ins Studium" },
+  { href: STUDIP_URL, icon: BookOpen, title: "Altklausuren", text: "Unsere Sammlung auf StudIP", external: true },
+  { href: "/awareness", icon: ShieldCheck, title: "Awareness", text: "Unser Konzept für einen Safer Space" },
+  { href: "/mitglieder", icon: Users, title: "Mitglieder", text: "Wer gerade im FSR sitzt" },
+];
+
+export default async function page() {
   const { about: t } = await getTranslation("de");
+  const { mail, strasse, plz, ort } = siteConfig.company;
+
+  const channels = [
+    { href: `mailto:${mail}`, icon: Mail, title: "E-Mail", text: mail },
+    { href: "https://www.instagram.com/fsr.wiwi.halle/", icon: Instagram, title: t.cards.instagram.title, text: t.cards.instagram.content },
+    { href: "https://www.facebook.com/fsr.wiwi.halle", icon: Facebook, title: t.cards.facebook.title, text: t.cards.facebook.content },
+    { href: STUDIP_URL, icon: BookOpen, title: t.cards.studip.title, text: t.cards.studip.content },
+  ];
+
   return (
-    <>
-      <PageHeader title={t.title} subtitle={t.subtitle} />
-
-      <Section className="px-6 lg:px-16 py-12 bg-border shadow-md rounded-lg">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <img
-            src="https://fachschaft.wiwi.uni-halle.de/im/1603205731_616_00_420.png"
-            alt="Überblick über den Fachschaftsrat"
-            className="rounded-lg shadow-lg size-cover bg-border mx-auto"
-          />
-          <div className="flex flex-col justify-center">
-            <h2 className="text-3xl font-semibold text-text">
-              {t.aboutSection.title}
-            </h2>
-            <p className="mt-4 text-text-light">{t.aboutSection.text1}</p>
-            <p className="mt-4 text-text-light">{t.aboutSection.text2}</p>
-          </div>
-        </div>
-      </Section>
-
-      <Section className="px-6 lg:px-16 py-12 bg-border/30 shadow-md rounded-lg">
-        <h2 className="text-3xl font-semibold text-text">
-          {t.contactSection.title}
-        </h2>
-        <p className="mt-4 text-text-light">
-          Fachschaftsrat des wirtschaftswissenschaftlichen Bereichs der
-          Juristischen und Wirtschaftswissenschaftlichen Fakultät
-        </p>
-        <p className="mt-2 text-text-light">
-          Große Steinstrasse 73, 06108 Halle (Saale)
-        </p>
-        <p className="mt-2">
-          <a
-            href="mailto:fachschaftsrat@wiwi.uni-halle.de"
-            className="text-primary underline"
+    <div className="flex flex-col gap-16 md:gap-24">
+      <PageHero
+        eyebrow="Über uns"
+        title={
+          <>
+            {/* Weicher Trennstrich: bricht als "Fachschafts-rat" statt mitten im Wort */}
+            Fachschafts&shy;rat{" "}
+            <span className="text-transparent [-webkit-text-stroke:2px_white]">WiWi</span>
+          </>
+        }
+        poster
+      >
+        <HeroLead>{t.subtitle}</HeroLead>
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <Button asChild size="lg" className="bg-white text-fsr-deep hover:bg-white/90">
+            <Link href="/mitglieder">
+              <Users className="mr-2 size-4" /> Unsere Mitglieder
+            </Link>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white"
           >
-            fachschaftsrat@wiwi.uni-halle.de
-          </a>
-        </p>
-      </Section>
+            <Link href="/kontakt">
+              Kontakt <ArrowRight className="ml-2 size-4" />
+            </Link>
+          </Button>
+        </div>
+      </PageHero>
 
-      <Section className="grid grid-cols-1 sm:grid-cols-3 gap-4"> 
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <ExternalLink className="mr-2 h-4 w-4" /> {t.cards.studip.title}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>{t.cards.studip.content}</p>
-          </CardContent>
-          <CardFooter>
-            <Button asChild>
-              <Link href="https://studip.uni-halle.de/dispatch.php/course/overview?cid=ee8c88937076ac5fe253303faf816cbe">
-                {t.cards.studip.button}
-              </Link>
-            </Button>
-          </CardFooter>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Facebook className="mr-2 h-4 w-4" /> {t.cards.facebook.title}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>{t.cards.facebook.content}</p>
-          </CardContent>
-          <CardFooter>
-            <Button asChild>
+      <section className="grid gap-8 md:grid-cols-[2fr_3fr] md:gap-12">
+        <SectionHeading eyebrow="Wer wir sind" title={t.aboutSection.title} />
+        <div className="space-y-4 text-lg leading-relaxed text-foreground/80 md:pt-6">
+          <p>{t.aboutSection.text1}</p>
+          <p>{t.aboutSection.text2}</p>
+        </div>
+      </section>
+
+      <section>
+        <SectionHeading eyebrow="Für euch" title="Was wir machen" />
+        <ul className="mt-8 grid gap-4 md:grid-cols-3">
+          {offers.map((o) => (
+            <li key={o.title} className="flex flex-col rounded-3xl border bg-card p-6">
+              <span className="flex size-11 items-center justify-center rounded-2xl bg-fsr/10 text-fsr">
+                <o.icon className="size-5" />
+              </span>
+              <h3 className="mt-5 text-lg font-bold leading-tight">{o.title}</h3>
+              <ul className="mt-3 flex-1 list-disc space-y-1.5 pl-5 text-sm text-muted-foreground marker:text-fsr">
+                {o.points.map((p) => (
+                  <li key={p}>{p}</li>
+                ))}
+              </ul>
               <Link
-                href="https://www.facebook.com/fsr.wiwi.halle"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={o.link.href}
+                {...(o.link.external && { target: "_blank", rel: "noopener noreferrer" })}
+                className="group mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-fsr underline-offset-4 hover:underline"
               >
-                {t.cards.facebook.button}
+                {o.link.label}
+                {o.link.external ? (
+                  <ArrowUpRight className="size-4" />
+                ) : (
+                  <ArrowRight className="size-4 transition group-hover:translate-x-0.5" />
+                )}
               </Link>
-            </Button>
-          </CardFooter>
-        </Card>
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center">
-              <Instagram className="mr-2 h-4 w-4" /> {t.cards.instagram.title}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p>{t.cards.instagram.content}</p>
-          </CardContent>
-          <CardFooter>
-            <Button asChild>
+            </li>
+          ))}
+        </ul>
+        <ul className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4">
+          {more.map((l) => (
+            <li key={l.title}>
               <Link
-                href="https://www.instagram.com/fsr.wiwi.halle/?hl=de"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={l.href}
+                {...(l.external && { target: "_blank", rel: "noopener noreferrer" })}
+                className="group flex h-full items-center gap-3 rounded-2xl border p-4 transition hover:border-fsr/40 hover:bg-fsr/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fsr"
               >
-                {t.cards.instagram.button}
+                <l.icon className="size-5 shrink-0 text-fsr" />
+                <span className="min-w-0">
+                  <span className="block font-bold leading-tight">{l.title}</span>
+                  <span className="block text-xs text-muted-foreground">{l.text}</span>
+                </span>
               </Link>
-            </Button>
-          </CardFooter>
-        </Card>
-      </Section> 
-    </>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <MeetingCard />
+
+      <section>
+        <SectionHeading eyebrow={t.contactSection.title} title="So erreichst du uns" />
+        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          {channels.map((c) => (
+            <a
+              key={c.title}
+              href={c.href}
+              {...(!c.href.startsWith("mailto:") && { target: "_blank", rel: "noopener noreferrer" })}
+              className="group flex flex-col rounded-3xl border bg-card p-5 transition hover:border-fsr/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fsr"
+            >
+              <span className="flex items-start justify-between">
+                <span className="flex size-11 items-center justify-center rounded-2xl bg-fsr/10 text-fsr">
+                  <c.icon className="size-5" />
+                </span>
+                <ArrowUpRight className="size-5 text-muted-foreground transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fsr" />
+              </span>
+              <span className="mt-6 block text-lg font-bold leading-tight">{c.title}</span>
+              <span className="mt-1 block break-words text-sm text-muted-foreground">{c.text}</span>
+            </a>
+          ))}
+        </div>
+        <p className="mt-6 flex items-start gap-2 text-sm text-muted-foreground">
+          <MapPin className="mt-0.5 size-4 shrink-0 text-fsr" />
+          Fachschaftsrat des wirtschaftswissenschaftlichen Bereichs der Juristischen und
+          Wirtschaftswissenschaftlichen Fakultät · {strasse}, {plz} {ort}
+        </p>
+      </section>
+    </div>
   );
 }

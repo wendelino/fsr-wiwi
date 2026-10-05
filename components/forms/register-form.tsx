@@ -12,7 +12,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
-import { signupSuccessText } from "@/lib/events";
+import { SignupSuccess } from "@/components/events/signup-result";
+import { signupButtonLabel } from "@/lib/events";
 import { addGuestToEvent } from "@/app/_actions/sign-up";
 
 const Schema = z.object({
@@ -62,24 +63,15 @@ export default function RegisterForm({
 			mode="create"
 			className={className}
 			onCreate={onCreate}
-			onSuccess={() => {
-				/* optional */
-			}}
-			onError={() => {
-				/* optional */
-			}}
+			successView={(res) => <SignupSuccess event={event} message={res.msg} />}
 			config={{
 				title: "Anmeldeformular",
 				description: "Bitte trage deine Daten ein.",
-				submitText: "Anmelden",
-				submitLoadingText: "Laden...",
-				submitSuccessText: signupSuccessText(event),
-				submitErrorText: "Senden fehlgeschlagen. Versuche es erneut.",
+				submitText: signupButtonLabel(event),
+				submitLoadingText: "Wird gesendet …",
+				submitErrorText: "Die Anmeldung konnte nicht gesendet werden.",
 				showRequiredHint: true,
 			}}
-			// optional eigene Erfolg-/Fehlersichten:
-			// successView={<div>Danke!</div>}
-			// errorView={<div>Ups, Fehler.</div>}
 		>
 			{(form) => (
 				<>

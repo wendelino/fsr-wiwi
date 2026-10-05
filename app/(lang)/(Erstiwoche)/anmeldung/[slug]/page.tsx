@@ -70,10 +70,7 @@ export default async function page({ params }: PageProps) {
 					) : event.slug === "unilympics" ? (
 						<UnilympicsForm event={event} />
 					) : (
-						<RegisterForm
-							event={event}
-							className="max-w-none sm:rounded-3xl sm:bg-card sm:shadow-none"
-						/>
+						<RegisterForm event={event} className="max-w-none" />
 					)}
 				</div>
 			</div>

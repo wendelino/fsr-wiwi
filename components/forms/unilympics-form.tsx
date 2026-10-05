@@ -8,7 +8,7 @@ import {
 } from "react-hook-form";
 import { z } from "zod";
 import { motion, AnimatePresence } from "motion/react";
-import { ArrowLeft, Plus, Trash2, User, Users } from "lucide-react";
+import { ArrowLeft, ArrowRight, Plus, Trash2, User, Users } from "lucide-react";
 import Link from "next/link";
 
 import GenericForm, { type FormFnRes } from "@/components/forms/generic-form";
@@ -23,7 +23,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { signupSuccessText } from "@/lib/events";
+import { SignupSuccess } from "@/components/events/signup-result";
 import { addGuestToEvent } from "@/app/_actions/sign-up";
 
 type Mode = "select" | "single" | "team";
@@ -73,37 +73,25 @@ export default function UnilympicsForm({ event }: { event: EventItem }) {
 					animate={{ opacity: 1, y: 0 }}
 					exit={{ opacity: 0, y: -10 }}
 					transition={{ duration: 0.25 }}
-					className="mx-auto w-full max-w-md sm:rounded-xl sm:border sm:p-8 sm:shadow-xl"
+					className="mx-auto w-full max-w-md rounded-3xl border bg-card p-6 sm:p-8"
 				>
-					<h3 className="text-lg font-semibold">Anmeldung Unilympics</h3>
-					<p className="text-muted-foreground mb-6 border-b pb-3 text-sm">
+					<h3 className="text-2xl font-black tracking-tight">Anmeldung Unilympics</h3>
+					<p className="mb-5 mt-1 border-b pb-4 text-sm text-muted-foreground">
 						Wie möchtest du teilnehmen?
 					</p>
-					<div className="grid gap-3 ">
-						<Button
-							type="button"
-							variant="secondary"
-							className="h-auto flex-col gap-1 py-4"
+					<div className="grid gap-3">
+						<ModeChoice
+							icon={User}
+							title="Einzelanmeldung"
+							text="Du wirst einem Team zugeteilt."
 							onClick={() => setMode("single")}
-						>
-							<User className="size-6" />
-							<span className="font-semibold">Einzelanmeldung</span>
-							<span className="text-muted-foreground text-xs font-normal">
-								Du wirst einem Team zugeteilt.
-							</span>
-						</Button>
-						<Button
-							type="button"
-							variant="secondary"
-							className="h-auto flex-col gap-1 py-4"
+						/>
+						<ModeChoice
+							icon={Users}
+							title="Teamanmeldung"
+							text="Melde dich mit deinem Team an."
 							onClick={() => setMode("team")}
-						>
-							<Users className="size-6" />
-							<span className="font-semibold">Teamanmeldung</span>
-							<span className="text-muted-foreground text-xs font-normal">
-								Melde dich mit deinem Team an.
-							</span>
-						</Button>
+						/>
 					</div>
 				</motion.div>
 			)}
@@ -139,6 +127,35 @@ export default function UnilympicsForm({ event }: { event: EventItem }) {
 	);
 }
 
+function ModeChoice({
+	icon: Icon,
+	title,
+	text,
+	onClick,
+}: {
+	icon: typeof User;
+	title: string;
+	text: string;
+	onClick: () => void;
+}) {
+	return (
+		<button
+			type="button"
+			onClick={onClick}
+			className="group flex items-center gap-4 rounded-2xl border p-4 text-left transition hover:border-fsr/40 hover:bg-fsr/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fsr"
+		>
+			<span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-fsr/10 text-fsr">
+				<Icon className="size-5" />
+			</span>
+			<span className="min-w-0">
+				<span className="block font-bold">{title}</span>
+				<span className="block text-sm text-muted-foreground">{text}</span>
+			</span>
+			<ArrowRight className="ml-auto size-4 shrink-0 text-muted-foreground transition group-hover:translate-x-0.5 group-hover:text-fsr" />
+		</button>
+	);
+}
+
 function BackButton({ onClick }: { onClick: () => void }) {
 	return (
 		<div className="mx-auto w-full max-w-md">
@@ -147,10 +164,10 @@ function BackButton({ onClick }: { onClick: () => void }) {
 				variant="ghost"
 				size="sm"
 				onClick={onClick}
-				className="text-muted-foreground -ml-2"
+				className="-ml-2 text-muted-foreground"
 			>
 				<ArrowLeft className="mr-1 size-4" />
-				Zurück
+				Andere Teilnahmeart
 			</Button>
 		</div>
 	);
@@ -180,13 +197,13 @@ function SingleForm({ event }: { event: EventItem }) {
 			defaultValues={def}
 			mode="create"
 			onCreate={onCreate}
+			successView={(res) => <SignupSuccess event={event} message={res.msg} />}
 			config={{
 				title: "Einzelanmeldung",
 				description: "Bitte trage deine Daten ein.",
 				submitText: "Anmelden",
-				submitLoadingText: "Laden...",
-				submitSuccessText: signupSuccessText(event),
-				submitErrorText: "Senden fehlgeschlagen. Versuche es erneut.",
+				submitLoadingText: "Wird gesendet …",
+				submitErrorText: "Die Anmeldung konnte nicht gesendet werden.",
 				showRequiredHint: true,
 			}}
 		>
@@ -289,13 +306,13 @@ function TeamForm({ event }: { event: EventItem }) {
 			defaultValues={def}
 			mode="create"
 			onCreate={onCreate}
+			successView={(res) => <SignupSuccess event={event} message={res.msg} />}
 			config={{
 				title: "Teamanmeldung",
 				description: "Bitte trage deine Teamdaten ein.",
 				submitText: "Team anmelden",
-				submitLoadingText: "Laden...",
-				submitSuccessText: signupSuccessText(event),
-				submitErrorText: "Senden fehlgeschlagen. Versuche es erneut.",
+				submitLoadingText: "Wird gesendet …",
+				submitErrorText: "Die Anmeldung konnte nicht gesendet werden.",
 				showRequiredHint: true,
 			}}
 		>

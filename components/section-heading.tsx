@@ -39,7 +39,7 @@ export function SectionHeading({
   return (
     <div className={className}>
       {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-      <h2 className="mt-1 text-4xl font-black tracking-tight md:text-5xl">{title}</h2>
+      <h2 className="mt-1 hyphens-auto text-4xl font-black tracking-tight md:text-5xl">{title}</h2>
       {children && <div className="mt-4 max-w-xl text-muted-foreground">{children}</div>}
     </div>
   );

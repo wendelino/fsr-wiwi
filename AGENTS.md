@@ -131,6 +131,9 @@ und Footer folgen ihm bereits.
 | `EventFacts`, `EventActions` | `components/events/event-*.tsx` | „Auf einen Blick“ und Buttons in der Seitenleiste |
 | `EventMarkdown` | `components/events/event-markdown.tsx` | Beschreibungen aus dem CMS (Markdown, ohne HTML) |
 | `SponsorStrip` | `components/ersti/sponsor-strip.tsx` | Logo-Raster, weiße Logos auf dunkler Kachel (`onDark`) |
+| `GenericForm` | `components/forms/generic-form.tsx` | Jedes Formular: Karte, Lade-Spinner, Ergebnis statt Formular, „Erneut versuchen“ mit erhaltenen Eingaben |
+| `ResultState` | `components/result-state.tsx` | Erfolg/Fehler nach einer Aktion: gezeichnetes Icon, Text, optionale Schritte und Buttons |
+| `SignupSuccess` | `components/events/signup-result.tsx` | Erfolgsansicht nach einer Anmeldung (Schritte bis zur E-Mail-Bestätigung) |
 
 Vor neuen Komponenten prüfen, ob es einen Baustein schon gibt. Wiederholt sich
 ein Muster ein drittes Mal, wird es ein Baustein.
@@ -155,7 +158,14 @@ ein Muster ein drittes Mal, wird es ein Baustein.
 - **Leerer Zustand:** `rounded-3xl border border-dashed p-10 text-center text-muted-foreground`
   mit einem Link, wie es weitergeht.
 - **Bewegung sparsam:** kleine Hover-Verschiebungen (`group-hover:translate-x-0.5`),
-  Puls nur für „läuft gerade“. Keine Einblend-Animationen, die Inhalte ohne JS verstecken.
+  Puls nur für „läuft gerade“ bzw. den aktuellen Schritt. Größere Animationen nur bei
+  Zustandswechseln (Formular → Erfolg/Fehler) über `motion` und immer mit
+  `useReducedMotion`. Keine Einblend-Animationen, die Inhalte ohne JS verstecken.
+- **Formulare und Ergebnisse:** nie nur ein Toast oder eine leere Seite. Erfolg zeigt,
+  was als Nächstes passiert (Schritte, z. B. „E-Mail bestätigen“) und bietet einen
+  sinnvollen nächsten Klick; Fehler zeigen die Meldung des Servers und „Erneut versuchen“.
+- **Lange Wörter in Postern:** Versalien trennt der Browser nicht zuverlässig – lange
+  Wörter mit `&shy;` vorbereiten (z. B. `Fachschafts&shy;rat`).
 
 ### Texte
 

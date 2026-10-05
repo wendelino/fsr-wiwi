@@ -36,7 +36,7 @@ export function ErstiTeaser({ className }: { className?: string }) {
         Ersti-Woche
       </span>
       <span className="truncate font-medium">{label}</span>
-      <ArrowRight className="size-4 shrink-0 transition group-hover:translate-x-0.5" />
+      <ArrowRight className="ml-auto size-4 shrink-0 transition group-hover:translate-x-0.5" />
     </Link>
   );
 }

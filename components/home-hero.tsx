@@ -30,8 +30,8 @@ export function HomeHero({ showErstiTeaser = false }: { showErstiTeaser?: boolea
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_0%_100%,hsl(350_63%_41%/0.55),transparent_55%)]"
         />
-        <div className="relative mx-auto max-w-6xl px-4 py-16 md:py-28">
-          {showErstiTeaser && <ErstiTeaser className="mb-8" />}
+        {/* Mobil steht der Ersti-Hinweis unter den Buttons, ab md darüber */}
+        <div className="relative mx-auto flex max-w-6xl flex-col px-4 py-16 md:py-28">
           <p className="text-sm font-bold uppercase tracking-widest text-white/70">
             Fachschaftsrat Wirtschaftswissenschaften · MLU Halle
           </p>
@@ -60,6 +60,9 @@ export function HomeHero({ showErstiTeaser = false }: { showErstiTeaser?: boolea
               </Link>
             </Button>
           </div>
+          {showErstiTeaser && (
+            <ErstiTeaser className="mt-6 w-full md:order-first md:mb-8 md:mt-0 md:w-auto md:self-start" />
+          )}
         </div>
       </div>
     </FullBleed>

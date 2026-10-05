@@ -48,6 +48,7 @@ export default function BewertungForm({ slug }: BewertungFormProps) {
       config={{
         submitText: "Bewertung absenden",
         submitLoadingText: "Sende...",
+        successTitle: "Danke!",
         submitSuccessText: "Vielen Dank für deine Bewertung!",
         submitErrorText: "Fehler beim Senden. Versuche es erneut.",
         showRequiredHint: true,
