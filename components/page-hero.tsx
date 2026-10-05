@@ -2,6 +2,7 @@ import { FullBleed } from "@/components/full-bleed";
 import { Eyebrow } from "@/components/section-heading";
 import { cn } from "@/lib/utils";
 import { ArrowLeft } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 /**
@@ -32,10 +33,12 @@ export function PageHero({
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.18),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(0,0,0,0.35),transparent_50%)]"
         />
-        <img
+        <Image
           src="/logo_outline.png"
           alt=""
           aria-hidden
+          width={420}
+          height={423}
           className="pointer-events-none absolute -right-24 -top-16 hidden w-[420px] opacity-[0.07] invert md:block"
         />
         <div className="relative mx-auto max-w-6xl px-4 py-10 md:py-16">

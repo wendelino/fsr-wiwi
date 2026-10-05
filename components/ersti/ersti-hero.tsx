@@ -40,10 +40,12 @@ export function ErstiHero({
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.18),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(0,0,0,0.35),transparent_50%)]"
         />
-        <img
+        <Image
           src="/logo_outline.png"
           alt=""
           aria-hidden
+          width={420}
+          height={423}
           className="pointer-events-none absolute -bottom-24 -left-24 w-[420px] opacity-[0.07] invert"
         />
         <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 md:grid-cols-[1.5fr_1fr] md:py-24">

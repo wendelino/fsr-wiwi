@@ -2,6 +2,7 @@
 import { siteConfig, type NavItem, type NavPage } from "@/lib/siteConfig";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -50,7 +51,7 @@ export default function NavBar({ lang: _lang }: { lang: string }) {
         "sticky top-0 z-50 h-[72px] border-b transition-colors",
         open
           ? "border-transparent bg-fsr-deep text-white"
-          : "bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/75"
+          : "bg-background backdrop-blur supports-[backdrop-filter]:bg-background/90"
       )}
     >
       <WidthWrapper className="flex h-full items-center justify-between gap-4">
@@ -62,7 +63,14 @@ export default function NavBar({ lang: _lang }: { lang: string }) {
           )}
         >
           <span className={cn("flex size-11 items-center justify-center rounded-full", open && "bg-white")}>
-            <img src="/lion.png" alt="" className={cn("w-auto", open ? "h-9" : "h-11")} />
+            <Image
+              src="/lion.png"
+              alt=""
+              width={44}
+              height={44}
+              priority
+              className={cn("w-auto", open ? "h-9" : "h-11")}
+            />
           </span>
           <span className="text-lg font-black leading-none tracking-tight">
             FSR WiWi
@@ -248,10 +256,12 @@ function MobileMenu({ pages, pathname }: { pages: NavPage[]; pathname: string })
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.18),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(0,0,0,0.35),transparent_50%)]"
       />
-      <img
+      <Image
         src="/logo_outline.png"
         alt=""
         aria-hidden
+        width={360}
+        height={363}
         className="pointer-events-none absolute -bottom-16 -right-24 w-[360px] opacity-[0.07] invert"
       />
       <nav aria-label="Hauptnavigation" className="relative flex flex-col gap-8 px-4 pb-10 pt-6">
