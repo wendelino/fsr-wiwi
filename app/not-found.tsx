@@ -1,3 +1,4 @@
+import { Stagger, StaggerItem } from "@/components/motion";
 import { HeroLead, PageHero } from "@/components/page-hero";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CalendarDays, Home, MessageCircle } from "lucide-react";
@@ -32,9 +33,9 @@ export default function NotFound() {
         </Button>
       </PageHero>
 
-      <ul className="grid gap-3 sm:grid-cols-2">
+      <Stagger as="ul" className="grid gap-3 sm:grid-cols-2">
         {links.map((l) => (
-          <li key={l.href}>
+          <StaggerItem as="li" variant="scale" key={l.href}>
             <Link
               href={l.href}
               className="group flex items-center gap-4 rounded-3xl border bg-card p-5 transition hover:border-fsr/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fsr"
@@ -48,9 +49,9 @@ export default function NotFound() {
               </span>
               <ArrowRight className="ml-auto size-4 text-muted-foreground transition group-hover:translate-x-0.5 group-hover:text-fsr" />
             </Link>
-          </li>
+          </StaggerItem>
         ))}
-      </ul>
+      </Stagger>
     </div>
   );
 }

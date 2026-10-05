@@ -1,3 +1,4 @@
+import { Stagger, StaggerItem } from "@/components/motion";
 import { ErstiSponsor } from "@/lib/ersti";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
@@ -14,9 +15,11 @@ export function SponsorStrip({
 }) {
   return (
     // Flex statt Grid, damit eine unvollständige letzte Reihe mittig steht
-    <ul className={cn("flex flex-wrap justify-center gap-3", className)}>
+    <Stagger as="ul" step={0.04} className={cn("flex flex-wrap justify-center gap-3", className)}>
       {sponsors.map((s) => (
-        <li
+        <StaggerItem
+          as="li"
+          variant="scale"
           key={s.label}
           className="w-[calc((100%_-_1.5rem)/3)] sm:w-[calc((100%_-_3rem)/5)]"
         >
@@ -41,8 +44,8 @@ export function SponsorStrip({
               />
             </span>
           </a>
-        </li>
+        </StaggerItem>
       ))}
-    </ul>
+    </Stagger>
   );
 }

@@ -4,6 +4,7 @@ import { EventActions } from "@/components/events/event-actions";
 import { EventHeader, EventNotFound } from "@/components/events/event-header";
 import { EventMarkdown } from "@/components/events/event-markdown";
 import { LotteryNote } from "@/components/events/event-status";
+import { Reveal } from "@/components/motion";
 import RegisterForm from "@/components/forms/register-form";
 import UnilympicsForm from "@/components/forms/unilympics-form";
 import { isFull, plainText } from "@/lib/events";
@@ -64,7 +65,7 @@ export default async function page({ params }: PageProps) {
 					</Link>
 				</div>
 
-				<div className="md:sticky md:top-24 md:self-start">
+				<Reveal variant="scale" delay={0.1} className="md:sticky md:top-24 md:self-start">
 					{closed ? (
 						<ClosedCard event={event} past={past} />
 					) : event.slug === "unilympics" ? (
@@ -72,7 +73,7 @@ export default async function page({ params }: PageProps) {
 					) : (
 						<RegisterForm event={event} className="max-w-none" />
 					)}
-				</div>
+				</Reveal>
 			</div>
 		</>
 	);

@@ -5,6 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { SectionHeading } from "@/components/section-heading";
+import { Reveal } from "@/components/motion";
 import { ERSTI_GUIDE } from "@/lib/ersti";
 import { siteConfig } from "@/lib/siteConfig";
 import Link from "next/link";
@@ -88,13 +89,15 @@ function Faq() {
     },
   ];
   return (
-    <Accordion type="single" collapsible className="rounded-3xl border bg-card px-6">
-      {items.map((item, i) => (
-        <AccordionItem key={item.q} value={`q${i}`} className={i === items.length - 1 ? "border-b-0" : undefined}>
-          <AccordionTrigger className="text-left">{item.q}</AccordionTrigger>
-          <AccordionContent className="text-muted-foreground">{item.a}</AccordionContent>
-        </AccordionItem>
-      ))}
-    </Accordion>
+    <Reveal>
+      <Accordion type="single" collapsible className="rounded-3xl border bg-card px-6">
+        {items.map((item, i) => (
+          <AccordionItem key={item.q} value={`q${i}`} className={i === items.length - 1 ? "border-b-0" : undefined}>
+            <AccordionTrigger className="text-left">{item.q}</AccordionTrigger>
+            <AccordionContent className="text-muted-foreground">{item.a}</AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </Reveal>
   );
 }

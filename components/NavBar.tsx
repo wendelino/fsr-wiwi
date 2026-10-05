@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { ActivePill, Appear, Stagger, StaggerItem, Swap } from "@/components/motion";
+import { HeroDeco } from "@/components/hero-deco";
 import { type NavItem, type NavPage, siteConfig } from "@/lib/siteConfig";
 import { cn } from "@/lib/utils";
 import { ThemeButton } from "./ThemeToggle";
@@ -105,6 +107,7 @@ export default function NavBar({ lang: _lang }: { lang: string }) {
                 aria-current={isActive(pathname, page.href) ? "page" : undefined}
                 className={cn(pillClass(isActive(pathname, page.href)), focusRing)}
               >
+                {isActive(pathname, page.href) && <NavPill />}
                 {page.label}
               </Link>
             )
@@ -141,21 +144,35 @@ export default function NavBar({ lang: _lang }: { lang: string }) {
                 : cn("hover:bg-muted", focusRing)
             )}
           >
-            {open ? <X className="size-5" /> : <Menu className="size-5" />}
+            <Swap swapKey={open ? "close" : "open"}>
+              {open ? <X className="size-5" /> : <Menu className="size-5" />}
+            </Swap>
           </button>
         </div>
       </WidthWrapper>
 
-      {open && <MobileMenu pages={siteConfig.pages} pathname={pathname} />}
+      <Appear
+        show={open}
+        variant="sheet"
+        id="mobile-menu"
+        className="fixed inset-x-0 bottom-0 top-[72px] overflow-y-auto overflow-x-hidden overscroll-contain bg-fsr-deep text-white md:hidden"
+      >
+        <MobileMenu pages={siteConfig.pages} pathname={pathname} />
+      </Appear>
     </header>
   );
 }
 
 function pillClass(active: boolean) {
   return cn(
-    "inline-flex h-10 items-center gap-1 rounded-full px-4 text-sm font-semibold transition",
-    active ? "bg-fsr/10 text-fsr" : "text-foreground/80 hover:bg-muted hover:text-foreground"
+    "relative isolate inline-flex h-10 items-center gap-1 rounded-full px-4 text-sm font-semibold transition-colors",
+    active ? "text-fsr" : "text-foreground/80 hover:bg-muted hover:text-foreground"
   );
+}
+
+/** Markierung der aktiven Seite; gleitet beim Seitenwechsel zum neuen Eintrag. */
+function NavPill() {
+  return <ActivePill id="nav-active" className="rounded-full bg-fsr/10" />;
 }
 
 function DesktopDropdown({
@@ -197,6 +214,7 @@ function DesktopDropdown({
         onClick={() => setOpen((o) => !o)}
         className={cn(pillClass(active), "pr-3", focusRing)}
       >
+        {active && <NavPill />}
         {label}
         <ChevronDown
           aria-hidden
@@ -204,7 +222,7 @@ function DesktopDropdown({
         />
       </button>
       {/* pt-2 als Brücke, damit der Hover beim Wechsel ins Menü nicht abreißt */}
-      <div className={cn("absolute left-0 top-full z-10 pt-2", !open && "hidden")}>
+      <Appear show={open} variant="drop" className="absolute left-0 top-full z-10 origin-top-left pt-2">
         <ul className="min-w-56 rounded-3xl border bg-card p-2 shadow-lg">
           {items.map((item) => {
             const itemActive = isActive(pathname, item.href);
@@ -229,7 +247,7 @@ function DesktopDropdown({
             );
           })}
         </ul>
-      </div>
+      </Appear>
     </div>
   );
 }
@@ -241,7 +259,7 @@ function MobileMenu({ pages, pathname }: { pages: NavPage[]; pathname: string })
   const bigLink = (item: NavItem, key: string) => {
     const active = isActive(pathname, item.href);
     return (
-      <li key={key}>
+      <StaggerItem as="li" variant="left" key={key}>
         <Link
           href={item.href}
           prefetch={item.prefetch}
@@ -257,32 +275,21 @@ function MobileMenu({ pages, pathname }: { pages: NavPage[]; pathname: string })
           </span>
           {isExternal(item.href) && <ArrowUpRight aria-hidden className="size-5 text-white/60" />}
         </Link>
-      </li>
+      </StaggerItem>
     );
   };
 
   return (
-    <div
-      id="mobile-menu"
-      className="fixed inset-x-0 bottom-0 top-[72px] overflow-y-auto overflow-x-hidden overscroll-contain bg-fsr-deep text-white md:hidden"
-    >
+    <>
       {/* Eigener Rahmen, damit die Deko die Scrollfläche nicht vergrößert */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.18),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(0,0,0,0.35),transparent_50%)]" />
-        <Image
-          src="/logo_outline.png"
-          alt=""
-          width={360}
-          height={363}
-          className="absolute -bottom-16 -right-24 w-[360px] opacity-[0.07] invert"
-        />
-      </div>
-      <nav aria-label="Hauptnavigation" className="relative flex flex-col gap-8 px-4 pb-10 pt-6">
+      <HeroDeco logo="bottom-right" parallax={false} />
+      {/* Links laufen nacheinander ein, sobald das Menü ausgerollt ist */}
+      <Stagger as="nav" trigger="mount" delay={0.12} step={0.05} aria-label="Hauptnavigation" className="relative flex flex-col gap-8 px-4 pb-10 pt-6">
         <ul className="flex flex-col">
           {singles.map((page) => {
             const active = isActive(pathname, page.href);
             return (
-              <li key={page.label}>
+              <StaggerItem as="li" variant="left" key={page.label}>
                 <Link
                   href={page.href}
                   aria-current={active ? "page" : undefined}
@@ -294,22 +301,26 @@ function MobileMenu({ pages, pathname }: { pages: NavPage[]; pathname: string })
                   {page.label}
                   {active && <span aria-hidden className="size-3 rounded-full bg-white" />}
                 </Link>
-              </li>
+              </StaggerItem>
             );
           })}
         </ul>
 
         {groups.map((group) => (
           <section key={group.label}>
-            <p className="border-b border-white/20 pb-2 text-xs font-bold uppercase tracking-widest text-white/60">
+            <StaggerItem
+              as="p"
+              variant="fade"
+              className="border-b border-white/20 pb-2 text-xs font-bold uppercase tracking-widest text-white/60"
+            >
               {group.label}
-            </p>
+            </StaggerItem>
             <ul className="mt-2 flex flex-col">
               {group.dropdown.map((item) => bigLink(item, item.label))}
             </ul>
           </section>
         ))}
-      </nav>
-    </div>
+      </Stagger>
+    </>
   );
 }

@@ -8,7 +8,8 @@ und Footer folgen ihm bereits.
 ## Projekt
 
 - Next.js 15 (App Router), React 19, Tailwind 3, shadcn/ui (`components/ui`),
-  Icons aus `lucide-react`. Paketmanager ist **bun**.
+  Icons aus `lucide-react`, Animationen mit `motion` über die Bausteine in
+  `components/motion` (siehe „Bewegung“). Paketmanager ist **bun**.
 - `bun dev` startet lokal, `bun run build` baut. Prüfen vor jedem Commit:
   `npx tsc --noEmit -p .` (`bun run lint` ist kaputt, siehe `docs/AUDIT.md` G6).
 - Events kommen aus dem CMS (`CMS_ENDPOINT`, `CMS_TOKEN`) über
@@ -74,7 +75,7 @@ und Footer folgen ihm bereits.
 12. **Barrierefrei.** Fokus immer sichtbar (`focus-visible:ring-2
     focus-visible:ring-fsr`, auf Dunkel `ring-white`), Deko mit `aria-hidden`,
     Alt-Texte für Inhaltsbilder, `prefers-reduced-motion` respektieren
-    (`motion-reduce:animate-none`, `useReducedMotion`).
+    (`MotionProvider` im Layout, `motion-reduce:animate-none` für CSS).
 13. **Keine fremden Server ohne Zustimmung.** Karten und Instagram nur über
     `IframeConsent`; statt fremder Bilder Lucide-Icons oder Dateien in `public/`.
 
@@ -124,7 +125,9 @@ und Footer folgen ihm bereits.
 | `ErstiHero` | `components/ersti/ersti-hero.tsx` | Kampagnen-Hero der Ersti-Woche mit Laufband |
 | `Lineup`, `NowCard`, `FaqSection` | `app/(lang)/(Erstiwoche)/erstiwoche/*.tsx` | Programm mit Tagesleiste, „Jetzt / Als Nächstes“, FAQ der Ersti-Woche |
 | `ErstiTeaser` | `components/ersti/ersti-teaser.tsx` | Kleiner Hinweis mit Live-Status, verlinkt aufs Programm |
-| `PageHero`, `HeroLead` | `components/page-hero.tsx` | Kopf jeder Unterseite (Eyebrow, `h1`, optional Zurück-Link) |
+| `PageHero`, `HeroLead` | `components/page-hero.tsx` | Kopf jeder Unterseite (Eyebrow, `h1`, optional Zurück-Link), mit gestaffeltem Einstieg |
+| `HeroDeco` | `components/hero-deco.tsx` | Verläufe + Outline-Logo (mit Parallax) für Bordeaux-Flächen |
+| `Prose` | `components/prose.tsx` | Langer Fließtext (Impressum, Datenschutz, Ordnungen) mit nackten `h2`/`ul`/`a` |
 | `SectionHeading`, `Eyebrow` | `components/section-heading.tsx` | Einstieg jeder Sektion |
 | `PosterList` | `components/poster-list.tsx` | 3–5 Begriffe mit großer Schrift und Nummer |
 | `MeetingCard` | `components/meeting-card.tsx` | Dunkles Band zur öffentlichen Sitzung |
@@ -156,19 +159,53 @@ ein Muster ein drittes Mal, wird es ein Baustein.
   aktiv `bg-white text-fsr-deep`.
 - **Fakten:** `dl` mit `divide-y`; `dt` als kleine Eyebrow, `dd` `font-medium`.
   Auf Dunkel als Poster-Fakten (`MeetingCard`).
-- **Hero-Deko:** zwei radiale Verläufe plus `logo_outline.png` mit
-  `invert opacity-[0.07]`, immer `aria-hidden`.
+- **Hero-Deko:** immer `HeroDeco` (zwei radiale Verläufe plus `logo_outline.png`
+  mit `invert opacity-[0.07]`, `aria-hidden`), nicht nachbauen.
 - **Leerer Zustand:** `rounded-3xl border border-dashed p-10 text-center text-muted-foreground`
   mit einem Link, wie es weitergeht.
-- **Bewegung sparsam:** kleine Hover-Verschiebungen (`group-hover:translate-x-0.5`),
-  Puls nur für „läuft gerade“ bzw. den aktuellen Schritt. Größere Animationen nur bei
-  Zustandswechseln (Formular → Erfolg/Fehler) über `motion` und immer mit
-  `useReducedMotion`. Keine Einblend-Animationen, die Inhalte ohne JS verstecken.
 - **Formulare und Ergebnisse:** nie nur ein Toast oder eine leere Seite. Erfolg zeigt,
   was als Nächstes passiert (Schritte, z. B. „E-Mail bestätigen“) und bietet einen
   sinnvollen nächsten Klick; Fehler zeigen die Meldung des Servers und „Erneut versuchen“.
 - **Lange Wörter in Postern:** Versalien trennt der Browser nicht zuverlässig – lange
   Wörter mit `&shy;` vorbereiten (z. B. `Fachschafts&shy;rat`).
+
+### Bewegung
+
+Subtil, aber mit Charakter: Inhalte gleiten herein, wenn man sie erreicht, aktive
+Markierungen wandern mit, Deko bewegt sich langsamer als die Seite. Nie dauerhaft
+wackeln, nie länger als eine knappe Sekunde.
+
+**Seiten benutzen kein `motion` direkt**, sondern die Bausteine aus
+`@/components/motion`. Fehlt einer für den Use Case, wird er dort angelegt (mit den
+Kurven und Dauern aus `presets.ts`) und hier eingetragen – nicht in der Seite gebaut.
+Ausnahme sind einmalige Spezialfälle mit eigenem Baustein (z. B. `ResultState`).
+
+| Baustein | Einsatz |
+|---|---|
+| `Enter` | Einstieg ganz oben (Heros) per CSS, gestaffelt über `step`; `variant="rise"` für die Poster-`h1`, `"pop"` für Sticker. Läuft auch vor der Hydration. |
+| `Reveal` | Einzelnes Element (Karte, Band, Text, Embed) gleitet beim Hineinscrollen ein. `variant`: `up`, `fade`, `scale` (Karten/Bänder), `left`, `right` (Seitenleisten). |
+| `Stagger` + `StaggerItem` | Raster und Listen erscheinen nacheinander. `as` setzt das Tag (`ul`/`li`, `ol`, `aside` …), Grid-Klassen wie `col-span-2` gehören auf das `StaggerItem`. |
+| `Swap` | Inhalt tauschen bei Zustandswechsel (Formular → Ergebnis, Tageswechsel, Platzhalter → Inhalt); `direction` −1/1 für seitliche Wechsel. |
+| `Appear` | Bedingte Elemente nach Nutzeraktion: `drop` (Dropdown), `sheet` (Vollbild-Menü), `pop` (kleine Buttons), `fade`. |
+| `Collapse` | Auf- und Zuklappen in der Höhe (vergangene Termine, neue Formularzeilen). |
+| `ActivePill` | Hintergrund des aktiven Tabs/Links, der zum neuen Eintrag gleitet (`layoutId`); Elternelement `relative isolate`. |
+| `ProgressBar` | Balken, der sich beim Erscheinen füllt (Plätze, Live-Fortschritt). |
+| `Parallax` | Deko oder Hero-Foto, das langsamer scrollt (nur oben auf der Seite). |
+
+Regeln:
+
+- `SectionHeading`, `PosterList`, `MeetingCard`, `SponsorStrip`, `SignupCard` und die
+  Heros sind schon animiert – nicht zusätzlich in `Reveal` packen.
+- **Nichts darf ohne JS unsichtbar bleiben.** Vom Server Gerendertes startet sichtbar;
+  `Reveal`/`Stagger` verstecken nur, was beim Laden unter dem Fenster liegt
+  (`useReveal`). `trigger="mount"` nur für Inhalte, die erst im Browser entstehen
+  (Menü, „Jetzt“-Karte). Heros nur mit `Enter` (CSS), nie mit `initial` von motion.
+- Hover bleibt Tailwind: `transition` + kleine Verschiebung/Drehung
+  (`group-hover:translate-x-0.5`, `group-hover:-rotate-6`), bei Transforms über
+  300 ms mit `motion-reduce:transition-none`.
+- Puls (`animate-ping`) nur für „läuft gerade“, „Jetzt“ und den aktuellen Schritt.
+- `MotionProvider` (`reducedMotion="user"`) im Layout schaltet Transforms bei
+  „Bewegung reduzieren“ ab; die Hooks blenden dann gar nicht erst aus.
 
 ### Texte
 
@@ -187,5 +224,6 @@ ein Muster ein drittes Mal, wird es ein Baustein.
 - [ ] `npx tsc --noEmit -p .` ist sauber.
 - [ ] Bei 390 px und 1200 px angesehen, Dark Mode kurz geprüft.
 - [ ] Neue Seite: `PageHero` + `SectionHeading` + Seiten-Wrapper.
+- [ ] Animationen nur über `@/components/motion`; Karten-Raster mit `Stagger`, Einzelnes mit `Reveal`.
 - [ ] Termine verlinken auf `/kalender/[slug]`, Status-Texte aus `lib/events.ts`.
 - [ ] Keine neuen externen Bilder/Skripte ohne `IframeConsent`.

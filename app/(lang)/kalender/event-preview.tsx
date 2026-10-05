@@ -1,41 +1,31 @@
-import { format } from "date-fns";
-import Link from "next/link";
-import { ChevronRight } from "lucide-react";
+import { EventStatus } from "@/components/events/event-status";
+import { timeRange } from "@/lib/berlin";
+import { eventHref, plainText } from "@/lib/events";
+import { Phase } from "@/lib/use-now";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
-import { isLottery, plainText } from "@/lib/events";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
 
-export default function EventPreview({
-  event,
-  className,
-}: {
-  event: EventItem;
-  className?: string;
-}) {
+/** Termin in der Kalenderliste; verlinkt auf /kalender/[slug]. */
+export default function EventPreview({ event, phase }: { event: EventItem; phase: Phase }) {
   return (
     <Link
-      href={`kalender/${encodeURIComponent(event.slug)}`}
-      className={cn(" py-5 flex items-center cursor-pointer w-full", className)}
+      href={eventHref(event)}
+      className={cn(
+        "group flex items-start gap-4 rounded-3xl border bg-card p-5 transition hover:border-fsr/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fsr",
+        phase === "past" && "opacity-55",
+        phase === "live" && "border-fsr/50 shadow-md"
+      )}
     >
-      <div className="w-full truncate">
-        <div className="flex items-center gap-x-2 flex-wrap-reverse">
-          <h4 className="underline text-fsr font-semibold mb-1">
-            {event.title}
-          </h4>
-          {event.registrable && <Badge>Anmeldepflichtig!</Badge>}
-          {isLottery(event) && <Badge variant="secondary">Losverfahren</Badge>}
-        </div>
-
-        <span className="text-foreground/70 mr-2">
-          {format(event.start, "HH:mm")}-{format(event.end, "HH:mm")}
-        </span>
-        <div className="text-muted-foreground truncate max-w-[80%]">
-          {plainText(event.description)}
-        </div>
-      </div>
-      <div className="h-full flex items-center">
-        <ChevronRight className="size-6 block" />
-      </div>
+      <span className="min-w-0 flex-1">
+        <span className="block text-sm font-semibold tabular-nums text-fsr">{timeRange(event.start, event.end)} Uhr</span>
+        <span className="mt-1 block text-lg font-bold leading-tight">{event.title}</span>
+        {event.description && (
+          <span className="mt-1 line-clamp-2 block text-sm text-muted-foreground">{plainText(event.description)}</span>
+        )}
+        <EventStatus event={event} phase={phase} className="mt-3" />
+      </span>
+      <ArrowRight className="mt-1 size-5 shrink-0 text-muted-foreground transition group-hover:translate-x-0.5 group-hover:text-fsr" />
     </Link>
   );
 }

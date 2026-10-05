@@ -1,16 +1,19 @@
+import { Stagger, StaggerItem } from "@/components/motion";
 import { cn } from "@/lib/utils";
 import type { LucideIcon } from "lucide-react";
 
 export type PosterItem = { icon: LucideIcon; title: string; text: string };
 
-/** Nummerierte Liste mit großen Schlagworten, wie auf einem Festival-Poster. */
+/** Nummerierte Liste mit großen Schlagworten, wie auf einem Festival-Poster; Zeilen erscheinen nacheinander. */
 export function PosterList({ items, className }: { items: PosterItem[]; className?: string }) {
   return (
-    <ol className={cn("border-b", className)}>
+    <Stagger as="ol" className={cn("border-b", className)} step={0.09}>
       {items.map(({ icon: Icon, title, text }, i) => (
-        <li
+        <StaggerItem
+          as="li"
+          variant="left"
           key={title}
-          className="grid grid-cols-[2.5rem_1fr] items-center gap-x-4 border-t py-5 sm:grid-cols-[3.5rem_1fr_auto] sm:gap-x-6"
+          className="group grid grid-cols-[2.5rem_1fr] items-center gap-x-4 border-t py-5 sm:grid-cols-[3.5rem_1fr_auto] sm:gap-x-6"
         >
           <span
             aria-hidden
@@ -24,11 +27,11 @@ export function PosterList({ items, className }: { items: PosterItem[]; classNam
             </h3>
             <p className="mt-2 text-sm text-muted-foreground sm:text-base">{text}</p>
           </div>
-          <span className="hidden size-14 items-center justify-center rounded-full bg-fsr/10 text-fsr sm:flex">
+          <span className="hidden size-14 items-center justify-center rounded-full bg-fsr/10 text-fsr transition duration-300 group-hover:-rotate-12 group-hover:scale-110 motion-reduce:transition-none sm:flex">
             <Icon className="size-6" />
           </span>
-        </li>
+        </StaggerItem>
       ))}
-    </ol>
+    </Stagger>
   );
 }

@@ -1,8 +1,9 @@
 import { FullBleed } from "@/components/full-bleed";
+import { HeroDeco } from "@/components/hero-deco";
+import { Enter } from "@/components/motion";
 import { Eyebrow } from "@/components/section-heading";
 import { cn } from "@/lib/utils";
 import { ArrowLeft } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 
 /**
@@ -29,29 +30,27 @@ export function PageHero({
   return (
     <FullBleed>
       <div className={cn("relative overflow-hidden bg-fsr-deep text-white", className)}>
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.18),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(0,0,0,0.35),transparent_50%)]"
-        />
-        <Image
-          src="/logo_outline.png"
-          alt=""
-          aria-hidden
-          width={420}
-          height={423}
-          className="pointer-events-none absolute -right-24 -top-16 hidden w-[420px] opacity-[0.07] invert md:block"
-        />
+        <HeroDeco />
         <div className="relative mx-auto max-w-6xl px-4 py-10 md:py-16">
           {back && (
-            <Link
-              href={back.href}
-              className="mb-8 inline-flex items-center gap-1.5 rounded-full text-sm font-medium text-white/80 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
-            >
-              <ArrowLeft className="size-4" /> {back.label}
-            </Link>
+            <Enter className="mb-8">
+              <Link
+                href={back.href}
+                className="group inline-flex items-center gap-1.5 rounded-full text-sm font-medium text-white/80 transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              >
+                <ArrowLeft className="size-4 transition group-hover:-translate-x-0.5" /> {back.label}
+              </Link>
+            </Enter>
           )}
-          {eyebrow && <Eyebrow onDark>{eyebrow}</Eyebrow>}
-          <h1
+          {eyebrow && (
+            <Enter step={back ? 1 : 0}>
+              <Eyebrow onDark>{eyebrow}</Eyebrow>
+            </Enter>
+          )}
+          <Enter
+            as="h1"
+            variant="rise"
+            step={back ? 2 : 1}
             className={cn(
               // Lange Titel (z. B. "Infoveranstaltung") auf dem Handy trennen statt überlaufen
               "mt-2 max-w-4xl hyphens-auto break-words font-black",
@@ -61,8 +60,12 @@ export function PageHero({
             )}
           >
             {title}
-          </h1>
-          {children && <div className="mt-6 md:mt-8">{children}</div>}
+          </Enter>
+          {children && (
+            <Enter step={back ? 3 : 2} className="mt-6 md:mt-8">
+              {children}
+            </Enter>
+          )}
         </div>
       </div>
     </FullBleed>

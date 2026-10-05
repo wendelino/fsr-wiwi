@@ -1,5 +1,6 @@
 import { ErstiTeaser } from "@/components/ersti/ersti-teaser";
 import { FullBleed } from "@/components/full-bleed";
+import { Enter, Parallax } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CalendarDays } from "lucide-react";
 import Image from "next/image";
@@ -13,15 +14,18 @@ export function HomeHero({ showErstiTeaser = false }: { showErstiTeaser?: boolea
   return (
     <FullBleed>
       <div className="relative overflow-hidden bg-zinc-950 text-white">
-        <Image
-          src="/campus.jpg"
-          alt=""
-          aria-hidden
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-[70%_50%] opacity-60"
-        />
+        {/* Foto wandert beim Scrollen langsamer mit; Überstand nach unten verdeckt die Kante */}
+        <Parallax offset={120} className="absolute inset-x-0 -bottom-32 top-0">
+          <Image
+            src="/campus.jpg"
+            alt=""
+            aria-hidden
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-[70%_50%] opacity-60"
+          />
+        </Parallax>
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-gradient-to-r from-zinc-950 via-zinc-950/80 to-zinc-950/10"
@@ -32,18 +36,23 @@ export function HomeHero({ showErstiTeaser = false }: { showErstiTeaser?: boolea
         />
         {/* Mobil steht der Ersti-Hinweis unter den Buttons, ab md darüber */}
         <div className="relative mx-auto flex max-w-6xl flex-col px-4 py-16 md:py-28">
-          <p className="text-sm font-bold uppercase tracking-widest text-white/70">
+          <Enter as="p" className="text-sm font-bold uppercase tracking-widest text-white/70">
             Fachschaftsrat Wirtschaftswissenschaften · MLU Halle
-          </p>
-          <h1 className="mt-3 text-[clamp(3.2rem,9vw,6rem)] font-black uppercase leading-[0.85] tracking-tighter">
+          </Enter>
+          <Enter
+            as="h1"
+            variant="rise"
+            step={1}
+            className="mt-3 text-[clamp(3.2rem,9vw,6rem)] font-black uppercase leading-[0.85] tracking-tighter"
+          >
             Willkommen
-          </h1>
-          <p className="mt-6 max-w-xl  text-white/85 md:text-lg">
+          </Enter>
+          <Enter as="p" step={2} className="mt-6 max-w-xl text-white/85 md:text-lg">
             Wir sind die gewählte Vertretung aller Studierenden der
             Wirtschaftswissenschaften – für eure Anliegen, Veranstaltungen und
             alles rund ums Studium.
-          </p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          </Enter>
+          <Enter step={3} className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg" className="bg-white text-zinc-950 hover:bg-white/90">
               <Link href="/kalender">
                 <CalendarDays className="mr-2 size-4" /> Termine ansehen
@@ -59,9 +68,11 @@ export function HomeHero({ showErstiTeaser = false }: { showErstiTeaser?: boolea
                 Über uns <ArrowRight className="ml-2 size-4" />
               </Link>
             </Button>
-          </div>
+          </Enter>
           {showErstiTeaser && (
-            <ErstiTeaser className="mt-6 w-full md:order-first md:mb-8 md:mt-0 md:w-auto md:self-start" />
+            <Enter step={4} className="mt-6 md:order-first md:mb-8 md:mt-0 md:self-start">
+              <ErstiTeaser className="w-full md:w-auto" />
+            </Enter>
           )}
         </div>
       </div>

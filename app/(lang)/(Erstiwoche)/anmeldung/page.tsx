@@ -1,6 +1,7 @@
 import { getEvents } from "@/app/_actions/event";
 import { HeroLead, PageHero } from "@/components/page-hero";
 import { SignupCard } from "@/components/events/signup-card";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 import { Metadata } from "next";
 import Link from "next/link";
 
@@ -39,24 +40,21 @@ export default async function page() {
       </PageHero>
 
       {sorted.length === 0 ? (
-        <div className="rounded-3xl border border-dashed p-10 text-center text-muted-foreground">
+        <Reveal className="rounded-3xl border border-dashed p-10 text-center text-muted-foreground">
           Gerade gibt es keine Termine mit Anmeldung. Alle Termine findet ihr im{" "}
           <Link href="/kalender" className="font-medium text-fsr underline underline-offset-4">
             Kalender
           </Link>
           .
-        </div>
+        </Reveal>
       ) : (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <Stagger className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {sorted.map((e) => (
-            <SignupCard
-              key={e.id}
-              event={e}
-              phase={e.start <= now ? "live" : "upcoming"}
-              source="LIST"
-            />
+            <StaggerItem key={e.id} variant="scale">
+              <SignupCard event={e} phase={e.start <= now ? "live" : "upcoming"} source="LIST" />
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       )}
     </>
   );

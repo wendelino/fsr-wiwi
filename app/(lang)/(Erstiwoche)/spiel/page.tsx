@@ -1,5 +1,8 @@
-import { PageHeader } from "@/components/Framer/PageHeader";
-import { Header, SubHeader } from "@/components/TextComponents";
+import { Stagger, StaggerItem } from "@/components/motion";
+import { HeroLead, PageHero } from "@/components/page-hero";
+import { Prose } from "@/components/prose";
+import { SectionHeading } from "@/components/section-heading";
+import { Award, Medal, Trophy } from "lucide-react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -18,23 +21,40 @@ export const metadata: Metadata = {
   },
 };
 
+const prizes = [
+  { icon: Trophy, place: "Platz 1", prize: "Freitag-Rucksack" },
+  { icon: Medal, place: "Platz 2", prize: "Freitag-Bauchtasche" },
+  {
+    icon: Award,
+    place: "Platz 3",
+    prize: "Junge Bühnen Card + weitere kleine Überraschungen",
+  },
+];
+
 export default function Page() {
-
-  return <div></div>
+  return <div></div>;
   return (
-    <div className="space-y-8">
-      <img
-        src="/orange-bg.svg"
-        className="fixed z-[-1] inset-0 h-full w-full object-cover opacity-60"
-      />
-      <PageHeader
-        title="Gewinnspiel - Ersti-Woche"
-        subtitle="Sammle Stempel im Laufe der Woche und sichere dir damit Lose für die Auslosung."
-        disableMuted
-      />
+    <div className="flex flex-col gap-16 md:gap-24">
+      <PageHero
+        eyebrow="Ersti-Woche"
+        title={
+          <>
+            Gewinn
+            <span className="text-transparent [-webkit-text-stroke:2px_white]">
+              spiel
+            </span>
+          </>
+        }
+        poster
+      >
+        <HeroLead>
+          Sammle Stempel im Laufe der Woche und sichere dir damit Lose für die
+          Auslosung.
+        </HeroLead>
+      </PageHero>
 
-      <section className="space-y-4">
-        <p className="">
+      <Prose>
+        <p>
           Willkommen zur Ersti-Woche! Damit es noch spannender wird, gibt es
           dieses Jahr ein Gewinnspiel für euch. Jede*r von euch hat eine
           Stempelkarte bekommen. Im Laufe der Woche könnt ihr durch die
@@ -43,8 +63,7 @@ export default function Page() {
           Stempel hat, nimmt mit einem Los teil, wer fünf Stempel hat, mit fünf
           Losen – und so weiter.
         </p>
-
-        <p className="">
+        <p>
           Wichtig: Jede Stempelposition hat eine eigene Aufgabe – ihr könnt mit
           einer Aktivität also nicht mehrere Stempel auf einmal bekommen. Die
           Challenges sind ganz unterschiedlich. Mal gibt es Stempel schon für
@@ -52,11 +71,8 @@ export default function Page() {
           etwas Bestimmtes machen. Seid einfach aufmerksam dabei und lasst euch
           überraschen.
         </p>
-      </section>
-
-      <section className="space-y-4">
-        <Header>So funktioniert’s</Header>
-        <ul className="list-disc pl-6 space-y-2 ">
+        <h2>So funktioniert’s</h2>
+        <ul>
           <li>
             Stempel sammeln, indem ihr an Programmpunkten teilnehmt oder kleine
             Challenges absolviert.
@@ -79,57 +95,45 @@ export default function Page() {
             Stempelperson während der Woche.
           </li>
         </ul>
-      </section>
-
-      <section className="space-y-2">
-        <SubHeader>Abgabe der Stempelkarte</SubHeader>
-        <p className="">
+        <h2>Abgabe der Stempelkarte</h2>
+        <p>
           Am Ende der Woche müsst ihr eure Stempelkarte abgeben: Entweder direkt
           am Freitag nach der Stadtralley oder am Montag, den 13. Oktober, von
           16-18 Uhr im FSR-Büro, Große Steinstraße 73 (Räume R019/R020).
         </p>
-        <p className="">
+        <p>
           In der ersten FSR-Sitzung nach der Ersti-Woche findet die Auslosung
           statt. Danach werden die Gewinner*innen von uns benachrichtigt.
         </p>
+      </Prose>
+
+      <section>
+        <SectionHeading eyebrow="Zu gewinnen" title="Gewinne" />
+        <Stagger as="ul" className="mt-8 grid gap-3 sm:grid-cols-3">
+          {prizes.map((p) => (
+            <StaggerItem
+              as="li"
+              variant="scale"
+              key={p.place}
+              className="flex items-center gap-4 rounded-3xl border bg-card p-5"
+            >
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-fsr/10 text-fsr">
+                <p.icon className="size-5" />
+              </span>
+              <span>
+                <span className="block text-xs font-bold uppercase tracking-widest text-fsr">
+                  {p.place}
+                </span>
+                <span className="block font-bold leading-tight">{p.prize}</span>
+              </span>
+            </StaggerItem>
+          ))}
+        </Stagger>
       </section>
 
-      <section className="space-y-2">
-        <SubHeader>Gewinne</SubHeader>
-        <ul className="grid lg:grid-cols-3 gap-4 mt-4">
-          <li className="flex items-center gap-4 rounded-lg border p-4 transition-colors bg-background/60 backdrop-blur-md hover:bg-muted/70">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-              🏆
-            </div>
-            <div>
-              <p className="font-semibold">Platz 1</p>
-              <p className="text-muted-foreground">Freitag-Rucksack</p>
-            </div>
-          </li>
-          <li className="flex items-center gap-4 rounded-lg border p-4 transition-colors bg-background/60 backdrop-blur-md hover:bg-muted/70">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-              🥈
-            </div>
-            <div>
-              <p className="font-semibold">Platz 2</p>
-              <p className="text-muted-foreground">Freitag-Bauchtasche</p>
-            </div>
-          </li>
-          <li className="flex items-center gap-4 rounded-lg border p-4 transition-colors bg-background/60 backdrop-blur-md hover:bg-muted/70">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
-              🥉
-            </div>
-            <div>
-              <p className="font-semibold">Platz 3</p>
-              <p className="text-muted-foreground">Junge Bühnen Card + weitere kleine Überraschungen</p>
-            </div>
-          </li>
-        </ul>
-      </section>
-
-      <section className="space-y-2">
-        <Header>Datenschutzhinweis zum Gewinnspiel</Header>
-        <p className="">
+      <Prose className="text-base">
+        <h2>Datenschutzhinweis zum Gewinnspiel</h2>
+        <p>
           Verantwortlich für die Datenverarbeitung im Rahmen des Gewinnspiels
           ist der Fachschaftsrat des Wirtschaftswissenschaftlichen Bereichs der
           juristischen und wirtschaftswissenschaftlichen Fakultät der
@@ -139,7 +143,7 @@ export default function Page() {
           und Benachrichtigung der Gewinner*innen sowie zur Übergabe der
           Gewinne.
         </p>
-        <p className="">
+        <p>
           Erfasst und gespeichert werden ausschließlich die für die Durchführung
           des Gewinnspiels erforderlichen Daten (z. B. Name, Kontaktdaten). Die
           Daten werden nur so lange gespeichert, wie es für die Durchführung des
@@ -147,20 +151,17 @@ export default function Page() {
           Gewinner*innen und Übergabe der Gewinne werden sämtliche Daten
           unverzüglich und unwiderruflich gelöscht.
         </p>
-        <p className="">
+        <p>
           Eine Weitergabe der Daten an Dritte findet nicht statt. Zugriff haben
           ausschließlich die mit der Organisation des Gewinnspiels betrauten
           Personen. Bei Fragen zur Datenverarbeitung oder zur Geltendmachung
           Ihrer Rechte können Sie sich jederzeit an den Fachschaftsrat
           Wirtschaftswissenschaften wenden:{" "}
-          <a
-            className="underline"
-            href="mailto:fachschaftsrat@wiwi.uni-halle.de"
-          >
+          <a href="mailto:fachschaftsrat@wiwi.uni-halle.de">
             fachschaftsrat@wiwi.uni-halle.de
           </a>
         </p>
-      </section>
+      </Prose>
     </div>
   );
 }

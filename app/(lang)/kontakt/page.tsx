@@ -2,6 +2,7 @@ import ContactForm from "@/components/forms/contact-form";
 import IframeConsent from "@/components/iframe-consent";
 import InstagramEmbed from "@/components/InstagramEmbed";
 import { MeetingCard } from "@/components/meeting-card";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 import { HeroLead, PageHero } from "@/components/page-hero";
 import { Eyebrow, SectionHeading } from "@/components/section-heading";
 import { siteConfig } from "@/lib/siteConfig";
@@ -71,14 +72,14 @@ export default function page() {
       </PageHero>
 
       <div className="grid gap-10 md:grid-cols-[1fr_20rem] md:gap-12 lg:grid-cols-[1fr_22rem]">
-        <section className="rounded-3xl border bg-card p-6 sm:p-8">
+        <Reveal as="section" variant="scale" className="rounded-3xl border bg-card p-6 sm:p-8">
           <h2 className="text-2xl font-black tracking-tight">Nachricht</h2>
           <p className="mb-6 mt-1 text-sm text-muted-foreground">Wir melden uns so schnell wie möglich bei dir.</p>
           <ContactForm className="max-w-none" />
-        </section>
+        </Reveal>
 
-        <aside className="space-y-6 md:sticky md:top-24 md:self-start">
-          <dl className="divide-y rounded-3xl border bg-card p-6">
+        <Stagger as="aside" delay={0.15} className="space-y-6 md:sticky md:top-24 md:self-start">
+          <StaggerItem as="dl" variant="right" className="divide-y rounded-3xl border bg-card p-6">
             <div className="pb-4">
               <dt className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-fsr">
                 <Mail className="size-4" /> E-Mail
@@ -99,9 +100,9 @@ export default function page() {
                 {plz} {ort}
               </dd>
             </div>
-          </dl>
+          </StaggerItem>
 
-          <div>
+          <StaggerItem variant="right">
             <Eyebrow className="mb-3">Schneller ohne Nachricht</Eyebrow>
             <ul className="space-y-2">
               {shortcuts.map((s) => (
@@ -122,29 +123,31 @@ export default function page() {
                 </li>
               ))}
             </ul>
-          </div>
-        </aside>
+          </StaggerItem>
+        </Stagger>
       </div>
 
       <section>
         <SectionHeading eyebrow="Vor Ort" title="So findest du uns" className="mb-8">
           WiWi-Fakultät, {strasse}, {plz} {ort} – unsere Sitzungen finden in Raum 201 statt.
         </SectionHeading>
-        <div className="h-80 overflow-hidden rounded-3xl border md:h-96">
+        <Reveal className="h-80 overflow-hidden rounded-3xl border md:h-96">
           <IframeConsent
             iframe={{ src: MAPS_EMBED, className: "h-full w-full" }}
             label="Google Maps"
             disclaimerText="Bitte bestätige das Laden von externen Inhalten."
             providerLink="https://www.google.com"
           />
-        </div>
+        </Reveal>
       </section>
 
       <MeetingCard showContact={false} />
 
       <section>
         <SectionHeading eyebrow="@fsr.wiwi.halle" title="Folge uns auf Instagram" className="mb-8" />
-        <InstagramEmbed />
+        <Reveal>
+          <InstagramEmbed />
+        </Reveal>
       </section>
     </div>
   );

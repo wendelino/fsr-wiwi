@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { EASE_OUT } from "@/components/motion";
 import { motion, useReducedMotion } from "motion/react";
 
 export type ResultStep = { label: string; state: "done" | "current" | "open" };
@@ -37,7 +38,7 @@ export function ResultState({
       : {
           initial: { opacity: 0, y: 10 },
           animate: { opacity: 1, y: 0 },
-          transition: { delay: 0.45 + i * 0.08, duration: 0.35, ease: "easeOut" as const },
+          transition: { delay: 0.45 + i * 0.08, duration: 0.35, ease: EASE_OUT },
         };
 
   return (
@@ -99,7 +100,8 @@ export function ResultState({
       {actions && (
         <motion.div
           {...item(5)}
-          className="mt-8 flex w-full max-w-sm flex-col gap-2 sm:flex-row sm:justify-center [&>*]:flex-1"
+          // flex-1 nur in der Zeile: in der Spalte würde flex-basis 0 die Buttonhöhe auffressen
+          className="mt-8 flex w-full max-w-sm flex-col gap-2 sm:flex-row sm:justify-center sm:[&>*]:flex-1"
         >
           {actions}
         </motion.div>

@@ -7,11 +7,11 @@ import {
 	useFieldArray,
 } from "react-hook-form";
 import { z } from "zod";
-import { motion, AnimatePresence } from "motion/react";
 import { ArrowLeft, ArrowRight, Plus, Trash2, User, Users } from "lucide-react";
 import Link from "next/link";
 
 import GenericForm, { type FormFnRes } from "@/components/forms/generic-form";
+import { Collapse, Swap } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
@@ -65,17 +65,13 @@ export default function UnilympicsForm({ event }: { event: EventItem }) {
 	const [mode, setMode] = useState<Mode>("select");
 
 	return (
-		<AnimatePresence mode="wait">
-			{mode === "select" && (
-				<motion.div
-					key="select"
-					initial={{ opacity: 0, y: 10 }}
-					animate={{ opacity: 1, y: 0 }}
-					exit={{ opacity: 0, y: -10 }}
-					transition={{ duration: 0.25 }}
-					className="mx-auto w-full max-w-md rounded-3xl border bg-card p-6 sm:p-8"
-				>
-					<h3 className="text-2xl font-black tracking-tight">Anmeldung Unilympics</h3>
+		// Vor: weiter zum Formular, zurück: zur Auswahl
+		<Swap swapKey={mode} direction={mode === "select" ? -1 : 1}>
+			{mode === "select" ? (
+				<div className="mx-auto w-full max-w-md rounded-3xl border bg-card p-6 sm:p-8">
+					<h3 className="text-2xl font-black tracking-tight">
+						Anmeldung Unilympics
+					</h3>
 					<p className="mb-5 mt-1 border-b pb-4 text-sm text-muted-foreground">
 						Wie möchtest du teilnehmen?
 					</p>
@@ -93,37 +89,18 @@ export default function UnilympicsForm({ event }: { event: EventItem }) {
 							onClick={() => setMode("team")}
 						/>
 					</div>
-				</motion.div>
-			)}
-
-			{mode === "single" && (
-				<motion.div
-					key="single"
-					initial={{ opacity: 0, y: 10 }}
-					animate={{ opacity: 1, y: 0 }}
-					exit={{ opacity: 0, y: -10 }}
-					transition={{ duration: 0.25 }}
-					className="space-y-2"
-				>
+				</div>
+			) : (
+				<div className="space-y-2">
 					<BackButton onClick={() => setMode("select")} />
-					<SingleForm event={event} />
-				</motion.div>
+					{mode === "single" ? (
+						<SingleForm event={event} />
+					) : (
+						<TeamForm event={event} />
+					)}
+				</div>
 			)}
-
-			{mode === "team" && (
-				<motion.div
-					key="team"
-					initial={{ opacity: 0, y: 10 }}
-					animate={{ opacity: 1, y: 0 }}
-					exit={{ opacity: 0, y: -10 }}
-					transition={{ duration: 0.25 }}
-					className="space-y-2"
-				>
-					<BackButton onClick={() => setMode("select")} />
-					<TeamForm event={event} />
-				</motion.div>
-			)}
-		</AnimatePresence>
+		</Swap>
 	);
 }
 
@@ -452,33 +429,35 @@ function FriendsField({
 			</FormDescription>
 			<div className="mt-2 space-y-2">
 				{fields.map((memberItem, index) => (
-					<FormField
-						key={memberItem.id}
-						control={form.control}
-						name={`friends.${index}.name`}
-						render={({ field: memberField }) => (
-							<FormItem>
-								<div className="flex gap-2">
-									<FormControl>
-										<Input
-											placeholder={`Mitglied ${index + 2}`}
-											{...memberField}
-										/>
-									</FormControl>
-									<Button
-										type="button"
-										variant="destructive"
-										size="icon"
-										disabled={fields.length <= 1}
-										onClick={() => remove(index)}
-									>
-										<Trash2 className="size-4" />
-									</Button>
-								</div>
-								<FormMessage />
-							</FormItem>
-						)}
-					/>
+					// Neue Zeilen klappen auf
+					<Collapse key={memberItem.id}>
+						<FormField
+							control={form.control}
+							name={`friends.${index}.name`}
+							render={({ field: memberField }) => (
+								<FormItem>
+									<div className="flex gap-2">
+										<FormControl>
+											<Input
+												placeholder={`Mitglied ${index + 2}`}
+												{...memberField}
+											/>
+										</FormControl>
+										<Button
+											type="button"
+											variant="destructive"
+											size="icon"
+											disabled={fields.length <= 1}
+											onClick={() => remove(index)}
+										>
+											<Trash2 className="size-4" />
+										</Button>
+									</div>
+									<FormMessage />
+								</FormItem>
+							)}
+						/>
+					</Collapse>
 				))}
 				<Button
 					type="button"

@@ -1,6 +1,8 @@
 "use client";
 
 import { FullBleed } from "@/components/full-bleed";
+import { HeroDeco } from "@/components/hero-deco";
+import { Enter, Parallax } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { formatBerlin, getWeekDays } from "@/lib/berlin";
 import { ERSTI_DAYS, ERSTI_GUIDE, ERSTI_START } from "@/lib/ersti";
@@ -36,37 +38,31 @@ export function ErstiHero({
   return (
     <FullBleed>
       <div className="relative overflow-hidden bg-fsr-deep text-white">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.18),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(0,0,0,0.35),transparent_50%)]"
-        />
-        <Image
-          src="/logo_outline.png"
-          alt=""
-          aria-hidden
-          width={420}
-          height={423}
-          className="pointer-events-none absolute -bottom-24 -left-24 w-[420px] opacity-[0.07] invert"
-        />
+        <HeroDeco logo="bottom-left" />
         <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-14 md:grid-cols-[1.5fr_1fr] md:py-24">
           <div>
-            <div className="flex flex-wrap items-center gap-2">
+            <Enter className="flex flex-wrap items-center gap-2">
               <span className="inline-flex rounded-full bg-white/15 px-4 py-1.5 text-sm font-semibold ring-1 ring-white/25 backdrop-blur">
                 {formatBerlin(days[0].date, "dd.")}–{formatBerlin(days[ERSTI_DAYS - 1].date, "dd.MM.yyyy")} · Halle (Saale)
               </span>
               {showStatus && <HeroStatus events={events} days={days} />}
-            </div>
-            <h1 className="mt-6 text-[clamp(3.6rem,14vw,9rem)] font-black uppercase leading-[0.85] tracking-tighter">
+            </Enter>
+            <Enter
+              as="h1"
+              variant="rise"
+              step={1}
+              className="mt-6 text-[clamp(3.6rem,14vw,9rem)] font-black uppercase leading-[0.85] tracking-tighter"
+            >
               Ersti
               <br />
               <span className="text-transparent [-webkit-text-stroke:2px_white]">Woche</span>{" "}
               {ERSTI_START.slice(2, 4)}
-            </h1>
-            <p className="mt-6 max-w-lg text-lg text-white/85">
+            </Enter>
+            <Enter as="p" step={2} className="mt-6 max-w-lg text-lg text-white/85">
               Fünf Tage Touren, Sport, Workshops, Kneipenabende und Partys –
               euer Start ins Studium, organisiert vom FSR WiWi.
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            </Enter>
+            <Enter step={3} className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button asChild size="lg" className="bg-white text-fsr-deep hover:bg-white/90">
                 {isAnchor ? (
                   <a href={programHref}>Programm ansehen</a>
@@ -86,12 +82,17 @@ export function ErstiHero({
                   <FileText className="mr-2 size-4" /> Ersti-Guide (PDF)
                 </a>
               </Button>
-            </div>
+            </Enter>
           </div>
           <div className="hidden justify-center md:flex">
-            <div className="-rotate-6 rounded-full bg-white p-3 shadow-[0_25px_50px_rgba(0,0,0,0.35)]">
-              <Image src="/logo.png" alt="Logo des FSR WiWi" width={340} height={340} priority />
-            </div>
+            {/* Sticker: springt herein und dreht sich beim Scrollen weiter */}
+            <Enter variant="pop" step={2}>
+              <Parallax offset={-40} rotate={-10}>
+                <div className="-rotate-6 rounded-full bg-white p-3 shadow-[0_25px_50px_rgba(0,0,0,0.35)] transition-transform duration-500 hover:rotate-0 motion-reduce:transition-none">
+                  <Image src="/logo.png" alt="Logo des FSR WiWi" width={340} height={340} priority />
+                </div>
+              </Parallax>
+            </Enter>
           </div>
         </div>
       </div>

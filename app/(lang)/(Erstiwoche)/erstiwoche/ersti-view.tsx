@@ -5,6 +5,7 @@ import { ErstiHero } from "@/components/ersti/ersti-hero";
 import { PosterList, PosterItem } from "@/components/poster-list";
 import { SponsorStrip } from "@/components/ersti/sponsor-strip";
 import { SignupCard } from "@/components/events/signup-card";
+import { Stagger, StaggerItem } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { getWeekDays } from "@/lib/berlin";
 import { ERSTI_DAYS, ERSTI_START, erstiSponsors } from "@/lib/ersti";
@@ -70,11 +71,13 @@ export default function ErstiView({
       {highlights.length > 0 && (
         <section>
           <SectionHeading eyebrow="Nicht verpassen" title="Highlights der Woche" />
-          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <Stagger className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {highlights.map((e) => (
-              <SignupCard key={e.id} event={e} phase={phaseOf(e, now)} source="ERSTI" />
+              <StaggerItem key={e.id} variant="scale">
+                <SignupCard event={e} phase={phaseOf(e, now)} source="ERSTI" />
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </section>
       )}
 
@@ -92,10 +95,9 @@ export default function ErstiView({
 
       {/* Sponsoren */}
       <section>
-        <h2 className="mb-2 text-2xl font-bold tracking-tight">Unterstützt von</h2>
-        <p className="mb-6 text-muted-foreground">
+        <SectionHeading eyebrow="Danke" title="Unterstützt von" className="mb-8">
           Danke an alle Partner*innen, die die Ersti-Woche möglich machen.
-        </p>
+        </SectionHeading>
         <SponsorStrip sponsors={erstiSponsors} />
       </section>
     </div>

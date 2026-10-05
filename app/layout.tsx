@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import { cn } from "@/lib/utils";
 import WidthWrapper from "@/components/WidthWrapper";
 import ScrollTop from "@/components/ScrollTop";
+import { MotionProvider } from "@/components/motion";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Toaster } from "@/components/ui/toaster";
 import Script from "next/script";
@@ -62,44 +63,6 @@ export const metadata: Metadata = {
     canonical: "https://fsr-wiwi-halle.de",
   },
 };
-// export async function generateStaticParams() {
-//   return [{ lang: "en" }, { lang: "de" }];
-// }
-
-// export default function RootLayout({
-//   children,
-//   params,
-// }: Readonly<{
-//   children: React.ReactNode;
-//   params: { lang: string };
-// }>) {
-//   return (
-//     <html lang={params.lang}>
-//       <head>
-//         <script
-//           defer
-//           src="https://analytics.lnio.de/script.js"
-//           data-website-id="d72a7bb9-59d3-40b7-934a-a48d8dceca3f"
-//         />
-//       </head>
-//       <body className={cn(inter.className, "flex flex-col min-h-screen")}>
-//         <ThemeProvider
-//           attribute="class"
-//           defaultTheme="system"
-//           enableSystem
-//           disableTransitionOnChange
-//         >
-//           <NavBar lang={params.lang} />
-//           <main className="flex-1 min-h-[53vh]">
-//             <WidthWrapper className=" flex flex-col gap-16 lg:gap-32">{children}</WidthWrapper>
-//           </main>
-//           <Footer />
-//           <ScrollTop />
-//         </ThemeProvider>
-//       </body>
-//     </html>
-//   );
-// }
 
 export default function RootLayout({
   children,
@@ -121,15 +84,17 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <NavBar lang={"de"} />
-          <main className="flex-1 min-h-[53vh] pt-8">
-            <WidthWrapper className=" flex flex-col gap-8 lg:gap-16">
-              {children}
-            </WidthWrapper>
-          </main>
-          <Footer />
-          <ScrollTop />
-          <Toaster />
+          <MotionProvider>
+            <NavBar lang={"de"} />
+            <main className="flex-1 min-h-[53vh] pt-8">
+              <WidthWrapper className=" flex flex-col gap-8 lg:gap-16">
+                {children}
+              </WidthWrapper>
+            </main>
+            <Footer />
+            <ScrollTop />
+            <Toaster />
+          </MotionProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -1,6 +1,7 @@
 "use client";
 
 import { LotteryNote } from "@/components/events/event-status";
+import { ProgressBar } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { formatBerlin, timeRange } from "@/lib/berlin";
 import {
@@ -31,9 +32,14 @@ export function SignupCard({
   const full = isFull(event);
   const past = phase === "past";
   return (
-    <article className={cn("flex flex-col overflow-hidden rounded-3xl border bg-card", past && "opacity-60")}>
+    <article
+      className={cn(
+        "group flex h-full flex-col overflow-hidden rounded-3xl border bg-card transition hover:border-fsr/40 hover:shadow-md",
+        past && "opacity-60"
+      )}
+    >
       <div className="flex items-center gap-4 bg-fsr/10 p-5">
-        <div className="flex size-16 shrink-0 flex-col items-center justify-center rounded-2xl bg-fsr-deep text-white">
+        <div className="flex size-16 shrink-0 flex-col items-center justify-center rounded-2xl bg-fsr-deep text-white transition duration-300 group-hover:-rotate-6 motion-reduce:transition-none">
           <span className="text-[11px] font-bold uppercase">{formatBerlin(event.start, "EEE")}</span>
           <span className="text-2xl font-black leading-none">{formatBerlin(event.start, "dd")}</span>
         </div>
@@ -102,12 +108,7 @@ function SeatBar({ event }: { event: EventItem }) {
         <span className={full ? "text-destructive" : undefined}>{left}</span>
         <span className={overbooked ? "text-fsr" : "text-muted-foreground"}>{right}</span>
       </div>
-      <div className="h-2 overflow-hidden rounded-full bg-muted">
-        <div
-          className={cn("h-full rounded-full", full ? "bg-destructive" : "bg-fsr-deep")}
-          style={{ width: `${taken}%` }}
-        />
-      </div>
+      <ProgressBar value={taken} barClassName={full ? "bg-destructive" : undefined} />
     </div>
   );
 }

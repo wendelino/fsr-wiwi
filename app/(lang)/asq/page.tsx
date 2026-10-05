@@ -1,3 +1,5 @@
+import { HeroDeco } from "@/components/hero-deco";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 import { HeroLead, PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
 import {
@@ -167,36 +169,37 @@ export default function Page() {
 
       <section>
         <SectionHeading eyebrow="Auf einen Blick" title="Das Modul" />
-        <ul className="mt-8 grid gap-4 md:grid-cols-3">
+        <Stagger as="ul" className="mt-8 grid gap-4 md:grid-cols-3">
           {facts.map((f) => (
-            <li key={f.label} className="rounded-3xl border bg-card p-6">
+            <StaggerItem as="li" variant="scale" key={f.label} className="rounded-3xl border bg-card p-6">
               <p className="text-xs font-bold uppercase tracking-widest text-fsr">{f.label}</p>
               <p className="mt-2 text-4xl font-black uppercase leading-none tracking-tight">{f.value}</p>
               <p className="mt-4 text-sm text-muted-foreground">{f.text}</p>
-            </li>
+            </StaggerItem>
           ))}
-        </ul>
+        </Stagger>
       </section>
 
       <section>
         <SectionHeading eyebrow="Was dich erwartet" title="Deine Vorteile und Aufgaben" />
-        <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <Stagger as="ul" step={0.05} className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {tasks.map((task) => (
-            <li key={task.text} className="flex items-start gap-4 rounded-3xl border bg-card p-5">
-              <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-fsr/10 text-fsr">
+            <StaggerItem as="li" key={task.text} className="group flex items-start gap-4 rounded-3xl border bg-card p-5">
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-fsr/10 text-fsr transition duration-300 group-hover:-rotate-6 group-hover:scale-110 motion-reduce:transition-none">
                 <task.icon className="size-5" />
               </span>
               <p className="pt-1">{task.text}</p>
-            </li>
+            </StaggerItem>
           ))}
-        </ul>
+        </Stagger>
       </section>
 
       <section id="bewerbung" className="scroll-mt-24">
         <SectionHeading eyebrow="In vier Schritten" title="Der Bewerbungsprozess" />
-        <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Schritte laufen von links nach rechts ein, wie ein Zeitstrahl */}
+        <Stagger as="ol" step={0.12} className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((s, i) => (
-            <li key={s.title} className="border-t-2 border-fsr/40 pt-5">
+            <StaggerItem as="li" variant="left" key={s.title} className="border-t-2 border-fsr/40 pt-5">
               <span
                 aria-hidden
                 className="block text-5xl font-black tabular-nums text-transparent [-webkit-text-stroke:1.5px_hsl(var(--fsr1))]"
@@ -205,28 +208,27 @@ export default function Page() {
               </span>
               <h3 className="mt-3 text-lg font-bold leading-tight">{s.title}</h3>
               <p className="mt-1 text-sm text-muted-foreground">{s.text}</p>
-            </li>
+            </StaggerItem>
           ))}
-        </ol>
+        </Stagger>
       </section>
 
       <section className="grid gap-6 md:grid-cols-[1fr_2fr] md:gap-12">
         <SectionHeading eyebrow="FAQ" title="Häufig gestellte Fragen" />
-        <Accordion type="single" collapsible className="rounded-3xl border bg-card px-6">
-          {faq.map((item, i) => (
-            <AccordionItem key={item.q} value={`q${i}`} className={i === faq.length - 1 ? "border-b-0" : undefined}>
-              <AccordionTrigger className="text-left">{item.q}</AccordionTrigger>
-              <AccordionContent className="text-muted-foreground">{item.a}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        <Reveal>
+          <Accordion type="single" collapsible className="rounded-3xl border bg-card px-6">
+            {faq.map((item, i) => (
+              <AccordionItem key={item.q} value={`q${i}`} className={i === faq.length - 1 ? "border-b-0" : undefined}>
+                <AccordionTrigger className="text-left">{item.q}</AccordionTrigger>
+                <AccordionContent className="text-muted-foreground">{item.a}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </Reveal>
       </section>
 
-      <section className="relative overflow-hidden rounded-[2rem] bg-fsr-deep p-8 text-white sm:p-12 md:p-16">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.18),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(0,0,0,0.35),transparent_50%)]"
-        />
+      <Reveal as="section" variant="scale" className="relative overflow-hidden rounded-[2rem] bg-fsr-deep p-8 text-white sm:p-12 md:p-16">
+        <HeroDeco logo={false} />
         <div className="relative max-w-2xl">
           <p className="text-sm font-bold uppercase tracking-widest text-white/70">Mitmachen</p>
           <h2 className="mt-2 hyphens-auto text-3xl font-black tracking-tight sm:text-4xl md:text-5xl">
@@ -241,7 +243,7 @@ export default function Page() {
             </a>
           </Button>
         </div>
-      </section>
+      </Reveal>
     </div>
   );
 }
