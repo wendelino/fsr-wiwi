@@ -96,18 +96,17 @@ export default function Footer() {
         <div className="mt-14 flex flex-col gap-2 border-t border-white/10 py-6 text-sm text-white/50 sm:flex-row sm:justify-between">
           <p>
             © {new Date().getFullYear()} {owner}
-          </p>
-          <p>Öffentliche Sitzung jeden 2. Dienstag, 19 Uhr · Raum 201</p>
+          </p> 
         </div>
       </WidthWrapper>
 
       {/* Wortmarke als Poster-Abschluss */}
-      <p
+      {/* <p
         aria-hidden
         className="pointer-events-none -mb-[0.18em] select-none text-center text-[clamp(4rem,15vw,13rem)] font-black uppercase leading-none tracking-tighter text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.18)]"
       >
         FSR WiWi
-      </p>
+      </p> */}
     </footer>
   );
 }

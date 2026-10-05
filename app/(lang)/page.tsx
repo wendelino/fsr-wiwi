@@ -17,7 +17,8 @@ import {
   Landmark,
   Mail,
   MessageCircle,
-  School,
+  School, 
+  User,  
   Users,
 } from "lucide-react";
 import Link from "next/link";
@@ -38,12 +39,12 @@ const uniLinks = [
 
 const fachschaft: PosterItem[] = [
   {
-    icon: Users,
+    icon: User,
     title: "Fachschaft",
     text: "Mit der Immatrikulation bist du automatisch Mitglied – die Fachschaft sind alle Studierenden der Wirtschaftswissenschaften.",
   },
   {
-    icon: MessageCircle,
+    icon: Users,
     title: "Fachschaftsrat",
     text: "Die gewählte Vertretung der Fachschaft. Wir kümmern uns um die Probleme und Belange der Studierenden.",
   },
@@ -101,7 +102,7 @@ export default async function Home() {
             text="Ihr habt ein Projekt, das Unterstützung braucht? Hier gibt's das Merkblatt zur Antragsstellung."
           />
         </div>
-        <ul className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4">
+        {/* <ul className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4">
           {uniLinks.map((l) => (
             <li key={l.title}>
               <a
@@ -119,7 +120,7 @@ export default async function Home() {
               </a>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </section>
 
       {/* Fachschaft */}

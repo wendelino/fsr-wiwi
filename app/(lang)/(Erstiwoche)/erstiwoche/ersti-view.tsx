@@ -64,7 +64,7 @@ export default function ErstiView({
       {/* Jetzt / Als Nächstes */}
       <NowCard events={events} now={now} status={status} className="-mt-4 md:-mt-8" />
 
-      <Expectations />
+      {/* <Expectations /> */}
 
       {/* Highlights */}
       {highlights.length > 0 && (

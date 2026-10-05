@@ -35,10 +35,10 @@ export function HomeHero({ showErstiTeaser = false }: { showErstiTeaser?: boolea
           <p className="text-sm font-bold uppercase tracking-widest text-white/70">
             Fachschaftsrat Wirtschaftswissenschaften · MLU Halle
           </p>
-          <h1 className="mt-3 text-[clamp(3.2rem,11vw,8rem)] font-black uppercase leading-[0.85] tracking-tighter">
+          <h1 className="mt-3 text-[clamp(3.2rem,9vw,6rem)] font-black uppercase leading-[0.85] tracking-tighter">
             Willkommen
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-white/85 md:text-xl">
+          <p className="mt-6 max-w-xl  text-white/85 md:text-lg">
             Wir sind die gewählte Vertretung aller Studierenden der
             Wirtschaftswissenschaften – für eure Anliegen, Veranstaltungen und
             alles rund ums Studium.

@@ -8,8 +8,7 @@ import { getTranslation } from "@/locales/getTranslation";
 import {
   ArrowRight,
   ArrowUpRight,
-  BookOpen,
-  Facebook,
+  BookOpen, 
   GraduationCap,
   HandCoins,
   Instagram,
@@ -103,7 +102,7 @@ export default async function page() {
   const channels = [
     { href: `mailto:${mail}`, icon: Mail, title: "E-Mail", text: mail },
     { href: "https://www.instagram.com/fsr.wiwi.halle/", icon: Instagram, title: t.cards.instagram.title, text: t.cards.instagram.content },
-    { href: "https://www.facebook.com/fsr.wiwi.halle", icon: Facebook, title: t.cards.facebook.title, text: t.cards.facebook.content },
+    // { href: "https://www.facebook.com/fsr.wiwi.halle", icon: Facebook, title: t.cards.facebook.title, text: t.cards.facebook.content },
     { href: STUDIP_URL, icon: BookOpen, title: t.cards.studip.title, text: t.cards.studip.content },
   ];
 
@@ -200,7 +199,7 @@ export default async function page() {
 
       <section>
         <SectionHeading eyebrow={t.contactSection.title} title="So erreichst du uns" />
-        <div className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-8 grid gap-3 sm:grid-cols-1 lg:grid-cols-3">
           {channels.map((c) => (
             <a
               key={c.title}
