@@ -20,6 +20,9 @@ und Footer folgen ihm bereits.
   Legislaturen in `lib/data.ts` (`/mitglieder` leitet auf die neueste weiter).
 - Navigation und Footer-Links stehen in `lib/siteConfig.ts` bzw.
   `components/Footer.tsx`. Links aufs Ersti-Programm immer über die Konstanten.
+- Sitemap und robots.txt erzeugt Next selbst aus `app/sitemap.ts` und
+  `app/robots.ts` (Termine kommen aus dem CMS). Neue öffentliche Seiten dort
+  in `STATIC_PAGES` eintragen.
 - Seitenspezifische Teile liegen neben der Seite (z. B. `erstiwoche/lineup.tsx`),
   alles Wiederverwendbare in `components/` und `lib/`. Ungenutzten Code löschen
   statt auskommentieren.
