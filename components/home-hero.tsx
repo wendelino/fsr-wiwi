@@ -41,7 +41,7 @@ export function HomeHero({ showErstiTeaser = false }: { showErstiTeaser?: boolea
           </Enter>
           <Enter
             as="h1"
-            variant="rise"
+            variant="up"
             step={1}
             className="mt-3 text-[clamp(3.2rem,9vw,6rem)] font-black uppercase leading-[0.85] tracking-tighter"
           >

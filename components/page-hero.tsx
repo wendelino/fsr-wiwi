@@ -49,7 +49,7 @@ export function PageHero({
           )}
           <Enter
             as="h1"
-            variant="rise"
+            variant="up"
             step={back ? 2 : 1}
             className={cn(
               // Lange Titel (z. B. "Infoveranstaltung") auf dem Handy trennen statt überlaufen

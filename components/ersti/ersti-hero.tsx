@@ -49,7 +49,7 @@ export function ErstiHero({
             </Enter>
             <Enter
               as="h1"
-              variant="rise"
+              variant="up"
               step={1}
               className="mt-6 text-[clamp(3.6rem,14vw,9rem)] font-black uppercase leading-[0.85] tracking-tighter"
             >

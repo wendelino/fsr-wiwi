@@ -18,22 +18,69 @@ const CTA_HREF = "/kontakt";
 const focusRing =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fsr";
 
-/** Anker-Links (z. B. ERSTI_PROGRAM) und Dateien gelten nie als aktiv. */
-function isActive(pathname: string, href: string) {
-  if (href.includes("#") || href.includes(".")) return false;
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
-
 function isExternal(href: string) {
   return href.includes(".");
+}
+
+const allHrefs = siteConfig.pages.flatMap((p) => ("dropdown" in p ? p.dropdown.map((i) => i.href) : [p.href]));
+
+/**
+ * Genau ein aktiver Link: Teilen sich mehrere den Pfad (z. B. ERSTI_PAGE und
+ * ERSTI_PROGRAM), gewinnt der mit passendem Hash, sonst der ohne Hash.
+ */
+function findActiveHref(pathname: string, hash: string) {
+  const matches = allHrefs.filter((href) => {
+    if (isExternal(href)) return false;
+    const path = href.split("#")[0] || "/";
+    return pathname === path || pathname.startsWith(`${path}/`);
+  });
+  return (
+    matches.find((href) => hash !== "" && href.slice(href.indexOf("#")) === hash) ??
+    matches.find((href) => !href.includes("#")) ??
+    matches[0]
+  );
+}
+
+/**
+ * Aktueller Hash der URL. Next löst bei Links auf der eigenen Seite kein
+ * `hashchange` aus, daher werden Klicks auf solche Anker mitgelesen.
+ */
+function useHash(pathname: string) {
+  const [hash, setHash] = useState("");
+
+  useEffect(() => {
+    setHash(window.location.hash);
+  }, [pathname]);
+
+  useEffect(() => {
+    const sync = () => setHash(window.location.hash);
+    const onClick = (e: MouseEvent) => {
+      const a = (e.target as Element | null)?.closest?.("a[href]");
+      if (!(a instanceof HTMLAnchorElement)) return;
+      const url = new URL(a.href);
+      if (url.origin === window.location.origin && url.pathname === window.location.pathname) setHash(url.hash);
+    };
+    window.addEventListener("hashchange", sync);
+    window.addEventListener("popstate", sync);
+    document.addEventListener("click", onClick);
+    return () => {
+      window.removeEventListener("hashchange", sync);
+      window.removeEventListener("popstate", sync);
+      document.removeEventListener("click", onClick);
+    };
+  }, []);
+
+  return hash;
 }
 
 export default function NavBar({ lang: _lang }: { lang: string }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
+  const activeHref = findActiveHref(pathname, useHash(pathname));
   const pages = siteConfig.pages.filter((p) => !("href" in p) || p.href !== CTA_HREF);
 
-  // Seitenwechsel schließt das Menü (State-Reset beim Rendern statt Effect)
+  // Seitenwechsel schließt das Menü (State-Reset beim Rendern statt Effect);
+  // Links auf die eigene Seite ändern den Pfad nicht und schließen es per onClick
   const [lastPath, setLastPath] = useState(pathname);
   if (pathname !== lastPath) {
     setLastPath(pathname);
@@ -68,6 +115,7 @@ export default function NavBar({ lang: _lang }: { lang: string }) {
       <WidthWrapper className="flex h-full items-center justify-between gap-4">
         <Link
           href="/"
+          onClick={() => setOpen(false)}
           className={cn(
             "flex items-center gap-2.5 rounded-2xl",
             open ? "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white" : focusRing
@@ -99,15 +147,21 @@ export default function NavBar({ lang: _lang }: { lang: string }) {
         <nav aria-label="Hauptnavigation" className="hidden items-center gap-1 md:flex">
           {pages.map((page) =>
             "dropdown" in page ? (
-              <DesktopDropdown key={page.label} label={page.label} items={page.dropdown} pathname={pathname} />
+              <DesktopDropdown
+                key={page.label}
+                label={page.label}
+                items={page.dropdown}
+                pathname={pathname}
+                activeHref={activeHref}
+              />
             ) : (
               <Link
                 key={page.label}
                 href={page.href}
-                aria-current={isActive(pathname, page.href) ? "page" : undefined}
-                className={cn(pillClass(isActive(pathname, page.href)), focusRing)}
+                aria-current={page.href === activeHref ? "page" : undefined}
+                className={cn(pillClass(page.href === activeHref), focusRing)}
               >
-                {isActive(pathname, page.href) && <NavPill />}
+                {page.href === activeHref && <NavPill />}
                 {page.label}
               </Link>
             )
@@ -159,7 +213,7 @@ export default function NavBar({ lang: _lang }: { lang: string }) {
         // eingeblendete Toolbar, und der letzte Link verschwindet darunter.
         className="fixed inset-x-0 top-[72px] h-[calc(100vh-72px)] overflow-hidden bg-fsr-deep text-white supports-[height:100dvh]:h-[calc(100dvh-72px)] md:hidden"
       >
-        <MobileMenu pages={siteConfig.pages} pathname={pathname} />
+        <MobileMenu pages={siteConfig.pages} activeHref={activeHref} onNavigate={() => setOpen(false)} />
       </Appear>
     </header>
   );
@@ -181,14 +235,16 @@ function DesktopDropdown({
   label,
   items,
   pathname,
+  activeHref,
 }: {
   label: string;
   items: NavItem[];
   pathname: string;
+  activeHref?: string;
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
-  const active = items.some((i) => isActive(pathname, i.href));
+  const active = items.some((i) => i.href === activeHref);
 
   const [lastPath, setLastPath] = useState(pathname);
   if (pathname !== lastPath) {
@@ -227,13 +283,14 @@ function DesktopDropdown({
       <Appear show={open} variant="drop" className="absolute left-0 top-full z-10 origin-top-left pt-2">
         <ul className="min-w-56 rounded-3xl border bg-card p-2 shadow-lg">
           {items.map((item) => {
-            const itemActive = isActive(pathname, item.href);
+            const itemActive = item.href === activeHref;
             return (
               <li key={item.label}>
                 <Link
                   href={item.href}
                   prefetch={item.prefetch}
                   aria-current={itemActive ? "page" : undefined}
+                  onClick={() => setOpen(false)}
                   className={cn(
                     "group flex items-center justify-between gap-4 rounded-2xl px-4 py-2.5 text-sm font-semibold transition",
                     itemActive ? "bg-fsr/10 text-fsr" : "hover:bg-muted",
@@ -254,18 +311,27 @@ function DesktopDropdown({
   );
 }
 
-function MobileMenu({ pages, pathname }: { pages: NavPage[]; pathname: string }) {
+function MobileMenu({
+  pages,
+  activeHref,
+  onNavigate,
+}: {
+  pages: NavPage[];
+  activeHref?: string;
+  onNavigate: () => void;
+}) {
   const singles = pages.flatMap((p) => ("href" in p ? [p] : []));
   const groups = pages.flatMap((p) => ("dropdown" in p ? [p] : []));
 
   const bigLink = (item: NavItem, key: string) => {
-    const active = isActive(pathname, item.href);
+    const active = item.href === activeHref;
     return (
       <StaggerItem as="li" variant="left" key={key}>
         <Link
           href={item.href}
           prefetch={item.prefetch}
           aria-current={active ? "page" : undefined}
+          onClick={onNavigate}
           className={cn(
             "flex min-h-12 items-center justify-between gap-3 rounded-2xl py-1.5 text-2xl font-black tracking-tight transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white",
             active ? "text-white" : "text-white/75 hover:text-white"
@@ -289,21 +355,22 @@ function MobileMenu({ pages, pathname }: { pages: NavPage[]; pathname: string })
       <Stagger
         as="nav"
         trigger="mount"
-        delay={0.12}
-        step={0.05}
+        delay={0.07}
+        step={0.03}
         aria-label="Hauptnavigation"
         className="absolute inset-0 flex flex-col gap-8 overflow-y-auto overscroll-contain px-4 pb-[max(2.5rem,calc(env(safe-area-inset-bottom)+1.5rem))] pt-6"
       >
-        <ul className="flex flex-col">
+        <ul className="flex flex-col gap-1">
           {singles.map((page) => {
-            const active = isActive(pathname, page.href);
+            const active = page.href === activeHref;
             return (
               <StaggerItem as="li" variant="left" key={page.label}>
                 <Link
                   href={page.href}
                   aria-current={active ? "page" : undefined}
+                  onClick={onNavigate}
                   className={cn(
-                    "flex items-center gap-3 rounded-2xl py-1 text-[clamp(2.5rem,12vw,3.5rem)] font-black uppercase leading-[0.95] tracking-tighter transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white",
+                    "flex items-center gap-3 rounded-2xl py-1 text-[clamp(1.5rem,10vw,2.5rem)] font-black uppercase leading-[0.95] tracking-tighter transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white",
                     active ? "text-white" : "text-white/80 hover:text-white"
                   )}
                 >
