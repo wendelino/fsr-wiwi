@@ -17,7 +17,7 @@ function relativeStart(event: EventItem, now: Date) {
   return formatBerlin(event.start, "EEE HH:mm");
 }
 
-/** "Jetzt / Als Nächstes" aus Entwurf 3, für die volle Breite zweispaltig. */
+/** "Jetzt / Als Nächstes": Countdown vor, Live-Termine während und Abschluss nach der Woche. */
 export function NowCard({
   events,
   now,

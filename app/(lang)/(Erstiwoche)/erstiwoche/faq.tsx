@@ -12,7 +12,7 @@ import Link from "next/link";
 const ALTKLAUSUREN_URL =
   "https://studip.uni-halle.de/dispatch.php/course/overview?cid=ee8c88937076ac5fe253303faf816cbe";
 
-/** "Häufige Fragen" aus Entwurf 3. */
+/** FAQ der Ersti-Woche. */
 export function FaqSection() {
   return (
     <section className="grid gap-6 md:grid-cols-[1fr_2fr] md:gap-12">

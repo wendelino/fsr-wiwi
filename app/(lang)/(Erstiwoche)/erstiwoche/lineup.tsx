@@ -14,7 +14,7 @@ import { useRef, useState } from "react";
 // Höhe der fixen Navbar, darunter klebt die Tagesleiste
 const NAV_HEIGHT = 72;
 
-/** Tagesleiste + Timeline aus Entwurf 1; der heutige Tag ist immer vorausgewählt. */
+/** Programm als Tagesleiste + Timeline; der heutige Tag ist immer vorausgewählt. */
 export function Lineup({
   events,
   days,
@@ -59,6 +59,8 @@ export function Lineup({
 
   return (
     <section id="lineup" className="scroll-mt-24">
+      {/* Alte Links auf /erstiwoche#programm landen ebenfalls hier */}
+      <span id="programm" aria-hidden className="block scroll-mt-24" />
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <SectionHeading eyebrow="Die ganze Woche" title="Line-up" />
         <Button

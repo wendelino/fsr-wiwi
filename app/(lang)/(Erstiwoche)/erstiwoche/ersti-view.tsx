@@ -19,7 +19,7 @@ import {
   PartyPopper,
   Trophy,
 } from "lucide-react";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { FaqSection } from "./faq";
 import { Lineup } from "./lineup";
 import { NowCard } from "./now-card";
@@ -41,6 +41,14 @@ export default function ErstiView({
 }) {
   const days = useMemo(() => getWeekDays(ERSTI_START, ERSTI_DAYS), []);
   const now = useNow();
+  const ready = now !== null;
+
+  // Sobald die Uhrzeit bekannt ist, ändern Jetzt-Karte und Highlights ihre Höhe –
+  // ein Anker wie #lineup wird danach noch einmal angesprungen
+  useEffect(() => {
+    if (!ready || !window.location.hash) return;
+    document.getElementById(window.location.hash.slice(1))?.scrollIntoView({ behavior: "instant" });
+  }, [ready]);
   const status = getWeekStatus(days, now);
   const todayKey = status?.kind === "during" ? status.todayKey : null;
 
@@ -53,12 +61,12 @@ export default function ErstiView({
     <div className="flex flex-col gap-16 md:gap-24">
       <ErstiHero events={events} programHref="#lineup" />
 
-      {/* Jetzt / Als Nächstes (Entwurf 3) */}
+      {/* Jetzt / Als Nächstes */}
       <NowCard events={events} now={now} status={status} className="-mt-4 md:-mt-8" />
 
       <Expectations />
 
-      {/* Highlights (Entwurf 2) */}
+      {/* Highlights */}
       {highlights.length > 0 && (
         <section>
           <SectionHeading eyebrow="Nicht verpassen" title="Highlights der Woche" />
@@ -70,7 +78,7 @@ export default function ErstiView({
         </section>
       )}
 
-      {/* Line-up (Entwurf 1) */}
+      {/* Line-up */}
       <Lineup
         events={events}
         days={days}
@@ -79,10 +87,10 @@ export default function ErstiView({
         renderDayKey={renderDayKey}
       />
 
-      {/* Häufige Fragen (Entwurf 3) */}
+      {/* Häufige Fragen */}
       <FaqSection />
 
-      {/* Sponsoren (Entwurf 1) */}
+      {/* Sponsoren */}
       <section>
         <h2 className="mb-2 text-2xl font-bold tracking-tight">Unterstützt von</h2>
         <p className="mb-6 text-muted-foreground">

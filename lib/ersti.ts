@@ -1,13 +1,13 @@
-import type { SponsorItem } from "@/components/SponsorGrid";
 import { berlinDateKey, shiftDayKey } from "@/lib/berlin";
 
-// Zentrale Daten der Ersti-Woche, damit Seite und Design-Entwürfe dieselben Werte nutzen
+// Zentrale Daten der Ersti-Woche
 export const ERSTI_TAG = "ersti26";
 export const ERSTI_START = "2026-10-05"; // Montag, Berliner Kalendertag
 export const ERSTI_DAYS = 5;
 export const ERSTI_GUIDE = "/files/ersti-guide-26.pdf";
-// Ziel aller Links aufs Ersti-Programm; nach dem Umzug auf "/erstiwoche" umstellen
-export const ERSTI_PAGE = "/erstiwoche-new";
+export const ERSTI_PAGE = "/erstiwoche";
+// Anker des Programms (Line-up) auf ERSTI_PAGE
+export const ERSTI_PROGRAM = `${ERSTI_PAGE}#lineup`;
 
 // So viele Tage vorher zeigt die Startseite schon den Ersti-Hero
 const ERSTI_SEASON_LEAD_DAYS = 21;
@@ -20,8 +20,14 @@ export function isErstiSeason(now: Date) {
   return today >= from && today <= to;
 }
 
-// onDark: weißes Logo, braucht dunklen Hintergrund
-export type ErstiSponsor = SponsorItem & { onDark?: boolean };
+export type ErstiSponsor = {
+  /** Datei in public/sponsoring */
+  src: string;
+  href: string;
+  label: string;
+  /** Weißes Logo, braucht dunklen Hintergrund */
+  onDark?: boolean;
+};
 
 export const erstiSponsors: ErstiSponsor[] = [
   {

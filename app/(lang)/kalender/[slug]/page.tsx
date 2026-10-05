@@ -7,7 +7,7 @@ import { EventHeader, EventNotFound } from "@/components/events/event-header";
 import { EventMarkdown } from "@/components/events/event-markdown";
 import { LotteryNote } from "@/components/events/event-status";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ERSTI_PAGE, ERSTI_TAG } from "@/lib/ersti";
+import { ERSTI_PROGRAM, ERSTI_TAG } from "@/lib/ersti";
 import { plainText } from "@/lib/events";
 import { ArrowRight } from "lucide-react";
 import { Metadata } from "next";
@@ -98,7 +98,7 @@ async function Content({ slug }: { slug: string }) {
           <EventActions event={event} past={past} />
           {isErsti && (
             <Link
-              href={ERSTI_PAGE + "#lineup"}
+              href={ERSTI_PROGRAM}
               className="group flex items-center justify-between rounded-2xl bg-fsr/10 px-4 py-3 text-sm font-semibold text-fsr transition hover:bg-fsr/15"
             >
               Zum Programm der Ersti-Woche

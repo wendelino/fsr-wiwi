@@ -2,7 +2,7 @@
 
 Hinweise für Coding-Agents (und Menschen), die an dieser Website arbeiten.
 Der wichtigste Teil ist das **Design-System** weiter unten. Die Referenz dafür
-ist `/erstiwoche-new`; Startseite, Kalender, Anmeldung, Kontakt, Mitglieder
+ist `/erstiwoche`; Startseite, Kalender, Anmeldung, Kontakt, Mitglieder
 und Footer folgen ihm bereits.
 
 ## Projekt
@@ -15,10 +15,14 @@ und Footer folgen ihm bereits.
   `app/_actions/event.ts`; der Typ `EventItem` steht in `app/types.d.ts`.
 - Sprache der Seite und der Code-Kommentare: Deutsch. Kommentare knapp und nur,
   wo sie etwas erklären, das der Code nicht sagt.
-- Daten der Ersti-Woche (Tag, Start, Guide, Sponsoren, `ERSTI_PAGE`) zentral
-  in `lib/ersti.ts`; Legislaturen in `lib/data.ts`.
-- `/erstiwoche-1`, `-2`, `-3` sind alte Entwürfe (noindex). `_designs/` enthält
-  nur noch Re-Exports – neue Imports immer aus `lib/` bzw. `components/`.
+- Daten der Ersti-Woche (Tag, Start, Guide, Sponsoren, `ERSTI_PAGE`,
+  `ERSTI_PROGRAM` = `/erstiwoche#lineup`) zentral in `lib/ersti.ts`;
+  Legislaturen in `lib/data.ts` (`/mitglieder` leitet auf die neueste weiter).
+- Navigation und Footer-Links stehen in `lib/siteConfig.ts` bzw.
+  `components/Footer.tsx`. Links aufs Ersti-Programm immer über die Konstanten.
+- Seitenspezifische Teile liegen neben der Seite (z. B. `erstiwoche/lineup.tsx`),
+  alles Wiederverwendbare in `components/` und `lib/`. Ungenutzten Code löschen
+  statt auskommentieren.
 
 ### Zeit und Termine
 
@@ -115,6 +119,7 @@ und Footer folgen ihm bereits.
 | `FullBleed` | `components/full-bleed.tsx` | Abschnitt über die volle Fensterbreite |
 | `HomeHero` | `components/home-hero.tsx` | Startseite: Campus-Foto, „Willkommen“, optional `ErstiTeaser` |
 | `ErstiHero` | `components/ersti/ersti-hero.tsx` | Kampagnen-Hero der Ersti-Woche mit Laufband |
+| `Lineup`, `NowCard`, `FaqSection` | `app/(lang)/(Erstiwoche)/erstiwoche/*.tsx` | Programm mit Tagesleiste, „Jetzt / Als Nächstes“, FAQ der Ersti-Woche |
 | `ErstiTeaser` | `components/ersti/ersti-teaser.tsx` | Kleiner Hinweis mit Live-Status, verlinkt aufs Programm |
 | `PageHero`, `HeroLead` | `components/page-hero.tsx` | Kopf jeder Unterseite (Eyebrow, `h1`, optional Zurück-Link) |
 | `SectionHeading`, `Eyebrow` | `components/section-heading.tsx` | Einstieg jeder Sektion |

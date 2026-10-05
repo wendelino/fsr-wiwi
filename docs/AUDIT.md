@@ -1,5 +1,7 @@
 # UI/UX-Audit fsr-wiwi-halle.de
 
+> **Stand danach:** Die drei Entwürfe wurden zu einer Seite zusammengeführt, die jetzt unter `/erstiwoche` liegt. `/erstiwoche-1` bis `-3`, das alte Wochenraster und der Countdown sind gelöscht. Die Gestaltungsregeln stehen in `AGENTS.md`. Dieses Dokument und die Screenshots zeigen den Stand zum Zeitpunkt des Audits.
+
 Stand: 05.10.2026 · Branch `refactor` · Fokus: Startseite und `/erstiwoche`
 
 > **Hinweis zu den Screenshots:** Die Live-Seite und das CMS waren aus der Testumgebung nicht erreichbar. Alle Screenshots wurden lokal mit **Beispiel-Events** (fiktives Programm 05.–09.10.2026) und einer simulierten Uhrzeit (Dienstag, 06.10., 14:20) erstellt. Die echten Seiten nutzen weiterhin die CMS-Daten. Bilder, die von fremden Servern geladen werden, waren dort ebenfalls blockiert. Das erklärt die leeren Kacheln bei „Nützliche Links“, zeigt aber gleichzeitig das Problem in H5.

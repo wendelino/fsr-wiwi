@@ -1,3 +1,5 @@
+import { ERSTI_GUIDE, ERSTI_PAGE, ERSTI_PROGRAM } from "@/lib/ersti";
+
 export const siteConfig = {
   logo: "/logo.png",
   name: "FSR Wiwi",
@@ -6,10 +8,10 @@ export const siteConfig = {
     {
       label: "Ersti-Woche",
       dropdown: [
-        { href: "/erstiwoche", label: "Übersicht" },
-        { href: "/erstiwoche/#programm", label: "Programm" },
+        { href: ERSTI_PAGE, label: "Übersicht" },
+        { href: ERSTI_PROGRAM, label: "Programm" },
         { href: "/anmeldung", label: "Anmeldung" },
-        { href: "/files/ersti-guide-26.pdf", label: "Ersti-Guide", prefetch: false },
+        { href: ERSTI_GUIDE, label: "Ersti-Guide", prefetch: false },
         // { href: "/lageplan", label: "Lageplan" },
       ],
     },
