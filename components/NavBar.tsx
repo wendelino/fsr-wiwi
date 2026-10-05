@@ -155,7 +155,9 @@ export default function NavBar({ lang: _lang }: { lang: string }) {
         show={open}
         variant="sheet"
         id="mobile-menu"
-        className="fixed inset-x-0 bottom-0 top-[72px] overflow-y-auto overflow-x-hidden overscroll-contain bg-fsr-deep text-white md:hidden"
+        // Höhe über dvh statt bottom-0: Mobile Browser rechnen bottom-0 sonst hinter die
+        // eingeblendete Toolbar, und der letzte Link verschwindet darunter.
+        className="fixed inset-x-0 top-[72px] h-[calc(100vh-72px)] overflow-hidden bg-fsr-deep text-white supports-[height:100dvh]:h-[calc(100dvh-72px)] md:hidden"
       >
         <MobileMenu pages={siteConfig.pages} pathname={pathname} />
       </Appear>
@@ -281,10 +283,17 @@ function MobileMenu({ pages, pathname }: { pages: NavPage[]; pathname: string })
 
   return (
     <>
-      {/* Eigener Rahmen, damit die Deko die Scrollfläche nicht vergrößert */}
+      {/* Hintergrund und Deko stehen fest, nur die Liste darüber scrollt */}
       <HeroDeco logo="bottom-right" parallax={false} />
       {/* Links laufen nacheinander ein, sobald das Menü ausgerollt ist */}
-      <Stagger as="nav" trigger="mount" delay={0.12} step={0.05} aria-label="Hauptnavigation" className="relative flex flex-col gap-8 px-4 pb-10 pt-6">
+      <Stagger
+        as="nav"
+        trigger="mount"
+        delay={0.12}
+        step={0.05}
+        aria-label="Hauptnavigation"
+        className="absolute inset-0 flex flex-col gap-8 overflow-y-auto overscroll-contain px-4 pb-[max(2.5rem,calc(env(safe-area-inset-bottom)+1.5rem))] pt-6"
+      >
         <ul className="flex flex-col">
           {singles.map((page) => {
             const active = isActive(pathname, page.href);
