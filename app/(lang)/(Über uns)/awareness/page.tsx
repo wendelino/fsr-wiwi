@@ -1,4 +1,5 @@
 import { HeroLead, PageHero } from "@/components/page-hero";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 import { Eyebrow, SectionHeading } from "@/components/section-heading";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/siteConfig";
@@ -49,8 +50,8 @@ export default async function page() {
       </PageHero>
 
       <div className="grid gap-10 md:grid-cols-[1fr_20rem] md:gap-12">
-        <aside className="space-y-4 md:sticky md:top-24 md:order-last md:self-start">
-          <nav aria-label="Inhalt" className="rounded-3xl border bg-card p-6">
+        <Stagger as="aside" className="space-y-4 md:sticky md:top-24 md:order-last md:self-start">
+          <StaggerItem as="nav" variant="right" aria-label="Inhalt" className="rounded-3xl border bg-card p-6">
             <Eyebrow className="text-xs">Inhalt</Eyebrow>
             <ol className="mt-3 space-y-1">
               {sections.map((s, i) => (
@@ -65,8 +66,8 @@ export default async function page() {
                 </li>
               ))}
             </ol>
-          </nav>
-          <div className="rounded-3xl bg-fsr/10 p-6">
+          </StaggerItem>
+          <StaggerItem variant="right" className="rounded-3xl bg-fsr/10 p-6">
             <p className="font-bold">Du brauchst Unterstützung?</p>
             <p className="mt-1 text-sm text-muted-foreground">
               Auch nach einer Veranstaltung sind wir per Instagram oder Mail erreichbar.
@@ -83,8 +84,8 @@ export default async function page() {
                 </a>
               </Button>
             </div>
-          </div>
-        </aside>
+          </StaggerItem>
+        </Stagger>
 
         <article className="min-w-0 space-y-16 text-lg leading-relaxed text-foreground/80">
           <Section index={0}>
@@ -313,9 +314,9 @@ function Section({
   return (
     <section id={id} className="scroll-mt-24">
       <SectionHeading eyebrow={`Teil ${ROMAN[index]}`} title={label} />
-      <div className={highlight ? "mt-6 space-y-4 rounded-3xl bg-fsr/10 p-6 sm:p-8" : "mt-6 space-y-4"}>
+      <Reveal className={highlight ? "mt-6 space-y-4 rounded-3xl bg-fsr/10 p-6 sm:p-8" : "mt-6 space-y-4"}>
         {children}
-      </div>
+      </Reveal>
     </section>
   );
 }

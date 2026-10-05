@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { Swap } from "@/components/motion";
 
 type IframeProps = {
   iframe: {
@@ -43,45 +44,39 @@ export default function IframeConsent({
 
   const style = cn("w-full min-h-72 rounded-xl", iframe.className);
 
-  if (consentGiven) {
-    return (
-      <iframe
-        src={iframe.src}
-        className={style}
-        loading="lazy"
-        scrolling="no"
-      />
-    );
-  }
-
-  return (
-    <div
-      className={cn(
-        style,
-        "flex flex-col  bg-muted items-center justify-center p-8 "
-      )}
-    >
-        <h1 className="text-lg font-semibold mb-4">Externe Inhalte von {label}</h1>
+  const placeholder = (
+    <div className={cn(style, "flex flex-col items-center justify-center bg-muted p-8")}>
+      <p className="mb-4 text-lg font-semibold">Externe Inhalte von {label}</p>
       <p className="text-center text-muted-foreground">
-        {disclaimerText}<br></br> Weitere Infos beim Anbieter{" "}
-        <Link
-          href={providerLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="underline"
-        >
+        {disclaimerText}
+        <br /> Weitere Infos beim Anbieter{" "}
+        <Link href={providerLink} target="_blank" rel="noopener noreferrer" className="underline">
           {label}
-        </Link>.
+        </Link>
+        .
       </p>
-
-      <Button className="mt-8"  onClick={handleAccept} data-umami-event="IframeConsent-Accept">Externe Inhalte laden</Button>
-      <label className="flex items-center space-x-2 mt-2">
-        <Checkbox
-          checked={rememberChoice}
-          onCheckedChange={(checked: boolean) => setRememberChoice(checked)}
-        />
+      <Button
+        className="mt-8 bg-fsr-deep text-white hover:bg-fsr-deep/90"
+        onClick={handleAccept}
+        data-umami-event="IframeConsent-Accept"
+      >
+        Externe Inhalte laden
+      </Button>
+      <label className="mt-2 flex items-center space-x-2">
+        <Checkbox checked={rememberChoice} onCheckedChange={(checked: boolean) => setRememberChoice(checked)} />
         <span className="text-sm">Entscheidung merken</span>
       </label>
     </div>
+  );
+
+  return (
+    // Nach der Zustimmung blendet der Platzhalter in den Inhalt über
+    <Swap swapKey={consentGiven ? "iframe" : "consent"} className="h-full">
+      {consentGiven ? (
+        <iframe src={iframe.src} className={style} loading="lazy" scrolling="no" />
+      ) : (
+        placeholder
+      )}
+    </Swap>
   );
 }

@@ -1,4 +1,5 @@
 import { MeetingCard } from "@/components/meeting-card";
+import { Stagger, StaggerItem } from "@/components/motion";
 import { HeroLead, PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
 import { FsrMember, legislaturData, latestLegislatur } from "@/lib/data";
@@ -111,22 +112,22 @@ export default async function page({
       {withRole.length > 0 && (
         <section>
           <SectionHeading eyebrow="Mit Amt" title="Vorstand & Ämter" />
-          <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger as="ul" className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {withRole.map((m) => (
               <MemberCard key={m.name} member={m} featured />
             ))}
-          </ul>
+          </Stagger>
         </section>
       )}
 
       {others.length > 0 && (
         <section>
           <SectionHeading eyebrow="Gewählte Mitglieder" title="Das Team" />
-          <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger as="ul" step={0.04} className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {others.map((m) => (
               <MemberCard key={m.name} member={m} />
             ))}
-          </ul>
+          </Stagger>
         </section>
       )}
 
@@ -137,11 +138,11 @@ export default async function page({
 
 function MemberCard({ member, featured }: { member: FsrMember; featured?: boolean }) {
   return (
-    <li className="flex items-center gap-4 rounded-3xl border bg-card p-5">
+    <StaggerItem as="li" variant="scale" className="group flex items-center gap-4 rounded-3xl border bg-card p-5">
       <span
         aria-hidden
         className={cn(
-          "flex size-14 shrink-0 items-center justify-center rounded-2xl text-lg font-black",
+          "flex size-14 shrink-0 items-center justify-center rounded-2xl text-lg font-black transition duration-300 group-hover:-rotate-6 motion-reduce:transition-none",
           featured ? "bg-fsr-deep text-white" : "bg-fsr/10 text-fsr"
         )}
       >
@@ -154,6 +155,6 @@ function MemberCard({ member, featured }: { member: FsrMember; featured?: boolea
         <p className="text-lg font-bold leading-tight">{member.name}</p>
         {member.tasks && <p className="mt-0.5 text-sm text-muted-foreground">{member.tasks}</p>}
       </div>
-    </li>
+    </StaggerItem>
   );
 }

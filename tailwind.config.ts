@@ -73,10 +73,27 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        // Hero-Einstiege (components/motion/enter.tsx)
+        // "enter" ist schon von tailwindcss-animate belegt
+        "fade-up": {
+          from: { opacity: "0", transform: "translateY(14px)" },
+          to: { opacity: "1", transform: "none" },
+        },
+        rise: {
+          from: { opacity: "0", transform: "translateY(0.25em)", clipPath: "inset(100% -10% 0 -10%)" },
+          to: { opacity: "1", transform: "none", clipPath: "inset(-25% -10% -25% -10%)" },
+        },
+        "pop-in": {
+          from: { opacity: "0", transform: "scale(0.85) rotate(-14deg)" },
+          to: { opacity: "1", transform: "none" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-up": "fade-up 0.6s cubic-bezier(0.22,1,0.36,1) both",
+        rise: "rise 0.85s cubic-bezier(0.22,1,0.36,1) both",
+        "pop-in": "pop-in 0.9s cubic-bezier(0.34,1.56,0.64,1) both",
       },
     },
   },

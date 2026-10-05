@@ -1,3 +1,4 @@
+import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/siteConfig";
 import { cn } from "@/lib/utils";
@@ -15,7 +16,9 @@ export function MeetingCard({
   className?: string;
 }) {
   return (
-    <section
+    <Reveal
+      as="section"
+      variant="scale"
       className={cn(
         "grid gap-10 overflow-hidden rounded-[2rem] bg-zinc-950 p-6 text-white sm:p-10 md:grid-cols-2 md:gap-12 md:p-14",
         className
@@ -37,23 +40,24 @@ export function MeetingCard({
           </Button>
         )}
       </div>
-      <dl className="self-center border-b border-white/15">
+      {/* Fakten laufen nach der Karte einzeln ein */}
+      <Stagger as="dl" delay={0.25} step={0.1} className="self-center border-b border-white/15">
         <MeetingFact term="Wann" value="Jeden 2. Dienstag" />
         <MeetingFact term="Uhrzeit" value="19 Uhr" />
         <MeetingFact term="Wo" value="Raum 201" detail={`${siteConfig.company.strasse}, WiWi-Fakultät`} />
-      </dl>
-    </section>
+      </Stagger>
+    </Reveal>
   );
 }
 
 function MeetingFact({ term, value, detail }: { term: string; value: string; detail?: string }) {
   return (
-    <div className="grid grid-cols-[5.5rem_1fr] items-baseline gap-4 border-t border-white/15 py-4">
+    <StaggerItem variant="right" className="grid grid-cols-[5.5rem_1fr] items-baseline gap-4 border-t border-white/15 py-4">
       <dt className="text-xs font-bold uppercase tracking-widest text-white/60">{term}</dt>
       <dd>
         <span className="block text-2xl font-black uppercase leading-none tracking-tight sm:text-4xl">{value}</span>
         {detail && <span className="mt-1 block text-sm text-white/70">{detail}</span>}
       </dd>
-    </div>
+    </StaggerItem>
   );
 }

@@ -1,4 +1,5 @@
 import { MeetingCard } from "@/components/meeting-card";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 import { HeroLead, PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
 import { Button } from "@/components/ui/button";
@@ -141,18 +142,18 @@ export default async function page() {
 
       <section className="grid gap-8 md:grid-cols-[2fr_3fr] md:gap-12">
         <SectionHeading eyebrow="Wer wir sind" title={t.aboutSection.title} />
-        <div className="space-y-4 text-lg leading-relaxed text-foreground/80 md:pt-6">
+        <Reveal className="space-y-4 text-lg leading-relaxed text-foreground/80 md:pt-6">
           <p>{t.aboutSection.text1}</p>
           <p>{t.aboutSection.text2}</p>
-        </div>
+        </Reveal>
       </section>
 
       <section>
         <SectionHeading eyebrow="Für euch" title="Was wir machen" />
-        <ul className="mt-8 grid gap-4 md:grid-cols-3">
+        <Stagger as="ul" className="mt-8 grid gap-4 md:grid-cols-3">
           {offers.map((o) => (
-            <li key={o.title} className="flex flex-col rounded-3xl border bg-card p-6">
-              <span className="flex size-11 items-center justify-center rounded-2xl bg-fsr/10 text-fsr">
+            <StaggerItem as="li" variant="scale" key={o.title} className="group flex flex-col rounded-3xl border bg-card p-6 transition hover:border-fsr/40 hover:shadow-md">
+              <span className="flex size-11 items-center justify-center rounded-2xl bg-fsr/10 text-fsr transition duration-300 group-hover:-rotate-6 motion-reduce:transition-none">
                 <o.icon className="size-5" />
               </span>
               <h3 className="mt-5 text-lg font-bold leading-tight">{o.title}</h3>
@@ -173,12 +174,12 @@ export default async function page() {
                   <ArrowRight className="size-4 transition group-hover:translate-x-0.5" />
                 )}
               </Link>
-            </li>
+            </StaggerItem>
           ))}
-        </ul>
-        <ul className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4">
+        </Stagger>
+        <Stagger as="ul" className="mt-3 grid grid-cols-2 gap-3 md:grid-cols-4">
           {more.map((l) => (
-            <li key={l.title}>
+            <StaggerItem as="li" key={l.title}>
               <Link
                 href={l.href}
                 {...(l.external && { target: "_blank", rel: "noopener noreferrer" })}
@@ -190,34 +191,35 @@ export default async function page() {
                   <span className="block text-xs text-muted-foreground">{l.text}</span>
                 </span>
               </Link>
-            </li>
+            </StaggerItem>
           ))}
-        </ul>
+        </Stagger>
       </section>
 
       <MeetingCard />
 
       <section>
         <SectionHeading eyebrow={t.contactSection.title} title="So erreichst du uns" />
-        <div className="mt-8 grid gap-3 sm:grid-cols-1 lg:grid-cols-3">
+        <Stagger className="mt-8 grid gap-3 sm:grid-cols-1 lg:grid-cols-3">
           {channels.map((c) => (
-            <a
-              key={c.title}
-              href={c.href}
-              {...(!c.href.startsWith("mailto:") && { target: "_blank", rel: "noopener noreferrer" })}
-              className="group flex flex-col rounded-3xl border bg-card p-5 transition hover:border-fsr/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fsr"
-            >
-              <span className="flex items-start justify-between">
-                <span className="flex size-11 items-center justify-center rounded-2xl bg-fsr/10 text-fsr">
-                  <c.icon className="size-5" />
+            <StaggerItem key={c.title} variant="scale">
+              <a
+                href={c.href}
+                {...(!c.href.startsWith("mailto:") && { target: "_blank", rel: "noopener noreferrer" })}
+                className="group flex h-full flex-col rounded-3xl border bg-card p-5 transition hover:border-fsr/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fsr"
+              >
+                <span className="flex items-start justify-between">
+                  <span className="flex size-11 items-center justify-center rounded-2xl bg-fsr/10 text-fsr">
+                    <c.icon className="size-5" />
+                  </span>
+                  <ArrowUpRight className="size-5 text-muted-foreground transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fsr" />
                 </span>
-                <ArrowUpRight className="size-5 text-muted-foreground transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-fsr" />
-              </span>
-              <span className="mt-6 block text-lg font-bold leading-tight">{c.title}</span>
-              <span className="mt-1 block break-words text-sm text-muted-foreground">{c.text}</span>
-            </a>
+                <span className="mt-6 block text-lg font-bold leading-tight">{c.title}</span>
+                <span className="mt-1 block break-words text-sm text-muted-foreground">{c.text}</span>
+              </a>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
         <p className="mt-6 flex items-start gap-2 text-sm text-muted-foreground">
           <MapPin className="mt-0.5 size-4 shrink-0 text-fsr" />
           Fachschaftsrat des wirtschaftswissenschaftlichen Bereichs der Juristischen und

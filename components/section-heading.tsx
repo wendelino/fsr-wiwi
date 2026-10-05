@@ -1,3 +1,4 @@
+import { Stagger, StaggerItem } from "@/components/motion";
 import { cn } from "@/lib/utils";
 
 /** Kleine Zeile über Überschriften: fett, Versalien, gesperrt, Markenfarbe. */
@@ -23,7 +24,7 @@ export function Eyebrow({
   );
 }
 
-/** Eyebrow + h2 im Poster-Stil, der Standard-Einstieg jeder Sektion. */
+/** Eyebrow + h2 im Poster-Stil, der Standard-Einstieg jeder Sektion; erscheint beim Hineinscrollen. */
 export function SectionHeading({
   eyebrow,
   title,
@@ -37,10 +38,18 @@ export function SectionHeading({
   children?: React.ReactNode;
 }) {
   return (
-    <div className={className}>
-      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
-      <h2 className="mt-1 hyphens-auto text-4xl font-black tracking-tight md:text-5xl">{title}</h2>
-      {children && <div className="mt-4 max-w-xl text-muted-foreground">{children}</div>}
-    </div>
+    <Stagger className={className} step={0.08}>
+      {eyebrow && (
+        <StaggerItem variant="left">
+          <Eyebrow>{eyebrow}</Eyebrow>
+        </StaggerItem>
+      )}
+      <StaggerItem>
+        <h2 className="mt-1 hyphens-auto text-4xl font-black tracking-tight md:text-5xl">{title}</h2>
+      </StaggerItem>
+      {children && (
+        <StaggerItem className="mt-4 max-w-xl text-muted-foreground">{children}</StaggerItem>
+      )}
+    </Stagger>
   );
 }

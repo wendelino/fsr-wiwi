@@ -1,5 +1,5 @@
 import { getEvents } from "@/app/_actions/event";
-import { PageHeader } from "@/components/Framer/PageHeader";
+import { HeroLead, PageHero } from "@/components/page-hero";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Metadata } from "next";
 import { Suspense } from "react";
@@ -34,29 +34,30 @@ export const metadata: Metadata = {
 
 export default function Page() {
   return (
-    <>
-      <PageHeader
-        title="Eventkalender"
-        subtitle={"Bleib auf dem Laufenden über die neuesten Veranstaltungen"}
-      />
+    <div className="flex flex-col gap-16 md:gap-24">
+      <PageHero eyebrow="Termine" title="Kalender" poster>
+        <HeroLead>Bleib auf dem Laufenden über die neuesten Veranstaltungen.</HeroLead>
+      </PageHero>
       <Suspense fallback={<Loading />}>
         <Content />
       </Suspense>
-    </>
+    </div>
   );
 }
 
 function Loading() {
   return (
-    <>
-      {Array.from({ length: 5 }, (_, i) => (
-        <div className="space-y-4" key={i}>
-          <Skeleton className="h-6 w-full" />
-          <Skeleton className="h-4 w-1/3" />
-          <Skeleton className="h-4 w-3/4" />
+    <div className="flex flex-col gap-12">
+      {Array.from({ length: 3 }, (_, i) => (
+        <div key={i} className="grid gap-4 sm:grid-cols-[5rem_1fr] sm:gap-6">
+          <Skeleton className="size-16 rounded-2xl" />
+          <div className="grid gap-3">
+            <Skeleton className="h-28 rounded-3xl" />
+            <Skeleton className="h-28 rounded-3xl" />
+          </div>
         </div>
       ))}
-    </>
+    </div>
   );
 }
 

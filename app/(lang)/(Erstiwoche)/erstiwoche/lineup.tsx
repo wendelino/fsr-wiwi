@@ -1,5 +1,6 @@
 "use client";
 
+import { ActivePill, Collapse, Swap } from "@/components/motion";
 import { SectionHeading } from "@/components/section-heading";
 import { Button } from "@/components/ui/button";
 import { cn, handleSafeAllEventsCalendar } from "@/lib/utils";
@@ -31,6 +32,8 @@ export function Lineup({
   const [picked, setPicked] = useState<string | null>(null);
   const [onlyRegistrable, setOnlyRegistrable] = useState(false);
   const [showPast, setShowPast] = useState(false);
+  // Richtung des letzten Tageswechsels, damit die Liste von der passenden Seite kommt
+  const [direction, setDirection] = useState(0);
   const barAnchorRef = useRef<HTMLDivElement>(null);
 
   // Ist man schon in die Liste gescrollt, springt man beim Wechsel an ihren Anfang –
@@ -75,7 +78,7 @@ export function Lineup({
       <div ref={barAnchorRef} aria-hidden />
       <div className="sticky top-[72px] z-20 -mx-4 border-b bg-background/90 px-4 py-3 backdrop-blur">
         <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
-          {days.map((day) => {
+          {days.map((day, i) => {
             const isSelected = day.key === selected;
             return (
               <button
@@ -83,16 +86,16 @@ export function Lineup({
                 type="button"
                 aria-pressed={isSelected}
                 onClick={() => {
+                  setDirection(Math.sign(i - days.findIndex((d) => d.key === selected)));
                   setPicked(day.key);
                   scrollToListStart();
                 }}
                 className={cn(
-                  "flex flex-col items-center rounded-xl border px-1 py-2 text-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fsr",
-                  isSelected
-                    ? "border-transparent bg-fsr-deep text-white shadow-md"
-                    : "bg-card hover:bg-muted"
+                  "relative isolate flex flex-col items-center rounded-xl border px-1 py-2 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fsr",
+                  isSelected ? "border-transparent text-white" : "bg-card hover:bg-muted"
                 )}
               >
+                {isSelected && <ActivePill id="lineup-day" className="rounded-xl bg-fsr-deep shadow-md" />}
                 <span className="font-semibold">
                   <span className="sm:hidden">{formatBerlin(day.date, "EEEEEE")}</span>
                   <span className="hidden sm:inline">{formatBerlin(day.date, "EEEE")}</span>
@@ -110,6 +113,7 @@ export function Lineup({
             type="button"
             aria-pressed={onlyRegistrable}
             onClick={() => {
+              setDirection(0);
               setOnlyRegistrable((v) => !v);
               scrollToListStart();
             }}
@@ -123,45 +127,59 @@ export function Lineup({
         </div>
       </div>
 
-      <ol className="mt-6 space-y-1">
-        {dayEvents.length === 0 && (
-          <li className="rounded-xl border border-dashed p-8 text-center text-muted-foreground">
-            {onlyRegistrable
-              ? "An diesem Tag gibt es nichts mit Anmeldung – alles andere ist offen, kommt einfach vorbei."
-              : "An diesem Tag ist nichts geplant."}
-          </li>
-        )}
-        {pastCount > 0 && (
-          <li className="grid grid-cols-[3.5rem_1fr] gap-3 sm:grid-cols-[5rem_1fr] sm:gap-6">
-            <span />
-            <button
-              type="button"
-              onClick={() => {
-                setShowPast((v) => !v);
-                scrollToListStart();
-              }}
-              className="justify-self-start rounded-full border px-3 py-1 text-xs font-medium text-muted-foreground transition hover:bg-muted"
-            >
-              {hidePast
-                ? `${pastCount} vergangene ${pastCount === 1 ? "Termin" : "Termine"} einblenden`
-                : "Vergangene ausblenden"}
-            </button>
-          </li>
-        )}
-        {dayEvents.map((event, i) => hidePast && i < pastCount ? null : (
-          <TimelineEntry
-            key={event.id}
-            event={event}
-            phase={phaseOf(event, now)}
-            nowLabel={
-              showNowLine && i === firstNotPast ? formatBerlin(now!, "HH:mm") : null
-            }
-          />
-        ))}
-        {showNowLine && firstNotPast === -1 && dayEvents.length > 0 && (
-          <NowLine label={formatBerlin(now!, "HH:mm")} />
-        )}
-      </ol>
+      {/* Tageswechsel: Liste kommt aus der Richtung des gewählten Tages */}
+      <Swap swapKey={`${selected}-${onlyRegistrable}`} direction={direction}>
+        <ol className="mt-6 space-y-1">
+          {dayEvents.length === 0 && (
+            <li className="rounded-xl border border-dashed p-8 text-center text-muted-foreground">
+              {onlyRegistrable
+                ? "An diesem Tag gibt es nichts mit Anmeldung – alles andere ist offen, kommt einfach vorbei."
+                : "An diesem Tag ist nichts geplant."}
+            </li>
+          )}
+          {pastCount > 0 && (
+            <li className="grid grid-cols-[3.5rem_1fr] gap-3 sm:grid-cols-[5rem_1fr] sm:gap-6">
+              <span />
+              <button
+                type="button"
+                onClick={() => {
+                  setShowPast((v) => !v);
+                  scrollToListStart();
+                }}
+                className="justify-self-start rounded-full border px-3 py-1 text-xs font-medium text-muted-foreground transition hover:bg-muted"
+              >
+                {hidePast
+                  ? `${pastCount} vergangene ${pastCount === 1 ? "Termin" : "Termine"} einblenden`
+                  : "Vergangene ausblenden"}
+              </button>
+            </li>
+          )}
+          {pastCount > 0 && (
+            <li>
+              <Collapse show={!hidePast}>
+                <ol className="space-y-1">
+                  {dayEvents.slice(0, pastCount).map((event) => (
+                    <TimelineEntry key={event.id} event={event} phase={phaseOf(event, now)} nowLabel={null} />
+                  ))}
+                </ol>
+              </Collapse>
+            </li>
+          )}
+          {dayEvents.slice(pastCount).map((event, i) => (
+            <TimelineEntry
+              key={event.id}
+              event={event}
+              phase={phaseOf(event, now)}
+              nowLabel={
+                showNowLine && pastCount + i === firstNotPast ? formatBerlin(now!, "HH:mm") : null
+              }
+            />
+          ))}
+          {showNowLine && firstNotPast === -1 && dayEvents.length > 0 && (
+            <NowLine label={formatBerlin(now!, "HH:mm")} />
+          )}
+        </ol>
+      </Swap>
     </section>
   );
 }
@@ -171,7 +189,10 @@ function NowLine({ label }: { label: string }) {
     <li aria-hidden className="grid grid-cols-[3.5rem_1fr] items-center gap-3 py-1 sm:grid-cols-[5rem_1fr] sm:gap-6">
       <span className="text-right text-xs font-bold tabular-nums text-fsr">{label}</span>
       <span className="-ml-[5px] flex items-center gap-2">
-        <span className="size-3 rounded-full bg-fsr-deep ring-4 ring-fsr/20" />
+        <span className="relative flex size-3">
+          <span className="absolute inset-0 animate-ping rounded-full bg-fsr/40 motion-reduce:animate-none" />
+          <span className="relative size-3 rounded-full bg-fsr-deep ring-4 ring-fsr/20" />
+        </span>
         <span className="h-0.5 flex-1 bg-fsr-deep/70" />
         <span className="text-xs font-semibold uppercase tracking-wide text-fsr">Jetzt</span>
       </span>

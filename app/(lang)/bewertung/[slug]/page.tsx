@@ -1,7 +1,7 @@
 import BewertungForm from "@/components/forms/bewertung-form";
-import { PageHeader } from "@/components/Framer/PageHeader";
-import { Section } from "@/components/Framer/Section";
-import { Header } from "@/components/TextComponents";
+import { Reveal } from "@/components/motion";
+import { HeroLead, PageHero } from "@/components/page-hero";
+import { SectionHeading } from "@/components/section-heading";
 import { Metadata } from "next";
 import { notFound } from "next/navigation"; 
 
@@ -53,23 +53,19 @@ export default async function Page({
   const title = SLUG_TITLES[slug as Slug];
 
   return (
-    <>
-      <PageHeader
-        title={`Bewertung - ${title}`}
-        subtitle="Teile deine Erfahrungen und hilf anderen Studierenden"
-      />
+    <div className="flex flex-col gap-16 md:gap-24">
+      <PageHero eyebrow="Bewertung" title={title} poster>
+        <HeroLead>Teile deine Erfahrungen und hilf anderen Studierenden.</HeroLead>
+      </PageHero>
 
-      <Section className="grid md:grid-cols-2 lg:gap-32 items-center p-8 md:px-16 rounded-xl shadow-xl border">
-       <div>
-       <Header>
-          Deine <span className="fsr-gradient">Bewertung</span>
-        </Header>
-        <p className="text-muted-foreground mb-2">
-          Alles was du teilst ist anonym und wird nicht veröffentlicht.
-        </p>
-       </div>
-        <BewertungForm slug={slug} />
-      </Section>
-    </>
+      <section className="grid gap-8 md:grid-cols-[2fr_3fr] md:gap-12">
+        <SectionHeading eyebrow="Anonym" title="Deine Bewertung">
+          Alles, was du teilst, ist anonym und wird nicht veröffentlicht.
+        </SectionHeading>
+        <Reveal variant="scale" className="rounded-3xl border bg-card p-6 sm:p-8">
+          <BewertungForm slug={slug} />
+        </Reveal>
+      </section>
+    </div>
   );
 }

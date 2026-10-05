@@ -1,40 +1,27 @@
-import { Header, SubHeader } from "@/components/TextComponents";
+import { HeroLead, PageHero } from "@/components/page-hero";
 import { Button } from "@/components/ui/button";
-import { PaperclipIcon } from "lucide-react";
-import Image from "next/image";
-import Navigate from "./Navigate"; 
+import { FileDown } from "lucide-react";
+import Navigate from "./Navigate";
 import { notFound } from "next/navigation";
 
-export default async function page() { 
+export default async function page() {
 
   return notFound()
   return (
     <>
-      <div className="relative flex flex-col gap-16 items-center justify-center py-8 mb-8">
-        <Image
-          src="/logo.png"
-          alt=""
-          width={984}
-          height={991}
-          className="absolute mt-8 max-h-full w-auto opacity-10"
-        />
-        <Header>Geschäftsordnung</Header>
-        <SubHeader className="text-center">
+      <PageHero eyebrow="Fassung vom 03.07.2024" title={<>Geschäfts&shy;ordnung</>} poster>
+        <HeroLead>
           der Fachschaft und des Fachschaftsrates des
           wirtschaftswissenschaftlichen Bereichs der juristischen und
-          wirtschaftswissenschaftlichen Fakultät der Martin-Luther- Universität
+          wirtschaftswissenschaftlichen Fakultät der Martin-Luther-Universität
           Halle-Wittenberg
-        </SubHeader>
-        <SubHeader>Fassung vom 03.07.2024</SubHeader>
-      </div>
-      <a
-        href="/files/ordnung_fsr_wiwi.pdf"  
-        download
-      >
-        <Button>
-          <PaperclipIcon className="pr-2" /> Als PDF herunterladen
+        </HeroLead>
+        <Button asChild size="lg" className="mt-8 bg-white text-fsr-deep hover:bg-white/90">
+          <a href="/files/ordnung_fsr_wiwi.pdf" download>
+            <FileDown className="mr-2 size-4" /> Als PDF herunterladen
+          </a>
         </Button>
-      </a>
+      </PageHero>
       <Navigate/>
       <section id="preambel" className="mb-8">
         <h2 className="text-2xl font-bold mb-4">I. PRÄAMBEL</h2>

@@ -6,6 +6,7 @@ import { EventFacts } from "@/components/events/event-facts";
 import { EventHeader, EventNotFound } from "@/components/events/event-header";
 import { EventMarkdown } from "@/components/events/event-markdown";
 import { LotteryNote } from "@/components/events/event-status";
+import { Reveal } from "@/components/motion";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ERSTI_PROGRAM, ERSTI_TAG } from "@/lib/ersti";
 import { plainText } from "@/lib/events";
@@ -91,7 +92,7 @@ async function Content({ slug }: { slug: string }) {
           )}
         </article>
 
-        <aside className="space-y-5 self-start rounded-3xl border bg-card p-6 md:sticky md:top-24">
+        <Reveal as="aside" variant="right" delay={0.15} className="space-y-5 self-start rounded-3xl border bg-card p-6 md:sticky md:top-24">
           <h2 className="text-xl font-black tracking-tight">Auf einen Blick</h2>
           <EventFacts event={event} />
           {!past && <LotteryNote event={event} />}
@@ -105,7 +106,7 @@ async function Content({ slug }: { slug: string }) {
               <ArrowRight className="size-4 transition group-hover:translate-x-0.5" />
             </Link>
           )}
-        </aside>
+        </Reveal>
       </div>
     </>
   );

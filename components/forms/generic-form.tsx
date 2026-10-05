@@ -6,7 +6,8 @@ import { Form, FormDescription } from "@/components/ui/form";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, RotateCcw } from "lucide-react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { Swap } from "@/components/motion";
+import { useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
@@ -148,15 +149,6 @@ export default function GenericForm<TValues extends FieldValues>(
       ? (children as (f: UseFormReturn<TValues>) => ReactNode)(form)
       : children;
 
-  const fade = reduce
-    ? {}
-    : {
-        initial: { opacity: 0, y: 12 },
-        animate: { opacity: 1, y: 0 },
-        exit: { opacity: 0, y: -12 },
-        transition: { duration: 0.25, ease: "easeOut" as const },
-      };
-
   return (
     <div
       ref={rootRef}
@@ -166,9 +158,9 @@ export default function GenericForm<TValues extends FieldValues>(
         className
       )}
     >
-      <AnimatePresence mode="wait" initial={false}>
+      <Swap swapKey={showResult ? "result" : "form"}>
         {showResult ? (
-          <motion.div key="result" {...fade} className="py-4">
+          <div className="py-4">
             {phase === "success"
               ? successView?.(result, retry) ?? (
                   <ResultState status="success" title={texts.successTitle} detail={serverMsg}>
@@ -178,9 +170,9 @@ export default function GenericForm<TValues extends FieldValues>(
               : errorView?.(result, retry) ?? (
                   <FormError message={serverMsg} fallback={texts.submitErrorText} retry={retry} />
                 )}
-          </motion.div>
+          </div>
         ) : (
-          <motion.div key="form" {...fade}>
+          <>
             {texts.title && <h3 className="text-2xl font-black tracking-tight">{texts.title}</h3>}
             {texts.description && (
               <p className="mb-5 mt-1 border-b pb-4 text-sm text-muted-foreground">{texts.description}</p>
@@ -218,9 +210,9 @@ export default function GenericForm<TValues extends FieldValues>(
                 </Button>
               </form>
             </Form>
-          </motion.div>
+          </>
         )}
-      </AnimatePresence>
+      </Swap>
     </div>
   );
 }
