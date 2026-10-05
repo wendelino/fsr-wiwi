@@ -25,41 +25,70 @@ export default async function page() {
   const { events } = await getEvents({ tag: "ersti26", limit: 100 }); 
   const sponsors = [
     {
-      src: "schogetten-logo.png",
-      href: "https://example.com",
-      label: "Schogetten",
+      src: "myhealth-juicery.png",
+      href: "https://myhealth-juicery.de",
+      label: "MyHealth Juicery",
     },
     {
-      src: "buehnen.jpg",
-      href: "https://www.buehnen-halle.de",
-      label: "Bühnen Halle",
+      src: "ostkarte.png",
+      href: "https://ostkarte.com",
+      label: "Ostkarte",
     },
     {
-      src: "leuchtturm.svg",
-      href: "https://leuchtturm1917.de",
-      label: "Leuchtturm1917",
+      src: "zetti.png",
+      href: "https://www.zetti.de",
+      label: "Zetti",
     },
     {
-      src: "lioko.svg",
-      href: "https://www.lioko-mexikaner.de",
-      label: "Lioko-Mexikaner",
+      src: "goenrgy.png",
+      href: "https://goenrgy.de",
+      label: "Goenrgy",
     },
-    { src: "nabio.svg", href: "https://nabio.de", label: "Nabio" },
     {
-      src: "wilkinson.png",
-      href: "https://wilkinsonsword.de",
-      label: "Wilkinson Sword",
+      src: "iwh-halle.png",
+      href: "https://www.iwh-halle.de",
+      label: "IWH Halle",
     },
-    { src: "freitag.jpg", href: "https://freitag.ch/de_DE", label: "Freitag" },
     {
-      src: "carla.png",
-      href: "https://carlundcarla.de",
-      label: "CarlundCarla.de",
+      src: "lioko-mexikaner.png",
+      href: "http://www.lioko-mexikaner.de/shop",
+      label: "Lioko Mexikaner",
     },
-    { src: "partyfly.svg", href: "https://partyfly.de", label: "Partyfly" },
-    { src: "wgheld.png", href: "https://wgheld.de", label: "WG-Held" },
-    { src: "heinz.svg", href: "https://www.heinz.com/de-DE", label: "Heinz" },
-    { src: "ostkarte.jpg", href: "https://ostkarte.com", label: "Heinz" },
+    {
+      src: "kathi.png",
+      href: "https://www.kathi.de",
+      label: "Kathi",
+    },
+    {
+      src: "partyfly.png",
+      href: "https://www.partyfly.de",
+      label: "Partyfly",
+    },
+    {
+      src: "dak.png",
+      href: "https://www.dak.de",
+      label: "DAK",
+    },
+    {
+      src: "campus-tuete.png",
+      href: "https://www.campus-tuete.de",
+      label: "Campus-Tüte",
+    },
+    {
+      src: "sachsen-anhalt-kanns-halt.jpg",
+      href: "https://sachsen-anhalt-kanns-halt.de",
+      label: "Sachsen-Anhalt kanns halt",
+    },
+    {
+      src: "nowherenearold.png",
+      href: "https://www.instagram.com/nowherenearold/",
+      label: "Nowhere Near Old",
+    },
+    {
+      src: "sparda.jpg",
+      href: "https://www.sparda-b.de/homepage.html",
+      label: "Sparda-Bank Berlin",
+    },
   ]; 
   const offers = [
     {
@@ -97,6 +126,8 @@ export default async function page() {
       </div>
 
       <WeekGrid events={events} startDate={new Date("2026-10-05")} />
+
+      <SponsorGrid items={sponsors} />
 
 {/*   
 
