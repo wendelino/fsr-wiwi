@@ -190,3 +190,8 @@ export const legislaturData: FsrLegislatur[] = [
     ],
   },
 ];
+
+/** Aktuellste Legislatur (höchstes Jahr), Ziel von /mitglieder. */
+export const latestLegislatur = legislaturData.reduce((a, b) =>
+  Number(b.period) > Number(a.period) ? b : a
+);

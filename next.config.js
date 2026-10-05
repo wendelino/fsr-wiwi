@@ -1,18 +1,4 @@
 module.exports = {
-
   // output: 'export',
-    async redirects() {
-      return [
-        {
-          source: '/:locale/mitglieder',
-          destination: '/:locale/mitglieder/2025',  
-          permanent: false,
-        },
-        {
-          source: '/mitglieder',
-          destination: '/mitglieder/2025',  
-          permanent: false,
-        },
-      ]
-    },
-  }
+  // /mitglieder leitet in app/(lang)/(Über uns)/mitglieder/page.tsx auf die aktuelle Legislatur weiter
+};

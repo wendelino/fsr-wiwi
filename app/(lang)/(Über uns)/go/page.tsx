@@ -1,6 +1,7 @@
 import { Header, SubHeader } from "@/components/TextComponents";
 import { Button } from "@/components/ui/button";
 import { PaperclipIcon } from "lucide-react";
+import Image from "next/image";
 import Navigate from "./Navigate"; 
 import { notFound } from "next/navigation";
 
@@ -10,7 +11,13 @@ export default async function page() {
   return (
     <>
       <div className="relative flex flex-col gap-16 items-center justify-center py-8 mb-8">
-        <img src="/logo.png" className="absolute max-h-full mt-8 opacity-10 " />
+        <Image
+          src="/logo.png"
+          alt=""
+          width={984}
+          height={991}
+          className="absolute mt-8 max-h-full w-auto opacity-10"
+        />
         <Header>Geschäftsordnung</Header>
         <SubHeader className="text-center">
           der Fachschaft und des Fachschaftsrates des

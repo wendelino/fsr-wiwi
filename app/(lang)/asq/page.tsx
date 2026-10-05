@@ -1,9 +1,5 @@
-import {
-  AnimatedHeader,
-  AnimatedListItem
-} from "@/components/Framer";
-import { PageHeader } from "@/components/Framer/PageHeader";
-import { Section } from "@/components/Framer/Section";
+import { HeroLead, PageHero } from "@/components/page-hero";
+import { SectionHeading } from "@/components/section-heading";
 import {
   Accordion,
   AccordionContent,
@@ -11,52 +7,28 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/lib/siteConfig";
 import {
+  ArrowDown,
   Briefcase,
   Calendar,
   Coffee,
   EuroIcon,
   GraduationCap,
+  Mail,
   Users,
 } from "lucide-react";
 import { Metadata } from "next";
-import Link from "next/link";
 
-const tasks = [
-  {
-    icon: Calendar,
-    text: "Plane, organisiere und setze eigene Projekte in Teamarbeit um (z.B. Praxis, Party, Podiumsdiskussion)",
-  },
-  {
-    icon: EuroIcon,
-    text: "Nutze das zur Verfügung gestellte Budget für deine Projekte",
-  },
-  {
-    icon: Users,
-    text: "Lerne die Arbeit der Hochschulgremien kennen",
-  },
-  {
-    icon: Briefcase,
-    text: "Knüpfe Kontakte zu Studierenden aus verschiedenen Jahrgängen und Arbeitsbereichen",
-  },
-  {
-    icon: Coffee,
-    text: "Genieße eine lockere Arbeitsatmosphäre",
-  },
-  {
-    icon: GraduationCap,
-    text: "Sammle wertvolle praktische Erfahrungen für dein Studium und zukünftige Karriere",
-  },
-];
+const description =
+  "Entdecke neue Möglichkeiten, sammle wertvolle Erfahrungen und verdiene 5 ECTS-Punkte mit dem Allgemeinen Schlüsselqualifikationsmodul beim Fachschaftsrat Wirtschaftswissenschaften!";
 
 export const metadata: Metadata = {
   title: "ASQ",
-  description:
-    "Entdecke neue Möglichkeiten, sammle wertvolle Erfahrungen und verdiene 5 ECTS-Punkte mit dem Allgemeinen Schlüsselqualifikationsmodul beim Fachschaftsrat Wirtschaftswissenschaften!",
+  description,
   openGraph: {
     title: "ASQ",
-    description:
-      "Entdecke neue Möglichkeiten, sammle wertvolle Erfahrungen und verdiene 5 ECTS-Punkte mit dem Allgemeinen Schlüsselqualifikationsmodul beim Fachschaftsrat Wirtschaftswissenschaften!",
+    description,
     url: "https://fsr-wiwi-halle.de/asq",
     siteName: "Fachschaftsrat Wirtschaftswissenschaften",
     images: [
@@ -73,214 +45,203 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "ASQ",
-    description:
-      "Entdecke neue Möglichkeiten, sammle wertvolle Erfahrungen und verdiene 5 ECTS-Punkte mit dem Allgemeinen Schlüsselqualifikationsmodul beim Fachschaftsrat Wirtschaftswissenschaften!",
+    description,
     images: ["https://fsr-wiwi-halle.de/logo.png"],
   },
 };
 
+const facts = [
+  {
+    label: "Das Modul",
+    value: "5 ECTS",
+    text: "Ein ASQ beim FSR wird vom ASQ-Büro anerkannt und bringt dir volle 5 ECTS (entspricht 150 h Arbeitsaufwand).",
+  },
+  {
+    label: "Dein Team",
+    value: "5–6 Leute",
+    text: "Besteht aus 5–6 Studierenden, mit denen du zusammen arbeitest und spannende Projekte umsetzt.",
+  },
+  {
+    label: "Deine Unterstützung",
+    value: "Der FSR",
+    text: "Erhältst du direkt von den Mitgliedern des FSR, die dem ASQ mit Rat und Tat zur Seite stehen.",
+  },
+];
+
+const tasks = [
+  {
+    icon: Calendar,
+    text: "Plane, organisiere und setze eigene Projekte in Teamarbeit um (z. B. Praxis, Party, Podiumsdiskussion)",
+  },
+  { icon: EuroIcon, text: "Nutze das zur Verfügung gestellte Budget für deine Projekte" },
+  { icon: Users, text: "Lerne die Arbeit der Hochschulgremien kennen" },
+  {
+    icon: Briefcase,
+    text: "Knüpfe Kontakte zu Studierenden aus verschiedenen Jahrgängen und Arbeitsbereichen",
+  },
+  { icon: Coffee, text: "Genieße eine lockere Arbeitsatmosphäre" },
+  {
+    icon: GraduationCap,
+    text: "Sammle wertvolle praktische Erfahrungen für dein Studium und zukünftige Karriere",
+  },
+];
+
+const steps = [
+  {
+    title: "Bewerbungsfrist beachten",
+    text: "Die genaue Bewerbungsfrist wird jedes Semester über Facebook, Instagram und Stud.IP ausgeschrieben.",
+  },
+  {
+    title: "Bewerbung vorbereiten",
+    text: "Erstelle ein Anschreiben mit deinen persönlichen Daten und ein kreatives Motivationsschreiben.",
+  },
+  {
+    title: "Bewerbung einreichen",
+    text: "Sende deine Bewerbung an die angegebene E-Mail-Adresse oder reiche sie persönlich beim FSR ein.",
+  },
+  {
+    title: "Rückmeldung abwarten",
+    text: "Der FSR wird sich mit dir in Verbindung setzen, um dich über den weiteren Verlauf zu informieren.",
+  },
+];
+
+const faq = [
+  {
+    q: "Was ist der Leistungsnachweis?",
+    a: (
+      <>
+        Der Leistungsnachweis besteht aus drei Teilen:
+        <ol className="mt-2 list-decimal space-y-1 pl-5 marker:font-semibold marker:text-fsr">
+          <li>Dein eigenes Semesterprojekt</li>
+          <li>Unterstützung von FSR-Projekten</li>
+          <li>
+            Ein Bericht im Umfang von 3 bis 5 Seiten über die Art und den Umfang der
+            Tätigkeit mit Lernerfolgen bzw. erworbenen Kompetenzen
+          </li>
+        </ol>
+      </>
+    ),
+  },
+  {
+    q: "Wie viel Zeit muss ich investieren?",
+    a: "Das ASQ-Modul entspricht einem Arbeitsaufwand von 150 Stunden. Dies verteilt sich über das gesamte Semester, sodass du im Durchschnitt mit etwa 10 Stunden pro Woche rechnen kannst. Die genaue Zeiteinteilung ist jedoch flexibel und kann je nach Projektphase variieren.",
+  },
+  {
+    q: "Kann ich das ASQ-Modul auch in Teilzeit absolvieren?",
+    a: "Grundsätzlich ist das ASQ-Modul als Vollzeitaktivität während eines Semesters konzipiert. In Ausnahmefällen und nach Rücksprache mit dem FSR und dem ASQ-Büro könnte eine Teilzeitvariante über zwei Semester möglich sein. Dies muss jedoch individuell geprüft und vereinbart werden.",
+  },
+];
+
 export default function Page() {
+  const apply = `mailto:${siteConfig.company.mail}`;
   return (
-    <>
-      <PageHeader
-        title="ASQ"
-        subtitle="
-            Entdecke neue Möglichkeiten, sammle wertvolle Erfahrungen und
-            verdiene 5 ECTS-Punkte mit dem Allgemeinen
-            Schlüsselqualifikationsmodul beim Fachschaftsrat
-            Wirtschaftswissenschaften!"
-      />
-
-      <Section>
-        <ul className="grid gap-6 lg:grid-cols-3">
-          <AnimatedListItem index={1} className=" flex-col items-start">
-            <h3 className="font-bold text-xl">Das Modul </h3>
-            <p>
-              Ein ASQ beim FSR wird vom ASQ-Büro anerkannt und bringt Dir volle
-              5 ECTS (entspricht 150h Arbeitsaufwand).
-            </p>
-          </AnimatedListItem>
-          <AnimatedListItem index={2} className=" flex-col items-start">
-            <h3 className="font-bold text-xl">Dein Team </h3>
-            <p>
-              Besteht aus 5-6 Studierenden, mit denen Du zusammen arbeitest und
-              spannende Projekte umsetzt.
-            </p>
-          </AnimatedListItem>
-          <AnimatedListItem index={3} className=" flex-col items-start">
-            <h3 className="font-bold text-xl">Deine Unterstützung</h3>
-            <p>
-              Erhältst Du direkt von den Mitgliedern des FSR, die dem ASQ mit
-              Rat und Tat zur Seite stehen.
-            </p>
-          </AnimatedListItem>
-        </ul>
-      </Section>
-
-      <Section>
-        <div className="relative  px-4 py-12 ">
-          <AnimatedHeader>Deine Vorteile und Aufgaben</AnimatedHeader>
-          <ul className="flex flex-col gap-6 ">
-            {tasks.map((task, index) => (
-              <AnimatedListItem index={index} key={index} className="gap-6">
-                <span className={"w-8 h-8 text-fsr"}>
-                  <task.icon className="h-8 w-8 " />{" "}
-                </span>
-
-                <p className="text-foreground ">{task.text}</p>
-              </AnimatedListItem>
-            ))}
-          </ul>
-        </div>
-      </Section>
-
-      <Section>
-        <section className="grid lg:grid-cols-2 gap-8 items-start lg:items-center mb-16 p-8 ">
-          <AnimatedHeader> Der Bewerbungsprozess</AnimatedHeader>
-          <div className="">
-            <ol className="relative border-l  border-muted">
-              <li className="mb-10 ml-6">
-                <span className="absolute flex items-center fill-fsr justify-center w-8 h-8 bg-fsr-foreground rounded-full -left-4 ring-4 ring-background">
-                  <svg
-                    className="w-3.5 h-3.5 text-primary"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                  </svg>
-                </span>
-                <h3 className="font-medium leading-tight">
-                  Bewerbungsfrist beachten
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Die genaue Bewerbungsfrist wird jedes Semester über Facebook,
-                  Instagram und Stud.IP ausgeschrieben.
-                </p>
-              </li>
-              <li className="mb-10 ml-6">
-                <span className="absolute flex items-center fill-fsr justify-center w-8 h-8 bg-fsr-foreground rounded-full -left-4 ring-4 ring-background">
-                  <svg
-                    className="w-3.5 h-3.5 text-primary"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
-                  </svg>
-                </span>
-                <h3 className="font-medium leading-tight">
-                  Bewerbung vorbereiten
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Erstelle ein Anschreiben mit deinen persönlichen Daten und ein
-                  kreatives Motivationsschreiben.
-                </p>
-              </li>
-              <li className="mb-10 ml-6">
-                <span className="absolute flex items-center fill-fsr justify-center w-8 h-8 bg-fsr-foreground  rounded-full -left-4 ring-4 ring-background">
-                  <svg
-                    className="w-3.5 h-3.5 text-primary"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M18 2a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2zM7 17v-3h6v3H7z" />
-                  </svg>
-                </span>
-                <h3 className="font-medium leading-tight">
-                  Bewerbung einreichen
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Sende deine Bewerbung an die angegebene E-Mail-Adresse oder
-                  reiche sie persönlich beim FSR ein.
-                </p>
-              </li>
-              <li className="ml-6">
-                <span className="absolute flex items-center justify-center w-8 h-8 fill-fsr bg-fsr-foreground rounded-full -left-4 ring-4 ring-background">
-                  <svg
-                    className="w-3.5 h-3.5 text-primary"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 14a6 6 0 1 1 0-12 6 6 0 0 1 0 12z" />
-                    <path d="M10 12a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" />
-                  </svg>
-                </span>
-                <h3 className="font-medium leading-tight">
-                  Rückmeldung abwarten
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Der FSR wird sich mit dir in Verbindung setzen, um dich über
-                  den weiteren Verlauf zu informieren.
-                </p>
-              </li>
-            </ol>
-          </div>
-        </section>
-      </Section>
-
-      <Section>
-        <AnimatedHeader> Häufig gestellte Fragen</AnimatedHeader>
-        <Accordion type="single" collapsible className=" ">
-          <AccordionItem value="item-1">
-            <AccordionTrigger>Was ist der Leistungsnachweis?</AccordionTrigger>
-            <AccordionContent>
-              Der Leistungsnachweis besteht aus drei Teilen:
-              <ol className="list-decimal pl-6 mt-2">
-                <li>Dein eigenes Semesterprojekt</li>
-                <li>Unterstützung von FSR-Projekten</li>
-                <li>
-                  Ein Bericht im Umfang von 3 bis 5 Seiten über die Art und den
-                  Umfang der Tätigkeit mit Lernerfolgen bzw. erworbenen
-                  Kompetenzen
-                </li>
-              </ol>
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-2">
-            <AccordionTrigger>
-              Wie viel Zeit muss ich investieren?
-            </AccordionTrigger>
-            <AccordionContent>
-              Das ASQ-Modul entspricht einem Arbeitsaufwand von 150 Stunden.
-              Dies verteilt sich über das gesamte Semester, sodass du im
-              Durchschnitt mit etwa 10 Stunden pro Woche rechnen kannst. Die
-              genaue Zeiteinteilung ist jedoch flexibel und kann je nach
-              Projektphase variieren.
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-3">
-            <AccordionTrigger className="text-start">
-              Kann ich das ASQ-Modul auch in Teilzeit absolvieren?
-            </AccordionTrigger>
-            <AccordionContent>
-              Grundsätzlich ist das ASQ-Modul als Vollzeitaktivität während
-              eines Semesters konzipiert. In Ausnahmefällen und nach Rücksprache
-              mit dem FSR und dem ASQ-Büro könnte eine Teilzeitvariante über
-              zwei Semester möglich sein. Dies muss jedoch individuell geprüft
-              und vereinbart werden.
-            </AccordionContent>
-          </AccordionItem>
-        </Accordion>
-      </Section>
-
-      <Section className="flex flex-col items-center py-32">
-        <AnimatedHeader>Bereit für eine neue Herausforderung?</AnimatedHeader>
-        <p className="mb-8">
-          Wir freuen uns auf deine Bewerbung und darauf, dich im Team begrüßen
-          zu dürfen!
-        </p>
-        <Link href="mailto:fachschaftsrat@wiwi.uni-halle.de">
-          <Button
-            size="lg"
-            className="bg-primary text-primary-foreground hover:bg-primary/90"
-          >
-            Jetzt bewerben
+    <div className="flex flex-col gap-16 md:gap-24">
+      <PageHero
+        eyebrow="Schlüsselqualifikation beim FSR"
+        title={
+          <>
+            ASQ beim <span className="text-transparent [-webkit-text-stroke:2px_white]">FSR</span>
+          </>
+        }
+        poster
+      >
+        <HeroLead>{description}</HeroLead>
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+          <Button asChild size="lg" className="bg-white text-fsr-deep hover:bg-white/90">
+            <a href={apply} data-umami-event="ASQ-Apply-Hero">
+              <Mail className="mr-2 size-4" /> Jetzt bewerben
+            </a>
           </Button>
-        </Link>
-      </Section>
-    </>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white"
+          >
+            <a href="#bewerbung">
+              So bewirbst du dich <ArrowDown className="ml-2 size-4" />
+            </a>
+          </Button>
+        </div>
+      </PageHero>
+
+      <section>
+        <SectionHeading eyebrow="Auf einen Blick" title="Das Modul" />
+        <ul className="mt-8 grid gap-4 md:grid-cols-3">
+          {facts.map((f) => (
+            <li key={f.label} className="rounded-3xl border bg-card p-6">
+              <p className="text-xs font-bold uppercase tracking-widest text-fsr">{f.label}</p>
+              <p className="mt-2 text-4xl font-black uppercase leading-none tracking-tight">{f.value}</p>
+              <p className="mt-4 text-sm text-muted-foreground">{f.text}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <SectionHeading eyebrow="Was dich erwartet" title="Deine Vorteile und Aufgaben" />
+        <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {tasks.map((task) => (
+            <li key={task.text} className="flex items-start gap-4 rounded-3xl border bg-card p-5">
+              <span className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-fsr/10 text-fsr">
+                <task.icon className="size-5" />
+              </span>
+              <p className="pt-1">{task.text}</p>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section id="bewerbung" className="scroll-mt-24">
+        <SectionHeading eyebrow="In vier Schritten" title="Der Bewerbungsprozess" />
+        <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {steps.map((s, i) => (
+            <li key={s.title} className="border-t-2 border-fsr/40 pt-5">
+              <span
+                aria-hidden
+                className="block text-5xl font-black tabular-nums text-transparent [-webkit-text-stroke:1.5px_hsl(var(--fsr1))]"
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-3 text-lg font-bold leading-tight">{s.title}</h3>
+              <p className="mt-1 text-sm text-muted-foreground">{s.text}</p>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="grid gap-6 md:grid-cols-[1fr_2fr] md:gap-12">
+        <SectionHeading eyebrow="FAQ" title="Häufig gestellte Fragen" />
+        <Accordion type="single" collapsible className="rounded-3xl border bg-card px-6">
+          {faq.map((item, i) => (
+            <AccordionItem key={item.q} value={`q${i}`} className={i === faq.length - 1 ? "border-b-0" : undefined}>
+              <AccordionTrigger className="text-left">{item.q}</AccordionTrigger>
+              <AccordionContent className="text-muted-foreground">{item.a}</AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </section>
+
+      <section className="relative overflow-hidden rounded-[2rem] bg-fsr-deep p-8 text-white sm:p-12 md:p-16">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.18),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(0,0,0,0.35),transparent_50%)]"
+        />
+        <div className="relative max-w-2xl">
+          <p className="text-sm font-bold uppercase tracking-widest text-white/70">Mitmachen</p>
+          <h2 className="mt-2 hyphens-auto text-3xl font-black tracking-tight sm:text-4xl md:text-5xl">
+            Bereit für eine neue Heraus&shy;forderung?
+          </h2>
+          <p className="mt-4 text-lg text-white/85">
+            Wir freuen uns auf deine Bewerbung und darauf, dich im Team begrüßen zu dürfen!
+          </p>
+          <Button asChild size="lg" className="mt-8 bg-white text-fsr-deep hover:bg-white/90">
+            <a href={apply} data-umami-event="ASQ-Apply-CTA">
+              <Mail className="mr-2 size-4" /> Jetzt bewerben
+            </a>
+          </Button>
+        </div>
+      </section>
+    </div>
   );
 }

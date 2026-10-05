@@ -25,8 +25,10 @@ const config = {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         fsr: {
-          DEFAULT: "hsl(var(--fsr1))",
-          foreground: "hsl(var(--fsr2))",
+          DEFAULT: "hsl(var(--fsr1) / <alpha-value>)",
+          foreground: "hsl(var(--fsr2) / <alpha-value>)",
+          // Bordeaux unabhängig vom Theme, für gefüllte Flächen mit weißer Schrift
+          deep: "hsl(350 63% 41% / <alpha-value>)",
         },
         primary: {
           DEFAULT: "hsl(var(--primary))",

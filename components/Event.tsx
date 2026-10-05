@@ -1,25 +1,11 @@
 "use client";
 
-import { handleSafeCalendar } from "@/lib/utils";
-import { Calendar, MapPin } from "lucide-react";
-import Link from "next/link";
-import { Section } from "./Framer/Section";
+import { MapPin } from "lucide-react";
 import { Button } from "./ui/button";
 type Location_DB = {
   label: string;
   lat: number;
   long: number;
-};
-export type EventProps = {
-  id: string;
-  title: string;
-  start: Date;
-  end: Date;
-  description: string;
-  is_public: boolean;
-  registrable: boolean;
-  max_guests: number | null;
-  rest_seats: number | null;
 };
 export type LocationProps = {
   id: string;
@@ -27,9 +13,6 @@ export type LocationProps = {
   lat: number;
   long: number;
 };
-
-export type EventWithLocation = EventProps & { location_id: string | null };
- 
 
 export function LocationCard({ location }: { location: Location_DB }) {
   const handleGoogle = () =>
@@ -83,26 +66,5 @@ export function LocationCard({ location }: { location: Location_DB }) {
         </Button>
       </div>
     </div>
-  );
-}
-
-export function FullEventView({ event }: { event: EventItem }) {
-  return (
-    <>
-      <Section className="whitespace-pre-line">{event.description}</Section>
-      <Section className="flex justify-end gap-2">
-        <Button onClick={() => handleSafeCalendar(event)} variant="secondary" data-umami-event={"SaveCalendar-"+event.slug}>
-          <Calendar className="size-4 mr-2"  />
-          Im Kalender sichern
-        </Button>
-        {event.registrable && (
-          <Button asChild data-umami-event={"Signup-"+event.slug}>
-            <Link href={"/anmeldung/" + event.slug}>
-              Jetzt anmelden
-            </Link>
-          </Button>
-        )}
-      </Section>
-    </>
   );
 }

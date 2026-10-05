@@ -5,7 +5,6 @@ import EventPreview from "./event-preview";
 import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { Skeleton } from "@/components/ui/skeleton";
-import { DayProps } from "@/components/Day";
 import { format } from "date-fns";
 import { ListItem } from "@/components/Framer/ListItem";
 import { Section } from "@/components/Framer/Section";
@@ -81,6 +80,8 @@ export default function InfiniteScroll({
     </div>
   );
 }
+type DayProps = { date: string; events: EventItem[] };
+
 function groupEventsByDay(events: EventItem[] | undefined): DayProps[] {
   if (!events) return [];
 
