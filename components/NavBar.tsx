@@ -262,12 +262,14 @@ function MobileMenu({ pages, pathname }: { pages: NavPage[]; pathname: string })
   };
 
   return (
+    // Höhe über dvh statt bottom-0: Mobile Browser rechnen bottom-0 sonst hinter die
+    // eingeblendete Toolbar, und der letzte Link verschwindet darunter.
+    // Hintergrund und Deko stehen fest, nur die Liste darüber scrollt.
     <div
       id="mobile-menu"
-      className="fixed inset-x-0 bottom-0 top-[72px] overflow-y-auto overflow-x-hidden overscroll-contain bg-fsr-deep text-white md:hidden"
+      className="fixed inset-x-0 top-[72px] h-[calc(100vh-72px)] overflow-hidden bg-fsr-deep text-white supports-[height:100dvh]:h-[calc(100dvh-72px)] md:hidden"
     >
-      {/* Eigener Rahmen, damit die Deko die Scrollfläche nicht vergrößert */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+      <div aria-hidden className="pointer-events-none absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.18),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(0,0,0,0.35),transparent_50%)]" />
         <Image
           src="/logo_outline.png"
@@ -277,7 +279,10 @@ function MobileMenu({ pages, pathname }: { pages: NavPage[]; pathname: string })
           className="absolute -bottom-16 -right-24 w-[360px] opacity-[0.07] invert"
         />
       </div>
-      <nav aria-label="Hauptnavigation" className="relative flex flex-col gap-8 px-4 pb-10 pt-6">
+      <nav
+        aria-label="Hauptnavigation"
+        className="absolute inset-0 flex flex-col gap-8 overflow-y-auto overscroll-contain px-4 pb-[max(2.5rem,calc(env(safe-area-inset-bottom)+1.5rem))] pt-6"
+      >
         <ul className="flex flex-col">
           {singles.map((page) => {
             const active = isActive(pathname, page.href);
