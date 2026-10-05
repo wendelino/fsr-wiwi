@@ -6,7 +6,8 @@ import { Header } from "@/components/TextComponents";
 import WeekGrid from "@/components/weekgrid/weekgrid";
 import ErstiInfo from "./info";
 import { Metadata } from "next";
-import SaveCalendarButton from "@/components/weekgrid/save-calendar-button"; 
+import SaveCalendarButton from "@/components/weekgrid/save-calendar-button";
+import { ERSTI_START, ERSTI_TAG, erstiSponsors } from "@/lib/ersti";
 
 export const metadata: Metadata = {
   title: "Ersti-Woche",
@@ -22,74 +23,7 @@ export const metadata: Metadata = {
 };
 
 export default async function page() {
-  const { events } = await getEvents({ tag: "ersti26", limit: 100 }); 
-  const sponsors = [
-    {
-      src: "myhealth-juicery.png",
-      href: "https://myhealth-juicery.de",
-      label: "MyHealth Juicery",
-    },
-    {
-      src: "ostkarte.png",
-      href: "https://ostkarte.com",
-      label: "Ostkarte",
-    },
-    {
-      src: "zetti.png",
-      href: "https://www.zetti.de",
-      label: "Zetti",
-    },
-    {
-      src: "goenrgy.png",
-      href: "https://goenrgy.de",
-      label: "Goenrgy",
-    },
-    {
-      src: "iwh-halle.png",
-      href: "https://www.iwh-halle.de",
-      label: "IWH Halle",
-    },
-    {
-      src: "lioko-mexikaner.png",
-      href: "http://www.lioko-mexikaner.de/shop",
-      label: "Lioko Mexikaner",
-    },
-    {
-      src: "kathi.png",
-      href: "https://www.kathi.de",
-      label: "Kathi",
-    },
-    {
-      src: "partyfly.png",
-      href: "https://www.partyfly.de",
-      label: "Partyfly",
-    },
-    {
-      src: "dak.png",
-      href: "https://www.dak.de",
-      label: "DAK",
-    },
-    {
-      src: "campus-tuete.png",
-      href: "https://www.campus-tuete.de",
-      label: "Campus-Tüte",
-    },
-    {
-      src: "sachsen-anhalt-kanns-halt.jpg",
-      href: "https://sachsen-anhalt-kanns-halt.de",
-      label: "Sachsen-Anhalt kanns halt",
-    },
-    {
-      src: "nowherenearold.png",
-      href: "https://www.instagram.com/nowherenearold/",
-      label: "Nowhere Near Old",
-    },
-    {
-      src: "sparda.jpg",
-      href: "https://www.sparda-b.de/homepage.html",
-      label: "Sparda-Bank Berlin",
-    },
-  ]; 
+  const { events } = await getEvents({ tag: ERSTI_TAG, limit: 100 }); 
   const offers = [
     {
       link: "https://freitag.ch/mission/community/smart-brains",
@@ -125,9 +59,9 @@ export default async function page() {
         <SaveCalendarButton events={events} />
       </div>
 
-      <WeekGrid events={events} startDate={new Date("2026-10-05")} />
+      <WeekGrid events={events} startDate={new Date(ERSTI_START)} />
 
-      <SponsorGrid items={sponsors} />
+      <SponsorGrid items={erstiSponsors} />
 
 {/*   
 
