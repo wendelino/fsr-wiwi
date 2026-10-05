@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
+import { signupSuccessText } from "@/lib/events";
 import { addGuestToEvent } from "@/app/_actions/sign-up";
 
 const Schema = z.object({
@@ -25,7 +26,13 @@ const Schema = z.object({
 		message: "Bitte akzeptiere unsere Datenschutzerklärung.",
 	}),
 });
-export default function RegisterForm({ event }: { event: EventItem }) {
+export default function RegisterForm({
+	event,
+	className,
+}: {
+	event: EventItem;
+	className?: string;
+}) {
 	async function onCreate(values: z.infer<typeof Schema>): Promise<FormFnRes> {
 		const res = await addGuestToEvent({
 			eventSlug: event.slug,
@@ -53,6 +60,7 @@ export default function RegisterForm({ event }: { event: EventItem }) {
 			schema={Schema}
 			defaultValues={def}
 			mode="create"
+			className={className}
 			onCreate={onCreate}
 			onSuccess={() => {
 				/* optional */
@@ -65,7 +73,7 @@ export default function RegisterForm({ event }: { event: EventItem }) {
 				description: "Bitte trage deine Daten ein.",
 				submitText: "Anmelden",
 				submitLoadingText: "Laden...",
-				submitSuccessText: "Du bekommst eine Bestätigung per E-Mail.",
+				submitSuccessText: signupSuccessText(event),
 				submitErrorText: "Senden fehlgeschlagen. Versuche es erneut.",
 				showRequiredHint: true,
 			}}

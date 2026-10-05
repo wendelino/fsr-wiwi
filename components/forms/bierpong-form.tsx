@@ -12,6 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
+import { signupSuccessText } from "@/lib/events";
 import { addGuestToEvent } from "@/app/_actions/sign-up";
 
 const Schema = z.object({
@@ -57,7 +58,7 @@ export default function BierpongForm({ event }: { event: EventItem }) {
 				description: "Bitte trage deine Daten ein.",
 				submitText: "Anmelden",
 				submitLoadingText: "Laden...",
-				submitSuccessText: "Du bekommst eine Bestätigung per E-Mail.",
+				submitSuccessText: signupSuccessText(event),
 				submitErrorText: "Senden fehlgeschlagen. Versuche es erneut.",
 				showRequiredHint: true,
 			}}

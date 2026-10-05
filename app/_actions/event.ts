@@ -80,6 +80,9 @@ function eventF(i: EventItem): EventItem {
   return {
     ...i,
     start: new Date(i.start),
-    end: new Date(i.end), 
+    end: new Date(i.end),
+    // Ältere Events aus dem CMS haben die Felder noch nicht
+    isRandomSelection: i.isRandomSelection ?? false,
+    isHighlight: i.isHighlight ?? false,
   };
 }

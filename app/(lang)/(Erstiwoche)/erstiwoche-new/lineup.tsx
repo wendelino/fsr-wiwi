@@ -3,11 +3,15 @@
 import { Button } from "@/components/ui/button";
 import { cn, handleSafeAllEventsCalendar } from "@/lib/utils";
 import { CalendarPlus, ChevronRight } from "lucide-react";
-import { useState } from "react";
-import { eventsOnDay, formatBerlin, timeRange, WeekDay } from "../_designs/berlin";
-import { EventDialog } from "../_designs/event-dialog";
-import { EventStatus } from "../_designs/event-status";
-import { Phase, phaseOf } from "../_designs/use-now";
+import { EventDialog } from "@/components/events/event-dialog";
+import { EventStatus } from "@/components/events/event-status";
+import { eventsOnDay, formatBerlin, timeRange, WeekDay } from "@/lib/berlin";
+import { plainText } from "@/lib/events";
+import { Phase, phaseOf } from "@/lib/use-now";
+import { useRef, useState } from "react";
+
+// Höhe der fixen Navbar, darunter klebt die Tagesleiste
+const NAV_HEIGHT = 72;
 
 /** Tagesleiste + Timeline aus Entwurf 1; der heutige Tag ist immer vorausgewählt. */
 export function Lineup({
@@ -26,6 +30,16 @@ export function Lineup({
   const [picked, setPicked] = useState<string | null>(null);
   const [onlyRegistrable, setOnlyRegistrable] = useState(false);
   const [showPast, setShowPast] = useState(false);
+  const barAnchorRef = useRef<HTMLDivElement>(null);
+
+  // Ist man schon in die Liste gescrollt, springt man beim Wechsel an ihren Anfang –
+  // sonst landet man bei einem kürzeren Tag im Footer.
+  function scrollToListStart() {
+    const top = barAnchorRef.current?.getBoundingClientRect().top;
+    if (top != null && top < NAV_HEIGHT) {
+      window.scrollTo({ top: window.scrollY + top - NAV_HEIGHT, behavior: "instant" });
+    }
+  }
 
   // Bis die Uhrzeit im Browser bekannt ist, gilt der Tag vom Server
   const firstDay = days[0].key;
@@ -58,6 +72,7 @@ export function Lineup({
         </Button>
       </div>
 
+      <div ref={barAnchorRef} aria-hidden />
       <div className="sticky top-[72px] z-20 -mx-4 border-b bg-background/90 px-4 py-3 backdrop-blur">
         <div className="grid grid-cols-5 gap-1.5 sm:gap-2">
           {days.map((day) => {
@@ -67,7 +82,10 @@ export function Lineup({
                 key={day.key}
                 type="button"
                 aria-pressed={isSelected}
-                onClick={() => setPicked(day.key)}
+                onClick={() => {
+                  setPicked(day.key);
+                  scrollToListStart();
+                }}
                 className={cn(
                   "flex flex-col items-center rounded-xl border px-1 py-2 text-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fsr",
                   isSelected
@@ -91,7 +109,10 @@ export function Lineup({
           <button
             type="button"
             aria-pressed={onlyRegistrable}
-            onClick={() => setOnlyRegistrable((v) => !v)}
+            onClick={() => {
+              setOnlyRegistrable((v) => !v);
+              scrollToListStart();
+            }}
             className={cn(
               "rounded-full border px-3 py-1 text-xs font-medium transition",
               onlyRegistrable ? "border-fsr bg-fsr/10 text-fsr" : "hover:bg-muted"
@@ -115,7 +136,10 @@ export function Lineup({
             <span />
             <button
               type="button"
-              onClick={() => setShowPast((v) => !v)}
+              onClick={() => {
+                setShowPast((v) => !v);
+                scrollToListStart();
+              }}
               className="justify-self-start rounded-full border px-3 py-1 text-xs font-medium text-muted-foreground transition hover:bg-muted"
             >
               {hidePast
@@ -199,7 +223,7 @@ function TimelineEntry({
               </span>
               {event.description && (
                 <span className="mt-1 line-clamp-2 block text-sm text-muted-foreground">
-                  {event.description}
+                  {plainText(event.description)}
                 </span>
               )}
               <EventStatus event={event} phase={phase} className="mt-3" />

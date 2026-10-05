@@ -1,4 +1,5 @@
 "use client";
+import { signupSuccessText } from "@/lib/events";
 import { addGuestToEvent } from "@/app/_actions/sign-up";
 import GenericForm, { FormFnRes } from "@/components/forms/generic-form";
 import { Button } from "@/components/ui/button";
@@ -59,7 +60,7 @@ export default function BarHoppingForm({ event }: { event: EventItem }) {
         description: "Bitte trage deine Daten ein.",
         submitText: "Anmelden",
         submitLoadingText: "Laden...",
-        submitSuccessText: "Du bekommst eine Bestätigung per E-Mail.",
+        submitSuccessText: signupSuccessText(event),
         submitErrorText: "Senden fehlgeschlagen. Versuche es erneut.",
         showRequiredHint: true,
       }}

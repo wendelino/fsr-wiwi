@@ -44,6 +44,10 @@ function Faq() {
       ),
     },
     {
+      q: "Was bedeutet „Losverfahren“?",
+      a: "Bei manchen Terminen werden die Plätze verlost. Dort könnt ihr euch auch dann noch anmelden, wenn schon alle Plätze vergeben sind – gibt es mehr Anmeldungen als Plätze, entscheidet das Los.",
+    },
+    {
       q: "Wo finde ich alle Infos zum Studienstart?",
       a: (
         <>

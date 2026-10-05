@@ -23,6 +23,7 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { signupSuccessText } from "@/lib/events";
 import { addGuestToEvent } from "@/app/_actions/sign-up";
 
 type Mode = "select" | "single" | "team";
@@ -184,7 +185,7 @@ function SingleForm({ event }: { event: EventItem }) {
 				description: "Bitte trage deine Daten ein.",
 				submitText: "Anmelden",
 				submitLoadingText: "Laden...",
-				submitSuccessText: "Du bekommst eine Bestätigung per E-Mail.",
+				submitSuccessText: signupSuccessText(event),
 				submitErrorText: "Senden fehlgeschlagen. Versuche es erneut.",
 				showRequiredHint: true,
 			}}
@@ -293,7 +294,7 @@ function TeamForm({ event }: { event: EventItem }) {
 				description: "Bitte trage deine Teamdaten ein.",
 				submitText: "Team anmelden",
 				submitLoadingText: "Laden...",
-				submitSuccessText: "Du bekommst eine Bestätigung per E-Mail.",
+				submitSuccessText: signupSuccessText(event),
 				submitErrorText: "Senden fehlgeschlagen. Versuche es erneut.",
 				showRequiredHint: true,
 			}}

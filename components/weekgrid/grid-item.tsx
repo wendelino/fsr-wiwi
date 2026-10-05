@@ -3,6 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { Badge } from "../ui/badge";
 
 import { cn } from "@/lib/utils";
+import { freeSeats, isFull, isLottery, lotteryText, signupButtonLabel } from "@/lib/events";
 import { createEvent } from "ics";
 import Link from "next/link";
 import { Button } from "../ui/button";
@@ -151,11 +152,12 @@ export default function GridItem({
             <div className="flex justify-start w-full gap-2 flex-wrap mt-2">
               {registrable && (
                 <>
-                  {restSeats == 0 ? (
+                  {isFull(event) ? (
                     <Badge variant="destructive">Ausgebucht!</Badge>
                   ) : (
                     <Badge className=" font-medium">Anmeldepflichtig!</Badge>
                   )}
+                  {isLottery(event) && <Badge variant="secondary">Losverfahren</Badge>}
                 </>
               )}
             </div>
@@ -187,8 +189,12 @@ export default function GridItem({
           {registrable && (
             <div className="flex justify-center  w-full gap-2 flex-wrap mb-4">
               <Badge variant="secondary">Anmeldepflichtig</Badge>
-              <Badge>{restSeats} Plätze übrig</Badge>
+              {freeSeats(event) != null && <Badge>{restSeats} Plätze übrig</Badge>}
+              {isLottery(event) && <Badge variant="secondary">Losverfahren</Badge>}
             </div>
+          )}
+          {isLottery(event) && (
+            <p className="mb-4 rounded-md bg-muted p-3 text-sm">{lotteryText(event)}</p>
           )}
           <div className="text-sm whitespace-pre-line">{description}</div>
         </div>
@@ -198,11 +204,13 @@ export default function GridItem({
           </Button>
           {registrable && (
             <>
-              {restSeats == 0 ? (
+              {isFull(event) ? (
                 <Button disabled>Event ausgebucht</Button>
               ) : (
                 <Button asChild data-umami-event={"Signup-GRID-"+event.slug}>
-                  <Link href={"anmeldung/" + slug}>Zur Anmeldung</Link>
+                  <Link href={"/anmeldung/" + slug}>
+                    {isLottery(event) ? signupButtonLabel(event) : "Zur Anmeldung"}
+                  </Link>
                 </Button>
               )}
             </>

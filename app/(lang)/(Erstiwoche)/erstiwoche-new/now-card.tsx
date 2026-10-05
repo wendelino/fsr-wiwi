@@ -4,11 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { berlinDateKey, formatBerlin } from "../_designs/berlin";
-import { EventDialog } from "../_designs/event-dialog";
-import { isFull } from "../_designs/event-status";
-import { phaseOf } from "../_designs/use-now";
-import { WeekStatus } from "../_designs/week-status";
+import { EventDialog } from "@/components/events/event-dialog";
+import { berlinDateKey, formatBerlin } from "@/lib/berlin";
+import { isLottery, isOverbooked, seatsLabel } from "@/lib/events";
+import { phaseOf } from "@/lib/use-now";
+import { WeekStatus } from "@/lib/week-status";
 
 function relativeStart(event: EventItem, now: Date) {
   const diffMin = Math.round((event.start.getTime() - now.getTime()) / 60_000);
@@ -124,7 +124,8 @@ export function NowCard({
                       <span className="block font-semibold">{e.title}</span>
                       {e.registrable && (
                         <span className="text-xs text-white/70">
-                          {isFull(e) ? "Ausgebucht" : "Anmeldung nötig"}
+                          {seatsLabel(e)}
+                          {isLottery(e) && !isOverbooked(e) && " · Losverfahren"}
                         </span>
                       )}
                     </span>

@@ -1,7 +1,7 @@
 import { getEvents } from "@/app/_actions/event";
 import { ERSTI_TAG } from "@/lib/ersti";
 import { Metadata } from "next";
-import { berlinDateKey } from "../_designs/berlin";
+import { berlinDateKey } from "@/lib/berlin";
 import ErstiView from "./ersti-view";
 
 // Zusammengeführter Entwurf – nicht indexieren

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
+import { isLottery, plainText } from "@/lib/events";
 
 export default function EventPreview({
   event,
@@ -22,13 +23,14 @@ export default function EventPreview({
             {event.title}
           </h4>
           {event.registrable && <Badge>Anmeldepflichtig!</Badge>}
+          {isLottery(event) && <Badge variant="secondary">Losverfahren</Badge>}
         </div>
 
         <span className="text-foreground/70 mr-2">
           {format(event.start, "HH:mm")}-{format(event.end, "HH:mm")}
         </span>
         <div className="text-muted-foreground truncate max-w-[80%]">
-          {event.description}
+          {plainText(event.description)}
         </div>
       </div>
       <div className="h-full flex items-center">
