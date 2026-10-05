@@ -1,11 +1,11 @@
 "use client";
-import { siteConfig, type NavItem, type NavPage } from "@/lib/siteConfig";
-import { cn } from "@/lib/utils";
 import { ArrowUpRight, ChevronDown, Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { type NavItem, type NavPage, siteConfig } from "@/lib/siteConfig";
+import { cn } from "@/lib/utils";
 import { ThemeButton } from "./ThemeToggle";
 import WidthWrapper from "./WidthWrapper";
 
@@ -31,17 +31,25 @@ export default function NavBar({ lang: _lang }: { lang: string }) {
   const pathname = usePathname();
   const pages = siteConfig.pages.filter((p) => !("href" in p) || p.href !== CTA_HREF);
 
-  useEffect(() => setOpen(false), [pathname]);
+  // Seitenwechsel schließt das Menü (State-Reset beim Rendern statt Effect)
+  const [lastPath, setLastPath] = useState(pathname);
+  if (pathname !== lastPath) {
+    setLastPath(pathname);
+    setOpen(false);
+  }
 
   // Offenes Menü: Seite nicht scrollen, Escape schließt
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
     document.addEventListener("keydown", onKey);
-    document.body.style.overflow = "hidden";
+    // Nur html sperren: hätte auch body overflow, würde body zum Scroll-Container
+    // und der sticky Header klebte daran statt am Fenster
+    const root = document.documentElement;
+    root.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
-      document.body.style.overflow = "";
+      root.style.overflow = "";
     };
   }, [open]);
 
@@ -51,7 +59,8 @@ export default function NavBar({ lang: _lang }: { lang: string }) {
         "sticky top-0 z-50 h-[72px] border-b transition-colors",
         open
           ? "border-transparent bg-fsr-deep text-white"
-          : "bg-background backdrop-blur supports-[backdrop-filter]:bg-background/90"
+          : // backdrop-filter macht den Header zum Bezugsrahmen für position:fixed – nur ohne Menü
+            "bg-background backdrop-blur supports-[backdrop-filter]:bg-background/90"
       )}
     >
       <WidthWrapper className="flex h-full items-center justify-between gap-4">
@@ -162,9 +171,14 @@ function DesktopDropdown({
   const ref = useRef<HTMLDivElement>(null);
   const active = items.some((i) => isActive(pathname, i.href));
 
-  useEffect(() => setOpen(false), [pathname]);
+  const [lastPath, setLastPath] = useState(pathname);
+  if (pathname !== lastPath) {
+    setLastPath(pathname);
+    setOpen(false);
+  }
 
   return (
+    // biome-ignore lint/a11y/noStaticElementInteractions: Hover-Rahmen, bedienbar ist der Button darin
     <div
       ref={ref}
       className="relative"
@@ -250,20 +264,19 @@ function MobileMenu({ pages, pathname }: { pages: NavPage[]; pathname: string })
   return (
     <div
       id="mobile-menu"
-      className="fixed inset-x-0 bottom-0 top-[72px] overflow-y-auto overscroll-contain bg-fsr-deep text-white md:hidden"
+      className="fixed inset-x-0 bottom-0 top-[72px] overflow-y-auto overflow-x-hidden overscroll-contain bg-fsr-deep text-white md:hidden"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.18),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(0,0,0,0.35),transparent_50%)]"
-      />
-      <Image
-        src="/logo_outline.png"
-        alt=""
-        aria-hidden
-        width={360}
-        height={363}
-        className="pointer-events-none absolute -bottom-16 -right-24 w-[360px] opacity-[0.07] invert"
-      />
+      {/* Eigener Rahmen, damit die Deko die Scrollfläche nicht vergrößert */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.18),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(0,0,0,0.35),transparent_50%)]" />
+        <Image
+          src="/logo_outline.png"
+          alt=""
+          width={360}
+          height={363}
+          className="absolute -bottom-16 -right-24 w-[360px] opacity-[0.07] invert"
+        />
+      </div>
       <nav aria-label="Hauptnavigation" className="relative flex flex-col gap-8 px-4 pb-10 pt-6">
         <ul className="flex flex-col">
           {singles.map((page) => {
