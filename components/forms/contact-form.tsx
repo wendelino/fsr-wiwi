@@ -27,7 +27,7 @@ const Schema = z.object({
   }),
 });
 
-export default function ContactForm() {
+export default function ContactForm({ className }: { className?: string }) {
   async function onCreate(values: z.infer<typeof Schema>): Promise<FormFnRes> {
     const res = await handleMessage({
       message: values.message,
@@ -50,6 +50,7 @@ export default function ContactForm() {
       schema={Schema}
       defaultValues={def}
       disableStyling
+      className={className}
       mode="create"
       onCreate={onCreate}
       onSuccess={() => {

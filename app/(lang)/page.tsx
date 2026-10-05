@@ -1,11 +1,10 @@
-import { getEvents } from "@/app/_actions/event";
-import { ErstiHero } from "@/components/ersti/ersti-hero";
 import { HomeHero } from "@/components/home-hero";
+import { MeetingCard } from "@/components/meeting-card";
 import InstagramEmbed from "@/components/InstagramEmbed";
 import { PosterItem, PosterList } from "@/components/poster-list";
+import { SectionHeading } from "@/components/section-heading";
 import { Button } from "@/components/ui/button";
-import { ERSTI_PAGE, ERSTI_TAG, isErstiSeason } from "@/lib/ersti";
-import { siteConfig } from "@/lib/siteConfig";
+import { isErstiSeason } from "@/lib/ersti";
 import { cn } from "@/lib/utils";
 import { getTranslation } from "@/locales/getTranslation";
 import {
@@ -18,13 +17,12 @@ import {
   Landmark,
   Mail,
   MessageCircle,
-  PartyPopper,
   School,
   Users,
 } from "lucide-react";
 import Link from "next/link";
 
-// Der Ersti-Hero hängt vom Datum ab
+// Der Ersti-Teaser im Hero hängt vom Datum ab
 export const revalidate = 3600;
 
 const ALTKLAUSUREN_URL =
@@ -59,22 +57,14 @@ const fachschaft: PosterItem[] = [
 export default async function Home() {
   const { home: t } = await getTranslation("de");
   const season = isErstiSeason(new Date());
-  const { events } = season
-    ? await getEvents({ tag: ERSTI_TAG, limit: 100 })
-    : { events: [] as EventItem[] };
 
   return (
     <div className="flex flex-col gap-16 md:gap-24">
-      {season ? (
-        <ErstiHero events={events} programHref={`${ERSTI_PAGE}#lineup`} showStatus />
-      ) : (
-        <HomeHero subtitle={t.councilName} />
-      )}
+      <HomeHero showErstiTeaser={season} />
 
       {/* Schnellzugriff */}
       <section>
-        <p className="text-sm font-bold uppercase tracking-widest text-fsr">Schnellzugriff</p>
-        <h2 className="mt-1 text-4xl font-black tracking-tight md:text-5xl">Alles Wichtige</h2>
+        <SectionHeading eyebrow="Schnellzugriff" title="Alles Wichtige" />
         <div className="mt-8 grid grid-cols-2 gap-3 md:grid-cols-4">
           <a
             href={ALTKLAUSUREN_URL}
@@ -100,11 +90,7 @@ export default async function Home() {
               </span>
             </span>
           </a>
-          {season ? (
-            <Tile href={ERSTI_PAGE} icon={PartyPopper} title="Ersti-Woche" text="Programm, Anmeldung und Ersti-Guide" />
-          ) : (
-            <Tile href="/kalender" icon={CalendarDays} title="Kalender" text="Alle Termine des FSR" />
-          )}
+          <Tile href="/kalender" icon={CalendarDays} title="Kalender" text="Alle Termine des FSR" />
           <Tile href="/kontakt" icon={MessageCircle} title="Kontakt" text="Fragen, Ideen, Probleme? Schreib uns." />
           <Tile
             className="col-span-2"
@@ -139,14 +125,10 @@ export default async function Home() {
       {/* Fachschaft */}
       <section className="grid gap-8 md:grid-cols-[2fr_3fr] md:gap-12">
         <div className="md:pt-5">
-          <p className="text-sm font-bold uppercase tracking-widest text-fsr">Über uns</p>
-          <h2 className="mt-1 text-4xl font-black tracking-tight md:text-5xl">
-            {t.meaningOfFachschaft.header}
-          </h2>
-          <p className="mt-4 max-w-md text-muted-foreground">
+          <SectionHeading eyebrow="Über uns" title={t.meaningOfFachschaft.header}>
             Wer ist eigentlich wer? Drei Begriffe, die dir im Studium immer
             wieder begegnen.
-          </p>
+          </SectionHeading>
           <div className="mt-6 flex flex-wrap gap-2">
             <Button asChild variant="outline">
               <Link href="/about">
@@ -161,33 +143,11 @@ export default async function Home() {
         <PosterList items={fachschaft} />
       </section>
 
-      {/* Sitzung */}
-      <section className="grid gap-10 overflow-hidden rounded-[2rem] bg-zinc-950 p-6 text-white sm:p-10 md:grid-cols-2 md:gap-12 md:p-14">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-widest text-fsr-foreground">Öffentliche Sitzung</p>
-          <h2 className="mt-2 text-3xl font-black tracking-tight md:text-4xl">{t.meeting.header}</h2>
-          <p className="mt-4 text-white/75">
-            Unsere Sitzungen sind öffentlich. Studierende der Wirtschaftswissenschaften
-            sind herzlich eingeladen – schreibt uns gern übers Kontaktformular, per
-            Mail oder auf Instagram. Wir freuen uns auf euch!
-          </p>
-          <Button asChild size="lg" className="mt-8 bg-white text-zinc-950 hover:bg-white/90">
-            <Link href="/kontakt">
-              <MessageCircle className="mr-2 size-4" /> Schreib uns
-            </Link>
-          </Button>
-        </div>
-        <dl className="self-center border-b border-white/15">
-          <MeetingFact term="Wann" value="Jeden 2. Dienstag" />
-          <MeetingFact term="Uhrzeit" value="19 Uhr" />
-          <MeetingFact term="Wo" value="Raum 201" detail={`${siteConfig.company.strasse}, WiWi-Fakultät`} />
-        </dl>
-      </section>
+      <MeetingCard title={t.meeting.header} />
 
       {/* Instagram */}
       <section>
-        <p className="text-sm font-bold uppercase tracking-widest text-fsr">@fsr.wiwi.halle</p>
-        <h2 className="mb-8 mt-1 text-4xl font-black tracking-tight md:text-5xl">{t.followUs.header}</h2>
+        <SectionHeading eyebrow="@fsr.wiwi.halle" title={t.followUs.header} className="mb-8" />
         <InstagramEmbed />
       </section>
     </div>
@@ -233,17 +193,5 @@ function Tile({
     <Link href={href} className={cls}>
       {content}
     </Link>
-  );
-}
-
-function MeetingFact({ term, value, detail }: { term: string; value: string; detail?: string }) {
-  return (
-    <div className="grid grid-cols-[5.5rem_1fr] items-baseline gap-4 border-t border-white/15 py-4">
-      <dt className="text-xs font-bold uppercase tracking-widest text-white/60">{term}</dt>
-      <dd>
-        <span className="block text-2xl font-black uppercase leading-none tracking-tight sm:text-4xl">{value}</span>
-        {detail && <span className="mt-1 block text-sm text-white/70">{detail}</span>}
-      </dd>
-    </div>
   );
 }

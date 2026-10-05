@@ -1,5 +1,6 @@
 "use client";
 
+import { SectionHeading } from "@/components/section-heading";
 import { ErstiHero } from "@/components/ersti/ersti-hero";
 import { PosterList, PosterItem } from "@/components/poster-list";
 import { SponsorStrip } from "@/components/ersti/sponsor-strip";
@@ -60,8 +61,7 @@ export default function ErstiView({
       {/* Highlights (Entwurf 2) */}
       {highlights.length > 0 && (
         <section>
-          <p className="text-sm font-bold uppercase tracking-widest text-fsr">Nicht verpassen</p>
-          <h2 className="mt-1 text-4xl font-black tracking-tight md:text-5xl">Highlights der Woche</h2>
+          <SectionHeading eyebrow="Nicht verpassen" title="Highlights der Woche" />
           <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {highlights.map((e) => (
               <SignupCard key={e.id} event={e} phase={phaseOf(e, now)} source="ERSTI" />
@@ -99,13 +99,11 @@ function Expectations() {
   return (
     <section className="grid gap-8 md:grid-cols-[2fr_3fr] md:gap-12">
       <div className="md:pt-5">
-        <p className="text-sm font-bold uppercase tracking-widest text-fsr">Das Programm</p>
-        <h2 className="mt-1 text-4xl font-black tracking-tight md:text-5xl">Was euch erwartet</h2>
-        <p className="mt-4 max-w-md text-muted-foreground">
+        <SectionHeading eyebrow="Das Programm" title="Was euch erwartet">
           Kommt zu allem, was euch interessiert. Nur Termine mit dem Hinweis
           „Anmeldung nötig“ haben begrenzte Plätze – alles andere ist offen,
           einfach vorbeikommen.
-        </p>
+        </SectionHeading>
         <Button asChild variant="outline" className="mt-6">
           <a href="#lineup">
             Zum Line-up <ArrowDown className="ml-2 size-4" />

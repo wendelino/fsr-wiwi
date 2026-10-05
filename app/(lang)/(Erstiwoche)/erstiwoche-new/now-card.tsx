@@ -4,9 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { EventDialog } from "@/components/events/event-dialog";
 import { berlinDateKey, formatBerlin } from "@/lib/berlin";
-import { isLottery, isOverbooked, seatsLabel } from "@/lib/events";
+import { eventHref, isLottery, isOverbooked, seatsLabel } from "@/lib/events";
 import { phaseOf } from "@/lib/use-now";
 import { WeekStatus } from "@/lib/week-status";
 
@@ -96,15 +95,13 @@ export function NowCard({
                 ((now.getTime() - e.start.getTime()) / (e.end.getTime() - e.start.getTime())) * 100;
               return (
                 <li key={e.id}>
-                  <EventDialog event={e} phase="live">
-                    <button type="button" className="w-full rounded-2xl bg-white/10 p-4 text-left transition hover:bg-white/15">
-                      <span className="block text-2xl font-bold leading-tight">{e.title}</span>
-                      <span className="mt-1 block text-sm text-white/80">noch bis {formatBerlin(e.end, "HH:mm")} Uhr</span>
-                      <span className="mt-3 block h-1.5 overflow-hidden rounded-full bg-white/20">
-                        <span className="block h-full rounded-full bg-white" style={{ width: `${progress}%` }} />
-                      </span>
-                    </button>
-                  </EventDialog>
+                  <Link href={eventHref(e)} className="block rounded-2xl bg-white/10 p-4 transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+                    <span className="block text-2xl font-bold leading-tight">{e.title}</span>
+                    <span className="mt-1 block text-sm text-white/80">noch bis {formatBerlin(e.end, "HH:mm")} Uhr</span>
+                    <span className="mt-3 block h-1.5 overflow-hidden rounded-full bg-white/20">
+                      <span className="block h-full rounded-full bg-white" style={{ width: `${progress}%` }} />
+                    </span>
+                  </Link>
                 </li>
               );
             })}
@@ -118,22 +115,20 @@ export function NowCard({
           <ul className="mt-2 divide-y divide-white/15">
             {next.map((e) => (
               <li key={e.id}>
-                <EventDialog event={e} phase="upcoming">
-                  <button type="button" className="flex w-full items-center justify-between gap-4 py-3 text-left hover:opacity-90">
-                    <span className="min-w-0">
-                      <span className="block font-semibold">{e.title}</span>
-                      {e.registrable && (
-                        <span className="text-xs text-white/70">
-                          {seatsLabel(e)}
-                          {isLottery(e) && !isOverbooked(e) && " · Losverfahren"}
-                        </span>
-                      )}
-                    </span>
-                    <span className="shrink-0 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold tabular-nums">
-                      {relativeStart(e, now)}
-                    </span>
-                  </button>
-                </EventDialog>
+                <Link href={eventHref(e)} className="flex items-center justify-between gap-4 rounded-lg py-3 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+                  <span className="min-w-0">
+                    <span className="block font-semibold">{e.title}</span>
+                    {e.registrable && (
+                      <span className="text-xs text-white/70">
+                        {seatsLabel(e)}
+                        {isLottery(e) && !isOverbooked(e) && " · Losverfahren"}
+                      </span>
+                    )}
+                  </span>
+                  <span className="shrink-0 rounded-full bg-white/15 px-3 py-1 text-xs font-semibold tabular-nums">
+                    {relativeStart(e, now)}
+                  </span>
+                </Link>
               </li>
             ))}
           </ul>

@@ -1,10 +1,10 @@
 "use client";
 
-import { EventDialog } from "@/components/events/event-dialog";
 import { LotteryNote } from "@/components/events/event-status";
 import { Button } from "@/components/ui/button";
 import { formatBerlin, timeRange } from "@/lib/berlin";
 import {
+  eventHref,
   isFull,
   isOverbooked,
   plainText,
@@ -17,7 +17,7 @@ import { cn, handleSafeCalendar } from "@/lib/utils";
 import { CalendarPlus, Ticket } from "lucide-react";
 import Link from "next/link";
 
-/** Karte mit Datum, Platz-Balken und Anmelde-Button (Highlights, Anmeldeseite). */
+/** Karte mit Datum, Platz-Balken und Anmelde-Button (Highlights, Anmeldeseite); Details auf /kalender/[slug]. */
 export function SignupCard({
   event,
   phase,
@@ -38,7 +38,11 @@ export function SignupCard({
           <span className="text-2xl font-black leading-none">{formatBerlin(event.start, "dd")}</span>
         </div>
         <div className="min-w-0">
-          <h3 className="text-lg font-bold leading-tight">{event.title}</h3>
+          <h3 className="text-lg font-bold leading-tight">
+            <Link href={eventHref(event)} className="hover:underline hover:underline-offset-4">
+              {event.title}
+            </Link>
+          </h3>
           <p className="text-sm text-muted-foreground">
             {formatBerlin(event.start, "dd.MM.")} · {timeRange(event.start, event.end)} Uhr
           </p>
@@ -64,9 +68,9 @@ export function SignupCard({
               </Link>
             </Button>
           )}
-          <EventDialog event={event} phase={phase}>
-            <Button variant="outline">Details</Button>
-          </EventDialog>
+          <Button asChild variant="outline">
+            <Link href={eventHref(event)}>Details</Link>
+          </Button>
         </div>
       </div>
     </article>

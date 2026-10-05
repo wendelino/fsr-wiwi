@@ -4,6 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { SectionHeading } from "@/components/section-heading";
 import { ERSTI_GUIDE } from "@/lib/ersti";
 import { siteConfig } from "@/lib/siteConfig";
 import Link from "next/link";
@@ -16,14 +17,13 @@ export function FaqSection() {
   return (
     <section className="grid gap-6 md:grid-cols-[1fr_2fr] md:gap-12">
       <div>
-        <h2 className="text-4xl font-black tracking-tight md:text-5xl">Häufige Fragen</h2>
-        <p className="mt-3 text-muted-foreground">
+        <SectionHeading eyebrow="FAQ" title="Häufige Fragen">
           Noch etwas offen?{" "}
           <Link href="/kontakt" className="font-medium text-fsr underline underline-offset-4">
             Schreib uns
           </Link>
           .
-        </p>
+        </SectionHeading>
       </div>
       <Faq />
     </section>

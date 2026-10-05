@@ -1,5 +1,5 @@
 import { getEvents } from "@/app/_actions/event";
-import { FullBleed } from "@/components/full-bleed";
+import { HeroLead, PageHero } from "@/components/page-hero";
 import { SignupCard } from "@/components/events/signup-card";
 import { Metadata } from "next";
 import Link from "next/link";
@@ -30,25 +30,13 @@ export default async function page() {
 
   return (
     <>
-      <FullBleed>
-        <div className="relative overflow-hidden bg-fsr-deep text-white">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_20%,rgba(255,255,255,0.18),transparent_45%),radial-gradient(circle_at_85%_80%,rgba(0,0,0,0.35),transparent_50%)]"
-          />
-          <div className="relative mx-auto max-w-6xl px-4 py-12 md:py-20">
-            <p className="text-sm font-bold uppercase tracking-widest text-white/70">Plätze begrenzt</p>
-            <h1 className="mt-2 text-[clamp(3rem,10vw,6.5rem)] font-black uppercase leading-[0.9] tracking-tighter">
-              Anmeldung
-            </h1>
-            <p className="mt-6 max-w-xl text-lg text-white/85">
-              Für diese Termine braucht ihr eine Anmeldung. Bei manchen werden die
-              Plätze verlost – dort könnt ihr euch auch noch anmelden, wenn alle
-              Plätze vergeben sind.
-            </p>
-          </div>
-        </div>
-      </FullBleed>
+      <PageHero eyebrow="Plätze begrenzt" title="Anmeldung" poster>
+        <HeroLead>
+          Für diese Termine braucht ihr eine Anmeldung. Bei manchen werden die
+          Plätze verlost – dort könnt ihr euch auch noch anmelden, wenn alle
+          Plätze vergeben sind.
+        </HeroLead>
+      </PageHero>
 
       {sorted.length === 0 ? (
         <div className="rounded-3xl border border-dashed p-10 text-center text-muted-foreground">

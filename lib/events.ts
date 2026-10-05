@@ -1,5 +1,8 @@
 // Plätze, Losverfahren und Anmeldestatus an einer Stelle
 
+/** Detailseite eines Termins – Klicks auf Termine führen immer dorthin. */
+export const eventHref = (event: EventItem) => `/kalender/${encodeURIComponent(event.slug)}`;
+
 /** Plätze werden verlost – Anmeldung bleibt auch ohne freie Plätze offen. */
 export function isLottery(event: EventItem) {
   return event.registrable && event.isRandomSelection;
@@ -43,7 +46,7 @@ export const plural = (n: number, one: string, many: string) =>
 export function seatsLabel(event: EventItem) {
   if (!event.registrable) return null;
   if (isFull(event)) return "Ausgebucht";
-  if (isOverbooked(event)) return "Voll – es wird gelost";
+  if (isOverbooked(event)) return "Anmeldung nötig – es wird gelost";
   const seats = freeSeats(event);
   if (seats == null) return "Anmeldung nötig";
   return `Anmeldung nötig · ${plural(seats, "Platz", "Plätze")} frei`;

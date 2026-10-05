@@ -1,12 +1,13 @@
 "use client";
 
+import { SectionHeading } from "@/components/section-heading";
 import { Button } from "@/components/ui/button";
 import { cn, handleSafeAllEventsCalendar } from "@/lib/utils";
 import { CalendarPlus, ChevronRight } from "lucide-react";
-import { EventDialog } from "@/components/events/event-dialog";
+import Link from "next/link";
 import { EventStatus } from "@/components/events/event-status";
 import { eventsOnDay, formatBerlin, timeRange, WeekDay } from "@/lib/berlin";
-import { plainText } from "@/lib/events";
+import { eventHref, plainText } from "@/lib/events";
 import { Phase, phaseOf } from "@/lib/use-now";
 import { useRef, useState } from "react";
 
@@ -59,10 +60,7 @@ export function Lineup({
   return (
     <section id="lineup" className="scroll-mt-24">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
-        <div>
-          <p className="text-sm font-bold uppercase tracking-widest text-fsr">Die ganze Woche</p>
-          <h2 className="mt-1 text-4xl font-black tracking-tight md:text-5xl">Line-up</h2>
-        </div>
+        <SectionHeading eyebrow="Die ganze Woche" title="Line-up" />
         <Button
           variant="outline"
           onClick={() => handleSafeAllEventsCalendar(events)}
@@ -209,26 +207,24 @@ function TimelineEntry({
               phase === "live" ? "border-fsr-deep bg-fsr-deep" : "border-muted-foreground/40"
             )}
           />
-          <EventDialog event={event} phase={phase}>
-            <button
-              type="button"
-              className={cn(
-                "group w-full rounded-2xl border bg-card p-4 text-left transition hover:border-fsr/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fsr",
-                phase === "live" && "border-fsr/50 shadow-md"
-              )}
-            >
-              <span className="flex items-start justify-between gap-3">
-                <span className="font-semibold leading-snug">{event.title}</span>
-                <ChevronRight className="mt-0.5 size-4 shrink-0 text-muted-foreground transition group-hover:translate-x-0.5" />
+          <Link
+            href={eventHref(event)}
+            className={cn(
+              "group block rounded-2xl border bg-card p-4 text-left transition hover:border-fsr/40 hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fsr",
+              phase === "live" && "border-fsr/50 shadow-md"
+            )}
+          >
+            <span className="flex items-start justify-between gap-3">
+              <span className="font-semibold leading-snug">{event.title}</span>
+              <ChevronRight className="mt-0.5 size-4 shrink-0 text-muted-foreground transition group-hover:translate-x-0.5" />
+            </span>
+            {event.description && (
+              <span className="mt-1 line-clamp-2 block text-sm text-muted-foreground">
+                {plainText(event.description)}
               </span>
-              {event.description && (
-                <span className="mt-1 line-clamp-2 block text-sm text-muted-foreground">
-                  {plainText(event.description)}
-                </span>
-              )}
-              <EventStatus event={event} phase={phase} className="mt-3" />
-            </button>
-          </EventDialog>
+            )}
+            <EventStatus event={event} phase={phase} className="mt-3" />
+          </Link>
         </div>
       </li>
     </>
