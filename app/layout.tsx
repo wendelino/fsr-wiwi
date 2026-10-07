@@ -74,7 +74,9 @@ export default function RootLayout({
       <head>
         <Script
           src="https://analytics.m.lnio.de/script.js"
-          data-website-id="d72a7bb9-59d3-40b7-934a-a48d8dceca3f"async
+          data-website-id="d72a7bb9-59d3-40b7-934a-a48d8dceca3f"
+          data-performance="true"
+          async
         /> 
       </head>
       <body className={cn(inter.className, "flex flex-col min-h-screen")}>
