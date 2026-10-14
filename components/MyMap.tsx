@@ -1,30 +1,12 @@
 "use client";
-import dynamic from "next/dynamic";
-import { useEffect } from "react";
 import { LocationCard, LocationProps } from "./Event";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet/dist/leaflet.css";
-import React, { useMemo, useState } from "react";
-import {
-  Circle,
-  MapContainer,
-  Marker,
-  Polyline,
-  Popup,
-  TileLayer,
-  Tooltip,
-} from "react-leaflet";
-
-// Typ für LatLngExpression importieren
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { LatLngExpression } from "leaflet";
 
 export default function MyMap({ locations }: { locations: LocationProps[] }) {
-  // CSS-Dateien nur auf dem Client laden
-  useEffect(() => {
-    import("./MyMap.css"); 
-  }, []);
-
   const center: LatLngExpression = locations.length > 0 ? [locations[0].lat, locations[0].long] : [51.1657, 10.4515]; // Standardkoordinaten, falls keine Orte vorhanden sind
 
   return (
@@ -39,14 +21,13 @@ export default function MyMap({ locations }: { locations: LocationProps[] }) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      {locations &&
-        locations.map((loc) => (
-          <Marker position={[loc.lat, loc.long]} key={loc.label}>
-            <Popup>
-              <LocationCard location={loc} />
-            </Popup>
-          </Marker>
-        ))}
+      {locations.map((loc) => (
+        <Marker position={[loc.lat, loc.long]} key={loc.id}>
+          <Popup>
+            <LocationCard location={loc} />
+          </Popup>
+        </Marker>
+      ))}
     </MapContainer>
   );
 }

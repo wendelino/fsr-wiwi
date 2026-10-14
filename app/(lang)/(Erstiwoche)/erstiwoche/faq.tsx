@@ -10,9 +10,6 @@ import { ERSTI_GUIDE } from "@/lib/ersti";
 import { siteConfig } from "@/lib/siteConfig";
 import Link from "next/link";
 
-const ALTKLAUSUREN_URL =
-  "https://studip.uni-halle.de/dispatch.php/course/overview?cid=ee8c88937076ac5fe253303faf816cbe";
-
 /** FAQ der Ersti-Woche. */
 export function FaqSection() {
   return (
@@ -62,18 +59,6 @@ function Faq() {
       q: "Wie bekomme ich die Termine in meinen Kalender?",
       a: "Über „Alle Termine in den Kalender“ lädst du eine .ics-Datei mit dem ganzen Programm herunter. Einzelne Termine speicherst du im Detailfenster eines Termins.",
     },
-    // {
-    //   q: "Wo finde ich Altklausuren?",
-    //   a: (
-    //     <>
-    //       Auf StudIP unter{" "}
-    //       <a href={ALTKLAUSUREN_URL} target="_blank" rel="noopener noreferrer" className="underline">
-    //         Fachschaftsrat Wirtschaftswissenschaften (FSR WiWi) / Econ Students Council
-    //       </a>
-    //       .
-    //     </>
-    //   ),
-    // },
     {
       q: "Wer organisiert die Ersti-Woche – und kann ich mitmachen?",
       a: "Der Fachschaftsrat Wirtschaftswissenschaften, die gewählte Vertretung der WiWi-Studierenden. Unsere Sitzungen sind öffentlich: jeden zweiten Dienstag um 19 Uhr in der Großen Steinstraße 73, Raum 201.",

@@ -8,11 +8,6 @@ export const formatBerlin = (date: Date, formatStr: string) =>
 
 export const berlinDateKey = (date: Date) => formatBerlin(date, "yyyy-MM-dd");
 
-export const berlinMinutesOfDay = (date: Date) => {
-  const [h, m] = formatBerlin(date, "HH:mm").split(":").map(Number);
-  return h * 60 + m;
-};
-
 /** "10:00–12:00", Endzeit um Mitternacht als 24:00. */
 export function timeRange(start: Date, end: Date) {
   const endsAtMidnight =

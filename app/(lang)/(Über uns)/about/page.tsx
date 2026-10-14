@@ -97,13 +97,12 @@ const more = [
 ];
 
 export default async function page() {
-  const { about: t } = await getTranslation("de");
+  const { about: t } = getTranslation();
   const { mail, strasse, plz, ort } = siteConfig.company;
 
   const channels = [
     { href: `mailto:${mail}`, icon: Mail, title: "E-Mail", text: mail },
     { href: "https://www.instagram.com/fsr.wiwi.halle/", icon: Instagram, title: t.cards.instagram.title, text: t.cards.instagram.content },
-    // { href: "https://www.facebook.com/fsr.wiwi.halle", icon: Facebook, title: t.cards.facebook.title, text: t.cards.facebook.content },
     { href: STUDIP_URL, icon: BookOpen, title: t.cards.studip.title, text: t.cards.studip.content },
   ];
 

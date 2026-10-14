@@ -30,7 +30,7 @@ const INSTAGRAM_URL = "https://www.instagram.com/fsr.wiwi.halle/";
 const list = "list-disc space-y-2 pl-5 marker:text-fsr";
 
 export default async function page() {
-  const { awareness: t } = await getTranslation("de");
+  const { awareness: t } = getTranslation();
   const { mail } = siteConfig.company;
 
   return (

@@ -2,11 +2,6 @@
 
 import { MapPin } from "lucide-react";
 import { Button } from "./ui/button";
-type Location_DB = {
-  label: string;
-  lat: number;
-  long: number;
-};
 export type LocationProps = {
   id: string;
   label: string;
@@ -14,7 +9,7 @@ export type LocationProps = {
   long: number;
 };
 
-export function LocationCard({ location }: { location: Location_DB }) {
+export function LocationCard({ location }: { location: LocationProps }) {
   const handleGoogle = () =>
     window.open(
       `https://maps.google.com/?q=${location.lat},${location.long}`,

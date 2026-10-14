@@ -73,7 +73,7 @@ function useHash(pathname: string) {
   return hash;
 }
 
-export default function NavBar({ lang: _lang }: { lang: string }) {
+export default function NavBar() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const activeHref = findActiveHref(pathname, useHash(pathname));

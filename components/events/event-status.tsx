@@ -3,8 +3,6 @@ import { Phase } from "@/lib/use-now";
 import { cn } from "@/lib/utils";
 import { Dices } from "lucide-react";
 
-export { isFull, seatsLabel };
-
 /** Einheitliche Status-Badges: läuft gerade, Anmeldung/Plätze, Losverfahren, ausgebucht, vorbei. */
 export function EventStatus({
   event,

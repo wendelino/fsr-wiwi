@@ -42,13 +42,6 @@ export default function RegisterForm({
 		return res;
 	}
 
-	// const def = {
-	//   dsgvo: true,
-	//   course: "ww",
-	//   name: "ww",
-	//   surname: "ww",
-	//   email: "t@t.de",
-	// };
 	const def = {
 		dsgvo: false,
 		course: "",
@@ -122,19 +115,6 @@ export default function RegisterForm({
 							</FormItem>
 						)}
 					/>
-					{/* <FormField
-						control={form.control}
-						name="course"
-						render={({ field }) => (
-							<FormItem>
-								<FormLabel>Studiengang</FormLabel>
-								<FormControl>
-									<Input placeholder="Wirtschaftsinformatik B.Sc." {...field} />
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						)}
-					/> */}
 					<FormField
 						control={form.control}
 						name="dsgvo"

@@ -218,7 +218,7 @@ export default function GenericForm<TValues extends FieldValues>(
 }
 
 /** Standard-Fehleransicht: Meldung, erneut versuchen (Eingaben bleiben), Kontakt. */
-export function FormError({
+function FormError({
   message,
   fallback = "Senden fehlgeschlagen. Versuche es erneut.",
   retry,
