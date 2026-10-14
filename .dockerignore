@@ -1,0 +1,16 @@
+# Lokale Artefakte gehören nicht in den Build-Kontext: node_modules und .next
+# würden die im Image gebauten Stände überschreiben, die übrigen blähen den
+# Kontext nur auf. .git liest beim Build nichts (keine Build-ID aus dem Commit).
+node_modules
+.next
+out
+build
+.git
+.env*
+!.env.example
+coverage
+*.tsbuildinfo
+*.log
+.DS_Store
+.vscode
+.claude
