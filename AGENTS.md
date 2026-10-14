@@ -11,7 +11,7 @@ und Footer folgen ihm bereits.
   Icons aus `lucide-react`, Animationen mit `motion` über die Bausteine in
   `components/motion` (siehe „Bewegung“). Paketmanager ist **bun**.
 - `bun dev` startet lokal, `bun run build` baut. Prüfen vor jedem Commit:
-  `npx tsc --noEmit -p .` (`bun run lint` ist kaputt, siehe `docs/AUDIT.md` G6).
+  `npx tsc --noEmit -p .` und `bun run lint`.
 - Events kommen aus dem CMS (`CMS_ENDPOINT`, `CMS_TOKEN`) über
   `app/_actions/event.ts`; der Typ `EventItem` steht in `app/types.d.ts`.
 - Sprache der Seite und der Code-Kommentare: Deutsch. Kommentare knapp und nur,
@@ -221,7 +221,7 @@ Regeln:
 
 ### Checkliste
 
-- [ ] `npx tsc --noEmit -p .` ist sauber.
+- [ ] `npx tsc --noEmit -p .` und `bun run lint` sind sauber.
 - [ ] Bei 390 px und 1200 px angesehen, Dark Mode kurz geprüft.
 - [ ] Neue Seite: `PageHero` + `SectionHeading` + Seiten-Wrapper.
 - [ ] Animationen nur über `@/components/motion`; Karten-Raster mit `Stagger`, Einzelnes mit `Reveal`.

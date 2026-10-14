@@ -46,7 +46,7 @@ const fachschaft: PosterItem[] = [
 ];
 
 export default async function Home() {
-  const { home: t } = await getTranslation("de");
+  const { home: t } = getTranslation();
   const season = isErstiSeason(new Date());
 
   return (

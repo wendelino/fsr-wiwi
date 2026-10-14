@@ -18,10 +18,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ lang: string; period: string }>;
+  params: Promise<{ period: string }>;
 }): Promise<Metadata> {
-  const { period, lang } = await params;
-  const { mitglieder: t, global: gt } = await getTranslation(lang);
+  const { period } = await params;
+  const { mitglieder: t, global: gt } = getTranslation();
 
   const legislatur = legislaturData.find(({ period: p }) => p == period);
   const title = `${t.title} ${legislatur?.period || gt["not-found"]}`;
@@ -57,10 +57,10 @@ const initials = (name: string) => {
 export default async function page({
   params,
 }: {
-  params: Promise<{ lang: string; period: string }>;
+  params: Promise<{ period: string }>;
 }) {
   const p = await params;
-  const { mitglieder: t } = await getTranslation(p.lang);
+  const { mitglieder: t } = getTranslation();
 
   const legislatur = legislaturData.find(({ period }) => period == p.period);
   if (!legislatur) redirect("/mitglieder");

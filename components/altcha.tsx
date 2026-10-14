@@ -1,17 +1,9 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { toast } from "./ui/use-toast";
-
-interface AltchaProps {
-  onStateChange?: (ev: Event | CustomEvent) => void;
-  onVerified?: () => void;
-}
+import { useEffect, useState } from "react";
 
 const ENDPOINT = "/api/altcha";
 
-const Altcha = ({ onStateChange, onVerified }: AltchaProps) => {
-  const widgetRef = useRef<HTMLElement>(null);
-
+const Altcha = () => {
   const [isReady, setIsReady] = useState(false);
   useEffect(() => {
     let isMounted = true;
@@ -22,7 +14,6 @@ const Altcha = ({ onStateChange, onVerified }: AltchaProps) => {
 
         if (isMounted) setIsReady(true);
       } catch (err) {
-        // Silently fail; widget will not render if script fails
         if (isMounted) setIsReady(false);
       }
     };
@@ -31,35 +22,6 @@ const Altcha = ({ onStateChange, onVerified }: AltchaProps) => {
       isMounted = false;
     };
   }, []);
-
-  //   const handleStateChange = async (ev: Event | CustomEvent) => {
-  //     return;
-
-  //     if (!("detail" in ev)) return;
-  //     const detail = (ev as CustomEvent).detail;
-  //     const payload = detail?.payload;
-  //     onStateChange?.(ev);
-
-  //     if (!payload) return;
-  //     const res = await fetch("/api/altcha", {
-  //       method: "POST",
-  //       headers: { "Content-Type": "application/json" },
-  //       body: JSON.stringify({ payload }),
-  //     });
-  //     const json = await res.json().catch(() => ({}));
-  //     if (!res.ok) {
-  //       toast({
-  //         title: "Überprüfung fehlgeschlagen",
-  //         description: json?.message || JSON.stringify(json),
-  //         variant: "destructive",
-  //       });
-  //       (widgetRef.current as unknown as { reset(): void })?.reset?.();
-
-  //       return;
-  //     }
-  //     onVerified?.();
-  //     return false;
-  //   };
 
   if (!isReady) return null;
 
@@ -70,7 +32,6 @@ const Altcha = ({ onStateChange, onVerified }: AltchaProps) => {
   };
   return (
     <altcha-widget
-      ref={widgetRef}
       style={{
         "--altcha-max-width": "320px",
         "--altcha-border-width": "1px",
@@ -83,15 +44,9 @@ const Altcha = ({ onStateChange, onVerified }: AltchaProps) => {
       }}
       challengeurl={ENDPOINT}
       verifyurl={ENDPOINT}
-      //   onstatechange={handleStateChange}
-
       floating
       delay={500}
       expire={120000}
-      //disablerefetchonexpire
-      //   onverified={handleStateChange}
-      //   auto="onsubmit"
-      //   debug
       strings={JSON.stringify(CONFIG)}
     ></altcha-widget>
   );

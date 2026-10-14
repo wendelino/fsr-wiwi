@@ -8,7 +8,6 @@ import WidthWrapper from "@/components/WidthWrapper";
 import ScrollTop from "@/components/ScrollTop";
 import { MotionProvider } from "@/components/motion";
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { Toaster } from "@/components/ui/toaster";
 import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -87,7 +86,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <MotionProvider>
-            <NavBar lang={"de"} />
+            <NavBar />
             <main className="flex-1 min-h-[53vh] pt-8">
               <WidthWrapper className=" flex flex-col gap-8 lg:gap-16">
                 {children}
@@ -95,7 +94,6 @@ export default function RootLayout({
             </main>
             <Footer />
             <ScrollTop />
-            <Toaster />
           </MotionProvider>
         </ThemeProvider>
       </body>

@@ -67,9 +67,6 @@ export default function ContactForm({ className }: { className?: string }) {
         submitErrorText: "Senden fehlgeschlagen. Versuche es erneut.",
         showRequiredHint: true,
       }}
-      // optional eigene Erfolg-/Fehlersichten:
-      // successView={<div>Danke!</div>}
-      // errorView={<div>Ups, Fehler.</div>}
     >
       {(form) => (
         <>
