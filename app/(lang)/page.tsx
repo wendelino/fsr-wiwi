@@ -24,7 +24,7 @@ import Link from "next/link";
 export const revalidate = 3600;
 
 const ALTKLAUSUREN_URL =
-  "https://studip.uni-halle.de/dispatch.php/course/overview?cid=ee8c88937076ac5fe253303faf816cbe";
+  "https://studip.uni-halle.de/dispatch.php/course/details?sem_id=ee8c88937076ac5fe253303faf816cbe&again=yes";
 const FUNDING_URL = "https://wcms.itz.uni-halle.de/download.php?down=56894&elem=2139305";
 
 const fachschaft: PosterItem[] = [
