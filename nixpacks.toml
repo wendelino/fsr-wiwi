@@ -1,9 +1,0 @@
-[phases.install]
-# Ohne diese Zeile kopiert nixpacks vor dem Install das komplette Repo ins
-# Image. Jede geänderte Quelldatei macht dann den Docker-Layer ungültig, und
-# alle Dependencies werden neu installiert. So hängt der Layer nur noch an
-# Manifest und Lockfile.
-onlyIncludeFiles = ["package.json", "bun.lock"]
-# Bricht ab, wenn bun.lock nicht zu package.json passt, statt still neu
-# aufzulösen – sonst würde im Image etwas anderes laufen als lokal.
-cmds = ["bun install --frozen-lockfile"]
