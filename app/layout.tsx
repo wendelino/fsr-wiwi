@@ -72,7 +72,7 @@ export default function RootLayout({
     <html lang={"de"} suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
         <Script
-          src="https://analytics.m.lnio.de/script.js"
+          src="https://stats.fsr-wiwi-halle.de/script.js"
           data-website-id="d72a7bb9-59d3-40b7-934a-a48d8dceca3f"
           data-performance="true"
           async
