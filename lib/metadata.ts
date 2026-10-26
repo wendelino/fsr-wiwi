@@ -5,10 +5,10 @@ export const SITE_DESCRIPTION =
   "Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg";
 
 export const OG_IMAGE = {
-  url: siteConfig.logo,
-  width: 984,
-  height: 991,
-  alt: "Logo des FSR WiWi",
+  url: "/og-image.png",
+  width: 1200,
+  height: 630,
+  alt: "FSR WiWi Halle – Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
 };
 
 type PageMetadata = Omit<Metadata, "title" | "description"> & {
