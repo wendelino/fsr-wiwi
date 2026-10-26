@@ -9,17 +9,19 @@ import ScrollTop from "@/components/ScrollTop";
 import { MotionProvider } from "@/components/motion";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Script from "next/script";
+import { OG_IMAGE, SITE_DESCRIPTION } from "@/lib/metadata";
+import { siteConfig } from "@/lib/siteConfig";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  icons: "https://fsr-wiwi-halle.de/favicon.ico",
+  metadataBase: new URL(siteConfig.url),
+  icons: "/favicon.ico",
   title: {
     template: "%s | FSR Wiwi",
     default: "FSR Wiwi Halle",
   },
-  description:
-    "Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
+  description: SITE_DESCRIPTION,
   keywords: [
     "Fachschaftsrat",
     "FSR",
@@ -30,24 +32,17 @@ export const metadata: Metadata = {
     "Universität",
     "MLU",
   ],
+  // canonical und og:url setzt jede Seite selbst (pageMetadata), sonst erben alle die Startseite
   openGraph: {
-    url: "https://fsr-wiwi-halle.de",
-    siteName: "FSR Wiwi",
+    siteName: siteConfig.name,
     type: "website",
+    locale: "de_DE",
     title: {
       template: "%s | FSR Wiwi",
       default: "FSR Wiwi Halle",
     },
-    description:
-      "Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
-    images: [
-      {
-        url: "https://fsr-wiwi-halle.de/logo.png",
-        width: 1200,
-        height: 630,
-        alt: "Logo",
-      },
-    ],
+    description: SITE_DESCRIPTION,
+    images: [OG_IMAGE],
   },
   twitter: {
     card: "summary_large_image",
@@ -55,11 +50,7 @@ export const metadata: Metadata = {
       template: "%s | FSR Wiwi",
       default: "FSR Wiwi Halle",
     },
-    description:
-      "Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
-  },
-  alternates: {
-    canonical: "https://fsr-wiwi-halle.de",
+    description: SITE_DESCRIPTION,
   },
 };
 
@@ -86,8 +77,14 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <MotionProvider>
+            <a
+              href="#inhalt"
+              className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-fsr-deep focus:px-5 focus:py-2.5 focus:font-semibold focus:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+            >
+              Zum Inhalt springen
+            </a>
             <NavBar />
-            <main className="flex-1 min-h-[53vh] pt-8">
+            <main id="inhalt" tabIndex={-1} className="flex-1 min-h-[53vh] pt-8 focus:outline-none">
               <WidthWrapper className=" flex flex-col gap-8 lg:gap-16">
                 {children}
               </WidthWrapper>

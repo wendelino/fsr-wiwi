@@ -7,11 +7,12 @@ import { HeroLead, PageHero } from "@/components/page-hero";
 import { Eyebrow, SectionHeading } from "@/components/section-heading";
 import { siteConfig } from "@/lib/siteConfig";
 import { ArrowUpRight, BookOpen, FileText, Mail, MapPin } from "lucide-react";
-import { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Kontakt",
   description: "Schreib uns eine Nachricht, wir melden uns bei dir :)",
+  path: "/kontakt",
   keywords: [
     "Fachschaftsrat",
     "FSR",
@@ -25,28 +26,7 @@ export const metadata: Metadata = {
     "Hilfe",
     "Email",
   ],
-  openGraph: {
-    url: "https://fsr-wiwi-halle.de/kontakt",
-    type: "website",
-    title: "Kontakt",
-    description:
-      "Kontakt zum Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
-    images: [
-      {
-        url: "https://fsr-wiwi-halle.de/logo.png",
-        width: 1200,
-        height: 630,
-        alt: "Logo",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Kontakt",
-    description:
-      "Kontakt zum Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
-  },
-};
+});
 
 const ALTKLAUSUREN_URL =
   "https://studip.uni-halle.de/dispatch.php/course/overview?cid=ee8c88937076ac5fe253303faf816cbe";

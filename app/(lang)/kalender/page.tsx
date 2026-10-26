@@ -1,36 +1,15 @@
 import { getEvents } from "@/app/_actions/event";
 import { HeroLead, PageHero } from "@/components/page-hero";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import { Suspense } from "react";
 import InfiniteScroll from "./infinite-scroll";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Eventkalender",
   description: "Bleib auf dem Laufenden über die neuesten Veranstaltungen",
-  openGraph: {
-    title: "Eventkalender",
-    description: "Bleib auf dem Laufenden über die neuesten Veranstaltungen",
-    url: "https://fsr-wiwi-halle.de/kalender",
-    siteName: "Fachschaftsrat Wirtschaftswissenschaften",
-    images: [
-      {
-        url: "https://fsr-wiwi-halle.de/logo.png",
-        width: 1200,
-        height: 630,
-        alt: "Eventkalender",
-      },
-    ],
-    locale: "de_DE",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Eventkalender",
-    description: "Bleib auf dem Laufenden über die neuesten Veranstaltungen",
-    images: ["https://fsr-wiwi-halle.de/logo.png"],
-  },
-};
+  path: "/kalender",
+});
 
 export default function Page() {
   return (

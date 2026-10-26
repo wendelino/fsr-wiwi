@@ -1,16 +1,18 @@
 "use server";
 import { getEvent } from "@/app/_actions/event";
 import { EventActions } from "@/components/events/event-actions";
-import { EventHeader, EventNotFound } from "@/components/events/event-header";
+import { EventHeader } from "@/components/events/event-header";
 import { EventMarkdown } from "@/components/events/event-markdown";
 import { LotteryNote } from "@/components/events/event-status";
 import { Reveal } from "@/components/motion";
 import RegisterForm from "@/components/forms/register-form";
 import UnilympicsForm from "@/components/forms/unilympics-form";
 import { isFull, plainText } from "@/lib/events";
+import { pageMetadata } from "@/lib/metadata";
 import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 const BACK = { href: "/anmeldung", label: "Alle Anmeldungen" };
 
@@ -22,15 +24,13 @@ export async function generateMetadata({
 	const p = await params;
 	const slug = decodeURIComponent(p.slug);
 	const { event } = await getEvent(slug);
-	const title = event ? `Anmeldung: ${event.title}` : "Event 404";
-	const description = event ? plainText(event.description).slice(0, 160) : "Event 404";
+	if (!event) return { title: "Termin nicht gefunden" };
 
-	return {
-		title,
-		description,
-		openGraph: { title, description },
-		twitter: { title, description },
-	};
+	return pageMetadata({
+		title: `Anmeldung: ${event.title}`,
+		description: plainText(event.description).slice(0, 160),
+		path: `/anmeldung/${encodeURIComponent(event.slug)}`,
+	});
 }
 
 interface PageProps {
@@ -42,7 +42,7 @@ export default async function page({ params }: PageProps) {
 	const slug = p.slug;
 
 	const { event } = await getEvent(slug);
-	if (!event) return <EventNotFound back={BACK} />;
+	if (!event) notFound();
 
 	const past = event.end <= new Date();
 	const closed = !event.registrable || isFull(event) || past;

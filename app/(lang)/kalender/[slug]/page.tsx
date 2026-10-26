@@ -1,19 +1,18 @@
 "use server";
 import { getEvent } from "@/app/_actions/event";
-import { FullBleed } from "@/components/full-bleed";
 import { EventActions } from "@/components/events/event-actions";
 import { EventFacts } from "@/components/events/event-facts";
-import { EventHeader, EventNotFound } from "@/components/events/event-header";
+import { EventHeader } from "@/components/events/event-header";
 import { EventMarkdown } from "@/components/events/event-markdown";
 import { LotteryNote } from "@/components/events/event-status";
 import { Reveal } from "@/components/motion";
-import { Skeleton } from "@/components/ui/skeleton";
 import { ERSTI_PROGRAM, ERSTI_TAG } from "@/lib/ersti";
-import { plainText } from "@/lib/events";
+import { eventHref, plainText } from "@/lib/events";
+import { pageMetadata } from "@/lib/metadata";
 import { ArrowRight } from "lucide-react";
 import { Metadata } from "next";
 import Link from "next/link";
-import { Suspense } from "react";
+import { notFound } from "next/navigation";
 
 const BACK = { href: "/kalender", label: "Alle Termine" };
 
@@ -25,15 +24,13 @@ export async function generateMetadata({
   const p = await params;
   const slug = decodeURIComponent(p.slug);
   const { event } = await getEvent(slug);
-  const title = event?.title || "Event 404";
-  const description = event ? plainText(event.description).slice(0, 160) : "Event 404";
+  if (!event) return { title: "Termin nicht gefunden" };
 
-  return {
-    title,
-    description,
-    openGraph: { title, description },
-    twitter: { title, description },
-  };
+  return pageMetadata({
+    title: event.title,
+    description: plainText(event.description).slice(0, 160),
+    path: eventHref(event),
+  });
 }
 
 export default async function page({
@@ -43,38 +40,9 @@ export default async function page({
 }) {
   const p = await params;
   const slug = decodeURIComponent(p.slug);
-
-  return (
-    <Suspense fallback={<Loading />}>
-      <Content slug={slug} />
-    </Suspense>
-  );
-}
-
-function Loading() {
-  return (
-    <>
-      <FullBleed>
-        <div className="bg-fsr-deep">
-          <div className="mx-auto max-w-6xl space-y-6 px-4 py-10 md:py-16">
-            <Skeleton className="h-4 w-28 bg-white/20" />
-            <Skeleton className="h-14 w-3/4 bg-white/20" />
-            <Skeleton className="h-8 w-80 bg-white/20" />
-          </div>
-        </div>
-      </FullBleed>
-      <div className="space-y-4">
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-1/2" />
-        <Skeleton className="h-4 w-3/4" />
-      </div>
-    </>
-  );
-}
-
-async function Content({ slug }: { slug: string }) {
+  // Vor dem ersten Byte laden, damit unbekannte Termine mit Status 404 antworten
   const { event } = await getEvent(slug);
-  if (!event) return <EventNotFound back={BACK} />;
+  if (!event) notFound();
 
   const past = event.end <= new Date();
   const isErsti = event.tagsNew?.includes(ERSTI_TAG);

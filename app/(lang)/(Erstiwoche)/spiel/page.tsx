@@ -3,23 +3,14 @@ import { HeroLead, PageHero } from "@/components/page-hero";
 import { Prose } from "@/components/prose";
 import { SectionHeading } from "@/components/section-heading";
 import { Award, Medal, Trophy } from "lucide-react";
-import { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Gewinnspiel",
   description:
     "Nimm am Gewinnspiel der Ersti-Woche teil: Stempel sammeln, Lose sichern und tolle Preise gewinnen.",
-  openGraph: {
-    title: "Gewinnspiel",
-    description:
-      "So funktioniert das Gewinnspiel der Ersti-Woche: Stempelkarte, Abgabe & Gewinne.",
-  },
-  twitter: {
-    title: "Gewinnspiel",
-    description:
-      "Stempel sammeln, Lose sichern und mit etwas Glück Preise gewinnen.",
-  },
-};
+  path: "/spiel",
+});
 
 const prizes = [
   { icon: Trophy, place: "Platz 1", prize: "Freitag-Rucksack" },

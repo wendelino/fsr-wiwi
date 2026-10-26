@@ -73,7 +73,7 @@ export default function IframeConsent({
     // Nach der Zustimmung blendet der Platzhalter in den Inhalt über
     <Swap swapKey={consentGiven ? "iframe" : "consent"} className="h-full">
       {consentGiven ? (
-        <iframe src={iframe.src} className={style} loading="lazy" scrolling="no" />
+        <iframe src={iframe.src} title={`Inhalt von ${label}`} className={style} loading="lazy" scrolling="no" />
       ) : (
         placeholder
       )}

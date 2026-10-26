@@ -24,6 +24,13 @@ und Footer folgen ihm bereits.
 - Sitemap und robots.txt erzeugt Next selbst aus `app/sitemap.ts` und
   `app/robots.ts` (Termine kommen aus dem CMS). Neue öffentliche Seiten dort
   in `STATIC_PAGES` eintragen.
+- Metadaten jeder Seite über `pageMetadata` (`lib/metadata.ts`): setzt Titel,
+  Beschreibung, canonical und die Vorschau (Open Graph, Twitter). Nie einen
+  canonical im Layout setzen – den erben sonst alle Seiten.
+- Unbekannte Inhalte (z. B. Termine) mit `notFound()` beantworten, nicht mit
+  einer normalen Seite – sonst liefert der Server Status 200.
+- Ordner und Route-Gruppen nur mit ASCII benennen (`(ueber-uns)`, nicht
+  `(Über uns)`): Umlaute und Leerzeichen landen in den Chunk-URLs.
 - Seitenspezifische Teile liegen neben der Seite (z. B. `erstiwoche/lineup.tsx`),
   alles Wiederverwendbare in `components/` und `lib/`. Ungenutzten Code löschen
   statt auskommentieren.
@@ -224,6 +231,7 @@ Regeln:
 - [ ] `npx tsc --noEmit -p .` und `bun run lint` sind sauber.
 - [ ] Bei 390 px und 1200 px angesehen, Dark Mode kurz geprüft.
 - [ ] Neue Seite: `PageHero` + `SectionHeading` + Seiten-Wrapper.
+- [ ] Neue Seite: `pageMetadata` mit eigenem `path`, öffentlich in `STATIC_PAGES`.
 - [ ] Animationen nur über `@/components/motion`; Karten-Raster mit `Stagger`, Einzelnes mit `Reveal`.
 - [ ] Termine verlinken auf `/kalender/[slug]`, Status-Texte aus `lib/events.ts`.
 - [ ] Keine neuen externen Bilder/Skripte ohne `IframeConsent`.

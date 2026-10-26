@@ -5,6 +5,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { FsrMember, legislaturData, latestLegislatur } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { getTranslation } from "@/locales/getTranslation";
+import { pageMetadata } from "@/lib/metadata";
 import { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
@@ -27,9 +28,10 @@ export async function generateMetadata({
   const title = `${t.title} ${legislatur?.period || gt["not-found"]}`;
   const description = `${t.elected_members} ${legislatur?.legislatur_start || ""}`;
 
-  return {
+  return pageMetadata({
     title,
     description,
+    path: `/mitglieder/${period}`,
     keywords: [
       "Legislatur",
       "FSR",
@@ -40,9 +42,7 @@ export async function generateMetadata({
       "Universität",
       "MLU",
     ],
-    openGraph: { title, description },
-    twitter: { title, description },
-  };
+  });
 }
 
 // Vorsitz zuerst, dann Stellvertretung, dann weitere Ämter

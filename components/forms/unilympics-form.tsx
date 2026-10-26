@@ -449,8 +449,9 @@ function FriendsField({
 											size="icon"
 											disabled={fields.length <= 1}
 											onClick={() => remove(index)}
+											aria-label={`Mitglied ${index + 2} entfernen`}
 										>
-											<Trash2 className="size-4" />
+											<Trash2 className="size-4" aria-hidden />
 										</Button>
 									</div>
 									<FormMessage />

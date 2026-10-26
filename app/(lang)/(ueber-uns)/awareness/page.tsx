@@ -5,13 +5,14 @@ import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/lib/siteConfig";
 import { getTranslation } from "@/locales/getTranslation";
 import { ArrowUpRight, FileDown, Instagram, Mail } from "lucide-react";
-import { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Awareness",
   description:
     "Awareness-Konzept des Fachschaftsrats Wirtschaftswissenschaften der MLU Halle-Wittenberg",
-};
+  path: "/awareness",
+});
 
 const sections = [
   { id: "awareness", label: "Was ist Awareness?" },

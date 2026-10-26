@@ -20,37 +20,12 @@ import {
   Mail,
   Users,
 } from "lucide-react";
-import { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 
 const description =
   "Entdecke neue Möglichkeiten, sammle wertvolle Erfahrungen und verdiene 5 ECTS-Punkte mit dem Allgemeinen Schlüsselqualifikationsmodul beim Fachschaftsrat Wirtschaftswissenschaften!";
 
-export const metadata: Metadata = {
-  title: "ASQ",
-  description,
-  openGraph: {
-    title: "ASQ",
-    description,
-    url: "https://fsr-wiwi-halle.de/asq",
-    siteName: "Fachschaftsrat Wirtschaftswissenschaften",
-    images: [
-      {
-        url: "https://fsr-wiwi-halle.de/logo.png",
-        width: 1200,
-        height: 630,
-        alt: "ASQ",
-      },
-    ],
-    locale: "de_DE",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "ASQ",
-    description,
-    images: ["https://fsr-wiwi-halle.de/logo.png"],
-  },
-};
+export const metadata = pageMetadata({ title: "ASQ", description, path: "/asq" });
 
 const facts = [
   {

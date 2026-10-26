@@ -58,7 +58,7 @@ function NowCardContent({ events, now, status, className }: Props) {
     return (
       <section className={cn(base, "md:grid-cols-1")}>
         <div className="flex flex-col gap-4">
-          <p className="text-sm font-semibold uppercase tracking-widest text-white/70">Vorbei</p>
+          <p className="text-sm font-semibold uppercase tracking-widest text-white/85">Vorbei</p>
           <p className="text-3xl font-bold">Das war die Ersti-Woche 2026!</p>
           <p className="text-white/80">Danke, dass ihr dabei wart. Weitere Termine findet ihr im Kalender.</p>
           <Button asChild variant="secondary" className="self-start">

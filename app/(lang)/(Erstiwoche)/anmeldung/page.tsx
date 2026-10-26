@@ -2,24 +2,14 @@ import { getEvents } from "@/app/_actions/event";
 import { HeroLead, PageHero } from "@/components/page-hero";
 import { SignupCard } from "@/components/events/signup-card";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion";
-import { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Anmeldung",
   description: "Anmelden für Veranstaltungen des FSR WiWi und der Ersti-Woche",
-  openGraph: {
-    url: "https://fsr-wiwi-halle.de/anmeldung",
-    type: "website",
-    title: "Anmeldung",
-    description: "Anmelden für Veranstaltungen des FSR WiWi und der Ersti-Woche",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Anmeldung",
-    description: "Anmelden für Veranstaltungen des FSR WiWi und der Ersti-Woche",
-  },
-};
+  path: "/anmeldung",
+});
 
 export default async function page() {
   const { events } = await getEvents({

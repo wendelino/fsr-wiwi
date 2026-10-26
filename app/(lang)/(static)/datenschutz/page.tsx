@@ -1,5 +1,12 @@
 import { PageHero } from "@/components/page-hero";
 import { Prose } from "@/components/prose";
+import { pageMetadata } from "@/lib/metadata";
+
+export const metadata = pageMetadata({
+  title: "Datenschutz",
+  description: "Datenschutzerklärung des Fachschaftsrats Wirtschaftswissenschaften der MLU Halle-Wittenberg",
+  path: "/datenschutz",
+});
 
 export default function page() {
   return (

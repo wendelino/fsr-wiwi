@@ -6,6 +6,7 @@ import { PosterItem, PosterList } from "@/components/poster-list";
 import { SectionHeading } from "@/components/section-heading";
 import { Button } from "@/components/ui/button";
 import { isErstiSeason } from "@/lib/ersti";
+import { pageMetadata, SITE_DESCRIPTION } from "@/lib/metadata";
 import { getTranslation } from "@/locales/getTranslation";
 import {
   ArrowRight,
@@ -19,6 +20,12 @@ import {
   Users,
 } from "lucide-react";
 import Link from "next/link";
+
+export const metadata = pageMetadata({
+  title: { absolute: "FSR Wiwi Halle" },
+  description: SITE_DESCRIPTION,
+  path: "/",
+});
 
 // Der Ersti-Teaser im Hero hängt vom Datum ab
 export const revalidate = 3600;

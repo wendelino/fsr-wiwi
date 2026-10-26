@@ -19,36 +19,15 @@ import {
   ShieldCheck,
   Users,
 } from "lucide-react";
-import { Metadata } from "next";
+import { pageMetadata } from "@/lib/metadata";
 import Link from "next/link";
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: "Über uns",
   description:
     "Alle Informationen zum Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
-
-  openGraph: {
-    url: "https://fsr-wiwi-halle.de/about",
-    type: "website",
-    title: "Über uns",
-    description:
-      "Alle Informationen zum Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
-    images: [
-      {
-        url: "https://fsr-wiwi-halle.de/logo.png",
-        width: 1200,
-        height: 630,
-        alt: "Logo",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Über uns",
-    description:
-      "Alle Informationen zum Fachschaftsrat Wirtschaftswissenschaften der MLU Halle-Wittenberg",
-  },
-};
+  path: "/about",
+});
 
 const STUDIP_URL =
   "https://studip.uni-halle.de/dispatch.php/course/overview?cid=ee8c88937076ac5fe253303faf816cbe";
