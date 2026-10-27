@@ -22,6 +22,11 @@ function isExternal(href: string) {
   return href.includes(".");
 }
 
+/** Externe Links öffnen in einem neuen Tab. */
+function externalProps(href: string) {
+  return isExternal(href) ? { target: "_blank", rel: "noopener noreferrer" } : {};
+}
+
 const allHrefs = siteConfig.pages.flatMap((p) => ("dropdown" in p ? p.dropdown.map((i) => i.href) : [p.href]));
 
 /**
@@ -158,11 +163,13 @@ export default function NavBar() {
               <Link
                 key={page.label}
                 href={page.href}
+                {...externalProps(page.href)}
                 aria-current={page.href === activeHref ? "page" : undefined}
                 className={cn(pillClass(page.href === activeHref), focusRing)}
               >
                 {page.href === activeHref && <NavPill />}
                 {page.label}
+                {isExternal(page.href) && <ArrowUpRight aria-hidden className="size-4 opacity-60" />}
               </Link>
             )
           )}
@@ -289,6 +296,7 @@ function DesktopDropdown({
                 <Link
                   href={item.href}
                   prefetch={item.prefetch}
+                  {...externalProps(item.href)}
                   aria-current={itemActive ? "page" : undefined}
                   onClick={() => setOpen(false)}
                   className={cn(
@@ -330,6 +338,7 @@ function MobileMenu({
         <Link
           href={item.href}
           prefetch={item.prefetch}
+          {...externalProps(item.href)}
           aria-current={active ? "page" : undefined}
           onClick={onNavigate}
           className={cn(
@@ -367,6 +376,7 @@ function MobileMenu({
               <StaggerItem as="li" variant="left" key={page.label}>
                 <Link
                   href={page.href}
+                  {...externalProps(page.href)}
                   aria-current={active ? "page" : undefined}
                   onClick={onNavigate}
                   className={cn(
@@ -375,6 +385,7 @@ function MobileMenu({
                   )}
                 >
                   {page.label}
+                  {isExternal(page.href) && <ArrowUpRight aria-hidden className="size-[0.7em] text-white/60" />}
                   {active && <span aria-hidden className="size-3 rounded-full bg-white" />}
                 </Link>
               </StaggerItem>

@@ -7,6 +7,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { Button } from "@/components/ui/button";
 import { isErstiSeason } from "@/lib/ersti";
 import { pageMetadata, SITE_DESCRIPTION } from "@/lib/metadata";
+import { BUFAK_URL } from "@/lib/siteConfig";
 import { getTranslation } from "@/locales/getTranslation";
 import {
   ArrowRight,
@@ -15,6 +16,7 @@ import {
   CalendarDays,
   FileText,
   Landmark,
+  Map as MapIcon,
   MessageCircle,
   User,
   Users,
@@ -96,7 +98,13 @@ export default async function Home() {
           <Tile href="/kalender" icon={CalendarDays} title="Kalender" text="Alle Termine des FSR" />
           <Tile href="/kontakt" icon={MessageCircle} title="Kontakt" text="Fragen, Ideen, Probleme? Schreib uns." />
           <Tile
-            className="col-span-2"
+            href={BUFAK_URL}
+            external
+            icon={MapIcon}
+            title="BuFaK"
+            text="Alles zur Bundesfachschaftenkonferenz auf der eigenen Seite."
+          />
+          <Tile
             href={FUNDING_URL}
             external
             icon={FileText}

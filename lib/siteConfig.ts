@@ -1,5 +1,7 @@
 import { ERSTI_GUIDE, ERSTI_PAGE, ERSTI_PROGRAM } from "@/lib/ersti";
 
+export const BUFAK_URL = "https://bufak.fsr-wiwi-halle.de";
+
 export type NavItem = { href: string; label: string; prefetch?: boolean };
 export type NavPage = NavItem | { label: string; dropdown: NavItem[] };
 
@@ -14,6 +16,7 @@ export const siteConfig: {
   name: "FSR Wiwi",
   url: "https://fsr-wiwi-halle.de",
   pages: [
+    { href: BUFAK_URL, label: "BuFaK" },
     {
       label: "Ersti-Woche",
       dropdown: [
