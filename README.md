@@ -6,7 +6,8 @@ Next.js 15 (App Router), Tailwind, shadcn/ui; Paketmanager ist bun.
 ```bash
 bun install
 # .env mit CMS_ENDPOINT, CMS_TOKEN, ALTCHA_HMAC_KEY, EVALUATION_ENDPOINT,
-# TELEGRAM_BOT_TOKEN und TELEGRAM_CHAT_ID
+# GMAIL_USER, GMAIL_APP_PASSWORD (Gmail-App-Passwort) und CONTACT_MAIL_TO
+# (Empfänger der Kontaktanfragen)
 bun dev
 ```
 

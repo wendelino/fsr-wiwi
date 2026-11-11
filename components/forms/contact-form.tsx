@@ -12,8 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import Link from "next/link";
-import { addGuestToEvent } from "@/app/_actions/sign-up";
-import { handleMessage } from "@/app/_actions/sendTelegramMessage";
+import { sendContactMail } from "@/app/_actions/sendContactMail";
 import { Textarea } from "../ui/textarea";
 
 const Schema = z.object({
@@ -29,15 +28,8 @@ const Schema = z.object({
 
 export default function ContactForm({ className }: { className?: string }) {
   async function onCreate(values: z.infer<typeof Schema>): Promise<FormFnRes> {
-    const res = await handleMessage({
-      message: values.message,
-      first_name: values.name,
-      last_name: "",
-      email: values.email,
-      phone: "",
-    });
-
-    return { sx: res.success, msg: res.message };
+    const { name, email, message } = values;
+    return sendContactMail({ name, email, message });
   }
   const def = {
     dsgvo: false,
