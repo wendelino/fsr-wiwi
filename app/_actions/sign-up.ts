@@ -1,19 +1,22 @@
 "use server";
-import { FormFnRes } from "@/components/forms/generic-form";
+import { z } from "zod";
+import type { FormFnRes } from "@/components/forms/generic-form";
+import { CAPTCHA_ERROR, verifyCaptcha } from "@/lib/captcha";
 
-interface Props {
-  eventSlug: string;
-  eventType?: "bar-hopping";
-  guest: {
-    name: string;
-    surname: string;
-    email: string;
-    course?: string;
-    friends?: {
-      name: string;
-    }[];
-  };
-}
+// Server Actions sind öffentlich aufrufbar, darum hier noch einmal prüfen
+const SignupSchema = z.object({
+  eventSlug: z.string().trim().min(1).max(200),
+  eventType: z.literal("bar-hopping").optional(),
+  guest: z.object({
+    name: z.string().trim().min(1).max(120),
+    surname: z.string().trim().min(1).max(120),
+    email: z.string().trim().email().max(254),
+    // Bei Teams steckt hier Teamname + Mitglieder als JSON
+    course: z.string().trim().max(2000).optional(),
+    friends: z.array(z.object({ name: z.string().trim().min(1).max(120) })).max(20).optional(),
+  }),
+});
+
 type POST_Response = {
   msg: string;
   success: boolean;
@@ -22,7 +25,18 @@ type POST_Response = {
 const BASE_URL = `${process.env.CMS_ENDPOINT}/participant`;
 const token = process.env.CMS_TOKEN;
 
-export async function addGuestToEvent(body: Props): Promise<FormFnRes> {
+export async function addGuestToEvent(
+  input: z.input<typeof SignupSchema>,
+  captcha: string
+): Promise<FormFnRes> {
+  const parsed = SignupSchema.safeParse(input);
+  if (!parsed.success) {
+    return { sx: false, msg: "Bitte prüfe deine Eingaben." };
+  }
+  if (!(await verifyCaptcha(captcha))) {
+    return { sx: false, msg: CAPTCHA_ERROR };
+  }
+
   try {
     const response = await fetch(BASE_URL, {
       method: "POST",
@@ -30,23 +44,18 @@ export async function addGuestToEvent(body: Props): Promise<FormFnRes> {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(body),
+      body: JSON.stringify(parsed.data),
     });
 
     if (!response.ok) {
-      console.error("Failed to add guest:", response.statusText);
-      return { sx: false, msg: `Fehler - ${response.statusText}` };
+      console.error("Anmeldung fehlgeschlagen:", response.status, response.statusText);
+      return { sx: false, msg: `Fehler – ${response.statusText}` };
     }
 
     const data: POST_Response = await response.json();
-
-    if (response.ok) {
-      return { sx: data.success, msg: data.msg };
-    } else {
-      console.error("Failed to add guest:", data);
-    }
+    return { sx: data.success, msg: data.msg };
   } catch (error) {
-    console.error("Error making API request:", error);
+    console.error("Anmeldung fehlgeschlagen:", error);
   }
-  return { sx: false, msg: `Fehler - API Request fehlgeschlagen` };
+  return { sx: false, msg: "Fehler – API Request fehlgeschlagen" };
 }

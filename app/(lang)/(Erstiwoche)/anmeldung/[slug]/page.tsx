@@ -1,4 +1,3 @@
-"use server";
 import { getEvent } from "@/app/_actions/event";
 import { EventActions } from "@/components/events/event-actions";
 import { EventHeader } from "@/components/events/event-header";
@@ -7,7 +6,7 @@ import { LotteryNote } from "@/components/events/event-status";
 import { Reveal } from "@/components/motion";
 import RegisterForm from "@/components/forms/register-form";
 import UnilympicsForm from "@/components/forms/unilympics-form";
-import { isFull, plainText } from "@/lib/events";
+import { eventHref, isFull, plainText, slugFromParam } from "@/lib/events";
 import { pageMetadata } from "@/lib/metadata";
 import { ArrowRight } from "lucide-react";
 import type { Metadata } from "next";
@@ -22,7 +21,7 @@ export async function generateMetadata({
 	params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
 	const p = await params;
-	const slug = decodeURIComponent(p.slug);
+	const slug = slugFromParam(p.slug);
 	const { event } = await getEvent(slug);
 	if (!event) return { title: "Termin nicht gefunden" };
 
@@ -39,7 +38,7 @@ interface PageProps {
 
 export default async function page({ params }: PageProps) {
 	const p = await params;
-	const slug = p.slug;
+	const slug = slugFromParam(p.slug);
 
 	const { event } = await getEvent(slug);
 	if (!event) notFound();
@@ -58,7 +57,7 @@ export default async function page({ params }: PageProps) {
 						<EventMarkdown className="leading-relaxed">{event.description}</EventMarkdown>
 					)}
 					<Link
-						href={"/kalender/" + event.slug}
+						href={eventHref(event)}
 						className="inline-flex items-center gap-1.5 text-sm font-semibold text-fsr underline-offset-4 hover:underline"
 					>
 						Termin im Kalender ansehen <ArrowRight className="size-4" />

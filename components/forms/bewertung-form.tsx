@@ -15,7 +15,7 @@ const Schema = z.object({
   bewertung: z
     .string()
     .min(5, { message: "Die Bewertung muss mindestens 5 Zeichen lang sein." })
-    .max(10000, { message: "Die Bewertung darf maximal 1000 Zeichen lang sein." }),
+    .max(10000, { message: "Die Bewertung darf maximal 10.000 Zeichen lang sein." }),
 });
 
 interface BewertungFormProps {
@@ -23,8 +23,8 @@ interface BewertungFormProps {
 }
 
 export default function BewertungForm({ slug }: BewertungFormProps) {
-  async function onCreate(values: z.infer<typeof Schema>): Promise<FormFnRes> {
-    return await sendEvaluation({...values, slug: slug}); 
+  async function onCreate(values: z.infer<typeof Schema>, captcha: string): Promise<FormFnRes> {
+    return sendEvaluation({ ...values, slug }, captcha);
   }
 
   const def = {
@@ -36,7 +36,6 @@ export default function BewertungForm({ slug }: BewertungFormProps) {
       schema={Schema}
       defaultValues={def}
       disableStyling
-      disableCaptcha
       mode="create"
       onCreate={onCreate}
       onSuccess={() => {

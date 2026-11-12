@@ -153,11 +153,12 @@ function BackButton({ onClick }: { onClick: () => void }) {
 function SingleForm({ event }: { event: EventItem }) {
 	async function onCreate(
 		values: z.infer<typeof SingleSchema>,
+		captcha: string,
 	): Promise<FormFnRes> {
 		const res = await addGuestToEvent({
 			eventSlug: event.slug,
 			guest: { ...values },
-		});
+		}, captcha);
 		return res;
 	}
 
@@ -252,6 +253,7 @@ function SingleForm({ event }: { event: EventItem }) {
 function TeamForm({ event }: { event: EventItem }) {
 	async function onCreate(
 		values: z.infer<typeof TeamSchema>,
+		captcha: string,
 	): Promise<FormFnRes> {
 		const res = await addGuestToEvent({
 			eventSlug: event.slug,
@@ -264,7 +266,7 @@ function TeamForm({ event }: { event: EventItem }) {
 					members: values.friends.map((friend) => friend.name),
 				}),
 			},
-		});
+		}, captcha);
 		return res;
 	}
 

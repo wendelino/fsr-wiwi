@@ -1,10 +1,12 @@
 "use client";
 
-import { getEvents } from "@/app/_actions/event";
+import { loadEventsPage } from "@/app/_actions/events-page";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { berlinDateKey, formatBerlin } from "@/lib/berlin";
 import { phaseOf, useNow } from "@/lib/use-now";
+import { RotateCcw } from "lucide-react";
 import { useInView } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import EventPreview from "./event-preview";
@@ -21,21 +23,25 @@ export default function InfiniteScroll({
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(initialCursor !== null);
+  const [failed, setFailed] = useState(false);
   const now = useNow();
 
   const sentinel = useRef<HTMLDivElement>(null);
   const inView = useInView(sentinel, { margin: "0px 0px 400px 0px" });
 
   useEffect(() => {
-    if (!inView || !hasMore || loading) return;
+    if (!inView || !hasMore || loading || failed) return;
     setLoading(true);
-    getEvents({ page }).then(({ events: next, nextCursor }) => {
-      setEvents((prev) => [...prev, ...next]);
-      setHasMore(nextCursor !== null);
-      setPage((p) => p + 1);
-      setLoading(false);
-    });
-  }, [inView, hasMore, loading, page]);
+    loadEventsPage(page)
+      .then((res) => {
+        if (res.failed) return setFailed(true);
+        setEvents((prev) => [...prev, ...res.events]);
+        setHasMore(res.nextCursor !== null);
+        setPage((p) => p + 1);
+      })
+      .catch(() => setFailed(true))
+      .finally(() => setLoading(false));
+  }, [inView, hasMore, loading, failed, page]);
 
   return (
     <div className="flex flex-col gap-12">
@@ -58,7 +64,14 @@ export default function InfiniteScroll({
         </Reveal>
       ))}
 
-      {hasMore ? (
+      {failed ? (
+        <div role="alert" className="flex flex-col items-center gap-3 rounded-3xl border border-dashed p-10 text-center text-muted-foreground">
+          Weitere Termine konnten gerade nicht geladen werden.
+          <Button variant="outline" onClick={() => setFailed(false)}>
+            <RotateCcw className="mr-2 size-4" /> Erneut versuchen
+          </Button>
+        </div>
+      ) : hasMore ? (
         <div ref={sentinel} aria-busy className="grid gap-4 sm:grid-cols-[5rem_1fr] sm:gap-6">
           <Skeleton className="size-16 rounded-2xl" />
           <div className="grid gap-3">

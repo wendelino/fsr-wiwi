@@ -1,31 +1,34 @@
 import { ResultState } from "@/components/result-state";
 import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/lib/siteConfig";
+import type { Metadata } from "next";
 import Link from "next/link";
 
-interface PageProps {
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
-}
+export const metadata: Metadata = {
+  title: "Anmeldung stornieren",
+  robots: { index: false, follow: false },
+};
 
-export default async function page({ searchParams }: PageProps) {
-  const { participantId, eventId } = await searchParams;
-
-  if (!participantId || !eventId) {
-    return (
-      <div className="mx-auto mt-8 w-full max-w-lg rounded-3xl border bg-card p-6 sm:p-10">
-        <ResultState
-          status="error"
-          title="Ungültiger Link"
-          actions={
-            <Button asChild size="lg" variant="outline">
-              <Link href="/kontakt">Kontakt</Link>
+// Stornieren per Link ist noch nicht ans CMS angebunden – bis dahin per Nachricht
+export default function Page() {
+  return (
+    <div className="mx-auto mt-8 w-full max-w-lg rounded-3xl border bg-card p-6 sm:p-10">
+      <ResultState
+        status="error"
+        title="Stornieren per Link geht gerade nicht"
+        actions={
+          <>
+            <Button asChild size="lg" className="bg-fsr-deep text-white hover:bg-fsr-deep/90">
+              <Link href="/kontakt">Nachricht schreiben</Link>
             </Button>
-          }
-        >
-          Der Link zum Stornieren ist unvollständig. Öffne ihn bitte direkt aus der E-Mail.
-        </ResultState>
-      </div>
-    );
-  }
-
-  return <div>page</div>;
+            <Button asChild size="lg" variant="outline">
+              <a href={`mailto:${siteConfig.company.mail}`}>E-Mail</a>
+            </Button>
+          </>
+        }
+      >
+        Schreib uns kurz, für welchen Termin du dich abmelden möchtest – wir tragen dich dann aus.
+      </ResultState>
+    </div>
+  );
 }

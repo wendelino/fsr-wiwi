@@ -1,5 +1,5 @@
 "use client";
-import Altcha from "@/components/altcha";
+import Altcha, { CAPTCHA_FIELD } from "@/components/altcha";
 import { ResultState } from "@/components/result-state";
 import { Button } from "@/components/ui/button";
 import { Form, FormDescription } from "@/components/ui/form";
@@ -43,9 +43,12 @@ interface GenericFormConfig {
   showRequiredHint?: boolean;
 }
 
+/** captcha: Lösung des ALTCHA-Widgets, die Server Action prüft sie (lib/captcha.ts) */
+type SubmitHandler<TValues> = (values: TValues, captcha: string) => Promise<FormFnRes>;
+
 interface BaseHandlers<TValues> {
-  onCreate?: (values: TValues) => Promise<FormFnRes>;
-  onEdit?: (values: TValues) => Promise<FormFnRes>;
+  onCreate?: SubmitHandler<TValues>;
+  onEdit?: SubmitHandler<TValues>;
   onSuccess?: () => void;
   onError?: () => void;
 }
@@ -55,7 +58,6 @@ interface GenericFormProps<TFieldValues extends FieldValues>
   schema: z.ZodType<TFieldValues>;
   defaultValues: DefaultValues<TFieldValues>;
   mode?: "create" | "edit";
-  disableCaptcha?: boolean;
   /** Ohne eigene Karte, z. B. wenn die Seite schon eine Karte drumherum hat */
   disableStyling?: boolean;
   className?: string;
@@ -80,7 +82,6 @@ export default function GenericForm<TValues extends FieldValues>(
     onEdit,
     onSuccess,
     onError,
-    disableCaptcha = false,
     disableStyling = false,
     className,
     formClassName,
@@ -93,6 +94,7 @@ export default function GenericForm<TValues extends FieldValues>(
   const [phase, setPhase] = useState<FormPhase>("idle");
   const [result, setResult] = useState<FormFnRes>({ sx: true, msg: "" });
   const rootRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const reduce = useReducedMotion();
 
   const form = useForm<TValues>({
@@ -129,7 +131,10 @@ export default function GenericForm<TValues extends FieldValues>(
     try {
       const handler = mode === "edit" ? onEdit : onCreate;
       if (!handler) throw new Error("No handler found");
-      const res = await handler(values);
+      const captcha = formRef.current
+        ? String(new FormData(formRef.current).get(CAPTCHA_FIELD) ?? "")
+        : "";
+      const res = await handler(values, captcha);
       setResult(res);
       setPhase(res.sx ? "success" : "error");
       (res.sx ? onSuccess : onError)?.();
@@ -179,6 +184,7 @@ export default function GenericForm<TValues extends FieldValues>(
             )}
             <Form {...form}>
               <form
+                ref={formRef}
                 onSubmit={form.handleSubmit(handleSubmit)}
                 className={formClassName ?? "flex w-full flex-col"}
                 aria-busy={phase === "loading"}
@@ -186,7 +192,7 @@ export default function GenericForm<TValues extends FieldValues>(
                 {/* Während des Sendens nichts mehr ändern */}
                 <fieldset disabled={phase === "loading"} className="flex flex-col gap-4 disabled:opacity-70">
                   {renderChildren()}
-                  {!disableCaptcha && <Altcha />}
+                  <Altcha />
                   {texts.showRequiredHint && (
                     <FormDescription>
                       Felder mit einem <strong>*</strong> sind Pflichtfelder.

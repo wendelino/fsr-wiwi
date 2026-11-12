@@ -3,6 +3,15 @@
 /** Detailseite eines Termins – Klicks auf Termine führen immer dorthin. */
 export const eventHref = (event: EventItem) => `/kalender/${encodeURIComponent(event.slug)}`;
 
+/** Slug aus der URL; kaputte Kodierung (z. B. "%E0") ergibt einen leeren Slug und damit 404. */
+export function slugFromParam(param: string) {
+  try {
+    return decodeURIComponent(param);
+  } catch {
+    return "";
+  }
+}
+
 /** Plätze werden verlost – Anmeldung bleibt auch ohne freie Plätze offen. */
 export function isLottery(event: EventItem) {
   return event.registrable && event.isRandomSelection;

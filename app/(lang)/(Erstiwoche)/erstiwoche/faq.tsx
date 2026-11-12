@@ -57,7 +57,7 @@ function Faq() {
     },
     {
       q: "Wie bekomme ich die Termine in meinen Kalender?",
-      a: "Über „Alle Termine in den Kalender“ lädst du eine .ics-Datei mit dem ganzen Programm herunter. Einzelne Termine speicherst du im Detailfenster eines Termins.",
+      a: "Über „Alle Termine in den Kalender“ lädst du eine .ics-Datei mit dem ganzen Programm herunter. Einzelne Termine speicherst du auf der Seite des Termins über „In meinen Kalender“.",
     },
     {
       q: "Wer organisiert die Ersti-Woche – und kann ich mitmachen?",

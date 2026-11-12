@@ -27,9 +27,9 @@ const Schema = z.object({
 });
 
 export default function ContactForm({ className }: { className?: string }) {
-  async function onCreate(values: z.infer<typeof Schema>): Promise<FormFnRes> {
+  async function onCreate(values: z.infer<typeof Schema>, captcha: string): Promise<FormFnRes> {
     const { name, email, message } = values;
-    return sendContactMail({ name, email, message });
+    return sendContactMail({ name, email, message }, captcha);
   }
   const def = {
     dsgvo: false,

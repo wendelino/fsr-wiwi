@@ -8,7 +8,7 @@ import { getTranslation } from "@/locales/getTranslation";
 import { pageMetadata } from "@/lib/metadata";
 import { Metadata } from "next";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 
 // Statische URL-Generierung für jede Legislaturperiode
 export async function generateStaticParams() {
@@ -63,7 +63,7 @@ export default async function page({
   const { mitglieder: t } = getTranslation();
 
   const legislatur = legislaturData.find(({ period }) => period == p.period);
-  if (!legislatur) redirect("/mitglieder");
+  if (!legislatur) notFound();
 
   const withRole = legislatur.members
     .filter((m) => m.position)

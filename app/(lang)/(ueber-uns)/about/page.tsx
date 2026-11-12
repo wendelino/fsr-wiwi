@@ -4,7 +4,7 @@ import { HeroLead, PageHero } from "@/components/page-hero";
 import { SectionHeading } from "@/components/section-heading";
 import { Button } from "@/components/ui/button";
 import { ERSTI_PAGE } from "@/lib/ersti";
-import { siteConfig } from "@/lib/siteConfig";
+import { siteConfig, FUNDING_URL, INSTAGRAM_URL } from "@/lib/siteConfig";
 import { getTranslation } from "@/locales/getTranslation";
 import {
   ArrowRight,
@@ -31,7 +31,6 @@ export const metadata = pageMetadata({
 
 const STUDIP_URL =
   "https://studip.uni-halle.de/dispatch.php/course/overview?cid=ee8c88937076ac5fe253303faf816cbe";
-const FUNDING_URL = "https://wcms.itz.uni-halle.de/download.php?down=56894&elem=2139305";
 
 // Inhalte aus unserer Infografik (public/fsr-ovdf.jpeg)
 const offers = [
@@ -81,7 +80,7 @@ export default async function page() {
 
   const channels = [
     { href: `mailto:${mail}`, icon: Mail, title: "E-Mail", text: mail },
-    { href: "https://www.instagram.com/fsr.wiwi.halle/", icon: Instagram, title: t.cards.instagram.title, text: t.cards.instagram.content },
+    { href: INSTAGRAM_URL, icon: Instagram, title: t.cards.instagram.title, text: t.cards.instagram.content },
     { href: STUDIP_URL, icon: BookOpen, title: t.cards.studip.title, text: t.cards.studip.content },
   ];
 

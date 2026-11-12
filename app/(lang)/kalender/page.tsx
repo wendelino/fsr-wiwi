@@ -4,6 +4,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { pageMetadata } from "@/lib/metadata";
 import { Suspense } from "react";
 import InfiniteScroll from "./infinite-scroll";
+import { INSTAGRAM_URL } from "@/lib/siteConfig";
 
 export const metadata = pageMetadata({
   title: "Eventkalender",
@@ -41,7 +42,24 @@ function Loading() {
 }
 
 async function Content() {
-  const { events, nextCursor } = await getEvents();
+  const { events, nextCursor, failed } = await getEvents();
+
+  if (failed) {
+    return (
+      <p role="alert" className="rounded-3xl border border-dashed p-10 text-center text-muted-foreground">
+        Die Termine konnten gerade nicht geladen werden. Lade die Seite gleich noch einmal oder schau auf{" "}
+        <a
+          href={INSTAGRAM_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="rounded font-semibold text-fsr underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fsr"
+        >
+          Instagram
+        </a>{" "}
+        vorbei.
+      </p>
+    );
+  }
 
   return <InfiniteScroll initialEvents={events} initialCursor={nextCursor} />;
 }

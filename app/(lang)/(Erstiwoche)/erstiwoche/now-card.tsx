@@ -6,6 +6,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { berlinDateKey, formatBerlin } from "@/lib/berlin";
+import { ERSTI_START } from "@/lib/ersti";
 import { eventHref, isLottery, isOverbooked, seatsLabel } from "@/lib/events";
 import { phaseOf } from "@/lib/use-now";
 import { WeekStatus } from "@/lib/week-status";
@@ -59,9 +60,9 @@ function NowCardContent({ events, now, status, className }: Props) {
       <section className={cn(base, "md:grid-cols-1")}>
         <div className="flex flex-col gap-4">
           <p className="text-sm font-semibold uppercase tracking-widest text-white/85">Vorbei</p>
-          <p className="text-3xl font-bold">Das war die Ersti-Woche 2026!</p>
+          <p className="text-3xl font-bold">Das war die Ersti-Woche {ERSTI_START.slice(0, 4)}!</p>
           <p className="text-white/80">Danke, dass ihr dabei wart. Weitere Termine findet ihr im Kalender.</p>
-          <Button asChild variant="secondary" className="self-start">
+          <Button asChild className="self-start bg-white text-fsr-deep hover:bg-white/90">
             <Link href="/kalender">Zum Kalender</Link>
           </Button>
         </div>

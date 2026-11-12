@@ -3,6 +3,7 @@ import path from "node:path";
 import nodemailer, { type Transporter } from "nodemailer";
 import { z } from "zod";
 import type { FormFnRes } from "@/components/forms/generic-form";
+import { CAPTCHA_ERROR, verifyCaptcha } from "@/lib/captcha";
 import { LOGO_CID, contactSubject, renderContactMail } from "@/lib/mail/contact-mail";
 
 // Server Actions sind öffentlich aufrufbar, darum hier noch einmal prüfen
@@ -27,10 +28,16 @@ function getTransporter() {
   return { transporter, user };
 }
 
-export async function sendContactMail(input: z.input<typeof ContactSchema>): Promise<FormFnRes> {
+export async function sendContactMail(
+  input: z.input<typeof ContactSchema>,
+  captcha: string
+): Promise<FormFnRes> {
   const parsed = ContactSchema.safeParse(input);
   if (!parsed.success) {
     return { sx: false, msg: "Bitte prüfe deine Eingaben." };
+  }
+  if (!(await verifyCaptcha(captcha))) {
+    return { sx: false, msg: CAPTCHA_ERROR };
   }
   const data = parsed.data;
 

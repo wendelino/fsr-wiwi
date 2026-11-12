@@ -1,4 +1,3 @@
-"use server";
 import { getEvent } from "@/app/_actions/event";
 import { EventActions } from "@/components/events/event-actions";
 import { EventFacts } from "@/components/events/event-facts";
@@ -7,7 +6,7 @@ import { EventMarkdown } from "@/components/events/event-markdown";
 import { LotteryNote } from "@/components/events/event-status";
 import { Reveal } from "@/components/motion";
 import { ERSTI_PROGRAM, ERSTI_TAG } from "@/lib/ersti";
-import { eventHref, plainText } from "@/lib/events";
+import { eventHref, plainText, slugFromParam } from "@/lib/events";
 import { pageMetadata } from "@/lib/metadata";
 import { ArrowRight } from "lucide-react";
 import { Metadata } from "next";
@@ -22,7 +21,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const p = await params;
-  const slug = decodeURIComponent(p.slug);
+  const slug = slugFromParam(p.slug);
   const { event } = await getEvent(slug);
   if (!event) return { title: "Termin nicht gefunden" };
 
@@ -39,7 +38,7 @@ export default async function page({
   params: Promise<{ slug: string }>;
 }) {
   const p = await params;
-  const slug = decodeURIComponent(p.slug);
+  const slug = slugFromParam(p.slug);
   // Vor dem ersten Byte laden, damit unbekannte Termine mit Status 404 antworten
   const { event } = await getEvent(slug);
   if (!event) notFound();

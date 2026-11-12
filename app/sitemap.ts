@@ -9,7 +9,7 @@ import type { MetadataRoute } from "next";
 export const revalidate = 3600;
 
 // Nur öffentliche Seiten mit eigenem Inhalt. /mitglieder leitet weiter;
-// Formular-, Bestätigungs- und Altseiten (verify-mail, cancel, spiel, go, lageplan) fehlen bewusst.
+// Formular- und Bestätigungsseiten (verify-mail, cancel) fehlen bewusst.
 const STATIC_PAGES: { path: string; priority: number }[] = [
   { path: "", priority: 1 },
   { path: "/kalender", priority: 0.9 },

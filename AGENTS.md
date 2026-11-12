@@ -13,7 +13,11 @@ und Footer folgen ihm bereits.
 - `bun dev` startet lokal, `bun run build` baut. Prüfen vor jedem Commit:
   `npx tsc --noEmit -p .` und `bun run lint`.
 - Events kommen aus dem CMS (`CMS_ENDPOINT`, `CMS_TOKEN`) über
-  `app/_actions/event.ts`; der Typ `EventItem` steht in `app/types.d.ts`.
+  `app/_actions/event.ts` (nur Server); der Typ `EventItem` steht in `app/types.d.ts`.
+  Der Client lädt Termine nur über `app/_actions/events-page.ts` nach.
+- Server Actions sind öffentlich aufrufbar: Eingaben dort mit zod prüfen und
+  die Captcha-Lösung mit `verifyCaptcha` (`lib/captcha.ts`). `GenericForm`
+  reicht sie als zweites Argument an `onCreate` weiter.
 - Sprache der Seite und der Code-Kommentare: Deutsch. Kommentare knapp und nur,
   wo sie etwas erklären, das der Code nicht sagt.
 - Daten der Ersti-Woche (Tag, Start, Guide, Sponsoren, `ERSTI_PAGE`,

@@ -1,66 +1,41 @@
-import { NextResponse } from "next/server";
 import "server-only";
+import { NextResponse } from "next/server";
 
-// Basic anti-replay cache and naive rate limiter (in-memory)
-const REPLAY_TTL_MS = 10 * 60 * 1000; // 10 minutes
-const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
-const RATE_LIMIT_MAX_REQUESTS = 6; // per IP per window
+// Einfaches Rate-Limit im Speicher, pro IP und Minute
+const WINDOW_MS = 60 * 1000;
+const MAX_REQUESTS = 6;
 
-const usedSignatures = new Map<string, number>(); // signature -> expiresAt
-const ipHits = new Map<string, { count: number; resetAt: number }>();
+const hits = new Map<string, { count: number; resetAt: number }>();
 
+// x-real-ip setzt der Proxy selbst; in x-forwarded-for hängt er die echte IP
+// hinten an – alles davor kann der Client frei wählen.
 function getClientIp(req: Request): string {
-  try {
-    // Best-effort IP extraction; behind proxies use X-Forwarded-For
-    const xff =
-      (req.headers as any).get?.("x-forwarded-for") ||
-      req.headers.get("x-forwarded-for");
-    if (xff) return String(xff).split(",")[0].trim();
-    const xfRealIp = req.headers.get("x-real-ip");
-    if (xfRealIp) return xfRealIp;
-  } catch {}
-  return "unknown";
+  const realIp = req.headers.get("x-real-ip")?.trim();
+  if (realIp) return realIp;
+  const forwarded = req.headers.get("x-forwarded-for");
+  const last = forwarded?.split(",").pop()?.trim();
+  return last || "unknown";
 }
 
-function rateLimit(ip: string): boolean {
+function allow(ip: string): boolean {
   const now = Date.now();
-  const entry = ipHits.get(ip);
+  if (hits.size > 10_000) {
+    for (const [key, entry] of hits) if (entry.resetAt <= now) hits.delete(key);
+  }
+  const entry = hits.get(ip);
   if (!entry || entry.resetAt <= now) {
-    ipHits.set(ip, { count: 1, resetAt: now + RATE_LIMIT_WINDOW_MS });
+    hits.set(ip, { count: 1, resetAt: now + WINDOW_MS });
     return true;
   }
-  if (entry.count >= RATE_LIMIT_MAX_REQUESTS) return false;
+  if (entry.count >= MAX_REQUESTS) return false;
   entry.count += 1;
-
   return true;
 }
 
-function pruneReplayCache(now: number) {
-  for (const [sig, exp] of usedSignatures) {
-    if (exp <= now) usedSignatures.delete(sig);
-  }
-}
-
-export function checkReplay(signature: string) {
-  const now = Date.now();
-  pruneReplayCache(now);
-  const existing = usedSignatures.get(signature);
-  if (existing && existing > now) {
-    return true;
-  }
-  return false;
-}
-export function markSignatureUsed(signature: string) {
-  usedSignatures.set(signature, Date.now() + REPLAY_TTL_MS);
-}
-
 export function rateLimitRequest(req: Request): NextResponse | null {
-  const ip = getClientIp(req);
-  if (!rateLimit(ip)) {
-    return NextResponse.json(
-      { error: "rate_limited", message: "Too many requests" },
-      { status: 429 }
-    );
-  }
-  return null;
+  if (allow(getClientIp(req))) return null;
+  return NextResponse.json(
+    { error: "rate_limited", message: "Zu viele Anfragen. Warte kurz und versuch es erneut." },
+    { status: 429 }
+  );
 }

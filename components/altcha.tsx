@@ -2,6 +2,8 @@
 import { useEffect, useState } from "react";
 
 const ENDPOINT = "/api/altcha";
+/** Name des versteckten Felds, in dem das Widget die Lösung ablegt */
+export const CAPTCHA_FIELD = "altcha";
 
 const Altcha = () => {
   const [isReady, setIsReady] = useState(false);
@@ -42,8 +44,8 @@ const Altcha = () => {
         "--altcha-color-border-focus": "currentColor",
         "--altcha-color-error-text": "hsl(var(--destructive))",
       }}
+      name={CAPTCHA_FIELD}
       challengeurl={ENDPOINT}
-      verifyurl={ENDPOINT}
       floating
       delay={500}
       expire={120000}

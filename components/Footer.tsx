@@ -1,11 +1,10 @@
 import { ERSTI_PAGE } from "@/lib/ersti";
-import { siteConfig } from "@/lib/siteConfig";
+import { siteConfig, INSTAGRAM_URL } from "@/lib/siteConfig";
 import { ArrowUpRight, Instagram, Mail, MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import WidthWrapper from "./WidthWrapper";
 
-const INSTAGRAM_URL = "https://www.instagram.com/fsr.wiwi.halle/";
 
 const columns = [
   {

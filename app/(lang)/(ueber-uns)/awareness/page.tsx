@@ -2,7 +2,7 @@ import { HeroLead, PageHero } from "@/components/page-hero";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 import { Eyebrow, SectionHeading } from "@/components/section-heading";
 import { Button } from "@/components/ui/button";
-import { siteConfig } from "@/lib/siteConfig";
+import { siteConfig, INSTAGRAM_URL } from "@/lib/siteConfig";
 import { getTranslation } from "@/locales/getTranslation";
 import { ArrowUpRight, FileDown, Instagram, Mail } from "lucide-react";
 import { pageMetadata } from "@/lib/metadata";
@@ -26,7 +26,6 @@ const sections = [
 
 const ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII"];
 
-const INSTAGRAM_URL = "https://www.instagram.com/fsr.wiwi.halle/";
 
 const list = "list-disc space-y-2 pl-5 marker:text-fsr";
 

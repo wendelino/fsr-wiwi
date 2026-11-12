@@ -5,7 +5,7 @@ import { MeetingCard } from "@/components/meeting-card";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 import { HeroLead, PageHero } from "@/components/page-hero";
 import { Eyebrow, SectionHeading } from "@/components/section-heading";
-import { siteConfig } from "@/lib/siteConfig";
+import { siteConfig, ALTKLAUSUREN_URL, FUNDING_URL } from "@/lib/siteConfig";
 import { ArrowUpRight, BookOpen, FileText, Mail, MapPin } from "lucide-react";
 import { pageMetadata } from "@/lib/metadata";
 
@@ -28,9 +28,6 @@ export const metadata = pageMetadata({
   ],
 });
 
-const ALTKLAUSUREN_URL =
-  "https://studip.uni-halle.de/dispatch.php/course/overview?cid=ee8c88937076ac5fe253303faf816cbe";
-const FUNDING_URL = "https://wcms.itz.uni-halle.de/download.php?down=56894&elem=2139305";
 const MAPS_EMBED =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2434.7346769053684!2d11.967479776676894!3d51.48653291055576!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47a66344312e9d2d%3A0x4b22614bcb6f7c9e!2sGrosse%20Steinstrasse%2073%2C%2006108%20Halle%20(Saale)%2C%20Germany!5e0!3m2!1sen!2sus!4v1699029714680!5m2!1sen!2sus";
 

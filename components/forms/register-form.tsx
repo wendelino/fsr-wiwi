@@ -34,11 +34,11 @@ export default function RegisterForm({
 	event: EventItem;
 	className?: string;
 }) {
-	async function onCreate(values: z.infer<typeof Schema>): Promise<FormFnRes> {
+	async function onCreate(values: z.infer<typeof Schema>, captcha: string): Promise<FormFnRes> {
 		const res = await addGuestToEvent({
 			eventSlug: event.slug,
 			guest: { ...values, course: values.course || "k.A." },
-		});
+		}, captcha);
 		return res;
 	}
 

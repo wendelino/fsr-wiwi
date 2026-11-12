@@ -7,7 +7,7 @@ import { SectionHeading } from "@/components/section-heading";
 import { Button } from "@/components/ui/button";
 import { isErstiSeason } from "@/lib/ersti";
 import { pageMetadata, SITE_DESCRIPTION } from "@/lib/metadata";
-import { BUFAK_URL } from "@/lib/siteConfig";
+import { ALTKLAUSUREN_URL, BUFAK_URL, FUNDING_URL } from "@/lib/siteConfig";
 import { getTranslation } from "@/locales/getTranslation";
 import {
   ArrowRight,
@@ -32,9 +32,6 @@ export const metadata = pageMetadata({
 // Der Ersti-Teaser im Hero hängt vom Datum ab
 export const revalidate = 3600;
 
-const ALTKLAUSUREN_URL =
-  "https://studip.uni-halle.de/dispatch.php/course/details?sem_id=ee8c88937076ac5fe253303faf816cbe&again=yes";
-const FUNDING_URL = "https://wcms.itz.uni-halle.de/download.php?down=56894&elem=2139305";
 
 const fachschaft: PosterItem[] = [
   {
